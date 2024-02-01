@@ -3,8 +3,8 @@ Polaris IQ Home devices integration to Home Assistant
 
 ## Устройства Polaris
 
-| ID | Модель           | Тип устройства | Объекты устройства | Функции устройства | Изображение |
-|----|------------------|----------------|--------------------|--------------------|-------------|
+| ID    | Модель           | Тип устройства | Объекты устройства | Функции устройства | Изображение |
+| :---: |------------------|----------------|--------------------|--------------------|    :---:    |
 |34|PHB-1551WIFI|blender|speed, timer, multi_step|Вкл|![all](https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/60.webp)|
 |93|PHB-1350WIFI|blender|speed, timer, multi_step|Вкл|![all](https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/60.webp)|
 |11|PWH-IDF06|boiler|speed, timer, keep_warm, child_lock, smart_mode, temperature|Выкл, Вкл|![all](https://images.cdn.polaris-iot.com/5/e6/60f0f-98be-44ea-bea4-42cc3a27d340/60.webp)|
