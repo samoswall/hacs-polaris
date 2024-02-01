@@ -1,7 +1,7 @@
 from itertools import cycle, islice
 from typing import Final
 
-DOMAIN: Final = "Polaris"
+DOMAIN: Final = "hass-polaris"
 
 ATTR_NAME = "name"
 ATTR_ERROR = "error"
