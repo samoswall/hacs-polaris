@@ -1,4 +1,6 @@
-# hass-polaris
+# hacs-polaris 
+![all](https://github.com/samoswall/hass-polaris/blob/main/polaris_iqhome.png)
+
 Polaris IQ Home devices integration to Home Assistant
 
 ## Устройства Polaris
