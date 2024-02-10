@@ -3,10 +3,12 @@
 
 Polaris IQ Home devices integration to Home Assistant
 
+Интеграция Home Assistant для техники Polaris.
+
 ## Интеграция находится в разработке!!!
 ### По готовности будет опубликован релиз 1.0.0
 
-Интеграция Home Assistant для техники Polaris.
+
 
 Устройства Polaris
 
