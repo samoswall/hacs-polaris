@@ -1,16 +1,24 @@
 # hacs-polaris 
-![all](https://github.com/samoswall/hass-polaris/blob/main/polaris_iqhome_logo.png)
+![all](https://github.com/samoswall/hass-polaris/blob/main/logo&icon.png)
 
-Polaris IQ Home devices integration to Home Assistant
-
-Интеграция Home Assistant для техники Polaris.
-
-## Интеграция находится в разработке!!!
-### По готовности будет опубликован релиз 1.0.0
+## Polaris IQ Home devices integration to Home Assistant
+## Интеграция Home Assistant для техники Polaris.
 
 
+> [!WARNING]
+> ### Интеграция находится в разработке!!!
+> По готовности будет опубликован релиз 1.0.0
 
-Устройства Polaris
+## Список для разработок
+
+- [X] :heavy_check_mark: Интеграция с поиском устройств в MQTT брокере 
+- [X] :heavy_check_mark: Многоязычность (пока RU, EN, будет еще KZ и UA)
+- [X] :heavy_check_mark: Автосоздание sensor
+- [ ] Отображение ошибок устройств
+- [ ] Автосоздание switch, lock, light, water_heater и т.д.
+- [ ] Добавление работы по UDP или автосоздание отдельного MQTT брокера POLARIS 
+
+## Устройства Polaris
 
 | ID    | Модель           | Тип устройства | Объекты устройства | Функции устройства | Изображение |
 | :---: |------------------|----------------|--------------------|--------------------|    :---:    |
