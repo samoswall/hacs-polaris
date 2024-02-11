@@ -14,27 +14,52 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.helpers.entity import DeviceInfo, EntityCategory
-from .const import DOMAIN, CONF_TOPIC_PREFIX
+from .const import DOMAIN, CONF_TOPIC_PREFIX, POLARIS_DEVICE
 from homeassistant.const import (
     CONF_DEVICE_ID,
     ATTR_DEVICE_ID,
     SIGNAL_STRENGTH_DECIBELS,
+    EntityCategory
 )
 from homeassistant.core import callback
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.util import slugify
 
 _LOGGER = logging.getLogger(__name__)
+parsed_data = {}
 
-STATE_SENSORS = [
+
+STATE_SENSORS_RSSI = [
     {
-        "name": "Polaris test RSSI",
+        "name": "Polaris RSSI",
         "device_class": SensorDeviceClass.SIGNAL_STRENGTH,
         "unit_of_measurement": SIGNAL_STRENGTH_DECIBELS,
         "state_class": SensorStateClass.MEASUREMENT,
         "entity_category": EntityCategory.DIAGNOSTIC,
         "icon": "mdi:wifi-strength-outline",
-        "func": lambda js: js["2ad246f6f25e1877e7d09f6cbc137ad3"]["rssi"],
+        "func": lambda js: js["rssi"],
+    }
+]
+STATE_SENSORS_TEMPERATURE = [
+    {
+        "name": "Polaris temperature",
+        "device_class": SensorDeviceClass.TEMPERATURE,
+        "unit_of_measurement": "°C",
+        "state_class": SensorStateClass.MEASUREMENT,
+        "entity_category": EntityCategory.DIAGNOSTIC,
+        "icon": "mdi:thermometer",
+        "func": lambda js: js["temperature"],
+    }
+]
+STATE_SENSORS_HUMIDITY = [
+    {
+        "name": "Polaris humidity",
+        "device_class": SensorDeviceClass.HUMIDITY,
+        "unit_of_measurement": "%",
+        "state_class": SensorStateClass.MEASUREMENT,
+        "entity_category": EntityCategory.DIAGNOSTIC,
+        "icon": "mdi:water-percent",
+        "func": lambda js: js["humidity"],
     }
 ]
 
@@ -54,13 +79,25 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         """Handle received MQTT message."""
         topic = message.topic
         payload = message.payload
-        device_id = topic.split("/")[1]
+        cur_sens = message.subscribed_topic  # topic.split("/")[4]
+        # _LOGGER.debug("cur_sens: %s", cur_sens)
+        device_type = topic.split("/")[1]
+
+
+        device_id = topic.split("/")[2]
+        # _LOGGER.debug("message: %s", message)
+        #_LOGGER.debug("Topic: %s", topic)
+        # _LOGGER.debug("device_mac: %s", device_mac)
+        # _LOGGER.debug("topic_prefix: %s", topic_prefix)
+        #_LOGGER.debug("device_id: %s", device_id)
+        # _LOGGER.debug("device_type: %s", device_type)
+        # _LOGGER.debug("device_mac: %s", device_mac)
         if device_mac == "+" or device_id == device_mac:
             updateGroups = await async_get_device_groups(
-                deviceUpdateGroups, async_add_entities, device_id
+                deviceUpdateGroups, async_add_entities, device_id, device_type
             )
-            _LOGGER.debug("Received message: %s", topic)
-            _LOGGER.debug("  Payload: %s", payload)
+            # _LOGGER.debug("Received message: %s", topic)
+            # _LOGGER.debug("  Payload: %s", payload)
             for updateGroup in updateGroups:
                 updateGroup.process_update(message)
 
@@ -69,11 +106,25 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
     await mqtt.async_subscribe(hass, data_topic, mqtt_message_received, 1)
 
 
-async def async_get_device_groups(deviceUpdateGroups, async_add_entities, device_id):
+async def async_get_device_groups(
+    deviceUpdateGroups, async_add_entities, device_id, device_type
+):
     # add to update groups if not already there
     if device_id not in deviceUpdateGroups:
-        _LOGGER.debug("New device found: %s", device_id)
-        groups = [PolarisSensorUpdateGroup(device_id, "STATE", STATE_SENSORS)]
+        _LOGGER.debug("New device found id: %s", device_id)
+        _LOGGER.debug("New device found type: %s", device_type)
+        match device_type:
+            case "2"|"6"|"8"|"29"|"35"|"36"|"37"|"38"|"51"|"52"|"53"|"54"|"56"|"57"|"58"|"59"|"60"|"61"|"62"|"63"|"67"|"82"|"83"|"84"|"85"|"86"|"97"|"98"|"105"|"106"|"116"|"117"|"120":
+                groups = [
+                    PolarisSensorUpdateGroup(device_id, device_type, "diag/rssi", STATE_SENSORS_RSSI),
+                    PolarisSensorUpdateGroup(device_id, device_type, "sensor/temperature", STATE_SENSORS_TEMPERATURE)
+                ]
+            case "4"|"15"|"17"|"18"|"25"|"44"|"70"|"71"|"72"|"73"|"74"|"75"|"87"|"99"|"91":
+                groups = [
+                    PolarisSensorUpdateGroup(device_id, device_type, "diag/rssi", STATE_SENSORS_RSSI),
+                    PolarisSensorUpdateGroup(device_id, device_type, "sensor/temperature", STATE_SENSORS_TEMPERATURE),
+                    PolarisSensorUpdateGroup(device_id, device_type, "sensor/humidity", STATE_SENSORS_HUMIDITY)
+                ]
         async_add_entities(
             [
                 sensorEntity
@@ -90,11 +141,12 @@ async def async_get_device_groups(deviceUpdateGroups, async_add_entities, device
 class PolarisSensorUpdateGroup:
     """Representation of Polaris Sensors that all get updated together."""
 
-    def __init__(self, device_id: str, topic_regex: str, meters: Iterable) -> None:
+    def __init__(self, device_id: str, device_type: str, topic_regex: str, meters: Iterable) -> None:
         """Initialize the sensor collection."""
         self._topic_regex = re.compile(topic_regex)
+        _LOGGER.debug("topic_regex %s", self._topic_regex)
         self._sensors = [
-            PolarisSensor(device_id=device_id, **meter) for meter in meters
+            PolarisSensor(device_id=device_id, device_type=device_type, **meter) for meter in meters
         ]
 
     def process_update(self, message: ReceiveMessage) -> None:
@@ -102,8 +154,21 @@ class PolarisSensorUpdateGroup:
         topic = message.topic
         payload = message.payload
         if self._topic_regex.search(topic):
-            _LOGGER.debug("Matched on %s", self._topic_regex.pattern)
-            parsed_data = json.loads(payload)
+            down_topic = topic.split("/")[topic.count("/")]
+            #if down_topic == "rssi" or down_topic == "humidity" or down_topic == "temperature":
+            # _LOGGER.debug("Matched on %s", self._topic_regex.pattern)
+            # _LOGGER.debug("topic non parsed %s", topic)
+            # _LOGGER.debug("Payload non parsed %s", payload)
+        #    arr_parsed_data = {}
+        #    match topic.split("/")[topic.count("/")]:
+        #        case "rssi":
+        #            arr_parsed_data = {"rssi": str(json.loads(payload)), "temperature": 0, "humidity": 0}
+        #        case "temperature":
+        #            arr_parsed_data = {"rssi": 0, "temperature": str(json.loads(payload)), "humidity": 0}
+        #        case "humidity":
+        #            arr_parsed_data = {"rssi": 0, "temperature": 0, "humidity": str(json.loads(payload))}
+            parsed_data = json.dumps({topic.split("/")[topic.count("/")]: json.loads(payload)})    # , "device_type": topic.split("/")[1]
+            #_LOGGER.debug("Update group parsed_data: %s", parsed_data)
             for sensor in self._sensors:
                 sensor.process_update(parsed_data)
 
@@ -119,6 +184,7 @@ class PolarisSensor(SensorEntity):
     def __init__(
         self,
         device_id,
+        device_type,
         name,
         icon,
         device_class,
@@ -147,14 +213,17 @@ class PolarisSensor(SensorEntity):
         self._attr_device_info = DeviceInfo(
             connections={("ids", device_id)},
             manufacturer="Polaris IQ Home",
-            model="Model Test",
-            name=f"Name Test {device_id}",
+            model=POLARIS_DEVICE[int(device_type)]["model"],
+            name=POLARIS_DEVICE[int(device_type)]["class"]+" "+POLARIS_DEVICE[int(device_type)]["model"],
         )
         self._attr_native_value = None
 
     def process_update(self, mqtt_data) -> None:
         """Update the state of the sensor."""
+        _LOGGER.debug("mqtt_data: %s", mqtt_data)
+        mqtt_data = json.loads(mqtt_data)
         new_value = self._func(mqtt_data)
+        _LOGGER.debug("new_value: %s", new_value)
         if self._ignore_zero_values and new_value == 0:
             _LOGGER.debug(
                 "Ignored new value of %s on %s.", new_value, self._attr_unique_id
