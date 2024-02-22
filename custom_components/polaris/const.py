@@ -129,3 +129,31 @@ POLARIS_DEVICE = {
     28: {"model": "PTB-RMST201906", "class": "Toothbrush"},
     50: {"model": "PETB-0202TC", "class": "Toothbrush"},
 }
+
+@dataclass
+class openwbSwitchEntityDescription(SwitchEntityDescription):
+    """Enhance the select entity description for openWB."""
+
+    mqttTopicCommand: str | None = None
+    mqttTopicCurrentValue: str | None = None
+    mqttTopicChargeMode: str | None = None
+
+
+SWITCHES_PER_LP = [
+    openwbSwitchEntityDescription(
+        key="ChargePointEnabled",
+        entity_category=EntityCategory.CONFIG,
+        name="Включить",
+        mqttTopicCommand="control/mode",
+        mqttTopicCurrentValue="state/mode",
+        device_class=SwitchDeviceClass.SWITCH,
+    ),
+    openwbSwitchEntityDescription(
+        key="PriceBasedCharging",
+        entity_category=EntityCategory.CONFIG,
+        name="Без звука",
+        device_class=SwitchDeviceClass.SWITCH,
+        mqttTopicCommand="control/sound",
+        mqttTopicCurrentValue="state/sound",
+    ),
+]
