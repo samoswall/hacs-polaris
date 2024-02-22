@@ -2,19 +2,16 @@
 import logging
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import (CONF_DEVICE_ID)
+from homeassistant.const import CONF_DEVICE_ID
 from homeassistant.core import HomeAssistant
-from .const import DOMAIN, CONF_TOPIC_PREFIX
+from .const import DOMAIN, CONF_TOPIC_PREFIX, MQTT_DEVICE_FOUND
 
 _LOGGER = logging.getLogger(__name__)
 _LOGGER.setLevel(logging.DEBUG)
-console = logging.StreamHandler()
-console.setLevel(level=logging.DEBUG)
-formatter = logging.Formatter("%(levelname)s : %(message)s")
-console.setFormatter(formatter)
-_LOGGER.addHandler(console)
 
-PLATFORMS = ["sensor"]
+PLATFORMS = ["sensor", "switch"]
+
+HomeAssistant
 
 
 async def async_setup(hass: HomeAssistant, config: dict):
@@ -22,7 +19,6 @@ async def async_setup(hass: HomeAssistant, config: dict):
 
     if DOMAIN not in hass.data:
         hass.data[DOMAIN] = {}
-
     return True
 
 
@@ -31,8 +27,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
 
     if entry.entry_id not in hass.data[DOMAIN]:
         hass.data[DOMAIN][entry.entry_id] = {}
-
-    _LOGGER.debug("CONF_DEVICE_ID: %s", entry.data[CONF_DEVICE_ID])
 
     hass.data[DOMAIN][entry.entry_id][CONF_DEVICE_ID] = (
         entry.data[CONF_DEVICE_ID].strip().upper().replace(":", "").replace(" ", "")
@@ -44,10 +38,22 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
         .replace(" ", "")
     )
 
+    hass.data[DOMAIN][entry.entry_id][MQTT_DEVICE_FOUND] = {}
+
+    _LOGGER.debug("CONF_DEVICE_ID: %s", entry.data[CONF_DEVICE_ID])
+    
+    entry.async_on_unload(entry.add_update_listener(update_listener))
+
     for component in PLATFORMS:
         hass.async_create_task(
             hass.config_entries.async_forward_entry_setup(entry, component)
         )
-
     _LOGGER.debug("Finished setting up Polaris integration")
     return True
+
+
+async def update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    """Handle options update."""
+    _LOGGER.debug("update_listener: %s", entry)
+    # await hass.config_entries.async_reload(entry.entry_id)
+    await hass.config_entries.async_reload(entry.entry_id)
