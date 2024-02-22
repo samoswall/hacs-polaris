@@ -1,6 +1,12 @@
 from itertools import cycle, islice
 from typing import Final
 
+
+from dataclasses import dataclass
+from homeassistant.components.switch import SwitchDeviceClass, SwitchEntityDescription
+from homeassistant.helpers.entity import EntityCategory
+
+
 DOMAIN: Final = "polaris"
 
 ATTR_NAME = "name"
@@ -8,6 +14,7 @@ ATTR_ERROR = "error"
 ATTR_STATE = "state"
 
 CONF_TOPIC_PREFIX = "topic_prefix"
+MQTT_DEVICE_FOUND = "device_found"
 
 POLARIS_DEVICE = {
     34: {"model": "PHB-1551WIFI", "class": "Blender"},
@@ -129,6 +136,7 @@ POLARIS_DEVICE = {
     28: {"model": "PTB-RMST201906", "class": "Toothbrush"},
     50: {"model": "PETB-0202TC", "class": "Toothbrush"},
 }
+
 
 @dataclass
 class openwbSwitchEntityDescription(SwitchEntityDescription):

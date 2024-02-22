@@ -138,11 +138,45 @@ async def async_get_device_groups(
         # hass.config_entries.async_unload_platforms(config_entry, "switch")
         # hass.async_add_job
 
-        hass.async_create_task(hass.config_entries.async_reload(config_entry.entry_id))
+        hass.async_create_task(hass.config_entries.async_reload(config_entry))
         # {'61': ['2ad246f6f25e1877e7d09f6cbc137ad3'], '70': ['1dc47cb18aadbb06f073def3e31c97c3']}
 
         match device_type:
-            case ("2"|"6"|"8"|"29"|"35"|"36"|"37"|"38"|"51"|"52"|"53"|"54"|"56"|"57"|"58"|"59"|"60"|"61"|"62"|"63"|"67"|"82"|"83"|"84"|"85"|"86"|"97"|"98"|"105"|"106"|"116"|"117"|"120"):
+            case (
+                "2"
+                | "6"
+                | "8"
+                | "29"
+                | "35"
+                | "36"
+                | "37"
+                | "38"
+                | "51"
+                | "52"
+                | "53"
+                | "54"
+                | "56"
+                | "57"
+                | "58"
+                | "59"
+                | "60"
+                | "61"
+                | "62"
+                | "63"
+                | "67"
+                | "82"
+                | "83"
+                | "84"
+                | "85"
+                | "86"
+                | "97"
+                | "98"
+                | "105"
+                | "106"
+                | "116"
+                | "117"
+                | "120"
+            ):
                 groups = [
                     PolarisSensorUpdateGroup(
                         device_id, device_type, "diag/rssi", STATE_SENSORS_RSSI
@@ -154,7 +188,23 @@ async def async_get_device_groups(
                         STATE_SENSORS_TEMPERATURE,
                     ),
                 ]
-            case ("4"|"15"|"17"|"18"|"25"|"44"|"70"|"71"|"72"|"73"|"74"|"75"|"87"|"99"|"91"):
+            case (
+                "4"
+                | "15"
+                | "17"
+                | "18"
+                | "25"
+                | "44"
+                | "70"
+                | "71"
+                | "72"
+                | "73"
+                | "74"
+                | "75"
+                | "87"
+                | "99"
+                | "91"
+            ):
                 groups = [
                     PolarisSensorUpdateGroup(
                         device_id, device_type, "diag/rssi", STATE_SENSORS_RSSI
