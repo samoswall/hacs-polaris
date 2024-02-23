@@ -1,0 +1,309 @@
+{
+  "id": "1f00fbe4-1f0c-42fa-ae53-20dc5248be92",
+  "name": "PCH-0320WIFI",
+  "type": 65,
+  "class": "heater",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/2/ef/6cb11-25b4-4c82-adcf-33f0e01302b8/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/2/ef/6cb11-25b4-4c82-adcf-33f0e01302b8/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/2/ef/6cb11-25b4-4c82-adcf-33f0e01302b8/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/2/ef/6cb11-25b4-4c82-adcf-33f0e01302b8/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/2/ef/6cb11-25b4-4c82-adcf-33f0e01302b8/600.webp",
+    "id": "2ef6cb11-25b4-4c82-adcf-33f0e01302b8",
+    "original": "https://images.cdn.polaris-iot.com/2/ef/6cb11-25b4-4c82-adcf-33f0e01302b8/original.webp"
+  },
+  "limits": {
+    "timer": {
+      "max": 86400,
+      "min": 0,
+      "step": 3600,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "temperature": {
+      "max": 35,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 25,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "voice": {
+      "alice": {
+        "info": {
+          "model": "PCH-0320WIFI",
+          "manufacturer": "polaris"
+        },
+        "type": "devices.types.thermostat",
+        "errors": [
+          {
+            "code": 1,
+            "errorType": "HUMAN_INVOLVEMENT_NEEDED",
+            "allowControl": false
+          }
+        ],
+        "features": [
+          {
+            "type": "info",
+            "feature": "current_temperature",
+            "instance": "temperature",
+            "retrievable": true
+          },
+          {
+            "type": "slider",
+            "limit": {
+              "max": 35,
+              "min": 18,
+              "step": 1,
+              "round": 1,
+              "default": 25,
+              "roundAlt": 1
+            },
+            "feature": "temperature",
+            "instance": "temperature",
+            "retrievable": true
+          },
+          {
+            "type": "dropdown",
+            "fields": {},
+            "values": [
+              {
+                "value": "min",
+                "action": {
+                  "program": [
+                    3
+                  ]
+                },
+                "condition": {
+                  "or": [
+                    {
+                      "program": [
+                        0
+                      ]
+                    },
+                    {
+                      "program": [
+                        3
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "max",
+                "action": {
+                  "program": [
+                    5
+                  ]
+                },
+                "condition": {
+                  "program": [
+                    5
+                  ]
+                }
+              },
+              {
+                "value": "medium",
+                "action": {
+                  "program": [
+                    4
+                  ]
+                },
+                "condition": {
+                  "program": [
+                    4
+                  ]
+                }
+              }
+            ],
+            "instance": "heat",
+            "retrievable": true
+          },
+          {
+            "type": "button_power",
+            "action": {
+              "program": [
+                1
+              ]
+            },
+            "fields": {},
+            "actionOff": {
+              "program": [
+                0
+              ]
+            },
+            "condition": {
+              "not": {
+                "program": [
+                  0
+                ]
+              }
+            },
+            "retrievable": true
+          }
+        ],
+        "mockable": false
+      }
+    },
+    "hidden": true,
+    "realtime": true,
+    "shortcuts": [
+      {
+        "program": [
+          1
+        ]
+      },
+      {
+        "program": [
+          2
+        ]
+      },
+      {
+        "program": [
+          3
+        ]
+      },
+      {
+        "program": [
+          4
+        ]
+      }
+    ],
+    "manualInfoFields": [
+      "temperature"
+    ]
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "temperature",
+    "timer",
+    "current_temperature",
+    "schedule",
+    "demo"
+  ],
+  "programs": [
+    {
+      "name": {
+        "ar-AE": "إيقاف التشغيل",
+        "de-DE": "Aus",
+        "en-US": "Off",
+        "kk-KZ": "Өшіру",
+        "ru-RU": "Выкл",
+        "uk-UA": "Вимкнено"
+      },
+      "hidden": true,
+      "limits": {
+        "timer": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "temperature": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "مريح",
+        "de-DE": "KOMFORT",
+        "en-US": "COMFORT",
+        "kk-KZ": "COMFORT",
+        "ru-RU": "COMFORT",
+        "uk-UA": "COMFORT"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "اقتصادي",
+        "de-DE": "ÖKO",
+        "en-US": "ECO",
+        "kk-KZ": "ECO",
+        "ru-RU": "ECO",
+        "uk-UA": "ECO"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "منخفض",
+        "de-DE": "NIEDRIG",
+        "en-US": "LOW",
+        "kk-KZ": "LOW",
+        "ru-RU": "LOW",
+        "uk-UA": "LOW"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "متوسط",
+        "de-DE": "MITTEL",
+        "en-US": "MID",
+        "kk-KZ": "MID",
+        "ru-RU": "MID",
+        "uk-UA": "MID"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "الحد الأقصى",
+        "de-DE": "max",
+        "en-US": "MAX",
+        "kk-KZ": "MAX",
+        "ru-RU": "MAX",
+        "uk-UA": "MAX"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "بدون فروست",
+        "de-DE": "KEINEN FROST",
+        "en-US": "NO FROST",
+        "kk-KZ": "NO FROST",
+        "ru-RU": "NO FROST",
+        "uk-UA": "NO FROST"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/1800.webp",
+      "2400": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/2400.webp",
+      "id": "654883ab-1e73-48a1-afe4-461a27c8a06a",
+      "original": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1697809159,
+  "temperature_units": "celsius"
+}

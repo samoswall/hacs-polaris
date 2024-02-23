@@ -1,0 +1,287 @@
+{
+  "id": "23eaf546-a975-4dee-9442-f10a877c64da",
+  "name": "PHB-1350WIFI",
+  "type": 93,
+  "class": "blender",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/1800.webp",
+    "id": "ef822f01-dd2f-40e3-8f85-d7dc8f9fddce",
+    "original": "https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/original.webp"
+  },
+  "layout": {
+    "top": [
+      {
+        "type": "slider",
+        "points": {
+          "1": {
+            "label": "1"
+          },
+          "30": {
+            "label": "30"
+          }
+        },
+        "feature": "speed",
+        "position": 0,
+        "precondition": [
+          {
+            "source": "state",
+            "multi_step": 0
+          }
+        ]
+      },
+      {
+        "type": "button_power",
+        "position": 0
+      },
+      {
+        "type": "error",
+        "position": 0
+      },
+      {
+        "type": "button_power",
+        "position": 1
+      },
+      {
+        "type": "slider",
+        "points": {
+          "5": {
+            "label": "0:05"
+          },
+          "300": {
+            "label": "5:00"
+          }
+        },
+        "feature": "timer",
+        "position": 1,
+        "precondition": [
+          {
+            "source": "state",
+            "multi_step": 0
+          }
+        ]
+      },
+      {
+        "type": "error",
+        "position": 1
+      }
+    ],
+    "home": [
+      {
+        "type": "timer",
+        "feature": "timer",
+        "position": 0,
+        "visibility": [
+          {
+            "not": {
+              "multi_step": 0
+            }
+          }
+        ]
+      }
+    ],
+    "middle": [
+      {
+        "row": "steps",
+        "type": "info",
+        "position": 0
+      },
+      {
+        "type": "header",
+        "title": {
+          "en-US": "Function"
+        },
+        "position": 1
+      },
+      {
+        "type": "button",
+        "layout": "userPresets",
+        "position": 2,
+        "precondition": [
+          {
+            "source": "state",
+            "multi_step": 0
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "feature": "recipe",
+        "position": 2,
+        "precondition": [
+          {
+            "source": "state",
+            "multi_step": 0
+          }
+        ]
+      }
+    ],
+    "top_info": [
+      {
+        "type": "info",
+        "measure": "step_index",
+        "position": 0
+      },
+      {
+        "type": "info",
+        "measure": "total_time",
+        "position": 0,
+        "visibility": [
+          {
+            "source": "state",
+            "multi_step": 0
+          }
+        ]
+      },
+      {
+        "type": "info",
+        "feature": "timer",
+        "position": 0,
+        "visibility": [
+          {
+            "not": {
+              "source": "state",
+              "multi_step": 0
+            }
+          }
+        ]
+      }
+    ],
+    "userPresets": [
+      {
+        "type": "header",
+        "title": {
+          "en-US": "Custom modes",
+          "ru-RU": "Персональные режимы"
+        },
+        "position": 0
+      },
+      {
+        "row": "savePreset",
+        "type": "button",
+        "title": {
+          "en-US": "Add",
+          "ru-RU": "Добавить"
+        },
+        "position": 1
+      }
+    ]
+  },
+  "limits": {
+    "speed": {
+      "max": 30,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "timer": {
+      "max": 300,
+      "min": 5,
+      "step": 5,
+      "round": 1,
+      "default": 5,
+      "round_alt": 1
+    },
+    "multi_step": {
+      "max": 7,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "hidden": true,
+    "cloneOfType": 34,
+    "userPresets": true,
+    "adminPresets": true,
+    "hotspot_ssid": "PHB-1350",
+    "defaultProgram": [
+      1
+    ],
+    "multiStepFields": [
+      "speed",
+      "timer"
+    ]
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "timer",
+    "multi_step",
+    "speed",
+    "recipe"
+  ],
+  "messages": {
+    "diag": {
+      "ar-AE": "اضغط على الزر \"ذكي\" 4 مرات في غضون 10 ثوانٍ وانتظر 10 ثوانٍ. سترتفع النقطة الاتصال.",
+      "de-DE": "Drücken Sie die „Smart“-Taste 4 Mal innerhalb von 10 Sekunden und warten Sie 10 Sekunden. Der Hotspot wird steigen.",
+      "en-US": "Press the \"Smart\" button 4 times within 10 seconds and wait 10 seconds. The hotspot will rise.",
+      "kk-KZ": "«Smart» түймесін 10 секунд ішінде 4 рет басып, 10 секунд күтіңіз. Ыстық нүкте көтеріледі.",
+      "ru-RU": "Нажмите кнопку «Smart» 4 раза в течение 10 секунд и подождите 10 секунд. Поднимется хотспот.",
+      "uk-UA": "Натисніть кнопку «Smart» 4 рази протягом 10 секунд та зачекайте 10 секунд. Підніметься хотспот."
+    },
+    "pair": {
+      "ar-AE": "اضغط على الزر \"ذكي\" 4 مرات في غضون 10 ثوانٍ. سيومض كلا المؤشرين بدورهما.",
+      "de-DE": "Drücken Sie die „Smart“-Taste 4 Mal innerhalb von 10 Sekunden. Beide Anzeigen blinken abwechselnd.",
+      "en-US": "Press the \"Smart\" button 4 times within 10 seconds. Both indicators will flash in turn.",
+      "kk-KZ": "«Smart» түймесін 10 секунд ішінде 4 рет басыңыз. Екі индикатор да кезекпен жыпылықтайды.",
+      "ru-RU": "Нажмите кнопку «Smart» 4 раза в течение 10 секунд. Оба индикатора начнут мигать по очереди.",
+      "uk-UA": "Натисніть кнопку Smart 4 рази протягом 10 секунд. Обидва індикатори почнуть блимати по черзі."
+    },
+    "reset": {
+      "ar-AE": "اضغط على الزر \"ذكي\" 8 مرات في غضون 10 ثوانٍ. سيومض كلا المؤشرين 3 مرات في نفس الوقت، وستتم إعادة ضبط الإعدادات.",
+      "de-DE": "Drücken Sie die „Smart“-Taste innerhalb von 10 Sekunden 8 Mal. Beide Anzeigen blinken 3 Mal gleichzeitig, die Einstellungen werden zurückgesetzt.",
+      "en-US": "Press the \"Smart\" button 8 times within 10 seconds. Both indicators will flash 3 times at the same time, the settings will be reset.",
+      "kk-KZ": "«Smart» түймесін 10 секунд ішінде 8 рет басыңыз. Екі индикатор бір уақытта 3 рет жыпылықтайды, параметрлер қалпына келтіріледі.",
+      "ru-RU": "Нажмите кнопку «Smart» 8 раз в течение 10 секунд. Оба индикатора промигают 3 раза одновременно, настройки будут сброшены.",
+      "uk-UA": "Натисніть кнопку \"Smart\" 8 разів протягом 10 секунд. Обидва індикатори промигають 3 рази одночасно, налаштування буде скинуто."
+    },
+    "error.1": {
+      "ar-AE": "سخونة مفرطة! يحتاج الخلاط إلى التبريد.",
+      "de-DE": "Überhitzung! Der Mixer muss abkühlen.",
+      "en-US": "Overheating! The blender needs to cool down.",
+      "kk-KZ": "Қызып кету! Блендерді салқындату керек.",
+      "ru-RU": "Перегрев! Блендеру необходимо остыть.",
+      "uk-UA": "Перегрів! Блендеру необхідно охолонути."
+    },
+    "error.2": {
+      "ar-AE": "قفل الأطفال قيد العمل",
+      "de-DE": "Der Schutz gegen unbeabsichtigtes Drücken hat funktioniert",
+      "en-US": "Child lock operated",
+      "kk-KZ": "Кездейсоқ басудан қорғау атқарылды",
+      "ru-RU": "Сработала защита от случайного нажатия",
+      "uk-UA": "Функція захисту від дітей"
+    }
+  },
+  "programs": [
+    null,
+    {
+      "name": {
+        "ar-AE": "تشغيل",
+        "de-DE": "An",
+        "en-US": "On",
+        "kk-KZ": "Қосу",
+        "ru-RU": "Вкл",
+        "uk-UA": "Увімкнуто"
+      },
+      "hidden": true,
+      "limits_constraints": []
+    }
+  ],
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1694692199,
+  "temperature_units": "celsius"
+}

@@ -1,0 +1,467 @@
+{
+  "id": "2ed19295-e5a3-4427-8caa-180e793b5d1b",
+  "name": "SIGMA WI-FI",
+  "type": 30,
+  "class": "boiler",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/6/f1/21910-973b-4796-ab35-7bad5b9fb87e/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/6/f1/21910-973b-4796-ab35-7bad5b9fb87e/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/6/f1/21910-973b-4796-ab35-7bad5b9fb87e/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/6/f1/21910-973b-4796-ab35-7bad5b9fb87e/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/6/f1/21910-973b-4796-ab35-7bad5b9fb87e/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/6/f1/21910-973b-4796-ab35-7bad5b9fb87e/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/6/f1/21910-973b-4796-ab35-7bad5b9fb87e/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/6/f1/21910-973b-4796-ab35-7bad5b9fb87e/1800.webp",
+    "id": "6f121910-973b-4796-ab35-7bad5b9fb87e",
+    "original": "https://images.cdn.polaris-iot.com/6/f1/21910-973b-4796-ab35-7bad5b9fb87e/original.webp"
+  },
+  "limits": {
+    "speed": {
+      "max": 2,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "timer": {
+      "max": 86400,
+      "min": 0,
+      "step": 60,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "keep_warm": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "child_lock": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "smart_mode": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "temperature": {
+      "max": 75,
+      "min": 40,
+      "step": 5,
+      "round": 1,
+      "default": 75,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "icons": {
+      "expendable.0": "M0,0h24v24V0M18.3889 10.5556H2.55556L2.55556 13.8889H18.3889L18.3889 10.5556ZM2.55556 10H18.3889C18.6957 10 18.9444 10.2487 18.9444 10.5556V13.8889C18.9444 14.1957 18.6957 14.4444 18.3889 14.4444H2.55556C2.24873 14.4444 2 14.1957 2 13.8889V10.5556C2 10.2487 2.24873 10 2.55556 10ZM21.4445 11.6666H18.9445V12.7784H21.4445L21.4445 11.6666ZM21.4445 11.1111C21.7513 11.1111 22 11.3598 22 11.6666V12.7784C22 13.0852 21.7513 13.3339 21.4445 13.3339H18.3889V11.1111H21.4445Z"
+    },
+    "voice": {
+      "alice": {
+        "info": {
+          "model": "SIGMA WI-FI",
+          "manufacturer": "polaris"
+        },
+        "type": "devices.types.thermostat",
+        "errors": [],
+        "features": [
+          {
+            "type": "button_power",
+            "action": {
+              "program": [
+                1
+              ]
+            },
+            "actionOff": {
+              "program": [
+                0
+              ]
+            },
+            "condition": {
+              "not": {
+                "program": [
+                  0
+                ]
+              }
+            },
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "feature": "child_lock",
+            "instance": "controls_locked",
+            "retrievable": true
+          },
+          {
+            "type": "info",
+            "feature": "current_temperature",
+            "instance": "temperature",
+            "retrievable": true
+          },
+          {
+            "type": "dropdown",
+            "values": [
+              {
+                "value": "min",
+                "action": {
+                  "speed": 0,
+                  "program": [
+                    1
+                  ]
+                },
+                "condition": {
+                  "speed": 0
+                }
+              },
+              {
+                "value": "medium",
+                "action": {
+                  "speed": 1,
+                  "program": [
+                    1
+                  ]
+                },
+                "condition": {
+                  "speed": 1
+                }
+              },
+              {
+                "value": "max",
+                "action": {
+                  "speed": 2,
+                  "program": [
+                    1
+                  ]
+                },
+                "condition": {
+                  "speed": 2
+                }
+              }
+            ],
+            "instance": "work_speed",
+            "retrievable": true
+          },
+          {
+            "type": "slider",
+            "limit": {
+              "max": 75,
+              "min": 40,
+              "step": 5,
+              "round": 1,
+              "default": 75,
+              "roundAlt": 1
+            },
+            "feature": "temperature",
+            "instance": "temperature",
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "feature": "keep_warm",
+            "instance": "keep_warm",
+            "retrievable": true
+          }
+        ]
+      }
+    },
+    "realtime": true,
+    "altValues": {
+      "speed": {
+        "0": 800,
+        "1": 1200,
+        "2": 2000
+      },
+      "water_tank": {
+        "24": 30,
+        "40": 50,
+        "64": 80,
+        "80": 100
+      }
+    },
+    "defaultProgram": [
+      1
+    ],
+    "expendable_max": [
+      8760
+    ],
+    "deviceAttributes": [
+      {
+        "name": "capacity",
+        "title": "attr.title.capacity",
+        "values": [
+          {
+            "name": "30liters",
+            "title": "attr.capacity.30liters.title",
+            "water_tank": 24
+          },
+          {
+            "name": "50liters",
+            "title": "attr.capacity.50liters.title",
+            "water_tank": 40
+          },
+          {
+            "name": "80liters",
+            "title": "attr.capacity.80liters.title",
+            "water_tank": 64
+          },
+          {
+            "name": "100liters",
+            "title": "attr.capacity.100liters.title",
+            "water_tank": 80
+          }
+        ]
+      }
+    ],
+    "manualInfoFields": [
+      "temperature",
+      "speed"
+    ],
+    "mqttFeatureNames": {
+      "speed": "power"
+    },
+    "excludeScheduleFeatures": [
+      "timer",
+      "smart_mode",
+      "water_tank"
+    ]
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "temperature",
+    "speed",
+    "current_temperature",
+    "schedule",
+    "timer",
+    "child_lock",
+    "smart_mode",
+    "water_tank",
+    "expendables",
+    "keep_warm",
+    "demo"
+  ],
+  "messages": {
+    "diag": {
+      "ar-AE": "اضغط مع الاستمرار على زر تشغيل واي فاي حتى يصدر صوتي تنبيه.",
+      "de-DE": "Halten Sie die Taste Ein/Wi-Fi-Einstellungen bis zwei Pieptöne gedrückt",
+      "en-US": "Press and hold wifi operation button until two beeps.",
+      "kk-KZ": "Wi-Fi қосу/баптау батырмасын екі дыбыстық сигнал естілгенше басып тұрыңыз.",
+      "ru-RU": "Нажмите и удерживайте кнопку включения/настройки Wi-Fi до двух звуковых сигналов.",
+      "uk-UA": "Натисніть і утримуйте кнопку включення/налаштування Wi-Fi до двох звукових сигналів."
+    },
+    "pair": {
+      "ar-AE": "اضغط مع الاستمرار على زر تشغيل الواي فاي حتى يصدر صوت تنبيه.",
+      "de-DE": "Halten Sie die Taste Ein/Wi-Fi-Einstellungen bis ein Pieptöne gedrückt",
+      "en-US": "Press and hold wifi operation button until a beep.",
+      "kk-KZ": "Құрылғыдағы Wi-Fi қосу/баптау батырмасын бір дыбыстық сигнал шыққанша басып тұрыңыз.",
+      "ru-RU": "Нажмите и удерживайте на корпусе прибора кнопку включения/настройки Wi-Fi до одного звукового сигнала.",
+      "uk-UA": "Натисніть і утримуйте на корпусі приладу кнопку включення/налаштування Wi-Fi до одного звукового сигналу."
+    },
+    "reset": {
+      "ar-AE": "اضغط مع الاستمرار على زر تشغيل الواي فاي حتى إصدار ثلاث أصوات تنبيه.",
+      "de-DE": "Halten Sie die Taste Ein/Wi-Fi-Einstellungen bis drei Pieptöne gedrückt",
+      "en-US": "Press and hold wifi operation button until three beeps.",
+      "kk-KZ": "Wi-Fi-ды қосу/баптау батырмасын үш рет дыбыстық сигнал шыққанша басып тұрыңыз.",
+      "ru-RU": "Нажмите и удерживайте кнопку включения/настройки Wi-Fi до тройного звукового сигнала.",
+      "uk-UA": "Натисніть і утримуйте кнопку включення/налаштування Wi-Fi до потрійного звукового сигналу"
+    },
+    "error.1": {
+      "ar-AE": "فشل جهاز استشعار درجة الحرارة",
+      "de-DE": "Fehler des Wärmesensors",
+      "en-US": "Temperature sensor failure",
+      "kk-KZ": "Жылу датчигінің қатесі",
+      "ru-RU": "Ошибка термодатчика",
+      "uk-UA": "Несправність датчика температури"
+    },
+    "error.2": {
+      "ar-AE": "قفل الأطفال قيد العمل",
+      "de-DE": "Der Schutz gegen unbeabsichtigtes Drücken hat funktioniert",
+      "en-US": "Child lock operated",
+      "kk-KZ": "Кездейсоқ басудан қорғау атқарылды",
+      "ru-RU": "Сработала защита от случайного нажатия",
+      "uk-UA": "Функція захисту від дітей"
+    },
+    "attr.speed": {
+      "ar-AE": "الطاقة",
+      "de-DE": "Leistung",
+      "en-US": "Power",
+      "kk-KZ": "Қуат",
+      "ru-RU": "Мощность",
+      "uk-UA": "Потужність"
+    },
+    "url.manual": {
+      "ar-AE": "https://images.cdn.polaris-iot.com/ee/7c/0a67ec86-de3e-42f0-a76b-c5fcc22f13cc/original.pdf",
+      "de-DE": "https://images.cdn.polaris-iot.com/ee/7c/0a67ec86-de3e-42f0-a76b-c5fcc22f13cc/original.pdf",
+      "en-US": "https://images.cdn.polaris-iot.com/ee/7c/0a67ec86-de3e-42f0-a76b-c5fcc22f13cc/original.pdf",
+      "kk-KZ": "https://images.cdn.polaris-iot.com/ee/7c/0a67ec86-de3e-42f0-a76b-c5fcc22f13cc/original.pdf",
+      "ru-RU": "https://images.cdn.polaris-iot.com/ee/7c/0a67ec86-de3e-42f0-a76b-c5fcc22f13cc/original.pdf",
+      "uk-UA": "https://images.cdn.polaris-iot.com/ee/7c/0a67ec86-de3e-42f0-a76b-c5fcc22f13cc/original.pdf"
+    },
+    "alert.ready": {
+      "ar-AE": "اكتمل التسخين",
+      "de-DE": "Heizung abgeschlossen",
+      "en-US": "Heating completed",
+      "kk-KZ": "Ысыту аяқталды",
+      "ru-RU": "Нагрев завершён",
+      "uk-UA": "Нагрів завершено"
+    },
+    "expendable.0": {
+      "ar-AE": "الأنود",
+      "de-DE": "Anode",
+      "en-US": "Anode",
+      "kk-KZ": "Анод",
+      "ru-RU": "Анод",
+      "uk-UA": "Анод"
+    },
+    "attr.smart_mode": {
+      "ar-AE": "اقتصادي",
+      "de-DE": "Öko",
+      "en-US": "Eco",
+      "kk-KZ": "Эко",
+      "ru-RU": "Эко",
+      "uk-UA": "Eco"
+    },
+    "attr.temperature": {
+      "ar-AE": "درجة الحرارة المستهدفة",
+      "de-DE": "Zieltemperatur",
+      "en-US": "Target temperature",
+      "kk-KZ": "Мақсатты температура",
+      "ru-RU": "Целевая температура",
+      "uk-UA": "Цільова температура"
+    },
+    "attr.speed.suffix": {
+      "ar-AE": "وات",
+      "de-DE": "W",
+      "en-US": "W",
+      "kk-KZ": "W",
+      "ru-RU": "W",
+      "uk-UA": "W"
+    },
+    "attr.title.capacity": {
+      "ar-AE": "السعة",
+      "de-DE": "Fassungsvermögen",
+      "en-US": "Capacity",
+      "kk-KZ": "Ауыстыру",
+      "ru-RU": "Литраж",
+      "uk-UA": "літраж"
+    },
+    "attr.capacity.30liters.title": {
+      "ar-AE": "30 لتر",
+      "de-DE": "30 Liter",
+      "en-US": "30 liters",
+      "kk-KZ": "30 литр",
+      "ru-RU": "30 литров",
+      "uk-UA": "30 літрів"
+    },
+    "attr.capacity.50liters.title": {
+      "ar-AE": "50 لتر",
+      "de-DE": "50 Liter",
+      "en-US": "50 liters",
+      "kk-KZ": "50 литр",
+      "ru-RU": "50 литров",
+      "uk-UA": "50 літрів"
+    },
+    "attr.capacity.80liters.title": {
+      "ar-AE": "80 لتر",
+      "de-DE": "80 Liter",
+      "en-US": "80 liters",
+      "kk-KZ": "80 литр",
+      "ru-RU": "80 литров",
+      "uk-UA": "80 літрів"
+    },
+    "attr.capacity.100liters.title": {
+      "ar-AE": "100 لتر",
+      "de-DE": "100 Liter",
+      "en-US": "100 liters",
+      "kk-KZ": "100 литр",
+      "ru-RU": "100 литров",
+      "uk-UA": "100 літрів"
+    }
+  },
+  "programs": [
+    {
+      "name": {
+        "ar-AE": "إيقاف التشغيل",
+        "de-DE": "Aus",
+        "en-US": "Off",
+        "kk-KZ": "Өшіру",
+        "ru-RU": "Выкл",
+        "uk-UA": "Вимкнено"
+      },
+      "hidden": true,
+      "limits": {
+        "speed": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "timer": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "keep_warm": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "temperature": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "تشغيل",
+        "de-DE": "An",
+        "en-US": "On",
+        "kk-KZ": "Қосу",
+        "ru-RU": "Вкл",
+        "uk-UA": "Увімкнено"
+      },
+      "hidden": true,
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/1800.webp",
+      "2400": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/2400.webp",
+      "id": "223a9575-3220-46a0-af4a-3d2e48896b7d",
+      "original": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1698417021,
+  "temperature_units": "celsius"
+}

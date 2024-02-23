@@ -1,0 +1,360 @@
+{
+  "id": "8a97253b-ba26-46d2-98bc-add07f948872",
+  "name": "PWH-IDF06",
+  "type": 11,
+  "class": "boiler",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/5/e6/60f0f-98be-44ea-bea4-42cc3a27d340/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/5/e6/60f0f-98be-44ea-bea4-42cc3a27d340/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/5/e6/60f0f-98be-44ea-bea4-42cc3a27d340/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/5/e6/60f0f-98be-44ea-bea4-42cc3a27d340/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/5/e6/60f0f-98be-44ea-bea4-42cc3a27d340/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/5/e6/60f0f-98be-44ea-bea4-42cc3a27d340/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/5/e6/60f0f-98be-44ea-bea4-42cc3a27d340/1200.webp",
+    "id": "5e660f0f-98be-44ea-bea4-42cc3a27d340",
+    "original": "https://images.cdn.polaris-iot.com/5/e6/60f0f-98be-44ea-bea4-42cc3a27d340/original.webp"
+  },
+  "limits": {
+    "speed": {
+      "max": 2,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "timer": {
+      "max": 86400,
+      "min": 0,
+      "step": 60,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "keep_warm": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "child_lock": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "smart_mode": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "temperature": {
+      "max": 75,
+      "min": 40,
+      "step": 5,
+      "round": 1,
+      "default": 75,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "icons": {
+      "expendable.0": "M0,0h24v24V0M18.3889 10.5556H2.55556L2.55556 13.8889H18.3889L18.3889 10.5556ZM2.55556 10H18.3889C18.6957 10 18.9444 10.2487 18.9444 10.5556V13.8889C18.9444 14.1957 18.6957 14.4444 18.3889 14.4444H2.55556C2.24873 14.4444 2 14.1957 2 13.8889V10.5556C2 10.2487 2.24873 10 2.55556 10ZM21.4445 11.6666H18.9445V12.7784H21.4445L21.4445 11.6666ZM21.4445 11.1111C21.7513 11.1111 22 11.3598 22 11.6666V12.7784C22 13.0852 21.7513 13.3339 21.4445 13.3339H18.3889V11.1111H21.4445Z"
+    },
+    "voice": {
+      "alice": {
+        "info": {
+          "model": "PWH-IDF06",
+          "manufacturer": "polaris"
+        },
+        "type": "devices.types.thermostat",
+        "errors": [],
+        "features": [
+          {
+            "type": "button_power",
+            "action": {
+              "program": [
+                1
+              ]
+            },
+            "actionOff": {
+              "program": [
+                0
+              ]
+            },
+            "condition": {
+              "not": {
+                "program": [
+                  0
+                ]
+              }
+            },
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "feature": "child_lock",
+            "instance": "controls_locked",
+            "retrievable": true
+          },
+          {
+            "type": "info",
+            "feature": "current_temperature",
+            "instance": "temperature",
+            "retrievable": true
+          },
+          {
+            "type": "dropdown",
+            "values": [
+              {
+                "value": "min",
+                "action": {
+                  "speed": 0,
+                  "program": [
+                    1
+                  ]
+                },
+                "condition": {
+                  "speed": 0
+                }
+              },
+              {
+                "value": "medium",
+                "action": {
+                  "speed": 1,
+                  "program": [
+                    1
+                  ]
+                },
+                "condition": {
+                  "speed": 1
+                }
+              },
+              {
+                "value": "max",
+                "action": {
+                  "speed": 2,
+                  "program": [
+                    1
+                  ]
+                },
+                "condition": {
+                  "speed": 2
+                }
+              }
+            ],
+            "instance": "work_speed",
+            "retrievable": true
+          },
+          {
+            "type": "slider",
+            "limit": {
+              "max": 75,
+              "min": 40,
+              "step": 5,
+              "round": 1,
+              "default": 75,
+              "roundAlt": 1
+            },
+            "feature": "temperature",
+            "instance": "temperature",
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "feature": "keep_warm",
+            "instance": "keep_warm",
+            "retrievable": true
+          }
+        ]
+      }
+    },
+    "hidden": true,
+    "realtime": true,
+    "altValues": {
+      "speed": {
+        "0": 1000,
+        "1": 1500,
+        "2": 2500
+      }
+    },
+    "defaultProgram": [
+      1
+    ],
+    "expendable_max": [
+      8760
+    ],
+    "manualInfoFields": [
+      "temperature",
+      "speed"
+    ],
+    "mqttFeatureNames": {
+      "speed": "power"
+    },
+    "excludeScheduleFeatures": [
+      "timer",
+      "smart_mode",
+      "water_tank"
+    ]
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "temperature",
+    "speed",
+    "current_temperature",
+    "schedule",
+    "timer",
+    "child_lock",
+    "smart_mode",
+    "water_tank",
+    "expendables",
+    "keep_warm"
+  ],
+  "messages": {
+    "error.1": {
+      "ar-AE": "فشل جهاز استشعار درجة الحرارة",
+      "de-DE": "Fehler des Wärmesensors",
+      "en-US": "Temperature sensor failure",
+      "kk-KZ": "Жылу датчигінің қатесі",
+      "ru-RU": "Ошибка термодатчика",
+      "uk-UA": "Несправність датчика температури"
+    },
+    "error.2": {
+      "ar-AE": "قفل الأطفال قيد العمل",
+      "de-DE": "Der Schutz gegen unbeabsichtigtes Drücken hat funktioniert",
+      "en-US": "Child lock operated",
+      "kk-KZ": "Кездейсоқ басудан қорғау атқарылды",
+      "ru-RU": "Сработала защита от случайного нажатия",
+      "uk-UA": "Функція захисту від дітей"
+    },
+    "attr.speed": {
+      "ar-AE": "الطاقة",
+      "de-DE": "Leistung",
+      "en-US": "Power",
+      "kk-KZ": "Қуат",
+      "ru-RU": "Мощность",
+      "uk-UA": "Потужність"
+    },
+    "alert.ready": {
+      "ar-AE": "اكتمل التسخين",
+      "de-DE": "Heizung abgeschlossen",
+      "en-US": "Heating completed",
+      "kk-KZ": "Ысыту аяқталды",
+      "ru-RU": "Нагрев завершён",
+      "uk-UA": "Нагрів завершено"
+    },
+    "expendable.0": {
+      "ar-AE": "الأنود",
+      "de-DE": "Anode",
+      "en-US": "Anode",
+      "kk-KZ": "Анод",
+      "ru-RU": "Анод",
+      "uk-UA": "Анод"
+    },
+    "attr.smart_mode": {
+      "ar-AE": "اقتصادي",
+      "de-DE": "Öko",
+      "en-US": "Eco",
+      "kk-KZ": "Эко",
+      "ru-RU": "Эко",
+      "uk-UA": "Eco"
+    },
+    "attr.temperature": {
+      "ar-AE": "درجة الحرارة المستهدفة",
+      "de-DE": "Zieltemperatur",
+      "en-US": "Target temperature",
+      "kk-KZ": "Мақсатты температура",
+      "ru-RU": "Целевая температура",
+      "uk-UA": "Цільова температура"
+    },
+    "attr.speed.suffix": {
+      "ar-AE": "وات",
+      "de-DE": "W",
+      "en-US": "W",
+      "kk-KZ": "W",
+      "ru-RU": "W",
+      "uk-UA": "W"
+    }
+  },
+  "programs": [
+    {
+      "name": {
+        "ar-AE": "إيقاف التشغيل",
+        "de-DE": "Aus",
+        "en-US": "Off",
+        "kk-KZ": "Өшіру",
+        "ru-RU": "Выкл",
+        "uk-UA": "Вимкнено"
+      },
+      "hidden": true,
+      "limits": {
+        "speed": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "timer": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "keep_warm": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "temperature": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "تشغيل",
+        "de-DE": "An",
+        "en-US": "On",
+        "kk-KZ": "Қосу",
+        "ru-RU": "Вкл",
+        "uk-UA": "Увімкнено"
+      },
+      "hidden": true,
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/1800.webp",
+      "2400": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/2400.webp",
+      "id": "223a9575-3220-46a0-af4a-3d2e48896b7d",
+      "original": "https://images.cdn.polaris-iot.com/2/23/a9575-3220-46a0-af4a-3d2e48896b7d/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1698416869,
+  "temperature_units": "celsius"
+}

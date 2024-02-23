@@ -1,0 +1,505 @@
+{
+  "id": "4d02255d-a8cb-48fb-8f7a-3c4e5a4b380a",
+  "name": "SLG-V3",
+  "type": 141,
+  "class": "generator",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/4/14/8b312-c022-494a-86ce-0091e37168f2/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/4/14/8b312-c022-494a-86ce-0091e37168f2/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/4/14/8b312-c022-494a-86ce-0091e37168f2/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/4/14/8b312-c022-494a-86ce-0091e37168f2/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/4/14/8b312-c022-494a-86ce-0091e37168f2/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/4/14/8b312-c022-494a-86ce-0091e37168f2/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/4/14/8b312-c022-494a-86ce-0091e37168f2/1200.webp",
+    "id": "4148b312-c022-494a-86ce-0091e37168f2",
+    "original": "https://images.cdn.polaris-iot.com/4/14/8b312-c022-494a-86ce-0091e37168f2/original.webp"
+  },
+  "layout": {
+    "top": [
+      {
+        "type": "button_power",
+        "position": 0
+      }
+    ],
+    "middle": [
+      {
+        "row": "steps",
+        "info": [
+          {
+            "type": "info",
+            "title": {
+              "ru-RU": "Режим"
+            },
+            "params": {
+              "params": {}
+            },
+            "feature": "program"
+          },
+          {
+            "type": "info",
+            "title": {
+              "ru-RU": "Таймер"
+            },
+            "params": {
+              "params": {}
+            },
+            "feature": "timer"
+          }
+        ],
+        "type": "info",
+        "layout": "step.editor",
+        "position": 0,
+        "visibility": [
+          {
+            "not": {
+              "source": "state",
+              "multi_step": {
+                "min": 1
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "layout": "userPresets",
+        "position": 1,
+        "precondition": [
+          {
+            "not": {
+              "source": "state",
+              "multi_step": {
+                "min": 1
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "top_info": [
+      {
+        "type": "info",
+        "measure": "total_time",
+        "position": 0
+      }
+    ],
+    "step.editor": [
+      {
+        "type": "header",
+        "title": {
+          "ru-RU": "Редактор шага"
+        },
+        "position": 0
+      },
+      {
+        "type": "button",
+        "title": {
+          "en-US": "Sinus"
+        },
+        "action": {
+          "program": [
+            1
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "program": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "title": {
+          "en-US": "Standby"
+        },
+        "action": {
+          "program": [
+            2
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "program": [
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text_input",
+        "title": {
+          "ru-RU": "Время сессии (с)"
+        },
+        "feature": "timer",
+        "position": 2
+      },
+      {
+        "type": "text_input",
+        "title": {
+          "ru-RU": "Ток (mA)"
+        },
+        "feature": "speed",
+        "position": 3,
+        "visibility": [
+          {
+            "program": [
+              1
+            ]
+          }
+        ],
+        "formatRules": [
+          {
+            "formatValue": [
+              {
+                "op": "mul",
+                "value": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text_input",
+        "title": {
+          "ru-RU": "Частота (Hz)"
+        },
+        "feature": "amount",
+        "position": 4,
+        "visibility": [
+          {
+            "program": [
+              1
+            ]
+          }
+        ],
+        "formatRules": [
+          {
+            "formatValue": [
+              {
+                "op": "div",
+                "value": 10
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text_input",
+        "title": {
+          "ru-RU": "Ширина импульса (ms)"
+        },
+        "feature": "pressure",
+        "position": 5,
+        "visibility": [
+          {
+            "program": [
+              1
+            ]
+          }
+        ],
+        "formatRules": [
+          {
+            "formatValue": [
+              {
+                "op": "div",
+                "value": 1000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text_input",
+        "title": {
+          "ru-RU": "Частота амплитудной модуляции (Hz)"
+        },
+        "feature": "temperature",
+        "position": 6,
+        "visibility": [
+          {
+            "program": [
+              1
+            ]
+          }
+        ],
+        "formatRules": [
+          {
+            "formatValue": [
+              {
+                "op": "div",
+                "value": 10000
+              }
+            ]
+          }
+        ],
+        "text_suffix": false
+      }
+    ]
+  },
+  "limits": {
+    "speed": {
+      "max": 100,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 50,
+      "round_alt": 1
+    },
+    "timer": {
+      "max": 18000,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 60,
+      "round_alt": 1
+    },
+    "amount": {
+      "max": 50000,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 100,
+      "round_alt": 1
+    },
+    "pressure": {
+      "max": 100000,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1000,
+      "round_alt": 1
+    },
+    "multi_step": {
+      "max": 9,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "temperature": {
+      "max": 160000,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "hidden": true,
+    "commands": {
+      "pressure": {
+        "size": 4
+      },
+      "temperature": {
+        "cmd": "02",
+        "size": 4,
+        "topic": "temperature"
+      }
+    },
+    "userPresets": true,
+    "multiStepFields": [
+      "program",
+      "timer",
+      "speed",
+      "amount",
+      "pressure",
+      "temperature"
+    ],
+    "feature_constraints": [
+      {
+        "op": ">",
+        "exp1": "{temperature} 10000 /",
+        "exp2": "{amount} 10 /",
+        "error": {
+          "msg": "constraints.1"
+        },
+        "program": [
+          1
+        ]
+      },
+      {
+        "op": ">",
+        "exp1": "{pressure} 1000000 /",
+        "exp2": "10 {amount} /",
+        "error": {
+          "msg": "constraints.2"
+        },
+        "program": [
+          1
+        ]
+      },
+      {
+        "op": "<",
+        "exp1": "{pressure} 1000 /",
+        "exp2": "0.1",
+        "error": {
+          "msg": "constraints.3"
+        },
+        "program": [
+          1
+        ]
+      },
+      {
+        "op": "<",
+        "exp1": "{pressure} 1000 /",
+        "exp2": "{speed} 10 * 5 * 10000 /",
+        "error": {
+          "msg": "constraints.4",
+          "args": [
+            {
+              "exp": "{pressure} 1000 /"
+            },
+            {
+              "exp": "{pressure} 1000 / 10 * 5 / 1000 *"
+            }
+          ]
+        },
+        "program": [
+          1
+        ]
+      }
+    ]
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "multi_step",
+    "timer",
+    "speed",
+    "amount",
+    "pressure",
+    "temperature"
+  ],
+  "messages": {
+    "pair": {
+      "ru-RU": "Зажмите правую кнопку до 5 миганий"
+    },
+    "attr.speed": {
+      "ru-RU": "Ток"
+    },
+    "attr.amount": {
+      "ru-RU": "Частота"
+    },
+    "attr.pressure": {
+      "ru-RU": "Ширина импульса"
+    },
+    "constraints.1": {
+      "ru-RU": "Частота не может быть меньше Частоты АМ"
+    },
+    "constraints.2": {
+      "ru-RU": "Ширина импульса не может быть больше периода сигнала"
+    },
+    "constraints.3": {
+      "ru-RU": "Минимальная ширина импульса 0.1 мс"
+    },
+    "constraints.4": {
+      "ru-RU": "Для ширины импульса {} мс максимальный ток равен {} мА"
+    }
+  },
+  "programs": [
+    null,
+    {
+      "icon": "M0,-960h960v960V-960M320-203v-560l440 280-440 280Zm60-280Zm0 171 269-171-269-171v342Z",
+      "name": {
+        "en-US": "Sinus"
+      },
+      "hidden": false,
+      "limits": {
+        "speed": {
+          "max": 100,
+          "min": 5,
+          "step": 1,
+          "round": 1,
+          "default": 50,
+          "round_alt": 1
+        },
+        "timer": {
+          "max": 18000,
+          "min": 60,
+          "step": 1,
+          "round": 1,
+          "default": 60,
+          "round_alt": 1
+        },
+        "amount": {
+          "max": 50000,
+          "min": 1,
+          "step": 1,
+          "round": 1,
+          "default": 100,
+          "round_alt": 1
+        },
+        "pressure": {
+          "max": 100000,
+          "min": 100,
+          "step": 1,
+          "round": 1,
+          "default": 1000,
+          "round_alt": 1
+        },
+        "temperature": {
+          "max": 160000,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "icon": "M0,-960h960v960V-960M525-200v-560h235v560H525Zm-325 0v-560h235v560H200Zm385-60h115v-440H585v440Zm-325 0h115v-440H260v440Zm0-440v440-440Zm325 0v440-440Z",
+      "name": {
+        "en-US": "Standby"
+      },
+      "hidden": false,
+      "limits": {
+        "speed": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "amount": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "pressure": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "temperature": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    }
+  ],
+  "connectivity": [
+    "ble"
+  ],
+  "last_modified": 1687948701,
+  "temperature_units": "celsius"
+}

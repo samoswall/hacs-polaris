@@ -1,0 +1,695 @@
+{
+  "id": "67eace6e-90b6-400a-a2ec-969048fb0f0d",
+  "name": "PMC-0526WIFI",
+  "type": 169,
+  "class": "cooker",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/1800.webp",
+    "id": "6fdf7349-f7c0-46e0-b001-787923872799",
+    "original": "https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/original.webp"
+  },
+  "layout": {
+    "settings": [
+      {
+        "type": "button",
+        "title": {
+          "en-US": "Reset Configuration",
+          "ru-RU": "Сброс конфигурации"
+        },
+        "measure": "nfcReset",
+        "position": 0
+      }
+    ]
+  },
+  "limits": {
+    "timer": {
+      "max": 43200,
+      "min": 180,
+      "step": 60,
+      "round": 1,
+      "default": 7200,
+      "round_alt": 1
+    },
+    "multi_step": {
+      "max": 1,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "delay_start": {
+      "max": 64800,
+      "min": 0,
+      "step": 60,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "temperature": {
+      "max": 170,
+      "min": 35,
+      "step": 1,
+      "round": 1,
+      "default": 100,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "voice": {
+      "alice": {
+        "info": {
+          "model": "PMC-0526WIFI",
+          "manufacturer": "polaris"
+        },
+        "type": "devices.types.cooking.multicooker",
+        "errors": [],
+        "features": [
+          {
+            "type": "button_power",
+            "action": {
+              "steps": [
+                {
+                  "timer": 1200,
+                  "program": [
+                    1
+                  ],
+                  "temperature": 115
+                }
+              ]
+            },
+            "actionOff": {
+              "steps": []
+            },
+            "condition": {
+              "not": {
+                "multi_step": 0
+              }
+            },
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "feature": "keep_warm",
+            "instance": "keep_warm",
+            "retrievable": true
+          },
+          {
+            "type": "slider",
+            "limit": {
+              "max": 170,
+              "min": 35,
+              "step": 1,
+              "round": 1,
+              "default": 115,
+              "roundAlt": 1
+            },
+            "action": {
+              "steps": [
+                {
+                  "timer": 1200,
+                  "program": [
+                    1
+                  ],
+                  "temperature": 115
+                }
+              ]
+            },
+            "feature": "temperature",
+            "instance": "temperature",
+            "retrievable": true
+          },
+          {
+            "type": "dropdown",
+            "values": [
+              {
+                "value": "aspic",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 21600,
+                      "program": [
+                        10
+                      ],
+                      "temperature": 93
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "baking",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 1800,
+                      "program": [
+                        8
+                      ],
+                      "temperature": 145
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "bread",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 7200,
+                      "program": [
+                        19
+                      ],
+                      "temperature": 35
+                    },
+                    {
+                      "timer": 3600,
+                      "program": [
+                        255
+                      ],
+                      "temperature": 160
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "cereals",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 2400,
+                      "program": [
+                        18
+                      ],
+                      "temperature": 115
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "frying",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 300,
+                      "program": [
+                        7
+                      ],
+                      "temperature": 160
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "milk_porridge",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 3600,
+                      "program": [
+                        17
+                      ],
+                      "temperature": 95
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "multicooker",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 1200,
+                      "program": [
+                        1
+                      ],
+                      "temperature": 115
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "slow_cook",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 18000,
+                      "program": [
+                        21
+                      ],
+                      "temperature": 45
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "soup",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 3600,
+                      "program": [
+                        4
+                      ],
+                      "temperature": 97
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "steam",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 300,
+                      "program": [
+                        15
+                      ],
+                      "temperature": 115
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "stewing",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 7200,
+                      "program": [
+                        6
+                      ],
+                      "temperature": 93
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "yogurt",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 28800,
+                      "program": [
+                        12
+                      ],
+                      "temperature": 38
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "pilaf",
+                "action": {
+                  "steps": [
+                    {
+                      "timer": 3600,
+                      "program": [
+                        9
+                      ],
+                      "temperature": 120
+                    }
+                  ]
+                }
+              }
+            ],
+            "instance": "program",
+            "retrievable": false
+          },
+          {
+            "type": "switch",
+            "feature": "child_lock",
+            "instance": "controls_locked",
+            "retrievable": true
+          }
+        ],
+        "mockable": false
+      }
+    },
+    "hidden": true,
+    "barcode": "5055539149626",
+    "shortcuts": [
+      {
+        "program": [
+          1
+        ]
+      },
+      {
+        "program": [
+          18
+        ]
+      },
+      {
+        "program": [
+          13
+        ]
+      },
+      {
+        "program": [
+          4
+        ]
+      }
+    ],
+    "cloneOfType": 138,
+    "userPresets": true,
+    "adminPresets": true,
+    "modeFunction": true,
+    "max_steps_time": 57600,
+    "multiStepFields": [
+      "temperature",
+      "timer"
+    ],
+    "openMqttSupport": true,
+    "shareblePresets": true,
+    "manualInfoFields": [
+      "program",
+      "temperature",
+      "timer"
+    ],
+    "open_mqtt_support": true,
+    "excludeScheduleFeatures": [
+      "keep_warm"
+    ]
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "temperature",
+    "timer",
+    "multi_step",
+    "delay_start",
+    "recipe",
+    "demo"
+  ],
+  "messages": {
+    "diag": {
+      "de-DE": "Halten Sie die Pfeiltasten gleichzeitig bis zwei kurzen Pieptönen gedrückt. Zur Bestätigung auf dem Display des Multikochers beginnt die Wi-Fi-Anzeige nach einer Pause zweimal zu blinken.",
+      "en-US": "Press and hold both of the arrow buttons at the same time until two beeps. WiFi LED will start double blinking",
+      "kk-KZ": "Екі қысқа дыбыстық сигнал естілгенше көрсеткі батырмаларын бір уақытта басып тұрыңыз. Мультипісіргіштің дисплейін растау үшін Wi-Fi индикаторы кідіріс сайын екі рет жыпылықтай бастайды.",
+      "ru-RU": "Зажмите и удерживайте одновременно кнопки со стрелками до двух коротких звуковых сигналов. В подтверждение на дисплее мультиварки индикатор Wi-Fi начнет мигать двойным миганием через паузу",
+      "uk-UA": "Натисніть і утримуйте обидві кнопки зі стрілками одночасно до двох звукових сигналів. Індикатор WiFi почне блимати два рази"
+    },
+    "pair": {
+      "de-DE": "Drücken Sie gleichzeitig die Pfeiltasten und lassen Sie sie los – es ertönt ein Piepton. Die Wi-Fi-Anzeige beginnt langsam zu blinken, um die Bestätigung auf dem Display des Multivarks zu bestätigen",
+      "en-US": "Simultaneously press the arrow buttons and release – a beep will sound. In confirmation, the Wi-Fi indicator will start flashing slowly on the multivark display",
+      "kk-KZ": "Сонымен қатар, көрсеткілері бар батырмаларды басып, босатыңыз – дыбыстық сигнал естіледі. Мультиварка дисплейінде растау үшін Wi-Fi индикаторы баяу жыпылықтай бастайды",
+      "ru-RU": "Одновременно нажмите кнопки со стрелками и отпустите – раздастся звуковой сигнал. В подтверждениие на дисплее мультиварки индикатор Wi-Fi начнет медленно мигать",
+      "uk-UA": "Одночасно Натисніть кнопки зі стрілками і відпустіть-пролунає звуковий сигнал. На підтвердження на дисплеї мультиварки індикатор Wi-Fi почне повільно блимати"
+    },
+    "reset": {
+      "de-DE": "Halten Sie die Pfeiltasten gleichzeitig bis drei kurzen Pieptönen gedrückt. Zur Bestätigung auf dem Display des Multikochers wirdt die Wi-Fi-Anzeige nicht mehr angezeigt",
+      "en-US": "Press and hold both of the arrow buttons at the same time until three beeps. WiFi LED will switch off",
+      "kk-KZ": "Үш қысқа дыбыстық сигналға дейін бір уақытта көрсеткі батырмаларын басып тұрыңыз. Растау үшін Wi-Fi индикаторы мультипісіргіштің дисплейінде көрсетілуін тоқтатады",
+      "ru-RU": "Зажмите и удерживайте одновременно кнопки со стрелками до трех коротких звуковых сигналов. В подтверждениие на дисплее мультиварки индикатор Wi-Fi перестанет отображаться",
+      "uk-UA": "Натисніть і утримуйте обидві кнопки зі стрілками одночасно до трьох звукових сигналів. Індикатор WiFi вимкнеться"
+    },
+    "error.1": {
+      "en-US": "Temperature sensor failure",
+      "kk-KZ": "Жылу датчигінің қатесі",
+      "ru-RU": "Ошибка термодатчика",
+      "uk-UA": "Несправність датчика температури"
+    },
+    "error.2": {
+      "en-US": "Temperature sensor failure",
+      "kk-KZ": "Жылу датчигінің қатесі",
+      "ru-RU": "Ошибка термодатчика",
+      "uk-UA": "Несправність датчика температури"
+    },
+    "error.3": {
+      "en-US": "Temperature sensor failure",
+      "kk-KZ": "Жылу датчигінің қатесі",
+      "ru-RU": "Ошибка термодатчика",
+      "uk-UA": "Несправність датчика температури"
+    },
+    "error.4": {
+      "en-US": "Temperature sensor failure",
+      "kk-KZ": "Жылу датчигінің қатесі",
+      "ru-RU": "Ошибка термодатчика",
+      "uk-UA": "Несправність датчика температури"
+    },
+    "error.6": {
+      "de-DE": "Schüssel fehlt",
+      "en-US": "Cup is not present",
+      "kk-KZ": "Тостаған орнатылмаған",
+      "ru-RU": "Чаша не установлена",
+      "uk-UA": "Чашка до складу не входить"
+    },
+    "error.7": {
+      "en-US": "Child lock operated",
+      "kk-KZ": "Кездейсоқ басудан қорғау атқарылды",
+      "ru-RU": "Сработала защита от случайного нажатия",
+      "uk-UA": "Функція захисту від дітей"
+    },
+    "alert.step": {
+      "en-US": "Cooking step completed",
+      "kk-KZ": "Даярлау қадамы аяқталды",
+      "ru-RU": "Шаг приготовления завершён",
+      "uk-UA": "Крок приготування завершено"
+    },
+    "smart_diag": {
+      "en-US": "Press and hold both of the arrow buttons at the same time until a short beep. WiFi LED will start blinking slowly",
+      "kk-KZ": "Қысқа дыбыстық сигнал естілгенше көрсеткі батырмаларын бір уақытта басып тұрыңыз. Мультипісіргіштің дисплейін растау үшін Wi-Fi индикаторы жыпылықтай бастайды",
+      "ru-RU": "Зажмите и удерживайте одновременно кнопки со стрелками до короткого звукового сигнала. В подтверждениие на дисплее мультиварки индикатор Wi-Fi начнет медленно мигать",
+      "uk-UA": "Натисніть і утримуйте обидві кнопки зі стрілками одночасно до короткого звукового сигналу. Індикатор Wi-Fi почне повільно блимати"
+    },
+    "url.manual": {
+      "en-US": "https://images.cdn.polaris-iot.com/pdf/polaris/9/PMC%200526.pdf"
+    },
+    "alert.ready": {
+      "en-US": "Cooking finished",
+      "kk-KZ": "Даярлау аяқталды",
+      "ru-RU": "Приготовление завершено",
+      "uk-UA": "Приготування їжі завершено"
+    },
+    "alert.start": {
+      "en-US": "Cooking started",
+      "kk-KZ": "Дайындық басталды",
+      "ru-RU": "Приготовление началось",
+      "uk-UA": "Розпочато приготування їжі"
+    },
+    "url.catalog": {
+      "de-DE": "https://www.polar.ru/catalog/multivarki/multivarka-polaris-pmc-0526-iq-home/",
+      "en-US": "https://www.polar.ru/catalog/multivarki/multivarka-polaris-pmc-0526-iq-home/",
+      "kk-KZ": "https://www.polar.ru/catalog/multivarki/multivarka-polaris-pmc-0526-iq-home/",
+      "ru-RU": "https://www.polar.ru/catalog/multivarki/multivarka-polaris-pmc-0526-iq-home/",
+      "uk-UA": "https://polaris.company/ua/catalog/multicookers/multivarka-polaris-pmc-0526-iq-home/"
+    },
+    "talking.no_wifi": {
+      "de-DE": "Wenn die Anzeige der verzögerten Startzeit 20 Minuten anzeigt, kann das Gerät das konfigurierte Netzwerk nicht finden",
+      "en-US": "If the delayed start time indicator shows 20 minutes, the device cannot detect the configured network",
+      "kk-KZ": "Егер кешіктірілген бастау уақытының индикаторы 20 минутты көрсетсе, құрылғы конфигурацияланған желіні таба алмайды.",
+      "ru-RU": "Если индикатор времени отложенного старта показывает 20 минут - устройство не может обнаружить настроенную сеть",
+      "uk-UA": "Якщо індикатор відкладеного часу затримки запуску показує 20 хвилин, пристрій не може виявити налаштовану мережу"
+    },
+    "talking.wifi_error": {
+      "de-DE": "Wenn die Anzeige für die verzögerte Startzeit 40 Minuten anzeigt, ist das Passwort bei der Verbinden mit dem konfigurierten Netzwerk nicht korrekt",
+      "en-US": "If the delayed start time indicator shows 40 minutes, the password did not match when connecting to the configured network",
+      "kk-KZ": "Егер кешіктірілген бастау уақыты индикаторы 40 минутты көрсетсе, конфигурацияланған желіге қосылу кезінде пароль сәйкес келмеді",
+      "ru-RU": "Если индикатор времени отложенного старта показывает 40 минут - при подключении к настроенной сети не подошел пароль",
+      "uk-UA": "Якщо індикатор часу затримки запуску показує 40 хвилин, пароль не збігався при підключенні до налаштованої мережі"
+    }
+  },
+  "programs": [
+    null,
+    {
+      "name": {
+        "en-US": "Chicken"
+      },
+      "hidden": false,
+      "limits_constraints": [
+        {
+          "max": 160,
+          "min": 140,
+          "limits": {
+            "timer": {
+              "max": 7200,
+              "min": 300,
+              "step": 300,
+              "round": 1,
+              "default": 1200,
+              "round_alt": 1
+            }
+          },
+          "feature": "temperature"
+        },
+        {
+          "max": 35700,
+          "min": 7201,
+          "limits": {
+            "temperature": {
+              "max": 135,
+              "min": 35,
+              "step": 5,
+              "round": 1,
+              "default": 60,
+              "round_alt": 1
+            }
+          },
+          "feature": "timer"
+        }
+      ]
+    },
+    {
+      "name": {
+        "en-US": "Beef"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Pork"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Warm"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Meat"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Vegetables"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Ribs"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "air_fry"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Stew"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Boiling"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "multigrain_porridge"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "hot_pot"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Steak"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "porridge_soup"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Smolder"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Cake"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Reheat"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "uncoverd_cook"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Slow_cook"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "pair": {
+      "60": "https://images.cdn.polaris-iot.com/6/64/cc250-dc8e-48e5-8d69-84a7bec362e7/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/6/64/cc250-dc8e-48e5-8d69-84a7bec362e7/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/6/64/cc250-dc8e-48e5-8d69-84a7bec362e7/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/6/64/cc250-dc8e-48e5-8d69-84a7bec362e7/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/6/64/cc250-dc8e-48e5-8d69-84a7bec362e7/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/6/64/cc250-dc8e-48e5-8d69-84a7bec362e7/900.webp",
+      "id": "664cc250-dc8e-48e5-8d69-84a7bec362e7",
+      "original": "https://images.cdn.polaris-iot.com/6/64/cc250-dc8e-48e5-8d69-84a7bec362e7/original.webp"
+    },
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/d/3f/3a5cb-cb02-4ccf-8e7e-02557b694187/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/d/3f/3a5cb-cb02-4ccf-8e7e-02557b694187/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/d/3f/3a5cb-cb02-4ccf-8e7e-02557b694187/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/d/3f/3a5cb-cb02-4ccf-8e7e-02557b694187/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/d/3f/3a5cb-cb02-4ccf-8e7e-02557b694187/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/d/3f/3a5cb-cb02-4ccf-8e7e-02557b694187/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/d/3f/3a5cb-cb02-4ccf-8e7e-02557b694187/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/d/3f/3a5cb-cb02-4ccf-8e7e-02557b694187/1800.webp",
+      "id": "d3f3a5cb-cb02-4ccf-8e7e-02557b694187",
+      "original": "https://images.cdn.polaris-iot.com/d/3f/3a5cb-cb02-4ccf-8e7e-02557b694187/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1700241856,
+  "temperature_units": "celsius"
+}

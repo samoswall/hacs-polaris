@@ -1,0 +1,716 @@
+{
+  "id": "0c32f052-43b1-4a0d-99c8-fc1bcdf4a0c4",
+  "name": "PUH-9105",
+  "type": 4,
+  "class": "humidifier",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/1800.webp",
+    "id": "c9d27f85-2e01-4cd7-85d8-a034e81c5be4",
+    "original": "https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/original.webp"
+  },
+  "limits": {
+    "speed": {
+      "max": 6,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 6,
+      "round_alt": 1
+    },
+    "timer": {
+      "max": 43200,
+      "min": 0,
+      "step": 3600,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "volume": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "ioniser": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "humidity": {
+      "max": 75,
+      "min": 0,
+      "step": 5,
+      "round": 1,
+      "default": 30,
+      "round_alt": 1
+    },
+    "backlight": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "stream_warm": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "voice": {
+      "alice": {
+        "info": {
+          "model": "PUH-9105",
+          "manufacturer": "polaris"
+        },
+        "type": "devices.types.humidifier",
+        "errors": [
+          {
+            "code": 1,
+            "errorType": "NOT_ENOUGH_WATER",
+            "allowControl": false
+          }
+        ],
+        "features": [
+          {
+            "type": "button_power",
+            "action": {
+              "program": [
+                1
+              ]
+            },
+            "fields": {},
+            "actionOff": {
+              "program": [
+                0
+              ]
+            },
+            "condition": {
+              "not": {
+                "program": [
+                  0
+                ]
+              }
+            },
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "feature": "ioniser",
+            "instance": "ionization",
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "action": {
+              "volume": 0
+            },
+            "instance": "mute",
+            "actionOff": {
+              "volume": 1
+            },
+            "condition": {
+              "volume": 0
+            },
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "feature": "backlight",
+            "instance": "backlight",
+            "retrievable": true
+          },
+          {
+            "type": "info",
+            "feature": "current_temperature",
+            "instance": "temperature",
+            "retrievable": true
+          },
+          {
+            "type": "info",
+            "feature": "current_humidity",
+            "instance": "humidity",
+            "retrievable": true
+          },
+          {
+            "type": "slider",
+            "limit": {
+              "max": 75,
+              "min": 30,
+              "step": 5,
+              "round": 1,
+              "default": 40,
+              "roundAlt": 1
+            },
+            "feature": "humidity",
+            "instance": "humidity",
+            "retrievable": true
+          },
+          {
+            "type": "dropdown",
+            "fields": {},
+            "values": [
+              {
+                "value": "auto",
+                "action": {
+                  "speed": 0,
+                  "ioniser": 0,
+                  "program": [
+                    1
+                  ],
+                  "humidity": 0,
+                  "backlight": 0
+                },
+                "condition": {
+                  "not": {
+                    "program": [
+                      5
+                    ]
+                  }
+                }
+              },
+              {
+                "value": "low",
+                "action": {
+                  "speed": 2,
+                  "program": [
+                    5
+                  ]
+                },
+                "condition": {
+                  "and": [
+                    {
+                      "or": [
+                        {
+                          "speed": 1
+                        },
+                        {
+                          "speed": 2
+                        }
+                      ]
+                    },
+                    {
+                      "program": [
+                        5
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "medium",
+                "action": {
+                  "speed": 4,
+                  "program": [
+                    5
+                  ]
+                },
+                "condition": {
+                  "and": [
+                    {
+                      "or": [
+                        {
+                          "speed": 3
+                        },
+                        {
+                          "speed": 4
+                        }
+                      ]
+                    },
+                    {
+                      "program": [
+                        5
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "high",
+                "action": {
+                  "speed": 6,
+                  "program": [
+                    5
+                  ]
+                },
+                "condition": {
+                  "and": [
+                    {
+                      "or": [
+                        {
+                          "speed": 5
+                        },
+                        {
+                          "speed": 6
+                        },
+                        {
+                          "program": [
+                            5
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "instance": "work_speed",
+            "retrievable": true
+          }
+        ]
+      }
+    },
+    "barcode": "5055539147844",
+    "altTypes": [
+      17,
+      18,
+      44,
+      70
+    ],
+    "realtime": true,
+    "shortcuts": [
+      {
+        "values": {
+          "backlight": 1
+        }
+      },
+      {
+        "program": [
+          1
+        ]
+      },
+      {
+        "values": {
+          "ioniser": 1
+        }
+      },
+      {
+        "program": [
+          3
+        ]
+      }
+    ],
+    "invertSound": true,
+    "manualInfoFields": [
+      "humidity",
+      "current_temperature",
+      "speed"
+    ],
+    "mqttFeatureNames": {
+      "speed": "intensity",
+      "volume": "sound"
+    }
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "timer",
+    "speed",
+    "humidity",
+    "current_temperature",
+    "current_humidity",
+    "ioniser",
+    "stream_warm",
+    "volume",
+    "schedule",
+    "backlight",
+    "demo"
+  ],
+  "messages": {
+    "diag": {
+      "ar-AE": "استمر في الضغط على زر \"تشغيل/ إيقاف\" حتى تسمع صوتي تنبيه قصيرين. للتأكيد، سيومض مؤشرالواي فاي ببطء",
+      "de-DE": "Halten Sie die Taste \"On/Off\"  bis zwei kurze Pieptöne gedrückt. Zur Bestätigung beginnt die WI-FI-Anzeige auf dem Display des Luftbefeuchters zu blinken",
+      "en-US": "Hold the \"On/Off\" button until two short beeps. In confirmation the Wi-Fi indicator will flash slowly",
+      "kk-KZ": "«\"On/Off» батырмасын екі қысқа дыбыстық сигнал шыққанша басып тұрыңыз. WI-FI индикаторы дымқылдатқыш дисплейінде жыпылықтап, растайды",
+      "ru-RU": "Зажмите и удерживайте кнопку \"On/Off\" до двух коротких звуковых сигналов. В подтверждение на дисплее увлажнителя индикатор WI-FI начнет мигать",
+      "uk-UA": "Утримуйте кнопку \"Увімк. / Вимк.\" до двох коротких звукових сигналів. На підтвердження індикатор Wi-Fi буде повільно блимати"
+    },
+    "pair": {
+      "ar-AE": "اضغط مع الاستمرار على زر \"تشغيل/ إيقاف\" حتى تسمع صوت تنبيه قصير. للتأكيد، سيومض مؤشر الواي فاي بسرعة",
+      "de-DE": "Halten Sie die Taste \"On/Off\"  bis ein kurzer Piepton gedrückt. Zur Bestätigung beginnt die WI-FI-Anzeige auf dem Display des Luftbefeuchters schnell zu blinken",
+      "en-US": "Hold the \"On/Off\" button until short beep. In confirmation the Wi-Fi indicator will flash rapidly",
+      "kk-KZ": "Қысқа сигнал естілгенше «\"On/Off» батырмасын басып тұрыңыз. Ылғалдатқыштың дисплейін растау үшін WI-FI индикаторы тез жыпылықтайды",
+      "ru-RU": "Зажмите и удерживайте кнопку \"On/Off\" до короткого звукового сигнала. В подтверждение на дисплее увлажнителя индикатор WI-FI начнет быстро мигать",
+      "uk-UA": "Утримуйте кнопку \"Вимк./Вимк.\" до короткого звукового сигналу. На підтвердження індикатор  почне Wi-Fi швидко блиматиме"
+    },
+    "reset": {
+      "ar-AE": "استمر في الضغط على زر \"تشغيل/ إيقاف\" حتى إصدار ثلاث أصوات تنبيه قصيرة. للتأكيد، سينطفئ مؤشر الواي فاي",
+      "de-DE": "Halten Sie die Taste \"On/Off\"  bis drei kurze Pieptöne gedrückt. Zur Bestätigung beginnt die WI-FI-Anzeige auf dem Display des Luftbefeuchters zu blinken",
+      "en-US": "Hold the \"On/Off\" button until three short beeps. In confirmation the Wi-Fi indicator will turn off",
+      "kk-KZ": "\"On/Off\" батырмасын үш дыбыстық сигналға дейін басып тұрыңыз. Ылғалдатқышты көрсетуді растау үшін WI-FI индикаторы сөніп қалуы керек",
+      "ru-RU": "Зажмите и удерживайте кнопку \"On/Off\" до трех звуковых сигналов. В подтверждение на дисплее увлажнителя индикатор WI-FI должен погаснуть",
+      "uk-UA": "Утримуйте кнопку \"Вимк./Вимк.\", до появи трьох коротких звукових сигналів. Вимкнеться Wi-Fi індикатор "
+    },
+    "error.1": {
+      "ar-AE": "مياه منخفضة",
+      "de-DE": "Wenig Wasser.",
+      "en-US": "Low water",
+      "kk-KZ": "Су аз",
+      "ru-RU": "Мало воды",
+      "uk-UA": "Низький pівень води "
+    },
+    "error.3": {
+      "ar-AE": "يوصى باستبدال الفلتر",
+      "de-DE": "Es wird empfohlen, den Filter zu wechseln",
+      "en-US": "It is recommended to replace the filter",
+      "kk-KZ": "Сүзгіні ауыстырған жөн",
+      "ru-RU": "Рекомендуется заменить фильтр",
+      "uk-UA": "Рекомендується замінити фільтр"
+    },
+    "attr.speed": {
+      "ar-AE": "كثافة",
+      "de-DE": "Intensität",
+      "en-US": "Intensity",
+      "kk-KZ": "Конфигурацияны қалдырып, жалғастырыңыз",
+      "ru-RU": "Интенсивность",
+      "uk-UA": "Інтенсивність"
+    },
+    "url.manual": {
+      "ar-AE": "https://images.cdn.polaris-iot.com/pdf/polaris/4/manual.pdf",
+      "en-US": "https://images.cdn.polaris-iot.com/pdf/polaris/4/manual.pdf"
+    },
+    "url.catalog": {
+      "ar-AE": "https://shop-polaris.ru/uvlazhniteli-iq-home603/uvlazhnitel-vozdukha-polaris-puh-9105-iq-home/",
+      "de-DE": "https://shop-polaris.ru/uvlazhniteli-iq-home603/uvlazhnitel-vozdukha-polaris-puh-9105-iq-home/",
+      "en-US": "https://shop-polaris.ru/uvlazhniteli-iq-home603/uvlazhnitel-vozdukha-polaris-puh-9105-iq-home/",
+      "kk-KZ": "https://shop-polaris.ru/uvlazhniteli-iq-home603/uvlazhnitel-vozdukha-polaris-puh-9105-iq-home/",
+      "ru-RU": "https://shop-polaris.ru/uvlazhniteli-iq-home603/uvlazhnitel-vozdukha-polaris-puh-9105-iq-home/",
+      "uk-UA": "https://shop-polaris.ru/uvlazhniteli-iq-home603/uvlazhnitel-vozdukha-polaris-puh-9105-iq-home/"
+    },
+    "attr.backlight": {
+      "ar-AE": "خفيف",
+      "de-DE": "Hintergrundbeleuchtung",
+      "en-US": "Light",
+      "kk-KZ": "Артқы жарық",
+      "ru-RU": "Подсветка",
+      "uk-UA": "Підсвічування"
+    },
+    "attr.stream_warm": {
+      "ar-AE": "بخار دافئ",
+      "de-DE": "warmer Dampf",
+      "en-US": "Warm steam",
+      "kk-KZ": "Жылы бу",
+      "ru-RU": "Теплый пар",
+      "uk-UA": "Тепла пара"
+    }
+  },
+  "programs": [
+    {
+      "name": {
+        "ar-AE": "إيقاف التشغيل",
+        "de-DE": "Aus.",
+        "en-US": "Off",
+        "kk-KZ": "Өшіру",
+        "ru-RU": "Выкл",
+        "uk-UA": "Вимкнено"
+      },
+      "hidden": true,
+      "limits": {
+        "speed": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "timer": {
+          "max": 0,
+          "min": 0,
+          "step": 3600,
+          "default": 0
+        },
+        "ioniser": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "humidity": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "backlight": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "stream_warm": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "icon": "M9.61523 12.3503H4.47852L3.50195 15.28H0.386719L5.67969 1.06128H8.39453L13.7168 15.28H10.6016L9.61523 12.3503ZM5.26953 9.97729H8.82422L7.03711 4.65503L5.26953 9.97729ZM25.6309 1.06128V10.4265C25.6309 11.9825 25.1426 13.213 24.166 14.1179C23.196 15.0229 21.8678 15.4753 20.1816 15.4753C18.5215 15.4753 17.2031 15.0359 16.2266 14.157C15.25 13.2781 14.752 12.0704 14.7324 10.5339V1.06128H17.6621V10.446C17.6621 11.377 17.8835 12.0574 18.3262 12.4871C18.7754 12.9102 19.3939 13.1218 20.1816 13.1218C21.8288 13.1218 22.6654 12.2559 22.6914 10.5242V1.06128H25.6309ZM38.7363 3.43433H34.3809V15.28H31.4512V3.43433H27.1543V1.06128H38.7363V3.43433ZM51.8223 8.49292C51.8223 9.89266 51.5749 11.1199 51.0801 12.1746C50.5853 13.2292 49.8757 14.0431 48.9512 14.616C48.0332 15.1889 46.9785 15.4753 45.7871 15.4753C44.6087 15.4753 43.5573 15.1921 42.6328 14.6257C41.7083 14.0593 40.9922 13.252 40.4844 12.2039C39.9766 11.1492 39.7194 9.93823 39.7129 8.57104V7.86792C39.7129 6.46818 39.9635 5.23771 40.4648 4.17651C40.9727 3.10881 41.6855 2.29175 42.6035 1.72534C43.528 1.15243 44.5827 0.865967 45.7676 0.865967C46.9525 0.865967 48.0039 1.15243 48.9219 1.72534C49.8464 2.29175 50.5592 3.10881 51.0605 4.17651C51.5684 5.23771 51.8223 6.46493 51.8223 7.85815V8.49292ZM48.8535 7.84839C48.8535 6.3575 48.5866 5.22469 48.0527 4.44995C47.5189 3.67521 46.7572 3.28784 45.7676 3.28784C44.7845 3.28784 44.026 3.67196 43.4922 4.44019C42.9583 5.2019 42.6882 6.3217 42.6816 7.79956V8.49292C42.6816 9.94474 42.9486 11.071 43.4824 11.8718C44.0163 12.6726 44.7845 13.073 45.7871 13.073C46.7702 13.073 47.5254 12.6889 48.0527 11.9207C48.5801 11.1459 48.847 10.0196 48.8535 8.54175V7.84839Z",
+      "name": {
+        "ar-AE": "تلقائي",
+        "de-DE": "automatisch",
+        "en-US": "Auto",
+        "kk-KZ": "Автоматты",
+        "ru-RU": "Авто",
+        "uk-UA": "Авто"
+      },
+      "hidden": false,
+      "limits": {
+        "speed": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "ioniser": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 0
+        },
+        "humidity": {
+          "max": 75,
+          "min": 30,
+          "step": 5,
+          "default": 0
+        },
+        "backlight": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 1
+        },
+        "stream_warm": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 0
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "icon": "M28.4128 2.5725C25.0628 -0.8175 19.5928 -0.8175 16.2428 2.5725L15.5428 3.2725C15.5028 3.3125 15.4528 3.3125 15.4128 3.2725L14.6928 2.5425C11.3428 -0.8475 5.87282 -0.8475 2.52282 2.5425C0.27282 4.8225 -0.46718 8.0225 0.28282 10.9125H7.46282C7.70282 10.9125 7.90282 11.0825 7.95282 11.3125L8.42282 13.6625L9.97282 4.3625C10.0128 4.1225 10.2228 3.9425 10.4628 3.9425H10.4728C10.7228 3.9425 10.9328 4.1325 10.9628 4.3725L12.5228 16.0725L13.9728 7.3625C14.0128 7.1325 14.2128 6.9525 14.4428 6.9425C14.6328 6.9625 14.8928 7.0925 14.9428 7.3225L15.8428 10.9425L20.0028 10.9125C20.2428 9.7825 21.2428 8.9425 22.4428 8.9425C23.8228 8.9425 24.9428 10.0625 24.9428 11.4425C24.9428 12.8225 23.8228 13.9425 22.4428 13.9425C21.2228 13.9425 20.2128 13.0725 19.9928 11.9125L15.4528 11.9425C15.2228 11.9425 15.0228 11.7825 14.9628 11.5625L14.5428 9.8925L12.9428 19.5225C12.9028 19.7625 12.6928 19.9425 12.4528 19.9425H12.4428C12.1928 19.9425 11.9828 19.7525 11.9528 19.5125L10.3928 7.8125L8.94282 16.5225C8.90282 16.7625 8.70282 16.9325 8.45282 16.9425C8.23282 16.9825 8.00282 16.7725 7.95282 16.5425L7.03282 11.9125H0.61282C1.03282 12.9825 1.67282 13.9825 2.53282 14.8525L14.7428 27.2125C15.1428 27.6225 15.8028 27.6225 16.2128 27.2125L28.4128 14.8825C31.7828 11.4725 31.7828 5.9825 28.4128 2.5725Z",
+      "name": {
+        "ar-AE": "الصحة",
+        "de-DE": "Gesundheit",
+        "en-US": "Health",
+        "kk-KZ": "Денсаулық",
+        "ru-RU": "Здоровье",
+        "uk-UA": "Здоров'я"
+      },
+      "hidden": false,
+      "limits": {
+        "speed": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "ioniser": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 0
+        },
+        "humidity": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "backlight": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 1
+        },
+        "stream_warm": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 1
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "icon": "M4.1,4.9c0-1.7,1.4-3.1,3.1-3.1c1.7,0,3.1,1.4,3.1,3.1S8.9,8,7.2,8C5.5,8,4.1,6.6,4.1,4.9zM10.5,9.4c-0.3-0.3-0.7-0.5-1.2-0.5H5c-0.4,0-0.8,0.2-1.2,0.5l-3.5,3.5c-0.5,0.5-0.5,1.4,0,1.9c0.5,0.5,1.4,0.5,1.9,0l1.8-1.8v10.6c0,0.7,0.6,1.3,1.3,1.3s1.3-0.6,1.3-1.3v-4.9h0.9v4.9c0,0.7,0.6,1.3,1.3,1.3c0.7,0,1.3-0.6,1.3-1.3V12.9l1.8,1.8c0.5,0.5,1.4,0.5,1.9,0c0.5-0.5,0.5-1.4,0-1.9L10.5,9.4zM19.2,4.9c0,1.7,1.4,3.1,3.1,3.1s3.1-1.4,3.1-3.1S24,1.8,22.3,1.8S19.2,3.2,19.2,4.9zM29.1,12.8l-3.5-3.5c-0.3-0.3-0.7-0.5-1.2-0.5h-4.3c-0.4,0-0.8,0.2-1.2,0.5l-3.5,3.5c-0.5,0.5-0.5,1.4,0,1.9c0.5,0.5,1.4,0.5,1.9,0l1.8-1.8c0,0.1-0.7,4.7-0.7,4.7c-0.1,0.5,0.3,0.9,0.7,1v4.9c0,0.7,0.6,1.3,1.3,1.3c0.7,0,1.3-0.6,1.3-1.3v-4.9h0.9v4.9c0,0.7,0.6,1.3,1.3,1.3c0.7,0,1.3-0.6,1.3-1.3v-4.9c0.5-0.1,0.8-0.5,0.7-1c0,0-0.7-4.6-0.7-4.7l1.8,1.8c0.5,0.5,1.4,0.5,1.9,0C29.6,14.2,29.6,13.4,29.1,12.8zM23.9,2c0.5,0.1,1,0.1,1.6,0.3c0.2,0.5,0.4,1,0.6,1.5c0.3,0.9,2.3-1.6,1.4-1.8c-0.5,0-1.1-0.1-1.6-0.2c-0.2-0.5-0.4-1-0.5-1.5C25-0.7,23,1.8,23.9,2zM18.4,3.7c0.2-0.5,0.3-1,0.6-1.4C19.5,2.1,20,2,20.5,2c0.9-0.2-1.1-2.7-1.4-1.8c-0.1,0.5-0.3,1-0.5,1.5C18,1.8,17.5,1.9,17,1.9v0C16.1,2,18.1,4.6,18.4,3.7z",
+      "name": {
+        "ar-AE": "وضع الطفل",
+        "de-DE": "Kinder",
+        "en-US": "Baby mode",
+        "kk-KZ": "Балалар үшін",
+        "ru-RU": "Детский",
+        "uk-UA": "Дитячий режим"
+      },
+      "hidden": false,
+      "limits": {
+        "speed": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "ioniser": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 1
+        },
+        "humidity": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "backlight": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 1
+        },
+        "stream_warm": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 1
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "icon": "M22.1652 20.92C22.1152 20.92 22.0652 20.93 22.0052 20.94C20.9352 21.25 19.8052 21.42 18.6352 21.42C18.3652 21.42 18.0852 21.41 17.8152 21.39C11.8852 20.99 7.00525 16.11 6.60525 10.18C6.50525 8.71998 6.67525 7.29998 7.05525 5.98998C7.16525 5.61998 6.87525 5.28998 6.53525 5.28998C6.44525 5.28998 6.35525 5.30998 6.27525 5.35998C2.06525 7.66998 -0.624754 12.41 0.125246 17.69C0.865246 22.92 5.08525 27.14 10.3152 27.88C10.9052 27.96 11.4952 28 12.0652 28C16.6252 28 20.5952 25.46 22.6452 21.73C22.8552 21.35 22.5652 20.92 22.1652 20.92ZM12.0652 26C11.5752 26 11.0852 25.96 10.5952 25.9C6.21525 25.28 2.72525 21.79 2.11525 17.42C1.68525 14.36 2.62525 11.39 4.59525 9.20998C4.59525 9.57998 4.60525 9.94998 4.62525 10.32C5.09525 17.3 10.7152 22.92 17.6952 23.39C18.0152 23.41 18.3352 23.42 18.6552 23.42C18.7052 23.42 18.7552 23.42 18.7952 23.42C16.9752 25.06 14.5852 26 12.0652 26ZM14.1452 5.7L16.0052 4.58L17.8552 5.7L17.3652 3.59L19.0052 2.17L16.8452 1.99L16.0052 0L15.1552 1.99L13.0052 2.17L14.6352 3.59L14.1452 5.7ZM26.0052 12.17L23.8452 11.99L23.0052 10L22.1552 11.99L20.0052 12.17L21.6352 13.59L21.1452 15.7L23.0052 14.58L24.8552 15.7L24.3652 13.59L26.0052 12.17ZM11.1452 15.7L13.0052 14.58L14.8552 15.7L14.3652 13.59L16.0052 12.17L13.8452 11.99L13.0052 10L12.1552 11.99L10.0052 12.17L11.6352 13.59L11.1452 15.7Z",
+      "name": {
+        "ar-AE": "مساء",
+        "de-DE": "Nacht",
+        "en-US": "Night",
+        "kk-KZ": "Түнгі",
+        "ru-RU": "Ночной",
+        "uk-UA": "Нічний"
+      },
+      "hidden": false,
+      "limits": {
+        "speed": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "ioniser": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 0
+        },
+        "humidity": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "stream_warm": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 0
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "icon": "M4 18H0V26H4V18ZM12 12H8V26H12V12ZM20 6H16V26H20V6ZM28 0H24V26H28V0Z",
+      "name": {
+        "ar-AE": "كثافة",
+        "de-DE": "Intensität",
+        "en-US": "Intensity",
+        "kk-KZ": "Қарқыны",
+        "ru-RU": "Интенсивность",
+        "uk-UA": "Інтенсивність"
+      },
+      "hidden": false,
+      "limits": {
+        "speed": {
+          "max": 6,
+          "min": 0,
+          "step": 1,
+          "default": 6
+        },
+        "ioniser": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 0
+        },
+        "humidity": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "backlight": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 1
+        },
+        "stream_warm": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "default": 0
+        }
+      },
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "pair": {
+      "60": "https://images.cdn.polaris-iot.com/0/76/cf925-5a47-4718-9dd9-ba6b0c9cb18d/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/0/76/cf925-5a47-4718-9dd9-ba6b0c9cb18d/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/0/76/cf925-5a47-4718-9dd9-ba6b0c9cb18d/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/0/76/cf925-5a47-4718-9dd9-ba6b0c9cb18d/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/0/76/cf925-5a47-4718-9dd9-ba6b0c9cb18d/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/0/76/cf925-5a47-4718-9dd9-ba6b0c9cb18d/900.webp",
+      "id": "076cf925-5a47-4718-9dd9-ba6b0c9cb18d",
+      "original": "https://images.cdn.polaris-iot.com/0/76/cf925-5a47-4718-9dd9-ba6b0c9cb18d/original.webp"
+    },
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/f/4e/c65fb-d263-4f60-9de5-2e417e5f891d/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/f/4e/c65fb-d263-4f60-9de5-2e417e5f891d/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/f/4e/c65fb-d263-4f60-9de5-2e417e5f891d/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/f/4e/c65fb-d263-4f60-9de5-2e417e5f891d/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/f/4e/c65fb-d263-4f60-9de5-2e417e5f891d/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/f/4e/c65fb-d263-4f60-9de5-2e417e5f891d/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/f/4e/c65fb-d263-4f60-9de5-2e417e5f891d/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/f/4e/c65fb-d263-4f60-9de5-2e417e5f891d/1800.webp",
+      "2400": "https://images.cdn.polaris-iot.com/f/4e/c65fb-d263-4f60-9de5-2e417e5f891d/2400.webp",
+      "id": "f4ec65fb-d263-4f60-9de5-2e417e5f891d",
+      "original": "https://images.cdn.polaris-iot.com/f/4e/c65fb-d263-4f60-9de5-2e417e5f891d/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1697204833,
+  "temperature_units": "celsius"
+}
