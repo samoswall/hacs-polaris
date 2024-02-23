@@ -183,5 +183,3 @@
 |28|PTB-RMST201906|toothbrush|Не поддерживается, bluetooth устройство||![all](https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/60.webp)|
 |50|PETB-0202TC|toothbrush|timer|Чувствительный, Чистка, Отбеливание, Полировка, Уход за деснами|![all](https://images.cdn.polaris-iot.com/d/d5/14363-6a8e-4d0d-bee1-658994b95305/60.webp)|
 |132|PWF-2005|toothbrush|speed, timer, ioniser|Вкл|![all](https://images.cdn.polaris-iot.com/a/a9/fcac0-cc30-4f2f-a1c1-cb38cf77f6db/60.webp)|
-
-
