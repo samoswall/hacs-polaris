@@ -1,0 +1,426 @@
+{
+  "id": "f47c7ee5-cd44-4e51-84b3-da8113f9d78b",
+  "name": "PWF-2005",
+  "type": 132,
+  "class": "toothbrush",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/a/a9/fcac0-cc30-4f2f-a1c1-cb38cf77f6db/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/a/a9/fcac0-cc30-4f2f-a1c1-cb38cf77f6db/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/a/a9/fcac0-cc30-4f2f-a1c1-cb38cf77f6db/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/a/a9/fcac0-cc30-4f2f-a1c1-cb38cf77f6db/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/a/a9/fcac0-cc30-4f2f-a1c1-cb38cf77f6db/600.webp",
+    "id": "aa9fcac0-cc30-4f2f-a1c1-cb38cf77f6db",
+    "original": "https://images.cdn.polaris-iot.com/a/a9/fcac0-cc30-4f2f-a1c1-cb38cf77f6db/original.webp"
+  },
+  "layout": {
+    "top": [
+      {
+        "type": "slider",
+        "limit": {
+          "max": 10,
+          "min": 1,
+          "step": 1,
+          "round": 1,
+          "default": 1,
+          "roundAlt": 1
+        },
+        "shift": 0,
+        "feature": "speed",
+        "position": 0,
+        "visibility": [
+          {
+            "not": {
+              "source": "state",
+              "program": [
+                1
+              ]
+            }
+          }
+        ],
+        "text_suffix": false
+      },
+      {
+        "type": "error",
+        "position": 0
+      },
+      {
+        "type": "button_power",
+        "position": 0,
+        "condition": [
+          {
+            "source": "state",
+            "program": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "type": "slider",
+        "limit": {
+          "max": 10,
+          "min": 1,
+          "step": 1,
+          "round": 1,
+          "default": 1,
+          "roundAlt": 1
+        },
+        "shift": 0,
+        "source": "state",
+        "feature": "speed",
+        "position": 0,
+        "visibility": [
+          {
+            "source": "state",
+            "program": [
+              1
+            ]
+          }
+        ],
+        "text_suffix": false
+      },
+      {
+        "row": "userSelector",
+        "type": "info",
+        "index": 0,
+        "position": 1
+      }
+    ],
+    "middle": [
+      {
+        "type": "header",
+        "title": {
+          "en-US": "Function",
+          "ru-RU": "Функции"
+        },
+        "position": 1
+      },
+      {
+        "type": "button",
+        "feature": "ioniser",
+        "position": 2
+      },
+      {
+        "type": "button",
+        "title": {
+          "ru-RU": "User program"
+        },
+        "layout": "user.program.1",
+        "position": 2,
+        "precondition": [
+          {
+            "source": "state",
+            "program": [
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "top_info": [
+      {
+        "icon": "M0.0,0.0h24.0v24.0V0.0M7 11v2h10v-2H7zm5-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z",
+        "type": "info",
+        "title": {
+          "en-US": "O3"
+        },
+        "position": 0,
+        "visibility": [
+          {
+            "ioniser": 0
+          }
+        ]
+      },
+      {
+        "icon": "M0.0,0.0h24.0v24.0V0.0M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z",
+        "type": "info",
+        "title": {
+          "en-US": "O3"
+        },
+        "position": 0,
+        "visibility": [
+          {
+            "ioniser": 1
+          }
+        ]
+      },
+      {
+        "type": "info",
+        "feature": "timer",
+        "position": 0
+      },
+      {
+        "type": "info",
+        "title": {
+          "en-US": "Motor current",
+          "ru-RU": "Сила тока"
+        },
+        "position": 0,
+        "program_data": {
+          "field": "motor_current",
+          "program": [
+            0
+          ]
+        }
+      }
+    ],
+    "user.program.1": [
+      {
+        "type": "header",
+        "title": {
+          "en-US": "User program",
+          "ru-RU": "Пользовательскиий режим"
+        },
+        "position": 0
+      },
+      {
+        "type": "slider",
+        "feature": "speed",
+        "position": 1
+      },
+      {
+        "type": "switch",
+        "feature": "ioniser",
+        "position": 2,
+        "value_strings": {
+          "0": "Off",
+          "1": "On"
+        }
+      }
+    ],
+    "template.user_preset": [
+      {
+        "type": "button",
+        "position": 0,
+        "precondition": [
+          {
+            "program": [
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "limits": {
+    "speed": {
+      "max": 10,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 5,
+      "round_alt": 1
+    },
+    "timer": {
+      "max": 255,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "ioniser": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "hidden": true,
+    "realtime": false,
+    "fastSwitch": {
+      "on": {
+        "program": [
+          1
+        ]
+      },
+      "off": {
+        "program": [
+          0
+        ]
+      }
+    },
+    "autoSetMode": true,
+    "userPresets": true,
+    "program_data": {
+      "0": [
+        {
+          "max": 65535,
+          "min": 0,
+          "name": "motor_current",
+          "size": 2,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "roundAlt": 1
+        }
+      ],
+      "1": [
+        {
+          "max": 10,
+          "min": 1,
+          "name": "speed.0",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 5,
+          "roundAlt": 1
+        },
+        {
+          "max": 10,
+          "min": 1,
+          "name": "speed.1",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 5,
+          "roundAlt": 1
+        },
+        {
+          "max": 10,
+          "min": 1,
+          "name": "speed.2",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 5,
+          "roundAlt": 1
+        },
+        {
+          "max": 1,
+          "min": 0,
+          "name": "ioniser.0",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "roundAlt": 1
+        },
+        {
+          "max": 1,
+          "min": 0,
+          "name": "ioniser.1",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "roundAlt": 1
+        },
+        {
+          "max": 1,
+          "min": 0,
+          "name": "ioniser.2",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "roundAlt": 1
+        }
+      ]
+    },
+    "recipeAdvices": true,
+    "multiUserConfig": {
+      "maxUsers": 3,
+      "userPrograms": [
+        {
+          "program": [
+            1
+          ],
+          "program_data_id": [
+            1
+          ]
+        }
+      ]
+    },
+    "shareblePresets": true
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "speed",
+    "ioniser",
+    "timer",
+    "recipe"
+  ],
+  "messages": {
+    "diag": {
+      "de-DE": "Drücken Sie die Taste «O3» für 6 Sekunden. Das untere Symbol (Welle) beginnt langsam auf dem Bildschirm des Geräts zu blinken.",
+      "en-US": "Hold down the \"O3\" button for 6 seconds. The lower symbol (Wave) will start blinking slowly on the device screen.",
+      "kk-KZ": "\"O3\" түймесін 6 секунд басып тұрыңыз. Құрылғы экранында төменгі таңба (толқындар) баяу жыпылықтай бастайды.",
+      "ru-RU": "Зажать кнопку «O3» на 6 секунд. На экране девайса начнет медленно моргать нижний  символ (Волны).",
+      "uk-UA": "Затиснути кнопку \" O3 \" на 6 секунд. На екрані девайса почне повільно моргати нижній символ (хвилі)."
+    },
+    "pair": {
+      "de-DE": "Drücken Sie die Taste «O3» für 2 Sekunden. Auf dem Bildschirm des Geräts beginnt das untere Symbol (Welle) schnell zu blinken.",
+      "en-US": "Hold down the \"O3\" button for 2 seconds. The lower symbol (Wave) will start blinking rapidly on the device screen.",
+      "kk-KZ": "O3 түймесін 2 секунд басып тұрыңыз. Құрылғы экранында төменгі таңба (толқындар) тез жыпылықтай бастайды.",
+      "ru-RU": "Зажать кнопку «O3» на 2 секунды. На экране девайса начнет быстро моргать нижний символ (Волны).",
+      "uk-UA": "Затиснути кнопку \" O3 \" на 2 секунди. На екрані девайса почне швидко моргати нижній символ (хвилі)."
+    },
+    "reset": {
+      "de-DE": "Drücken Sie die Taste »O3\" für 10 Sekunden. Das untere Symbol (Welle) erlischt auf dem Gerätebildschirm.",
+      "en-US": "Hold down the \"O3\" button for 10 seconds. The lower symbol (Wave) will go out on the device screen.",
+      "kk-KZ": "\"O3\" түймесін 10 секунд басып тұрыңыз. Құрылғы экранында төменгі таңба (толқындар) сөнеді.",
+      "ru-RU": "Зажать кнопку «О3» на 10 секунд. На экране девайса погаснет нижний символ (Волны).",
+      "uk-UA": "Затиснути кнопку \" О3 \" на 10 секунд. На екрані девайса згасне нижній символ (хвилі)."
+    },
+    "error.1": {
+      "en-US": "Stalled"
+    },
+    "attr.ioniser": {
+      "en-US": "O3"
+    }
+  },
+  "programs": [
+    null,
+    {
+      "name": {
+        "en-US": "On"
+      },
+      "hidden": false,
+      "limits": {
+        "ioniser": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "temperature": {
+          "max": 95,
+          "min": 30,
+          "step": 5,
+          "round": 1,
+          "default": 40,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/1800.webp",
+      "2400": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/2400.webp",
+      "id": "54184761-ca4e-40f6-aaf1-e8384f2af4d5",
+      "original": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1691169982,
+  "temperature_units": "celsius"
+}

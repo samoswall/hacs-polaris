@@ -1,0 +1,361 @@
+{
+  "id": "834b9936-f8d2-40c0-a7aa-79ac68840d6d",
+  "name": "PMH-21XX",
+  "type": 64,
+  "class": "heater",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/6/e0/263c0-2c33-4a8a-929c-e998568a5606/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/6/e0/263c0-2c33-4a8a-929c-e998568a5606/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/6/e0/263c0-2c33-4a8a-929c-e998568a5606/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/6/e0/263c0-2c33-4a8a-929c-e998568a5606/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/6/e0/263c0-2c33-4a8a-929c-e998568a5606/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/6/e0/263c0-2c33-4a8a-929c-e998568a5606/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/6/e0/263c0-2c33-4a8a-929c-e998568a5606/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/6/e0/263c0-2c33-4a8a-929c-e998568a5606/1800.webp",
+    "id": "6e0263c0-2c33-4a8a-929c-e998568a5606",
+    "original": "https://images.cdn.polaris-iot.com/6/e0/263c0-2c33-4a8a-929c-e998568a5606/original.webp"
+  },
+  "limits": {
+    "timer": {
+      "max": 64800,
+      "min": 0,
+      "step": 3600,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "backlight": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "child_lock": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "temperature": {
+      "max": 35,
+      "min": 18,
+      "step": 1,
+      "round": 1,
+      "default": 25,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "voice": {
+      "alice": {
+        "info": {
+          "model": "PMH-21XX",
+          "manufacturer": "polaris"
+        },
+        "type": "devices.types.thermostat",
+        "errors": [
+          {
+            "code": 1,
+            "errorType": "HUMAN_INVOLVEMENT_NEEDED",
+            "allowControl": false
+          }
+        ],
+        "features": [
+          {
+            "type": "info",
+            "feature": "current_temperature",
+            "instance": "temperature",
+            "retrievable": true
+          },
+          {
+            "type": "slider",
+            "limit": {
+              "max": 35,
+              "min": 18,
+              "step": 1,
+              "round": 1,
+              "default": 25,
+              "roundAlt": 1
+            },
+            "feature": "temperature",
+            "instance": "temperature",
+            "retrievable": true
+          },
+          {
+            "type": "dropdown",
+            "values": [
+              {
+                "value": "min",
+                "action": {
+                  "program": [
+                    1
+                  ]
+                },
+                "condition": {
+                  "or": [
+                    {
+                      "program": [
+                        0
+                      ]
+                    },
+                    {
+                      "program": [
+                        1
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "value": "max",
+                "action": {
+                  "program": [
+                    2
+                  ]
+                },
+                "condition": {
+                  "program": [
+                    2
+                  ]
+                }
+              }
+            ],
+            "instance": "heat",
+            "retrievable": true
+          },
+          {
+            "type": "button_power",
+            "action": {
+              "program": [
+                1
+              ]
+            },
+            "fields": {},
+            "actionOff": {
+              "program": [
+                0
+              ]
+            },
+            "condition": {
+              "not": {
+                "program": [
+                  0
+                ]
+              }
+            },
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "fields": {},
+            "feature": "backlight",
+            "instance": "backlight",
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "feature": "child_lock",
+            "instance": "controls_locked",
+            "retrievable": true
+          }
+        ],
+        "mockable": false
+      }
+    },
+    "hidden": true,
+    "realtime": true,
+    "manualInfoFields": [
+      "temperature"
+    ]
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "temperature",
+    "timer",
+    "current_temperature",
+    "schedule",
+    "child_lock",
+    "backlight",
+    "demo"
+  ],
+  "messages": {
+    "diag": {
+      "ar-AE": "اضغط مع الاستمرار على أزرار إعداد درجة الحرارة وإعداد المؤقت معًا حتى يتم إصدار صوتي تنبيه",
+      "de-DE": "Halten Sie die Temperatur- und Timer-Tasten gleichzeitig gedrückt und halten Sie bis zu 2 Signaltöne gedrückt",
+      "en-US": "Hold down the temperature setting and timer setting buttons at the same time and hold up to 2 beeps",
+      "kk-KZ": "Температураны орнату және таймерді орнату түймелерін бір уақытта басып, 2 дыбысқа дейін ұстап тұрыңыз",
+      "ru-RU": "Зажмите одновременно кнопки установки температуры и установки таймера  и удерживайте до 2 звуковых сигналов",
+      "uk-UA": "Затисніть одночасно кнопки установки температури і установки таймера й утримуйте до 2 звукових сигналів"
+    },
+    "pair": {
+      "ar-AE": "اضغط في نفس الوقت على أزرار إعداد درجة الحرارة وإعداد المؤقت ثم حررها - سيصدر صوت تنبيه",
+      "de-DE": "Drücken Sie gleichzeitig die Temperatur– und Timer-Einstelltasten und lassen Sie los - es ertönt ein Piepton",
+      "en-US": "Simultaneously press the temperature setting and timer setting buttons and release – a beep will sound",
+      "kk-KZ": "Сонымен қатар, температура параметрлері мен таймер параметрлері түймелерін басып, босатыңыз – дыбыстық сигнал естіледі",
+      "ru-RU": "Одновременно нажмите кнопки установки температуры и установки таймера и отпустите – раздастся звуковой сигнал",
+      "uk-UA": "Одночасно Натисніть кнопки налаштування температури і налаштування таймера і відпустіть-пролунає звуковий сигнал"
+    },
+    "reset": {
+      "ar-AE": "اضغط مع الاستمرار على أزرار إعداد درجة الحرارة وإعداد المؤقت في نفس الوقت واستمر في الضغط حتى إصدار 3 أصوات تنبيه",
+      "de-DE": "Halten Sie die Temperatur- und Timer-Tasten gleichzeitig gedrückt und halten Sie bis zu 3 Signaltöne gedrückt",
+      "en-US": "Hold down the temperature setting and timer setting buttons simultaneously and hold up to 3 beeps",
+      "kk-KZ": "Температураны орнату және таймерді орнату түймелерін бір уақытта басып, 3 дыбыс сигналын ұстап тұрыңыз",
+      "ru-RU": "Зажмите одновременно кнопки установки температуры и установки таймера  и удерживайте до 3 звуковых сигналов",
+      "uk-UA": "Затисніть одночасно кнопки установки температури і установки таймера й утримуйте до 3 звукових сигналів"
+    },
+    "error.1": {
+      "ar-AE": "فرط السخونة",
+      "de-DE": "Überhitzen",
+      "en-US": "Overheat",
+      "kk-KZ": "Қызып кетті",
+      "ru-RU": "Перегрев",
+      "uk-UA": "Перегрів"
+    },
+    "error.2": {
+      "ar-AE": "فشل جهاز استشعار درجة الحرارة",
+      "de-DE": "Fehler des Wärmesensors",
+      "en-US": "Temperature sensor failure",
+      "kk-KZ": "Жылу датчигінің қатесі",
+      "ru-RU": "Ошибка термодатчика",
+      "uk-UA": "Несправність датчика температури"
+    },
+    "error.4": {
+      "ar-AE": "قفل الأطفال قيد العمل",
+      "de-DE": "Der Schutz gegen unbeabsichtigtes Drücken hat funktioniert",
+      "en-US": "Child lock operated",
+      "kk-KZ": "Кездейсоқ басудан қорғау атқарылды",
+      "ru-RU": "Сработала защита от случайного нажатия",
+      "uk-UA": "Функція захисту від дітей"
+    },
+    "url.manual": {
+      "ar-AE": "https://images.cdn.polaris-iot.com/ee/7c/987cd1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf",
+      "de-DE": "https://images.cdn.polaris-iot.com/ee/7c/987cd1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf",
+      "en-US": "https://images.cdn.polaris-iot.com/ee/7c/987cd1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf",
+      "kk-KZ": "https://images.cdn.polaris-iot.com/ee/7c/987cd1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf",
+      "ru-RU": "https://images.cdn.polaris-iot.com/ee/7c/987cd1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf",
+      "uk-UA": "https://images.cdn.polaris-iot.com/ee/7c/987cd1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf"
+    },
+    "attr.current_temperature": {
+      "ar-AE": "درجة الحرارة الحالية",
+      "de-DE": "Aktuelle Temperatur",
+      "en-US": "Current temperature",
+      "kk-KZ": "Қазіргі температура",
+      "ru-RU": "Текущая температура",
+      "uk-UA": "Поточна температура"
+    }
+  },
+  "programs": [
+    {
+      "name": {
+        "ar-AE": "إيقاف التشغيل",
+        "de-DE": "Aus",
+        "en-US": "Off",
+        "kk-KZ": "Өшіру",
+        "ru-RU": "Выкл",
+        "uk-UA": "Вимкнено"
+      },
+      "hidden": true,
+      "limits": {
+        "timer": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        },
+        "temperature": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "default": 0
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "منخفض",
+        "de-DE": "NIEDRIG",
+        "en-US": "LOW",
+        "kk-KZ": "LOW",
+        "ru-RU": "LOW",
+        "uk-UA": "LOW"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "الحد الأقصى",
+        "de-DE": "max",
+        "en-US": "MAX",
+        "kk-KZ": "MAX",
+        "ru-RU": "MAX",
+        "uk-UA": "MAX"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "diag": {
+      "60": "https://images.cdn.polaris-iot.com/3/67/5730e-a4f0-4da4-b31b-7ac0ca71ba4c/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/3/67/5730e-a4f0-4da4-b31b-7ac0ca71ba4c/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/3/67/5730e-a4f0-4da4-b31b-7ac0ca71ba4c/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/3/67/5730e-a4f0-4da4-b31b-7ac0ca71ba4c/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/3/67/5730e-a4f0-4da4-b31b-7ac0ca71ba4c/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/3/67/5730e-a4f0-4da4-b31b-7ac0ca71ba4c/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/3/67/5730e-a4f0-4da4-b31b-7ac0ca71ba4c/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/3/67/5730e-a4f0-4da4-b31b-7ac0ca71ba4c/1800.webp",
+      "id": "3675730e-a4f0-4da4-b31b-7ac0ca71ba4c",
+      "original": "https://images.cdn.polaris-iot.com/3/67/5730e-a4f0-4da4-b31b-7ac0ca71ba4c/original.webp"
+    },
+    "pair": {
+      "60": "https://images.cdn.polaris-iot.com/f/98/6882e-fc90-4f05-afaa-a7e1a8bc4721/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/f/98/6882e-fc90-4f05-afaa-a7e1a8bc4721/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/f/98/6882e-fc90-4f05-afaa-a7e1a8bc4721/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/f/98/6882e-fc90-4f05-afaa-a7e1a8bc4721/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/f/98/6882e-fc90-4f05-afaa-a7e1a8bc4721/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/f/98/6882e-fc90-4f05-afaa-a7e1a8bc4721/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/f/98/6882e-fc90-4f05-afaa-a7e1a8bc4721/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/f/98/6882e-fc90-4f05-afaa-a7e1a8bc4721/1800.webp",
+      "id": "f986882e-fc90-4f05-afaa-a7e1a8bc4721",
+      "original": "https://images.cdn.polaris-iot.com/f/98/6882e-fc90-4f05-afaa-a7e1a8bc4721/original.webp"
+    },
+    "reset": {
+      "60": "https://images.cdn.polaris-iot.com/7/37/31efc-128a-4969-9bed-2d9c59c5f37c/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/7/37/31efc-128a-4969-9bed-2d9c59c5f37c/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/7/37/31efc-128a-4969-9bed-2d9c59c5f37c/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/7/37/31efc-128a-4969-9bed-2d9c59c5f37c/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/7/37/31efc-128a-4969-9bed-2d9c59c5f37c/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/7/37/31efc-128a-4969-9bed-2d9c59c5f37c/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/7/37/31efc-128a-4969-9bed-2d9c59c5f37c/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/7/37/31efc-128a-4969-9bed-2d9c59c5f37c/1800.webp",
+      "id": "73731efc-128a-4969-9bed-2d9c59c5f37c",
+      "original": "https://images.cdn.polaris-iot.com/7/37/31efc-128a-4969-9bed-2d9c59c5f37c/original.webp"
+    },
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/1800.webp",
+      "2400": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/2400.webp",
+      "id": "654883ab-1e73-48a1-afe4-461a27c8a06a",
+      "original": "https://images.cdn.polaris-iot.com/6/54/883ab-1e73-48a1-afe4-461a27c8a06a/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1697809842,
+  "temperature_units": "celsius"
+}

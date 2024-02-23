@@ -1,0 +1,206 @@
+{
+  "id": "5869841e-f990-46c4-899a-209ba78b36cf",
+  "name": "PTB-RMST201811",
+  "type": 26,
+  "class": "toothbrush",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/d/bf/defdd-706b-44fe-9c81-0d9c7b478434/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/d/bf/defdd-706b-44fe-9c81-0d9c7b478434/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/d/bf/defdd-706b-44fe-9c81-0d9c7b478434/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/d/bf/defdd-706b-44fe-9c81-0d9c7b478434/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/d/bf/defdd-706b-44fe-9c81-0d9c7b478434/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/d/bf/defdd-706b-44fe-9c81-0d9c7b478434/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/d/bf/defdd-706b-44fe-9c81-0d9c7b478434/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/d/bf/defdd-706b-44fe-9c81-0d9c7b478434/1800.webp",
+    "2400": "https://images.cdn.polaris-iot.com/d/bf/defdd-706b-44fe-9c81-0d9c7b478434/2400.webp",
+    "id": "dbfdefdd-706b-44fe-9c81-0d9c7b478434",
+    "original": "https://images.cdn.polaris-iot.com/d/bf/defdd-706b-44fe-9c81-0d9c7b478434/original.webp"
+  },
+  "limits": {
+    "speed": {
+      "max": 2,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "timer": {
+      "max": 115,
+      "min": 20,
+      "step": 1,
+      "round": 1,
+      "default": 60,
+      "round_alt": 1
+    },
+    "multi_step": {
+      "max": 4,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "temperature": {
+      "max": 5,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "hidden": true,
+    "roaman": true,
+    "advFormat": {
+      "name": [
+        {
+          "type": "const",
+          "value": "RMST201811"
+        },
+        {
+          "type": "mac"
+        }
+      ]
+    },
+    "bleService": "ffb0",
+    "commandValues": {
+      "temperature": {
+        "1": "31000",
+        "2": "35000",
+        "3": "38000",
+        "4": "41000",
+        "5": "48000"
+      }
+    },
+    "multiStepFields": [
+      "speed",
+      "temperature",
+      "timer"
+    ],
+    "manualInfoFields": [
+      "program",
+      "battery"
+    ]
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "battery",
+    "speed",
+    "timer",
+    "temperature",
+    "multi_step"
+  ],
+  "messages": {
+    "attr.speed": {
+      "ar-AE": "كثافة",
+      "de-DE": "Intensität",
+      "en-US": "Intensity",
+      "kk-KZ": "Конфигурацияны қалдырып, жалғастырыңыз",
+      "ru-RU": "Интенсивность",
+      "uk-UA": "Інтенсивність"
+    },
+    "attr.temperature": {
+      "ar-AE": "السرعة",
+      "de-DE": "Geschwindigkeit",
+      "en-US": "Speed",
+      "kk-KZ": "Жылдамдық",
+      "ru-RU": "Скорость",
+      "uk-UA": "Швидкість"
+    },
+    "attr.temperature.suffix": {
+      "uk-UA": "Empty"
+    }
+  },
+  "programs": [
+    {
+      "name": {
+        "ar-AE": "إيقاف التشغيل",
+        "de-DE": "Aus",
+        "en-US": "Off",
+        "kk-KZ": "Өшіру",
+        "ru-RU": "Выкл",
+        "uk-UA": "Вимкнено"
+      },
+      "hidden": true,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "حساس",
+        "de-DE": "Empfindlich",
+        "en-US": "Sensitive",
+        "kk-KZ": "Сезімтал",
+        "ru-RU": "Чувствительный",
+        "uk-UA": "Чутливий"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "العناية باللثة",
+        "de-DE": "Zahnfleischpflege",
+        "en-US": "Gum care",
+        "kk-KZ": "Қызыл иекке күтім жасау",
+        "ru-RU": "Уход за деснами",
+        "uk-UA": "Догляд за гумками"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "تلميع",
+        "de-DE": "Polieren",
+        "en-US": "Polish",
+        "kk-KZ": "Жылтырату",
+        "ru-RU": "Полировка",
+        "uk-UA": "Почистити"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "أبيض",
+        "de-DE": "Bleichung",
+        "en-US": "White",
+        "kk-KZ": "Ағарту",
+        "ru-RU": "Отбеливание",
+        "uk-UA": "Білий"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "تنظيف",
+        "de-DE": "Reinigung",
+        "en-US": "Clean",
+        "kk-KZ": "Тазалау",
+        "ru-RU": "Чистка",
+        "uk-UA": "Чистий"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/4/0e/ead3d-4980-471d-8332-18fa2d56a3d2/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/4/0e/ead3d-4980-471d-8332-18fa2d56a3d2/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/4/0e/ead3d-4980-471d-8332-18fa2d56a3d2/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/4/0e/ead3d-4980-471d-8332-18fa2d56a3d2/480.webp",
+      "id": "40eead3d-4980-471d-8332-18fa2d56a3d2",
+      "original": "https://images.cdn.polaris-iot.com/4/0e/ead3d-4980-471d-8332-18fa2d56a3d2/original.webp"
+    }
+  },
+  "connectivity": [
+    "ble"
+  ],
+  "last_modified": 1673447893,
+  "temperature_units": "celsius"
+}

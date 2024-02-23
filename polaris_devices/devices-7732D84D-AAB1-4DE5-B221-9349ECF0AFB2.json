@@ -1,0 +1,230 @@
+{
+  "id": "7732d84d-aab1-4de5-b221-9349ecf0afb2",
+  "name": "PTB-RMST201906",
+  "type": 28,
+  "class": "toothbrush",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/1800.webp",
+    "2400": "https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/2400.webp",
+    "id": "e0db02c3-8d15-4c4e-842a-1055e7277c7f",
+    "original": "https://images.cdn.polaris-iot.com/e/0d/b02c3-8d15-4c4e-842a-1055e7277c7f/original.webp"
+  },
+  "limits": {
+    "speed": {
+      "max": 2,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "timer": {
+      "max": 115,
+      "min": 20,
+      "step": 1,
+      "round": 1,
+      "default": 60,
+      "round_alt": 1
+    },
+    "multi_step": {
+      "max": 4,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "temperature": {
+      "max": 7,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "hidden": true,
+    "roaman": true,
+    "advFormat": {
+      "name": [
+        {
+          "type": "const",
+          "value": "RMST201906"
+        },
+        {
+          "type": "mac"
+        }
+      ]
+    },
+    "bleService": "ffb0",
+    "adminPresets": true,
+    "commandValues": {
+      "temperature": {
+        "1": "28000",
+        "2": "31000",
+        "3": "33000",
+        "4": "35000",
+        "5": "38000",
+        "6": "41000",
+        "7": "48000"
+      }
+    },
+    "multiStepFields": [
+      "speed",
+      "temperature",
+      "timer"
+    ],
+    "manualInfoFields": [
+      "program",
+      "battery"
+    ]
+  },
+  "vendor": "polaris",
+  "presets": [
+    {
+      "icon": "M0.0,0.0h24.0v24.0V0.0M3.82037 12.334C4.33474 12.2597 4.8119 12.6165 4.88615 13.1309C5.13385 14.8471 5.99179 16.4165 7.30269 17.5515C8.6136 18.6865 10.2896 19.311 12.0236 19.3105C12.0352 19.3105 12.0469 19.3107 12.0585 19.3112C13.7375 19.3731 15.3798 18.8104 16.668 17.7319C17.9562 16.6533 18.7988 15.1355 19.033 13.4719C19.1054 12.9572 19.5813 12.5988 20.0959 12.6712C20.6106 12.7436 20.969 13.2195 20.8966 13.7342C20.5975 15.859 19.5214 17.7974 17.8761 19.1749C16.2354 20.5486 14.1448 21.2671 12.0066 21.1925C9.82621 21.1889 7.71951 20.4017 6.07081 18.9743C4.41772 17.543 3.33582 15.564 3.02344 13.3998C2.9492 12.8854 3.306 12.4082 3.82037 12.334ZM12.0453 3.00834C9.89684 2.91375 7.79041 3.62619 6.14031 5.0061C4.48457 6.39072 3.40898 8.34647 3.12637 10.4863C3.05833 11.0015 3.42084 11.4743 3.93606 11.5424C4.45129 11.6104 4.92413 11.2479 4.99217 10.7327C5.21304 9.06038 6.05364 7.53192 7.34763 6.44981C8.64163 5.3677 10.2947 4.81079 11.9797 4.88931C11.9944 4.88999 12.0091 4.89033 12.0237 4.89033C13.7577 4.88988 15.4338 5.51439 16.7447 6.64937C18.0556 7.78434 18.9135 9.35374 19.1612 11.0699C19.2354 11.5843 19.7126 11.9411 20.227 11.8668C20.7413 11.7926 21.0981 11.3154 21.0239 10.8011C20.7115 8.6369 19.6297 6.65781 17.9765 5.22655C16.329 3.80009 14.224 3.01305 12.0453 3.00834ZM2.46361 7.85298C2.91142 7.58924 3.48824 7.73846 3.75198 8.18627L4.39222 9.27335L5.47931 8.6331C5.92711 8.36937 6.50394 8.51858 6.76768 8.96639C7.03141 9.4142 6.8822 9.99102 6.43439 10.2548L4.53648 11.3725C4.08867 11.6363 3.51185 11.4871 3.24811 11.0393L2.13033 9.14135C1.86659 8.69354 2.0158 8.11672 2.46361 7.85298ZM19.4961 12.7361C19.9469 12.4776 20.522 12.6337 20.7804 13.0846L21.8749 14.9941C22.1333 15.445 21.9773 16.02 21.5264 16.2785C21.0755 16.5369 20.5005 16.3809 20.2421 15.93L19.6155 14.8368L18.5224 15.4634C18.0715 15.7218 17.4965 15.5658 17.238 15.1149C16.9796 14.664 17.1356 14.089 17.5865 13.8306L19.4961 12.7361Z",
+      "name": {
+        "de-DE": "ttt",
+        "en-US": "test2",
+        "kk-KZ": "ttt",
+        "ru-RU": "ttt",
+        "uk-UA": "ttt"
+      },
+      "steps": [
+        {
+          "speed": 2,
+          "timer": 60,
+          "program": [
+            9
+          ],
+          "temperature": 3
+        }
+      ]
+    },
+    {
+      "icon": "M0.0,0.0h24.0v24.0V0.0M12 3.93548C7.54609 3.93548 3.93548 7.54609 3.93548 12C3.93548 16.4539 7.54609 20.0645 12 20.0645C16.4539 20.0645 20.0645 16.4539 20.0645 12C20.0645 7.54609 16.4539 3.93548 12 3.93548ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM16.5201 7.90292C16.954 8.21502 17.0527 8.81976 16.7406 9.25364L11.9716 15.8833C11.8185 16.0961 11.5858 16.2376 11.3265 16.2757C11.0672 16.3137 10.8035 16.245 10.5958 16.0852L7.46162 13.6736C7.03804 13.3476 6.95887 12.74 7.2848 12.3164C7.61073 11.8928 8.21834 11.8137 8.64192 12.1396L10.984 13.9417L15.1694 8.1234C15.4815 7.68953 16.0862 7.59081 16.5201 7.90292Z",
+      "name": {
+        "de-DE": "qqq",
+        "en-US": "qqq",
+        "kk-KZ": "qqq",
+        "ru-RU": "qqq",
+        "uk-UA": "qqq"
+      },
+      "steps": [
+        {
+          "speed": 1,
+          "timer": 60,
+          "program": [
+            10
+          ],
+          "temperature": 1
+        }
+      ]
+    }
+  ],
+  "features": [
+    "program",
+    "battery",
+    "speed",
+    "timer",
+    "temperature",
+    "multi_step"
+  ],
+  "messages": {
+    "attr.speed": {
+      "ar-AE": "كثافة",
+      "de-DE": "Intensität",
+      "en-US": "Intensity",
+      "kk-KZ": "Конфигурацияны қалдырып, жалғастырыңыз",
+      "ru-RU": "Интенсивность",
+      "uk-UA": "Інтенсивність"
+    },
+    "url.manual": {
+      "ar-AE": "https://images.cdn.polaris-iot.com/pdf/polaris/28/manual.pdf",
+      "en-US": "https://images.cdn.polaris-iot.com/pdf/polaris/28/manual.pdf"
+    },
+    "attr.battery": {
+      "en-US": "bb"
+    },
+    "attr.temperature": {
+      "ar-AE": "السرعة",
+      "de-DE": "Geschwindigkeit",
+      "en-US": "Speed",
+      "kk-KZ": "Жылдамдық",
+      "ru-RU": "Скорость",
+      "uk-UA": "Швидкість"
+    },
+    "attr.temperature.suffix": {
+      "uk-UA": "Empty"
+    }
+  },
+  "programs": [
+    {
+      "name": {
+        "ar-AE": "إيقاف التشغيل",
+        "de-DE": "Aus",
+        "en-US": "Off",
+        "kk-KZ": "Өшіру",
+        "ru-RU": "Выкл",
+        "uk-UA": "Вимкнено"
+      },
+      "hidden": true,
+      "limits_constraints": []
+    },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "name": {
+        "ar-AE": "الصباح",
+        "de-DE": "Morgen",
+        "en-US": "Morning",
+        "kk-KZ": "Таңғы",
+        "ru-RU": "Утренний",
+        "uk-UA": "Ранок"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "مساء",
+        "de-DE": "Abend",
+        "en-US": "Evening",
+        "kk-KZ": "Кешкі",
+        "ru-RU": "Вечерний",
+        "uk-UA": "Вечір"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/4/0e/ead3d-4980-471d-8332-18fa2d56a3d2/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/4/0e/ead3d-4980-471d-8332-18fa2d56a3d2/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/4/0e/ead3d-4980-471d-8332-18fa2d56a3d2/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/4/0e/ead3d-4980-471d-8332-18fa2d56a3d2/480.webp",
+      "id": "40eead3d-4980-471d-8332-18fa2d56a3d2",
+      "original": "https://images.cdn.polaris-iot.com/4/0e/ead3d-4980-471d-8332-18fa2d56a3d2/original.webp"
+    }
+  },
+  "connectivity": [
+    "ble"
+  ],
+  "last_modified": 1680106538,
+  "temperature_units": "celsius"
+}

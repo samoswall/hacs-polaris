@@ -1,0 +1,92 @@
+{
+  "id": "cfc9e849-763f-492e-83cc-2a5bbabae646",
+  "name": "PWS1830/1883",
+  "type": 5,
+  "class": "floor-scales",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/f/cc/49dba-e496-44af-9d44-a657109675c5/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/f/cc/49dba-e496-44af-9d44-a657109675c5/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/f/cc/49dba-e496-44af-9d44-a657109675c5/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/f/cc/49dba-e496-44af-9d44-a657109675c5/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/f/cc/49dba-e496-44af-9d44-a657109675c5/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/f/cc/49dba-e496-44af-9d44-a657109675c5/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/f/cc/49dba-e496-44af-9d44-a657109675c5/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/f/cc/49dba-e496-44af-9d44-a657109675c5/1800.webp",
+    "2400": "https://images.cdn.polaris-iot.com/f/cc/49dba-e496-44af-9d44-a657109675c5/2400.webp",
+    "id": "fcc49dba-e496-44af-9d44-a657109675c5",
+    "original": "https://images.cdn.polaris-iot.com/f/cc/49dba-e496-44af-9d44-a657109675c5/original.webp"
+  },
+  "limits": {
+    "weight": {
+      "max": 200000,
+      "min": 0,
+      "step": 100,
+      "default": 0
+    }
+  },
+  "params": {
+    "lsType": 1,
+    "barcode": "5055539150615",
+    "realtime": true,
+    "syncable": false,
+    "lsService": "7802",
+    "weight.fmt": "%.01f"
+  },
+  "vendor": "polaris",
+  "features": [
+    "weight",
+    "resistance",
+    "demo"
+  ],
+  "messages": {
+    "enable": {
+      "ar-AE": "استمر في الضغط على الزر الموجود أسفل الميزان حتى يظهر مؤشر وضع الاقتران على الشاشة. \n\n لتتمكن من جمع البيانات الحيوية، يُرجى ملء بياناتك في ملف تعريف مستخدم التطبيق",
+      "de-DE": "Drücken Sie die Taste auf der Rückseite der Waage, bis die Anzeige des Pairing-Modus im Display erscheint. \n\n Um biometrische Daten zu übertragen, geben Sie Ihre Daten im Benutzerprofil der App ein",
+      "en-US": "Hold the button on the bottom of the scales until pairing mode indicator appears on the screen.\n\nIn able to collect biometric data, please fill in your data in the app user profile",
+      "kk-KZ": "Дисплейде жұптау режимінің индикаторы пайда болғанға дейін таразының артқы жағындағы батырманы басыңыз. \n\nБиометриялық деректерді жіберу үшін қолданбадағы пайдаланушы профиліне мәліметтеріңізді енгізіңіз",
+      "ru-RU": "Зажмите кнопку на задней панели весов до появления индикатора режима сопряжения на дисплее.\n\nДля передачи биометрических данных, введите ваши данные в профиле пользователя приложения",
+      "uk-UA": "Утримуйте кнопку внизу ваг, доки на екрані не з'явиться індикатор режиму сполучення. \n\n Щоб отримати біометричні дані, заповніть свої дані у профілі користувача в програмі"
+    },
+    "url.manual": {
+      "en-US": "https://images.cdn.polaris-iot.com/pdf/polaris/5/PWS%201883.pdf"
+    },
+    "url.catalog": {
+      "ar-AE": "https://www.polar.ru/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/",
+      "de-DE": "https://www.polar.ru/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/",
+      "en-US": "https://www.polar.ru/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/",
+      "kk-KZ": "https://www.polar.ru/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/",
+      "ru-RU": "https://www.polar.ru/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/",
+      "uk-UA": "https://polaris.company/ua/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/"
+    }
+  },
+  "alt_images": {
+    "enable": {
+      "60": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/900.webp",
+      "id": "9f1c16bd-aca6-4e9a-b9c3-bc599efb8463",
+      "original": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/original.webp"
+    },
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/1800.webp",
+      "2400": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/2400.webp",
+      "id": "8f40e3bd-2c23-421e-abd8-be082c18f067",
+      "original": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/original.webp"
+    }
+  },
+  "connectivity": [
+    "ble"
+  ],
+  "last_modified": 1675359020,
+  "temperature_units": "celsius"
+}

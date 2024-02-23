@@ -1,0 +1,170 @@
+{
+  "id": "b107ee9a-18b0-4716-874b-d6a0a5ad3b43",
+  "name": "PWS-1894",
+  "type": 167,
+  "class": "floor-scales",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/a/0b/680a4-e1b5-4bc2-8dcf-3d89df9419fa/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/a/0b/680a4-e1b5-4bc2-8dcf-3d89df9419fa/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/a/0b/680a4-e1b5-4bc2-8dcf-3d89df9419fa/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/a/0b/680a4-e1b5-4bc2-8dcf-3d89df9419fa/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/a/0b/680a4-e1b5-4bc2-8dcf-3d89df9419fa/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/a/0b/680a4-e1b5-4bc2-8dcf-3d89df9419fa/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/a/0b/680a4-e1b5-4bc2-8dcf-3d89df9419fa/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/a/0b/680a4-e1b5-4bc2-8dcf-3d89df9419fa/1800.webp",
+    "id": "a0b680a4-e1b5-4bc2-8dcf-3d89df9419fa",
+    "original": "https://images.cdn.polaris-iot.com/a/0b/680a4-e1b5-4bc2-8dcf-3d89df9419fa/original.webp"
+  },
+  "limits": {
+    "weight": {
+      "max": 200000,
+      "min": 0,
+      "step": 100,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "hidden": true,
+    "realtime": true,
+    "syncable": false,
+    "wlService": "FFB0",
+    "deviceAttributes": [
+      {
+        "name": "appearance",
+        "title": "attr.title.appearance",
+        "values": [
+          {
+            "name": "1894",
+            "image": "attr.appearance.1894.image",
+            "title": "attr.appearance.1894.title",
+            "deviceName": "attr.appearance.1894.device"
+          },
+          {
+            "name": "1898",
+            "image": "attr.appearance.1898.image",
+            "title": "attr.appearance.1898.title",
+            "deviceName": "attr.appearance.1898.device"
+          }
+        ]
+      }
+    ]
+  },
+  "vendor": "polaris",
+  "features": [
+    "weight",
+    "resistance",
+    "demo"
+  ],
+  "messages": {
+    "pair": {
+      "en-US": "Press the button on the bottom of the scales 4 times. Then enter the number that appears on the scale's front screen and click \"continue\""
+    },
+    "reset": {
+      "en-US": "Press the button on the bottom of the scales 8 times"
+    },
+    "enable": {
+      "ar-AE": "قف على الميزان لتفعيل البلوتوث. \n\n لتتمكن من جمع البيانات الحيوية، يُرجى ملء بياناتك في ملف تعريف مستخدم التطبيق",
+      "de-DE": "Stellen Sie sich auf die Waage, um Bluetooth zu aktivieren.\n\nUm biometrische Daten zu übertragen, geben Sie Ihre Daten im Benutzerprofil der App ein",
+      "en-US": "Stand on the scales to activate bluetooth.\n\nIn able to collect biometric data, please fill in your data in the app user profile",
+      "kk-KZ": "Bluetooth-ды іске қосу үшін таразыға тұрыңыз. \n\nБиометриялық деректерді жіберу үшін қолданбадағы пайдаланушы профиліне мәліметтеріңізді енгізіңіз",
+      "ru-RU": "Встаньте на весы для активации bluetooth.\n\nДля передачи биометрических данных, введите ваши данные в профиле пользователя приложения",
+      "uk-UA": "Встаньте на ваги, щоб активувати Bluetooth. \n\n Щоб мати змогу збирати біометричні дані, заповніть свої дані у профілі користувача програми"
+    },
+    "url.manual": {
+      "en-US": "https://images.cdn.polaris-iot.com/pdf/polaris/5/PWS%201883.pdf"
+    },
+    "url.catalog": {
+      "ar-AE": "https://www.polar.ru/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/",
+      "de-DE": "https://www.polar.ru/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/",
+      "en-US": "https://www.polar.ru/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/",
+      "kk-KZ": "https://www.polar.ru/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/",
+      "ru-RU": "https://www.polar.ru/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/",
+      "uk-UA": "https://polaris.company/ua/catalog/scales/vesy-napolnye-polaris-pws-1883dgfi/"
+    },
+    "attr.title.appearance": {
+      "de-DE": "Modell",
+      "en-US": "Model",
+      "kk-KZ": "Үлгі",
+      "ru-RU": "Модель",
+      "uk-UA": "Модель"
+    },
+    "attr.appearance.1894.title": {
+      "en-US": "PWS-1894"
+    },
+    "attr.appearance.1898.title": {
+      "en-US": "PWS-1898"
+    },
+    "attr.appearance.1894.device": {
+      "en-US": "PWS-1894"
+    },
+    "attr.appearance.1898.device": {
+      "en-US": "PWS-1898"
+    }
+  },
+  "alt_images": {
+    "pair": {
+      "60": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/900.webp",
+      "id": "9f1c16bd-aca6-4e9a-b9c3-bc599efb8463",
+      "original": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/original.webp"
+    },
+    "reset": {
+      "60": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/900.webp",
+      "id": "9f1c16bd-aca6-4e9a-b9c3-bc599efb8463",
+      "original": "https://images.cdn.polaris-iot.com/9/f1/c16bd-aca6-4e9a-b9c3-bc599efb8463/original.webp"
+    },
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/1800.webp",
+      "2400": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/2400.webp",
+      "id": "8f40e3bd-2c23-421e-abd8-be082c18f067",
+      "original": "https://images.cdn.polaris-iot.com/8/f4/0e3bd-2c23-421e-abd8-be082c18f067/original.webp"
+    },
+    "attr.appearance.1894.image": {
+      "60": "https://images.cdn.polaris-iot.com/c/d7/7c5f6-4aef-42ca-8da1-e7bb3cc057fc/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/c/d7/7c5f6-4aef-42ca-8da1-e7bb3cc057fc/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/c/d7/7c5f6-4aef-42ca-8da1-e7bb3cc057fc/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/c/d7/7c5f6-4aef-42ca-8da1-e7bb3cc057fc/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/c/d7/7c5f6-4aef-42ca-8da1-e7bb3cc057fc/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/c/d7/7c5f6-4aef-42ca-8da1-e7bb3cc057fc/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/c/d7/7c5f6-4aef-42ca-8da1-e7bb3cc057fc/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/c/d7/7c5f6-4aef-42ca-8da1-e7bb3cc057fc/1800.webp",
+      "id": "cd77c5f6-4aef-42ca-8da1-e7bb3cc057fc",
+      "original": "https://images.cdn.polaris-iot.com/c/d7/7c5f6-4aef-42ca-8da1-e7bb3cc057fc/original.webp"
+    },
+    "attr.appearance.1898.image": {
+      "60": "https://images.cdn.polaris-iot.com/3/ef/15a13-fb51-4885-8e8c-03ce75e3297b/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/3/ef/15a13-fb51-4885-8e8c-03ce75e3297b/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/3/ef/15a13-fb51-4885-8e8c-03ce75e3297b/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/3/ef/15a13-fb51-4885-8e8c-03ce75e3297b/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/3/ef/15a13-fb51-4885-8e8c-03ce75e3297b/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/3/ef/15a13-fb51-4885-8e8c-03ce75e3297b/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/3/ef/15a13-fb51-4885-8e8c-03ce75e3297b/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/3/ef/15a13-fb51-4885-8e8c-03ce75e3297b/1800.webp",
+      "id": "3ef15a13-fb51-4885-8e8c-03ce75e3297b",
+      "original": "https://images.cdn.polaris-iot.com/3/ef/15a13-fb51-4885-8e8c-03ce75e3297b/original.webp"
+    }
+  },
+  "connectivity": [
+    "ble"
+  ],
+  "last_modified": 1701448400,
+  "temperature_units": "celsius"
+}

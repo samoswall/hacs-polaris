@@ -1,0 +1,751 @@
+{
+  "id": "c3797dfd-5599-4aa3-9c40-84facfad9bc1",
+  "name": "PVCR-3200",
+  "type": 7,
+  "class": "cleaner",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/4/27/7e198-dede-4ea1-a1a7-1cb9b6ce2888/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/4/27/7e198-dede-4ea1-a1a7-1cb9b6ce2888/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/4/27/7e198-dede-4ea1-a1a7-1cb9b6ce2888/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/4/27/7e198-dede-4ea1-a1a7-1cb9b6ce2888/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/4/27/7e198-dede-4ea1-a1a7-1cb9b6ce2888/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/4/27/7e198-dede-4ea1-a1a7-1cb9b6ce2888/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/4/27/7e198-dede-4ea1-a1a7-1cb9b6ce2888/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/4/27/7e198-dede-4ea1-a1a7-1cb9b6ce2888/1800.webp",
+    "id": "4277e198-dede-4ea1-a1a7-1cb9b6ce2888",
+    "original": "https://images.cdn.polaris-iot.com/4/27/7e198-dede-4ea1-a1a7-1cb9b6ce2888/original.webp"
+  },
+  "limits": {
+    "speed": {
+      "max": 2,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "battery": {
+      "max": 100,
+      "min": 1,
+      "step": 1,
+      "round": 1,
+      "default": 100,
+      "round_alt": 1
+    },
+    "child_lock": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "water_tank": {
+      "max": 2,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "icons": {
+      "expendable.0": "M0,0h24v24V0M10.336,8.389l-3.023,2.119c-0.212,-0.274 -0.554,-0.452 -0.939,-0.452c-0.349,0 -0.661,0.145 -0.875,0.377L2.583,8.389L2,9.351l3.301,1.378c-0.06,0.134 -0.094,0.282 -0.094,0.437c0,0.551 0.421,1.009 0.974,1.096l-0.39,3.349h1.166l-0.39,-3.348c0.552,-0.088 0.973,-0.545 0.973,-1.096c0,-0.132 -0.024,-0.259 -0.069,-0.377l3.448,-1.439L10.336,8.389zM6.374,11.722c-0.322,0 -0.583,-0.248 -0.583,-0.555s0.261,-0.556 0.583,-0.556s0.583,0.248 0.583,0.556C6.957,11.474 6.696,11.722 6.374,11.722zM22,9.351l-0.583,-0.962l-3.023,2.119c-0.212,-0.274 -0.554,-0.452 -0.939,-0.452c-0.349,0 -0.661,0.145 -0.875,0.377l-2.916,-2.044l-0.583,0.962l3.301,1.378c-0.06,0.134 -0.094,0.282 -0.094,0.437c0,0.551 0.421,1.009 0.974,1.096l-0.391,3.349h1.166l-0.391,-3.349c0.552,-0.087 0.974,-0.545 0.974,-1.096c0,-0.132 -0.024,-0.259 -0.069,-0.377L22,9.351zM17.455,11.722c-0.322,0 -0.583,-0.248 -0.583,-0.555s0.261,-0.556 0.583,-0.556s0.583,0.248 0.583,0.556C18.038,11.474 17.777,11.722 17.455,11.722z",
+      "expendable.1": "M0,0h24v24V0M21.553,11.445l0.047,-0.034l-0.156,-0.149v-0.928c0,-0.307 -0.248,-0.556 -0.555,-0.556H3.111c-0.307,0 -0.555,0.249 -0.555,0.556v1.111H2v1.111h0.556v1.111c0,0.307 0.249,0.555 0.556,0.555H20.89c0.307,0 0.555,-0.249 0.555,-0.555v-1.111H22v-1.111H21.553zM20.889,10.334v0.481l-2.199,1.569c-1.087,0.775 -2.741,0.622 -3.594,-0.332c-1.39,-1.555 -4.202,-1.555 -5.592,0c-0.853,0.954 -2.507,1.107 -3.594,0.332l-2.25,-1.606l-0.549,0.526v-0.97H20.889zM16.524,13.667H8.076c0.862,-0.116 1.676,-0.488 2.24,-1.119c0.986,-1.103 2.981,-1.103 3.967,0C14.847,13.179 15.662,13.551 16.524,13.667zM3.111,11.49l2.139,1.527c0.511,0.364 1.112,0.57 1.729,0.65H3.111V11.49zM17.621,13.667c0.617,-0.08 1.218,-0.286 1.729,-0.65l1.539,-1.098v1.749h-3.268V13.667z",
+      "expendable.2": "M0,0h24v24V0M21.444,7.833H2.556C2.249,7.833 2,8.082 2,8.389v1.669v0.555v0.555v0.555v0.555v0.556v0.555v0.556V14.5v0.556v0.555c0,0.307 0.249,0.556 0.556,0.556h18.889C21.751,16.166 22,15.918 22,15.611V8.389C22,8.082 21.751,7.833 21.444,7.833zM21.444,8.944h-2.777V8.389h2.777V8.944zM10.333,13.39v-0.556h3.611v0.555L10.333,13.39L10.333,13.39zM13.944,13.945V14.5h-3.611v-0.555H13.944zM10.333,12.279v-0.556h3.611v0.555L10.333,12.279L10.333,12.279zM10.333,11.168v-0.555h3.611v0.555H10.333zM10.333,10.057V9.499h3.611v0.558H10.333zM10.333,8.944V8.389h3.611v0.555C13.944,8.944 10.333,8.944 10.333,8.944zM9.778,8.944H6.167V8.389h3.611V8.944zM9.778,9.499v0.558H6.167V9.499H9.778zM9.778,10.613v0.555H6.167v-0.555H9.778zM9.778,11.723v0.555H6.167v-0.555H9.778zM9.778,12.834v0.555H6.167v-0.555H9.778zM9.778,13.945V14.5H6.167v-0.555H9.778zM9.778,15.056v0.555H6.167v-0.555H9.778zM10.333,15.056h3.611v0.555h-3.611V15.056zM14.5,15.056h3.611v0.555H14.5V15.056zM14.5,14.5v-0.555h3.611V14.5H14.5zM14.5,13.39v-0.556h3.611v0.555L14.5,13.39L14.5,13.39zM14.5,12.279v-0.556h3.611v0.555L14.5,12.279L14.5,12.279zM14.5,11.168v-0.555h3.611v0.555H14.5zM14.5,10.057V9.499h3.611v0.558H14.5zM14.5,8.944V8.389h3.611v0.555C18.111,8.944 14.5,8.944 14.5,8.944zM5.611,8.389v0.555H2.556V8.389H5.611zM2.556,9.499h3.056v0.558H2.556V9.499zM2.556,10.613h3.056v0.555H2.556V10.613zM2.556,11.723h3.056v0.555H2.556V11.723zM2.556,12.834h3.056v0.555H2.556V12.834zM2.556,13.945h3.056V14.5H2.556V13.945zM2.556,15.056h3.056v0.555H2.556V15.056zM21.444,15.611h-2.777v-0.555h2.777V15.611zM21.444,14.5h-2.777v-0.555h2.777V14.5zM21.444,13.39h-2.777v-0.556h2.777V13.39zM21.444,12.279h-2.777v-0.556h2.777V12.279zM21.444,11.168h-2.777v-0.555h2.777V11.168zM18.667,10.057V9.499h2.777v0.558H18.667z",
+      "expendable.3": "M0,0h24v24V0M22,10.476v6.358c0,0.305 -0.247,0.553 -0.553,0.553H2.649c-0.305,0 -0.553,-0.247 -0.553,-0.553v-6.219L2,10.07l19.602,-3.456l0.096,0.544L2.649,10.517v6.317h18.798v-6.358H22zM7.072,13.517c-0.305,0 -0.553,0.247 -0.553,0.553c0,0.305 0.248,0.553 0.553,0.553s0.553,-0.248 0.553,-0.553C7.625,13.764 7.377,13.517 7.072,13.517zM12.324,12.687c0,-0.305 -0.247,-0.553 -0.553,-0.553c-0.305,0 -0.553,0.247 -0.553,0.553c0,0.305 0.247,0.553 0.553,0.553S12.324,12.993 12.324,12.687zM12.877,14.346c0,0.305 0.248,0.553 0.553,0.553s0.553,-0.248 0.553,-0.553c0,-0.305 -0.247,-0.553 -0.553,-0.553C13.125,13.793 12.877,14.041 12.877,14.346zM15.642,15.175c0,0.458 0.371,0.829 0.829,0.829s0.829,-0.371 0.829,-0.829s-0.371,-0.829 -0.829,-0.829C16.013,14.346 15.642,14.717 15.642,15.175zM11.495,15.175c0,0.611 -0.495,1.106 -1.106,1.106s-1.106,-0.495 -1.106,-1.106s0.495,-1.106 1.106,-1.106C11,14.069 11.495,14.565 11.495,15.175zM10.942,15.175c0,-0.305 -0.247,-0.553 -0.553,-0.553c-0.305,0 -0.553,0.247 -0.553,0.553c0,0.305 0.247,0.553 0.553,0.553C10.695,15.728 10.942,15.481 10.942,15.175zM17.966,13.24h0.578c-0.245,-0.954 -1.111,-1.659 -2.142,-1.659c-0.723,0 -1.365,0.347 -1.769,0.884c-0.335,-1.149 -1.397,-1.99 -2.654,-1.99c-1.258,0 -2.319,0.84 -2.654,1.99c-0.405,-0.536 -1.047,-0.883 -1.77,-0.883c-1.031,0 -1.896,0.705 -2.142,1.659h0.578c0.228,-0.644 0.842,-1.106 1.564,-1.106c0.722,0 1.337,0.461 1.564,1.106h0.647c0,-1.221 0.99,-2.212 2.211,-2.212s2.212,0.99 2.212,2.212h0.647c0.228,-0.644 0.842,-1.106 1.564,-1.106C17.124,12.135 17.738,12.596 17.966,13.24z"
+    },
+    "voice": {
+      "alice": {
+        "info": {
+          "model": "PVCR-3200",
+          "manufacturer": "polaris"
+        },
+        "type": "devices.types.vacuum_cleaner",
+        "errors": [],
+        "features": [
+          {
+            "type": "button_power",
+            "action": {
+              "program": [
+                2
+              ]
+            },
+            "fields": {},
+            "actionOff": {
+              "program": [
+                5
+              ]
+            },
+            "condition": {
+              "not": {
+                "or": [
+                  {
+                    "program": [
+                      0
+                    ]
+                  },
+                  {
+                    "program": [
+                      5
+                    ]
+                  }
+                ]
+              }
+            },
+            "retrievable": true
+          },
+          {
+            "type": "dropdown",
+            "fields": {},
+            "values": [
+              {
+                "value": "max",
+                "action": {
+                  "speed": 2
+                },
+                "condition": {
+                  "speed": 2
+                }
+              },
+              {
+                "value": "min",
+                "action": {
+                  "speed": 0
+                },
+                "condition": {
+                  "speed": 0
+                }
+              },
+              {
+                "value": "medium",
+                "action": {
+                  "speed": 1
+                },
+                "condition": {
+                  "speed": 1
+                }
+              }
+            ],
+            "instance": "work_speed",
+            "retrievable": true
+          },
+          {
+            "type": "info",
+            "fields": {},
+            "feature": "battery",
+            "instance": "battery_level",
+            "retrievable": true
+          },
+          {
+            "type": "switch",
+            "fields": {},
+            "feature": "child_lock",
+            "instance": "controls_locked",
+            "retrievable": true
+          }
+        ],
+        "mockable": false
+      }
+    },
+    "barcode": "5055539151063",
+    "history": {
+      "values": [
+        {
+          "name": "clean_time",
+          "feature": "clean_time"
+        },
+        {
+          "name": "clean_area",
+          "feature": "clean_area"
+        },
+        {
+          "name": "power",
+          "feature": "speed"
+        },
+        {
+          "name": "mode",
+          "feature": "program"
+        }
+      ]
+    },
+    "altTypes": [
+      76,
+      115
+    ],
+    "realtime": true,
+    "shortcuts": [
+      {
+        "program": [
+          2
+        ]
+      },
+      {
+        "program": [
+          5
+        ]
+      },
+      {
+        "program": [
+          4
+        ]
+      },
+      {
+        "values": {
+          "map": 1
+        }
+      }
+    ],
+    "map_config": {
+      "target_route": 5
+    },
+    "defaultProgram": [
+      2
+    ],
+    "exclusiveTanks": false,
+    "expendable_max": [
+      216,
+      324,
+      108,
+      5
+    ],
+    "led_diagnostic": {
+      "led_r": 0.03,
+      "led_x": 0.498,
+      "led_y": 0.4825,
+      "lower_h": 125,
+      "upper_h": 150,
+      "result.7": "no_wifi",
+      "result.15": "auth_error"
+    },
+    "deviceAttributes": [
+      {
+        "name": "appearance",
+        "title": "attr.title.appearance",
+        "values": [
+          {
+            "name": "black",
+            "image": "appearance.black",
+            "title": "title.appearance.black"
+          },
+          {
+            "name": "blue",
+            "image": "appearance.blue",
+            "title": "title.appearance.blue"
+          },
+          {
+            "name": "white",
+            "image": "appearance.white",
+            "title": "title.appearance.white"
+          },
+          {
+            "name": "dark_blue",
+            "image": "attr.appearance.dark_blue.image",
+            "title": "attr.appearance.dark_blue.title"
+          },
+          {
+            "name": "dark_gray",
+            "image": "attr.appearance.dark_gray.image",
+            "title": "attr.appearance.dark_gray.title"
+          }
+        ]
+      }
+    ],
+    "manualInfoFields": [
+      "battery",
+      "clean_time",
+      "clean_area"
+    ],
+    "mqttFeatureNames": {
+      "speed": "suction"
+    },
+    "excludeScheduleFeatures": [
+      "water_tank"
+    ]
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "joystick",
+    "speed",
+    "battery",
+    "map",
+    "schedule",
+    "child_lock",
+    "clean_time",
+    "clean_area",
+    "expendables",
+    "demo",
+    "water_tank"
+  ],
+  "messages": {
+    "diag": {
+      "ar-AE": "اضغط مع الاستمرار على زري \"الصفحة الرئيسية\" و\"الحلزونية\" حتى يصدر صوت تنبيه. انتظر حتى يبدأ مؤشر واي فاي في الوميض بسرعة.\n اضغط مع الاستمرار على زري \"الصفحة الرئيسية\" و\"الحلزونية\" مرة أخرى حتى يصدر صوت تنبيه. انتظر حتى يبدأ مؤشر واي فاي في الوميض ببطء.\n لا تتوقف أكثر من 3 ثوان بين الضغطات",
+      "de-DE": "Führen Sie die folgenden Schritte mit einer Verzögerung von 3 Sekunden oder weniger aus:\n1. Halten Sie die Tasten \"Spirale\" und \"Basis\" bis ein Piepton gedrückt. Warten Sie, bis die Wi-Fi-Anzeige schnell zu blinken beginnt.\n2. Halten Sie die Tasten \"Spirale\" und \"Basis\" bis ein Piepton erneut gedrückt., und warten Sie, bis die Wi-Fi-Anzeige langsam zu blinken beginnt",
+      "en-US": "Press and hold \"Home\" and \"Spiral\" buttons until a beep. Wait until WiFi LED starts blinking fast.\nPress and hold \"Home\" and \"Spiral\" buttons again until a beep. Wait until WiFi LED starts blinking slowly.\nDon't pause more than 3 seconds between presses",
+      "kk-KZ": "1. «Спираль» және «база» батырмаларын дыбыстық сигнал естілгенше басып тұрыңыз. Wi-Fi индикаторы тез жыпылықтай бастағанша күтіңіз. \n2. «Спираль» және «база» батырмаларын қайта-қайта басып, дыбыстық сигнал естілгенше басып, Wi-Fi индикаторы баяу жыпылықтай бастағанша күтіңіз.",
+      "ru-RU": "Выполните следующие действия с задержкой не более 3 секунд:\n1. Зажмите и удерживайте кнопки «спираль» и «база» до звукового сигнала. Подождите пока индикатор Wi-Fi начнет быстро мигать.\n2. Повторно зажмите и удерживайте кнопки «спираль» и «база» до звукового сигнала и подождите пока индикатор Wi-Fi начнет медленно мигать",
+      "uk-UA": "Натисніть та утримуйте кнопки \"Дім\" та \"Спіраль\" до звукового сигналу. Зачекайте, доки індикатор Wi-Fi швидко почне блимати.\nНатисніть і утримуйте кнопки \"Дім\" і \"Спіраль\" ще раз до звукового сигналу. Зачекайте, доки індикатор Wi-Fi почне повільно блимати.\nНе робіть паузу  більше ніж 3 секунд між натисканнями"
+    },
+    "pair": {
+      "ar-AE": "اضغط مع الاستمرار على زري \"الصفحة الرئيسية\" و \"الحلزونية\" حتى يصدر صوت تنبيه. انتظر حتى يبدأ مؤشر واي فاي في الوميض بسرعة",
+      "de-DE": "Halten Sie die Tasten \"Spirale\" und \"Basis\" bis ein Piepton gedrückt. Warten Sie, bis die Wi-Fi-Anzeige schnell zu blinken beginnt",
+      "en-US": "Press and hold \"Home\" and \"Spiral\" buttons until a beep. Wait until WiFi LED starts blinking fast",
+      "kk-KZ": "«Спираль» және «база» батырмаларын дыбыстық сигнал естілгенше басып тұрыңыз. Wi-Fi индикаторы тез жыпылықтағанша күтіңіз",
+      "ru-RU": "Зажмите и удерживайте кнопки «спираль» и «база» до звукового сигнала. Подождите пока индикатор Wi-Fi начнет быстро мигать",
+      "uk-UA": "Натискайте та утримуйте кнопки \"Дім\" та \"Спіраль\" до звукового сигналу. Зачекайте, доки індикатор Wi-Fi почне швидко блимати"
+    },
+    "led.7": {
+      "ar-AE": "لم يتم العثور على شبكة واي فاي",
+      "de-DE": "WiFi-Netzwerk konnte nicht gefunden werden",
+      "en-US": "WiFi not found",
+      "kk-KZ": "WiFi желісі табылмады",
+      "ru-RU": "Не удалось обнаружить WiFi сеть",
+      "uk-UA": "Wi-Fi не знайдено"
+    },
+    "reset": {
+      "ar-AE": "اضغط مع الاستمرار على زري \"الصفحة الرئيسية\" و\"الحلزونية\" حتى يصدر صوت تنبيه قصير. انتظر حتى يبدأ مؤشر الواي فاي في الوميض بسرعة.\n اضغط مع الاستمرار على زري \"الصفحة الرئيسية\" و\"الحلزونية\" مرة أخرى حتى يصدر صوت تنبيه قصير. انتظر حتى يبدأ مؤشر الواي فاي في الوميض ببطء.\n اضغط مع الاستمرار على زري \"الصفحة الرئيسية\" و\"الحلزونية\" للمرة الثالثة حتى يصدر صوت تنبيه وانتظر إعادة ضبط جهازك.\n لا تتوقف أكثر من 3 ثوان بين الضغطات",
+      "de-DE": "Führen Sie die folgenden Schritte mit einer Verzögerung von 3 Sekunden oder weniger aus:\n1. Halten Sie die Tasten \"Spirale\" und \"Basis\" bis ein Piepton gedrückt. Warten Sie, bis die Wi-Fi-Anzeige schnell zu blinken beginnt.\n2. Halten Sie die Tasten \"Spirale\" und \"Basis\" bis ein Piepton erneut gedrückt, und warten Sie, bis die Wi-Fi-Anzeige langsam zu blinken beginnt\n3. Halten Sie die Tasten \"Spirale\" und \"Basis\" bis ein Piepton erneut gedrückt, und warten Sie, bis das Gerät neu gestartet wird",
+      "en-US": "Press and hold \"Home\" and \"Spiral\" buttons until a short beep. Wait until WiFi LED starts blinking fast.\nPress and hold \"Home\" and \"Spiral\" buttons again until a short beep. Wait until WiFi LED starts blinking slowly.\nPress and hold \"Home\" and \"Spiral\" buttons for the third time until a beep and wait for your device to reset.\nDon't pause more than 3 seconds between presses",
+      "kk-KZ": "3 секундтан аспайтын кідіріспен келесі әрекеттерді орындаңыз: \n1. «Спираль» мен «база» дыбыстық сигнал естілгенше ұстап тұрыңыз. Wi-Fi индикаторы тез жыпылықтай бастағанша күтіңіз. \n2. Қайтадан «Спираль» және «база» батырмаларын басып тұрыңыз, дыбыстық сигнал естілгенше ұстап тұрыңыз және Wi-Fi индикаторы баяу жыпылықтай бастағанша күтіңіз. \n3. Үшінші рет «спираль» мен «база» дыбыстық сигнал шыққанша басып тұрыңыз және құрылғы қайта іске қосылуын күтіңіз",
+      "ru-RU": "Выполните следующие действия с задержкой не более 3 секунд:\n1. Зажмите и удерживайте «спираль» и «база» до звукового сигнала. Подождите пока индикатор Wi-Fi начнет быстро мигать.\n2. Повторно зажмите и удерживайте кнопки «спираль» и «база» до звукового сигнала и подожите пока индикатор Wi-Fi начнет медленно мигать.\n3. Третий раз зажмите и удерживайте «спираль» и «база» до звукового сигнала и подождите пока устройство перезагрузится",
+      "uk-UA": "Натисніть і утримуйте кнопки \"Дім\" і \"Спіраль\" до короткого звукового сигналу. Зачекайте, доки індикатор Wi-Fi  почне швидко блимати.\nЗнову натисніть і утримуйте кнопки \"Дім\" і \"Спіраль\" до короткого звукового сигналу. Зачекайте, доки індикатор Wi-Fi почне повільно блимати.\nНатисніть і утримуйте кнопки \"Дім\" і \"Спіраль\" втретє до появи звукового сигналу і зачекайте, доки пристрій не буде скинуто.\nНе робіть паузи більше ніж 3 секунд між натисканнями"
+    },
+    "led.15": {
+      "ar-AE": "كلمة مرور واي فاي غير صالحة. إعادة تهيئة الجهاز مطلوبة",
+      "de-DE": "Ungültiges WiFi-Passwort. Gerät muss neu konfiguriert werden",
+      "en-US": "Invalid WiFi password. Device reconfiguration required",
+      "kk-KZ": "WiFi құпия сөзі дұрыс емес. Құрылғыны қайта конфигурациялау қажет",
+      "ru-RU": "Неверный пароль WiFi сети. Необходимо перенастоить устройство",
+      "uk-UA": "Неправильний пароль WiFi мережі. Необхідно переналаштувати пристрій"
+    },
+    "error.1": {
+      "ar-AE": "خطأ المنحدرات",
+      "de-DE": "Höhensensor überprüfen",
+      "en-US": "Cliff error",
+      "kk-KZ": "Биіктік датчигін тексеріңіз",
+      "ru-RU": "Проверьте датчик высоты",
+      "uk-UA": "Перевірте датчик висоти"
+    },
+    "error.2": {
+      "ar-AE": "تحقق من لوحة الاصطدام الأمامية",
+      "de-DE": "Vorderstoßfänger überprüfen",
+      "en-US": "Check front collision plate",
+      "kk-KZ": "Алдыңғы бамперді тексеріңіз",
+      "ru-RU": "Проверьте передний бампер",
+      "uk-UA": "Перевірте передню пластину зіткнення"
+    },
+    "error.4": {
+      "ar-AE": "تحقق من العجلات",
+      "de-DE": "Räder überprüfen",
+      "en-US": "Check wheels",
+      "kk-KZ": "Дөңгелектерді тексеріңіз",
+      "ru-RU": "Проверьте колёса",
+      "uk-UA": "Перевірте колеса"
+    },
+    "error.8": {
+      "ar-AE": "تحقق من فرش الحواف",
+      "de-DE": "Seitenbürsten überprüfen",
+      "en-US": "Check edge brushes",
+      "kk-KZ": "Бүйірлік щеткаларды тексеріңіз",
+      "ru-RU": "Проверьте боковые щётки",
+      "uk-UA": "Перевірте крайні щітки"
+    },
+    "error.10": {
+      "ar-AE": "غيّر الفرش الجانبية",
+      "de-DE": "Seitenbürsten ersetzen",
+      "en-US": "Change side brushes",
+      "kk-KZ": "Бүйірлік щеткаларды ауыстырыңыз",
+      "ru-RU": "Замените боковые щетки",
+      "uk-UA": "Змініть бічні щітки"
+    },
+    "error.11": {
+      "ar-AE": "غيّر الفرشاة الرئيسية",
+      "de-DE": "Hauptbürste ersetzen",
+      "en-US": "Change the main brush",
+      "kk-KZ": "Негізгі щетканы ауыстырыңыз",
+      "ru-RU": "Замените основную щетку",
+      "uk-UA": "Змініть основну щітку"
+    },
+    "error.12": {
+      "ar-AE": "غيّر الفلتر",
+      "de-DE": "Filter ersetzen",
+      "en-US": "Change filter",
+      "kk-KZ": "Сүзгіні ауыстырыңыз",
+      "ru-RU": "Замените фильтр",
+      "uk-UA": "Змініть фільтр"
+    },
+    "error.13": {
+      "ar-AE": "أفرغ صندوق الغبار",
+      "de-DE": "Staubbeutel leeren",
+      "en-US": "Empty the dust bin",
+      "kk-KZ": "Қоқыс жәшігін босатыңыз",
+      "ru-RU": "Опустошите контейнер для мусора",
+      "uk-UA": "Спорожніть контейнер для пилу"
+    },
+    "error.16": {
+      "ar-AE": "تحقق من محرك المروحة",
+      "de-DE": "Lüftermotor prüfen",
+      "en-US": "Check fan motor",
+      "kk-KZ": "Желдеткіштің қозғалтқышын тексеріңіз",
+      "ru-RU": "Проверьте мотор вентилятора",
+      "uk-UA": "Перевірте двигун вентилятора"
+    },
+    "error.22": {
+      "ar-AE": "الروبوت ليس على الأرض",
+      "de-DE": "Staubsauger auf den Boden stellen",
+      "en-US": "The robot is not on the floor",
+      "kk-KZ": "Шаңсорғышты еденге қойыңыз",
+      "ru-RU": "Поставьте пылесос на пол",
+      "uk-UA": "Робот не знаходиться на підлозі"
+    },
+    "error.32": {
+      "ar-AE": "تحقق من الفرشاة الأسطوانية",
+      "de-DE": "Hauptbürste prüfen",
+      "en-US": "Check roll brush",
+      "kk-KZ": "Негізгі щетканы тексеріңіз",
+      "ru-RU": "Проверьте основную щётку",
+      "uk-UA": "Перевірте рулонну щітку"
+    },
+    "error.64": {
+      "ar-AE": "البطارية منخفضة",
+      "de-DE": "Niedriger Batteriestatus",
+      "en-US": "Low batttery",
+      "kk-KZ": "Батареяның заряды төмен",
+      "ru-RU": "Низкий заряд батареи",
+      "uk-UA": "Низький заряд акумулятора"
+    },
+    "map.hint": {
+      "ar-AE": "حدد وضع \"تلقائي\" لإنشاء خريطة",
+      "de-DE": "Wählen Sie den «Auto»-Modus, um eine Karte zu erstellen",
+      "en-US": "Select the «Auto» mode to build a map",
+      "kk-KZ": "Картаны құру үшін «авто» режимін таңдаңыз",
+      "ru-RU": "Для построения карты выбирайте режим «Авто»",
+      "uk-UA": "Для побудови карти вибирайте режим «Авто»"
+    },
+    "error.128": {
+      "ar-AE": "قفل الأطفال قيد العمل",
+      "de-DE": "Der Schutz gegen unbeabsichtigtes Drücken hat funktioniert",
+      "en-US": "Child lock operated",
+      "kk-KZ": "Кездейсоқ басудан қорғау атқарылды",
+      "ru-RU": "Сработала защита от случайного нажатия",
+      "uk-UA": "Функція захисту від дітей"
+    },
+    "attr.speed": {
+      "ar-AE": "كثافة",
+      "de-DE": "Intensität",
+      "en-US": "Intensity",
+      "kk-KZ": "Конфигурацияны қалдырып, жалғастырыңыз",
+      "ru-RU": "Интенсивность",
+      "uk-UA": "Інтенсивність"
+    },
+    "smart_diag": {
+      "ar-AE": "1. قم بخلع المكنسة الكهربائية من القاعدة. \n\n 2. تأكد من تشغيل المكنسة الكهربائية (المفتاح الموجود على الجانب السفلي في موضع التشغيل\n • إذا كان الزر الأوسط أحمر اللون، فهذا يعني أن الشحن منخفض جدًا للتشخيص وتحتاج إلى شحنه\n • في حالة عدم إضاءة الزر، اضغط عليه مرتين لإيقاظ المكنسة الكهربائية \n\n 3. اضغط مع الاستمرار على زري \"الصفحة الرئيسية\" و\"الحلزونية\" حتى يصدر صوت تنبيه. انتظر حتى يبدأ الزر الأوسط في الوميض بفواصل زمنية صغيرة",
+      "de-DE": "1. Stellen Sie den Staubsauger von der Basis ab .\n\n2. Stellen Sie sicher, dass der Staubsauger eingeschaltet ist (der Schalter an der Unterseite befindet sich in der Position ON).\n- Wenn die mittlere Taste rot leuchtet, ist die Ladung des Staubsaugers zu niedrig für die Diagnose und muss neu aufgeladen werden\n-Wenn die Taste nicht leuchtet, drücken Sie sie zweimal, um den Schlafmodus zu deaktivieren.\n\n3. Halten Sie die Tasten Spirale und Basis gedrückt, bis der Summer ertönt. Warten Sie, bis die mittlere Taste in kurzen Abständen zu blinken beginnt.",
+      "en-US": "1. Remove the vacuum cleaner from the base.\n\n2. Make sure the vacuum cleaner is turned on (the switch on the underside is in the ON position\n• If the center button is red, the charge is too low for diagnostics and you need to charge it\n• If the button is not lit, press it twice to wake up the vacuum cleaner\n\n3. Press and hold \"Home\" and \"Spiral\" buttons until a beep. Wait until center button starts blinking with small intervals",
+      "kk-KZ": "1. Шаңсорғышты негізден алыңыз. \n\n 2. Шаңсорғыштың қосулы екеніне көз жеткізіңіз (төменгі жағындағы қосқыш ON күйінде).\n • Егер орталық түйме қызыл болса, шаңсорғыш диагностика үшін тым төмен және оны зарядтау қажет.\n • Түйме жанбаса, шаңсорғышты ұйқы режимінен ояту үшін оны екі рет басыңыз. \n\n 3. «Спираль» және «негіз» түймелерін дыбыстық сигнал шыққанша басып тұрыңыз. Орталық түйме қысқа аралықпен жыпылықтай бастағанша күтіңіз.",
+      "ru-RU": "1. Уберите пылесос с базы.\n\n2. Убедитесь, что пылесос включен (переключатель на нижней стороне в положении находится ON\n• Если центральная кнопка горит красным, заряд пылесоса слишком мал для проведения диагностики и вам необходимо зарядить его\n•Если кнопка не горит, нажмите на нее дважды, чтобы вывести пылесос из спящего режима.\n\n3. Зажмите и удерживайте кнопки «спираль» и «база» до звукового сигнала. Подождите пока центральная кнопка начнет мигать с небольшими интервалами.",
+      "uk-UA": "1. Зніміть пилосос з бази.\n\n2. Переконайтеся, що пилосос увімкнено (перемикач на дні пилососу знаходиться в положенні ON)\n• Якщо центральна кнопка червона, заряд занадто низький для діагностики, і вам потрібно зарядити батарею.\n• Якщо кнопка не світиться, двічі натисніть її, щоб активувати пилосос\n\n3. Натискайте та утримуйте кнопки «Дім» та «Спіраль» до звукового сигналу. Зачекайте, доки центральна кнопка не почне блимати з невеликими інтервалами"
+    },
+    "url.manual": {
+      "ar-AE": "https://images.cdn.polaris-iot.com/ee/7c/d1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf",
+      "de-DE": "https://images.cdn.polaris-iot.com/ee/7c/d1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf",
+      "en-US": "https://images.cdn.polaris-iot.com/ee/7c/d1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf",
+      "kk-KZ": "https://images.cdn.polaris-iot.com/ee/7c/d1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf",
+      "ru-RU": "https://images.cdn.polaris-iot.com/ee/7c/d1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf",
+      "uk-UA": "https://images.cdn.polaris-iot.com/ee/7c/d1c7-05d9-4c71-b1dd-a8bee0d9460f/original.pdf"
+    },
+    "alert.ready": {
+      "ar-AE": "انتهى التنظيف",
+      "de-DE": "Reinigung abgeschlossen",
+      "en-US": "Cleaning finished",
+      "kk-KZ": "Тазалау аяқталды",
+      "ru-RU": "Уборка завершена",
+      "uk-UA": "Прибирання закінчено"
+    },
+    "alert.start": {
+      "ar-AE": "بدأ التنظيف",
+      "de-DE": "Reinigung gestartet",
+      "en-US": "Cleaning started",
+      "kk-KZ": "Тазалау басталды",
+      "ru-RU": "Уборка началась",
+      "uk-UA": "Розпочато прибирання"
+    },
+    "url.catalog": {
+      "ar-AE": "https://www.polar.ru/catalog/robot-pylesosy/robot-pylesos-polaris-pvcr-3200-iq-home-aqua-black/",
+      "de-DE": "https://www.polar.ru/catalog/robot-pylesosy/robot-pylesos-polaris-pvcr-3200-iq-home-aqua-black/",
+      "en-US": "https://www.polar.ru/catalog/robot-pylesosy/robot-pylesos-polaris-pvcr-3200-iq-home-aqua-black/",
+      "kk-KZ": "https://www.polar.ru/catalog/robot-pylesosy/robot-pylesos-polaris-pvcr-3200-iq-home-aqua-black/",
+      "ru-RU": "https://www.polar.ru/catalog/robot-pylesosy/robot-pylesos-polaris-pvcr-3200-iq-home-aqua-black/",
+      "uk-UA": "https://polaris.company/ua/catalog/robotic-vacuum-cleaners/robot-pylesos-polaris-pvcr-3200-iq-home-aqua/"
+    },
+    "expendable.0": {
+      "ar-AE": "الفرشاة الجانبية",
+      "de-DE": "Seitenbürste",
+      "en-US": "Side brush",
+      "kk-KZ": "Бүйірлік щетка",
+      "ru-RU": "Боковая щетка",
+      "uk-UA": "Бічна щітка"
+    },
+    "expendable.1": {
+      "ar-AE": "الفرشاة الأساسية",
+      "de-DE": "Hauptbürste",
+      "en-US": "Main brush",
+      "kk-KZ": "Бүйірлік щетка",
+      "ru-RU": "Основная щетка",
+      "uk-UA": "Головна щітка"
+    },
+    "expendable.2": {
+      "ar-AE": "الفلتر",
+      "de-DE": "Filter",
+      "en-US": "Filter",
+      "kk-KZ": "Сүзгі",
+      "ru-RU": "Фильтр",
+      "uk-UA": "Фільтр"
+    },
+    "expendable.3": {
+      "ar-AE": "حاوية الغبار",
+      "de-DE": "Staubbeutel",
+      "en-US": "Dust container",
+      "kk-KZ": "Шаң контейнері",
+      "ru-RU": "Контейнер для пыли",
+      "uk-UA": "Контейнер для пилу"
+    },
+    "attr.water_tank": {
+      "ar-AE": "كثافة الماء",
+      "de-DE": "Intensität der Wasserversorgung",
+      "en-US": "Water intensity",
+      "kk-KZ": "Су ағынының жылдамдығы",
+      "ru-RU": "Интенсивность подачи воды",
+      "uk-UA": "Інтенсивність подачі води"
+    },
+    "attr.title.appearance": {
+      "ar-AE": "لون الغلاف",
+      "de-DE": "Deckelfarbe",
+      "en-US": "Cover color",
+      "kk-KZ": "Қалпақ түсі",
+      "ru-RU": "Цвет крышки",
+      "uk-UA": "колір кришки"
+    },
+    "title.appearance.blue": {
+      "ar-AE": "أزرق",
+      "de-DE": "Blau",
+      "en-US": "Blue",
+      "kk-KZ": "Көк",
+      "ru-RU": "Синий",
+      "uk-UA": "синій"
+    },
+    "title.appearance.black": {
+      "ar-AE": "أسود",
+      "de-DE": "Schwarz",
+      "en-US": "Black",
+      "kk-KZ": "Қара",
+      "ru-RU": "Чёрный",
+      "uk-UA": "Чорний"
+    },
+    "title.appearance.white": {
+      "ar-AE": "أبيض",
+      "de-DE": "Weiß",
+      "en-US": "White",
+      "kk-KZ": "Ақ",
+      "ru-RU": "Белый",
+      "uk-UA": "білий"
+    },
+    "attr.appearance.dark_blue.title": {
+      "de-DE": "Dunkelblau",
+      "en-US": "Dark blue",
+      "kk-KZ": "Қою көк",
+      "ru-RU": "Темно-синий",
+      "uk-UA": "Темно-синій"
+    },
+    "attr.appearance.dark_gray.title": {
+      "de-DE": "Dunkelgrau",
+      "en-US": "Dark gray",
+      "kk-KZ": "Қою сұр",
+      "ru-RU": "Темно-серый",
+      "uk-UA": "Темно-сірий"
+    }
+  },
+  "programs": [
+    {
+      "name": {
+        "ar-AE": "إيقاف التشغيل",
+        "de-DE": "Aus.",
+        "en-US": "Off",
+        "kk-KZ": "Өшіру",
+        "ru-RU": "Выкл",
+        "uk-UA": "Вимкнено"
+      },
+      "hidden": true,
+      "limits_constraints": []
+    },
+    {
+      "icon": "M7.3,19.5c0.4,0.4,0.4,1,0.1,1.4c-0.2,0.2-0.5,0.3-0.7,0.3c-0.2,0-0.5-0.1-0.7-0.3l-5.7-5.2c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0-0.1-0.1-0.1c0,0,0,0,0,0c0,0-0.1-0.1-0.1-0.1c0,0,0,0,0,0c0-0.1,0-0.1,0-0.2c0-0.1,0-0.1,0-0.2c0,0,0,0,0,0s0,0,0,0c0-0.1,0-0.1,0-0.2c0-0.1,0-0.1,0-0.2c0,0,0,0,0,0c0,0,0.1-0.1,0.1-0.1c0,0,0,0,0,0c0,0,0-0.1,0.1-0.1c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0L6,9.1c0.4-0.4,1-0.3,1.4,0.1c0.4,0.4,0.3,1-0.1,1.4L3.6,14h8.6c0.6,0,1,0.4,1,1s-0.4,1-1,1H3.6L7.3,19.5zM29.9,15.4C29.9,15.4,29.9,15.4,29.9,15.4c0-0.1,0-0.2,0.1-0.2c0-0.1,0-0.1,0-0.2c0,0,0,0,0,0s0,0,0,0c0-0.1,0-0.1,0-0.2c0-0.1,0-0.1,0-0.2c0,0,0,0,0,0c0,0-0.1-0.1-0.1-0.1c0,0,0,0,0,0c0,0,0-0.1-0.1-0.1c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0L24,9.1c-0.4-0.4-1-0.3-1.4,0.1c-0.4,0.4-0.3,1,0.1,1.4l3.8,3.5h-8.6c-0.6,0-1,0.4-1,1s0.4,1,1,1h8.6l-3.8,3.5c-0.4,0.4-0.4,1-0.1,1.4c0.2,0.2,0.5,0.3,0.7,0.3c0.2,0,0.5-0.1,0.7-0.3l5.7-5.2c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0-0.1,0.1-0.1c0,0,0,0,0,0C29.9,15.5,29.9,15.4,29.9,15.4zM9.8,7.7c0.3,0,0.5-0.1,0.7-0.3L14,3.6v8.6c0,0.6,0.4,1,1,1s1-0.4,1-1V3.6l3.5,3.8c0.2,0.2,0.5,0.3,0.7,0.3c0.2,0,0.5-0.1,0.7-0.3c0.4-0.4,0.4-1,0.1-1.4l-5.2-5.7c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0c0,0-0.1-0.1-0.1-0.1c0,0,0,0,0,0c0,0-0.1-0.1-0.1-0.1c0,0,0,0,0,0c-0.1,0-0.1,0-0.2,0c-0.1,0-0.1,0-0.2,0c0,0,0,0,0,0c0,0,0,0,0,0c-0.1,0-0.1,0-0.2,0c-0.1,0-0.1,0-0.2,0c0,0,0,0,0,0c0,0-0.1,0.1-0.1,0.1c0,0,0,0,0,0c0,0-0.1,0-0.1,0.1c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0L9.1,6C8.7,6.4,8.7,7,9.1,7.4C9.3,7.6,9.6,7.7,9.8,7.7zM19.5,22.7L16,26.4v-8.6c0-0.6-0.4-1-1-1s-1,0.4-1,1v8.6l-3.5-3.8c-0.4-0.4-1-0.4-1.4-0.1c-0.4,0.4-0.4,1-0.1,1.4l5.2,5.7c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0.1,0.1,0.2,0.1c0,0,0.1,0,0.1,0.1c0,0,0,0,0,0c0,0,0,0,0,0c0.1,0,0.2,0.1,0.4,0.1c0,0,0,0,0,0s0,0,0,0s0,0,0,0s0,0,0,0c0.1,0,0.3,0,0.4-0.1c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0.1,0,0.1-0.1c0.1,0,0.1-0.1,0.2-0.1c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0l5.2-5.7c0.4-0.4,0.3-1-0.1-1.4C20.5,22.2,19.8,22.3,19.5,22.7z",
+      "name": {
+        "ar-AE": "عشوائي",
+        "de-DE": "Zufällige Route",
+        "en-US": "Random",
+        "kk-KZ": "Кездейсоқ маршрут",
+        "ru-RU": "Случайный маршрут",
+        "uk-UA": "Випадковий"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "icon": "M9.03999 11.4594H4.03999L3.03999 14.3294H0L5.2 0.399414H7.86L13.07 14.3294H10.07L9.03999 11.4594ZM4.78999 9.12939H8.27L6.52 3.91943L4.78999 9.12939ZM24.74 0.399414V9.5694C24.7753 10.2401 24.6659 10.9105 24.4192 11.5352C24.1724 12.1598 23.7941 12.7239 23.31 13.1894C22.2304 14.1195 20.8329 14.5961 19.41 14.5194C18.0067 14.6088 16.6213 14.166 15.53 13.2794C15.0469 12.8265 14.6666 12.2752 14.4148 11.6628C14.1629 11.0504 14.0453 10.3911 14.07 9.72943V0.449402H16.94V9.6394C16.9067 9.99945 16.9472 10.3625 17.0589 10.7064C17.1707 11.0502 17.3514 11.3677 17.59 11.6394C18.0893 12.0821 18.7438 12.3087 19.41 12.2694C21.02 12.2694 21.84 11.4194 21.86 9.72943V0.459412L24.74 0.399414ZM37.59 2.71942H33.32V14.3294H30.45V2.71942H26.2V0.399414H37.55L37.59 2.71942ZM50.4 7.6795C50.4239 8.91855 50.1747 10.1476 49.67 11.2795C49.2247 12.2647 48.5019 13.0987 47.59 13.6795C46.6495 14.2296 45.5796 14.5195 44.49 14.5195C43.4004 14.5195 42.3305 14.2296 41.39 13.6795C40.4736 13.1115 39.7435 12.2876 39.29 11.3095C38.7735 10.1947 38.5137 8.97804 38.53 7.74945V7.05951C38.5066 5.81303 38.7593 4.57676 39.27 3.43945C39.7231 2.45315 40.4526 1.6195 41.37 1.03949C42.3086 0.489258 43.377 0.199219 44.465 0.199219C45.553 0.199219 46.6214 0.489258 47.56 1.03949C48.4772 1.61696 49.204 2.45162 49.65 3.43945C50.1678 4.57123 50.4241 5.80512 50.4 7.0495V7.6795ZM47.49 7.0495C47.5695 5.88515 47.294 4.72404 46.7 3.71948C46.4425 3.37009 46.1066 3.08611 45.7193 2.89038C45.3319 2.69465 44.904 2.59265 44.47 2.59265C44.036 2.59265 43.6081 2.69465 43.2207 2.89038C42.8334 3.08611 42.4974 3.37009 42.24 3.71948C41.6489 4.71458 41.3702 5.86418 41.44 7.01947V7.69946C41.3719 8.85649 41.6467 10.0079 42.23 11.0095C42.4696 11.3845 42.8036 11.69 43.1985 11.8954C43.5934 12.1007 44.0353 12.1987 44.48 12.1795C44.9165 12.2017 45.3512 12.1089 45.7408 11.9106C46.1303 11.7124 46.461 11.4155 46.7 11.0495C47.2816 10.0473 47.5563 8.89637 47.49 7.7395V7.0495Z",
+      "name": {
+        "ar-AE": "ذكي",
+        "de-DE": "Smart",
+        "en-US": "Smart",
+        "kk-KZ": "Smart",
+        "ru-RU": "Smart",
+        "uk-UA": "Розумний"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "icon": "M2.8,0h7.5v2H2.8C2.3,2,2,2.3,2,2.8v7.5H0V2.8C0,1.2,1.2,0,2.8,0zM2,27.2v-7.5H0v7.5C0,28.8,1.2,30,2.8,30h7.5v-2H2.8C2.3,28,2,27.7,2,27.2zM28,27.2c0,0.5-0.3,0.8-0.8,0.8h-7.5v2h7.5c1.6,0,2.8-1.2,2.8-2.8v-7.5h-2V27.2zM27.2,0h-7.5v2h7.5C27.7,2,28,2.3,28,2.8v7.5h2V2.8C30,1.2,28.8,0,27.2,0z",
+      "name": {
+        "ar-AE": "جدار",
+        "de-DE": "Perimeter",
+        "en-US": "Wall",
+        "kk-KZ": "Периметрі",
+        "ru-RU": "Периметр",
+        "uk-UA": "Стіна"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "icon": "M32,16.1c0,0,0-0.1,0-0.1c0-8.8-7.1-15.9-15.8-16c0,0,0,0,0,0c0,0,0,0,0,0c0,0-0.1,0-0.1,0C7.2,0,0.1,7.1,0,15.8c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0.1,0,0.1c0,8.8,7.1,15.9,15.8,16c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0.1,0,0.1,0C24.8,32,31.9,24.9,32,16.1C32,16.2,32,16.2,32,16.1C32,16.1,32,16.1,32,16.1zM16.9,30v-7c0-0.6-0.4-1-1-1s-1,0.4-1,1v7C8,29.4,2.5,23.8,2,16.9h7c0.6,0,1-0.4,1-1s-0.4-1-1-1h-7C2.6,8,8.2,2.5,15.1,2v7c0,0.6,0.4,1,1,1s1-0.4,1-1v-7C24,2.6,29.5,8.2,30,15.1h-7c-0.6,0-1,0.4-1,1s0.4,1,1,1h7C29.4,24,23.8,29.5,16.9,30z",
+      "name": {
+        "ar-AE": "حلزوني",
+        "de-DE": "Spirale",
+        "en-US": "Spiral",
+        "kk-KZ": "Спираль",
+        "ru-RU": "Спираль",
+        "uk-UA": "Спіраль"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "icon": "M16.2,11.8v-1.6c0-0.3,0.2-0.5,0.5-0.5h0.1c0.3,0,0.5,0.2,0.5,0.5v1.6h1c0.5,0,1,0.4,1,1v6.8c0,0.5-0.4,0.9-1,0.9h-7.5c-0.5,0-1-0.4-1-1v-6.8c0-0.6,0.4-1,1-1h1v-1.6c0-0.3,0.2-0.5,0.5-0.5h0.1c0.3,0,0.5,0.2,0.5,0.5v1.6H16.2zM29,10.5c0,0.6-0.5,1.1-1.1,1.1h-0.1h-1.4v15.5c0,0.9-0.7,1.5-1.6,1.5H14.5H4.1c-0.9,0-1.5-0.7-1.5-1.5V11.7H1.2h0h0c-0.6,0-1.1-0.5-1.1-1.1c0-0.4,0.2-0.7,0.5-0.9c0,0,0,0,0,0l13.1-9.3C13.9,0.1,14.2,0,14.5,0c0.3,0,0.6,0.1,0.9,0.3l13.1,9.3c0,0,0,0,0,0C28.8,9.8,29,10.2,29,10.5zM24.2,9.3l-9.4-6.7c-0.1-0.1-0.2-0.1-0.3-0.1c-0.1,0-0.2,0-0.3,0.1L4.8,9.3v0.1v2.2v14.3c0,0.3,0.2,0.5,0.5,0.5H14v-5.9h1.1v5.9h8.6c0.3,0,0.5-0.2,0.5-0.5V11.7V9.4V9.3z",
+      "name": {
+        "ar-AE": "الشحن",
+        "de-DE": "Zurück zur Basis",
+        "en-US": "Charge",
+        "kk-KZ": "Базаға оралу",
+        "ru-RU": "Возврат на базу",
+        "uk-UA": "Заряджання"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "led": {
+      "60": "https://images.cdn.polaris-iot.com/e/12/0d441-1d1a-4552-9789-a399bec407c7/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/e/12/0d441-1d1a-4552-9789-a399bec407c7/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/e/12/0d441-1d1a-4552-9789-a399bec407c7/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/e/12/0d441-1d1a-4552-9789-a399bec407c7/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/e/12/0d441-1d1a-4552-9789-a399bec407c7/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/e/12/0d441-1d1a-4552-9789-a399bec407c7/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/e/12/0d441-1d1a-4552-9789-a399bec407c7/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/e/12/0d441-1d1a-4552-9789-a399bec407c7/1800.webp",
+      "id": "e120d441-1d1a-4552-9789-a399bec407c7",
+      "original": "https://images.cdn.polaris-iot.com/e/12/0d441-1d1a-4552-9789-a399bec407c7/original.webp"
+    },
+    "pair": {
+      "60": "https://images.cdn.polaris-iot.com/7/e9/2ff54-78f7-4194-8542-1e7b9d1a19ee/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/7/e9/2ff54-78f7-4194-8542-1e7b9d1a19ee/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/7/e9/2ff54-78f7-4194-8542-1e7b9d1a19ee/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/7/e9/2ff54-78f7-4194-8542-1e7b9d1a19ee/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/7/e9/2ff54-78f7-4194-8542-1e7b9d1a19ee/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/7/e9/2ff54-78f7-4194-8542-1e7b9d1a19ee/900.webp",
+      "id": "7e92ff54-78f7-4194-8542-1e7b9d1a19ee",
+      "original": "https://images.cdn.polaris-iot.com/7/e9/2ff54-78f7-4194-8542-1e7b9d1a19ee/original.webp"
+    },
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/e/08/1433f-a8e5-4a90-9223-fc184a4e1572/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/e/08/1433f-a8e5-4a90-9223-fc184a4e1572/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/e/08/1433f-a8e5-4a90-9223-fc184a4e1572/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/e/08/1433f-a8e5-4a90-9223-fc184a4e1572/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/e/08/1433f-a8e5-4a90-9223-fc184a4e1572/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/e/08/1433f-a8e5-4a90-9223-fc184a4e1572/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/e/08/1433f-a8e5-4a90-9223-fc184a4e1572/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/e/08/1433f-a8e5-4a90-9223-fc184a4e1572/1800.webp",
+      "id": "e081433f-a8e5-4a90-9223-fc184a4e1572",
+      "original": "https://images.cdn.polaris-iot.com/e/08/1433f-a8e5-4a90-9223-fc184a4e1572/original.webp"
+    },
+    "appearance.blue": {
+      "60": "https://images.cdn.polaris-iot.com/0/42/7a040-df55-4b30-bcff-4a5ee1692ae4/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/0/42/7a040-df55-4b30-bcff-4a5ee1692ae4/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/0/42/7a040-df55-4b30-bcff-4a5ee1692ae4/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/0/42/7a040-df55-4b30-bcff-4a5ee1692ae4/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/0/42/7a040-df55-4b30-bcff-4a5ee1692ae4/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/0/42/7a040-df55-4b30-bcff-4a5ee1692ae4/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/0/42/7a040-df55-4b30-bcff-4a5ee1692ae4/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/0/42/7a040-df55-4b30-bcff-4a5ee1692ae4/1800.webp",
+      "id": "0427a040-df55-4b30-bcff-4a5ee1692ae4",
+      "original": "https://images.cdn.polaris-iot.com/0/42/7a040-df55-4b30-bcff-4a5ee1692ae4/original.webp"
+    },
+    "appearance.black": {
+      "60": "https://images.cdn.polaris-iot.com/c/b1/6cb3d-8bfc-4c3e-b3c3-cae3e3118999/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/c/b1/6cb3d-8bfc-4c3e-b3c3-cae3e3118999/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/c/b1/6cb3d-8bfc-4c3e-b3c3-cae3e3118999/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/c/b1/6cb3d-8bfc-4c3e-b3c3-cae3e3118999/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/c/b1/6cb3d-8bfc-4c3e-b3c3-cae3e3118999/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/c/b1/6cb3d-8bfc-4c3e-b3c3-cae3e3118999/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/c/b1/6cb3d-8bfc-4c3e-b3c3-cae3e3118999/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/c/b1/6cb3d-8bfc-4c3e-b3c3-cae3e3118999/1800.webp",
+      "id": "cb16cb3d-8bfc-4c3e-b3c3-cae3e3118999",
+      "original": "https://images.cdn.polaris-iot.com/c/b1/6cb3d-8bfc-4c3e-b3c3-cae3e3118999/original.webp"
+    },
+    "appearance.white": {
+      "60": "https://images.cdn.polaris-iot.com/3/6e/d21ce-042b-4d9d-a154-760226952ca2/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/3/6e/d21ce-042b-4d9d-a154-760226952ca2/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/3/6e/d21ce-042b-4d9d-a154-760226952ca2/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/3/6e/d21ce-042b-4d9d-a154-760226952ca2/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/3/6e/d21ce-042b-4d9d-a154-760226952ca2/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/3/6e/d21ce-042b-4d9d-a154-760226952ca2/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/3/6e/d21ce-042b-4d9d-a154-760226952ca2/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/3/6e/d21ce-042b-4d9d-a154-760226952ca2/1800.webp",
+      "id": "36ed21ce-042b-4d9d-a154-760226952ca2",
+      "original": "https://images.cdn.polaris-iot.com/3/6e/d21ce-042b-4d9d-a154-760226952ca2/original.webp"
+    },
+    "attr.appearance.dark_blue.image": {
+      "60": "https://images.cdn.polaris-iot.com/0/da/4316b-5e1b-4454-b687-8079315cd3ab/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/0/da/4316b-5e1b-4454-b687-8079315cd3ab/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/0/da/4316b-5e1b-4454-b687-8079315cd3ab/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/0/da/4316b-5e1b-4454-b687-8079315cd3ab/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/0/da/4316b-5e1b-4454-b687-8079315cd3ab/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/0/da/4316b-5e1b-4454-b687-8079315cd3ab/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/0/da/4316b-5e1b-4454-b687-8079315cd3ab/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/0/da/4316b-5e1b-4454-b687-8079315cd3ab/1800.webp",
+      "id": "0da4316b-5e1b-4454-b687-8079315cd3ab",
+      "original": "https://images.cdn.polaris-iot.com/0/da/4316b-5e1b-4454-b687-8079315cd3ab/original.webp"
+    },
+    "attr.appearance.dark_gray.image": {
+      "60": "https://images.cdn.polaris-iot.com/d/f8/b8c21-e84a-411b-98dd-ba650dfeccf1/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/d/f8/b8c21-e84a-411b-98dd-ba650dfeccf1/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/d/f8/b8c21-e84a-411b-98dd-ba650dfeccf1/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/d/f8/b8c21-e84a-411b-98dd-ba650dfeccf1/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/d/f8/b8c21-e84a-411b-98dd-ba650dfeccf1/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/d/f8/b8c21-e84a-411b-98dd-ba650dfeccf1/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/d/f8/b8c21-e84a-411b-98dd-ba650dfeccf1/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/d/f8/b8c21-e84a-411b-98dd-ba650dfeccf1/1800.webp",
+      "id": "df8b8c21-e84a-411b-98dd-ba650dfeccf1",
+      "original": "https://images.cdn.polaris-iot.com/d/f8/b8c21-e84a-411b-98dd-ba650dfeccf1/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1697805086,
+  "temperature_units": "celsius"
+}

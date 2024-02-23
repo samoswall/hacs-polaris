@@ -1,0 +1,733 @@
+{
+  "id": "c6362125-3ada-4141-a89c-80acda21d33b",
+  "name": "HOT BRUSH",
+  "type": 171,
+  "class": "kettle",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/b/6c/73ab1-d25f-44d7-98a7-7f91e6d40628/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/b/6c/73ab1-d25f-44d7-98a7-7f91e6d40628/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/b/6c/73ab1-d25f-44d7-98a7-7f91e6d40628/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/b/6c/73ab1-d25f-44d7-98a7-7f91e6d40628/480.webp",
+    "id": "b6c73ab1-d25f-44d7-98a7-7f91e6d40628",
+    "original": "https://images.cdn.polaris-iot.com/b/6c/73ab1-d25f-44d7-98a7-7f91e6d40628/original.webp"
+  },
+  "layout": {
+    "top": [
+      {
+        "type": "slider",
+        "points": {
+          "0": {
+            "color": "null",
+            "label": "0"
+          },
+          "3": {
+            "label": "Low"
+          },
+          "7": {
+            "label": "Mid"
+          },
+          "10": {
+            "color": "null",
+            "label": "High"
+          }
+        },
+        "feature": "temperature",
+        "position": 0,
+        "visibility": [
+          {
+            "source": "state",
+            "stream_warm": 0
+          }
+        ],
+        "text_suffix": false,
+        "precondition": [
+          {
+            "error": 0,
+            "source": "state"
+          },
+          {
+            "program": [
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button_power",
+        "action": {
+          "program": [
+            2
+          ]
+        },
+        "position": 0,
+        "condition": [
+          {
+            "not": {
+              "source": "state",
+              "program": [
+                0
+              ]
+            }
+          }
+        ],
+        "action_off": {
+          "program": [
+            0
+          ]
+        },
+        "visibility": [
+          {
+            "source": "state",
+            "stream_warm": 0
+          }
+        ]
+      },
+      {
+        "type": "error",
+        "position": 0,
+        "visibility": [
+          {
+            "source": "state",
+            "stream_warm": 0
+          }
+        ]
+      },
+      {
+        "type": "slider",
+        "points": {
+          "0": {
+            "color": "null",
+            "label": "0"
+          },
+          "33": {
+            "label": "Low"
+          },
+          "67": {
+            "label": "Mid"
+          },
+          "100": {
+            "color": "null",
+            "label": "High"
+          }
+        },
+        "feature": "speed",
+        "position": 1,
+        "text_suffix": false,
+        "precondition": [
+          {
+            "error": 0,
+            "source": "state"
+          },
+          {
+            "program": [
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button_power",
+        "action": {
+          "program": [
+            2
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "not": {
+              "source": "state",
+              "program": [
+                0
+              ]
+            }
+          }
+        ],
+        "action_off": {
+          "program": [
+            0
+          ]
+        }
+      },
+      {
+        "type": "error",
+        "position": 1
+      }
+    ],
+    "home": [
+      {
+        "type": "switch",
+        "action": {
+          "program": [
+            2
+          ]
+        },
+        "position": 0,
+        "condition": [
+          {
+            "not": {
+              "source": "state",
+              "program": [
+                0
+              ]
+            }
+          }
+        ],
+        "action_off": {
+          "program": [
+            0
+          ]
+        },
+        "pendingAction": [
+          {
+            "or": []
+          }
+        ]
+      }
+    ],
+    "middle": [
+      {
+        "type": "header",
+        "title": {
+          "de-DE": "Modi",
+          "en-US": "Modes",
+          "kk-KZ": "Режимдер",
+          "ru-RU": "Режимы",
+          "uk-UA": "Режими"
+        },
+        "position": 0
+      },
+      {
+        "type": "button",
+        "title": {
+          "en-US": "Manual"
+        },
+        "action": {
+          "speed": 50,
+          "program": [
+            1
+          ],
+          "temperature": 5
+        },
+        "position": 1,
+        "condition": [
+          {
+            "source": "selection",
+            "program": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "title": {
+          "en-US": "Custom"
+        },
+        "action": {
+          "speed": 50,
+          "program": [
+            2
+          ],
+          "temperature": 5
+        },
+        "position": 1,
+        "condition": [
+          {
+            "source": "selection",
+            "program": [
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "program": [
+            4
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "source": "selection",
+            "program": [
+              4
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "program": [
+            5
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "source": "selection",
+            "program": [
+              5
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "program": [
+            6
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "source": "selection",
+            "program": [
+              6
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "program": [
+            7
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "source": "selection",
+            "program": [
+              7
+            ]
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "title": {
+          "de-DE": "Einstellungen",
+          "en-US": "Settings",
+          "kk-KZ": "Параметрлер",
+          "ru-RU": "Настройки",
+          "uk-UA": "Налаштування"
+        },
+        "position": 2
+      },
+      {
+        "type": "button",
+        "action": {
+          "stream_warm": 1
+        },
+        "feature": "stream_warm",
+        "position": 3,
+        "condition": [
+          {
+            "source": "state",
+            "stream_warm": 1
+          }
+        ],
+        "action_off": {
+          "stream_warm": 0
+        },
+        "precondition": [
+          {
+            "or": [
+              {
+                "source": "state",
+                "program": [
+                  0
+                ]
+              },
+              {
+                "source": "state",
+                "program": [
+                  1
+                ]
+              },
+              {
+                "source": "state",
+                "program": [
+                  2
+                ]
+              }
+            ]
+          }
+        ],
+        "pendingAction": [
+          {
+            "or": []
+          }
+        ]
+      },
+      {
+        "type": "fill",
+        "position": 3
+      }
+    ],
+    "top_info": [
+      {
+        "type": "info",
+        "feature": "program",
+        "position": 0
+      },
+      {
+        "type": "info",
+        "feature": "current_temperature",
+        "position": 0
+      },
+      {
+        "type": "info",
+        "title": {
+          "en-US": "Position",
+          "ru-RU": "Положение"
+        },
+        "position": 0,
+        "program_data": {
+          "field": "fold",
+          "program": [
+            2
+          ]
+        },
+        "value_strings": {
+          "0": "Straight",
+          "1": "Folded"
+        }
+      }
+    ],
+    "shortcuts": [
+      {
+        "type": "button",
+        "title": {
+          "en-US": "Manual"
+        },
+        "action": {
+          "speed": 50,
+          "program": [
+            1
+          ],
+          "temperature": 5
+        },
+        "position": 1,
+        "condition": [
+          {
+            "source": "selection",
+            "program": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "title": {
+          "en-US": "Custom"
+        },
+        "action": {
+          "speed": 50,
+          "program": [
+            2
+          ],
+          "temperature": 5
+        },
+        "position": 1,
+        "condition": [
+          {
+            "source": "selection",
+            "program": [
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "title": {
+          "en-US": "Smart"
+        },
+        "action": {
+          "speed": 50,
+          "program": [
+            3
+          ],
+          "temperature": 5
+        },
+        "position": 1,
+        "condition": [
+          {
+            "source": "selection",
+            "program": [
+              4
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "stream_warm": 1
+        },
+        "feature": "stream_warm",
+        "position": 3,
+        "condition": [
+          {
+            "source": "state",
+            "stream_warm": 1
+          }
+        ],
+        "action_off": {
+          "stream_warm": 0
+        },
+        "pendingAction": [
+          {
+            "or": []
+          }
+        ]
+      }
+    ]
+  },
+  "limits": {
+    "speed": {
+      "max": 100,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 50,
+      "round_alt": 1
+    },
+    "stream_warm": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "temperature": {
+      "max": 10,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 5,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "hidden": true,
+    "realtime": true,
+    "fastSwitch": {
+      "on": {
+        "program": [
+          1
+        ]
+      },
+      "off": {
+        "program": [
+          0
+        ]
+      }
+    },
+    "autoSetMode": true,
+    "cloneOfType": 120,
+    "adminPresets": true,
+    "hotspot_ssid": "HOT-BRUSH",
+    "program_data": {
+      "0": [
+        {
+          "max": 255,
+          "min": 0,
+          "name": "backlight_r",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "roundAlt": 1
+        },
+        {
+          "max": 255,
+          "min": 0,
+          "name": "backlight_g",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "roundAlt": 1
+        },
+        {
+          "max": 255,
+          "min": 0,
+          "name": "backlight_b",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "roundAlt": 1
+        }
+      ],
+      "1": [
+        {
+          "max": 2,
+          "min": 0,
+          "name": "hair_color",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "roundAlt": 1
+        }
+      ],
+      "2": [
+        {
+          "max": 1,
+          "min": 0,
+          "name": "fold",
+          "size": 1,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "roundAlt": 1
+        }
+      ]
+    }
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "temperature",
+    "current_temperature",
+    "speed",
+    "stream_warm"
+  ],
+  "messages": {
+    "diag": {
+      "en-US": "Hold \"Power\" and \"+/-\" buttons together until two short beeps",
+      "kk-KZ": "«Power» және «+/-» батырмаларын екі қатар қысқа дыбыстық сигнал шыққанша басып тұрыңыз",
+      "ru-RU": "Зажмите одновременно кнопки \"Power\" и \"+/-\" до двух коротких звуковых сигналов подряд",
+      "uk-UA": "Утримуйте кнопки \"Живлення\" та \"+/-\" разом до двох коротких звукових сигналів"
+    },
+    "pair": {
+      "en-US": "Hold \"+/-\" button until short beep",
+      "kk-KZ": "«+/-» батырмасын қысқа дыбыстық сигналға дейін басып тұрыңыз",
+      "ru-RU": "Зажмите кнопку \"+/-\" до короткого звукового сигнала",
+      "uk-UA": "Утримуйте кнопку \"+/-\" до короткого звукового сигналу"
+    },
+    "reset": {
+      "en-US": "Hold \"+/-\" and \"Power\" buttons together until three short beeps",
+      "kk-KZ": "\"Power\" және «+/-» батырмаларын қатарынан үш қысқа сигналға дейін басыңыз",
+      "ru-RU": "Зажмите одновременно кнопки \"Power\" и \"+/-\" до трех коротких звуковых сигналов подряд",
+      "uk-UA": "Утримуйте кнопки \"+/-\" та \"Живлення\" разом до трьох коротких звукових сигналів"
+    },
+    "error.3": {
+      "en-US": "Overcurrent fault"
+    },
+    "error.4": {
+      "en-US": "Overvoltage"
+    },
+    "error.5": {
+      "en-US": "Low voltage"
+    },
+    "error.7": {
+      "en-US": "Motor blocked"
+    },
+    "error.15": {
+      "en-US": "NTC sensor fault"
+    },
+    "error.16": {
+      "ru-RU": "Выключите фен из розетки"
+    },
+    "attr.stream_warm": {
+      "en-US": "Cold"
+    },
+    "attr.temperature": {
+      "en-US": "Target temperature",
+      "kk-KZ": "Мақсатты температура",
+      "ru-RU": "Целевая температура",
+      "uk-UA": "Цільова температура"
+    }
+  },
+  "programs": [
+    {
+      "name": {
+        "en-US": "Standby"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Manual"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Custom"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Smart"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Wet hair"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Color detect"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Child"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "en-US": "Sensitive"
+      },
+      "hidden": false,
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/1800.webp",
+      "2400": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/2400.webp",
+      "id": "54184761-ca4e-40f6-aaf1-e8384f2af4d5",
+      "original": "https://images.cdn.polaris-iot.com/5/41/84761-ca4e-40f6-aaf1-e8384f2af4d5/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1699979704,
+  "temperature_units": "celsius"
+}

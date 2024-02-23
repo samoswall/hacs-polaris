@@ -1,0 +1,754 @@
+{
+  "id": "46931f49-4ebc-4e63-a409-aecf9017c861",
+  "name": "PSS-9090K",
+  "type": 159,
+  "class": "steamer",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/600.webp",
+    "id": "10043d2d-5a4b-4de7-a60a-767a007b7f5c",
+    "original": "https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/original.webp"
+  },
+  "layout": {
+    "top": [
+      {
+        "type": "slider",
+        "limit": {
+          "max": 4,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 1,
+          "roundAlt": 1
+        },
+        "feature": "temperature",
+        "position": 0,
+        "visibility": [
+          {
+            "not": {
+              "program": [
+                1
+              ]
+            }
+          }
+        ],
+        "text_suffix": false
+      },
+      {
+        "type": "button_power",
+        "action": {
+          "program": [
+            1
+          ]
+        },
+        "position": 0,
+        "condition": [
+          {
+            "not": {
+              "program": [
+                0
+              ]
+            }
+          }
+        ],
+        "action_off": {
+          "program": [
+            0
+          ]
+        }
+      },
+      {
+        "type": "error",
+        "position": 0
+      },
+      {
+        "type": "slider",
+        "limit": {
+          "max": 4,
+          "min": 1,
+          "step": 1,
+          "round": 1,
+          "default": 1,
+          "roundAlt": 1
+        },
+        "feature": "temperature",
+        "position": 0,
+        "visibility": [
+          {
+            "program": [
+              1
+            ]
+          }
+        ],
+        "text_suffix": false
+      },
+      {
+        "type": "slider",
+        "feature": "speed",
+        "position": 1
+      },
+      {
+        "type": "button_power",
+        "action": {
+          "program": [
+            1
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "not": {
+              "program": [
+                0
+              ]
+            }
+          }
+        ],
+        "action_off": {
+          "program": [
+            0
+          ]
+        }
+      },
+      {
+        "type": "error",
+        "position": 1
+      }
+    ],
+    "home": [
+      {
+        "type": "switch",
+        "action": {
+          "program": [
+            1
+          ]
+        },
+        "position": 0,
+        "condition": [
+          {
+            "not": {
+              "source": "state",
+              "program": [
+                0
+              ]
+            }
+          }
+        ],
+        "action_off": {
+          "program": [
+            0
+          ]
+        },
+        "pendingAction": [
+          {
+            "or": []
+          }
+        ]
+      }
+    ],
+    "middle": [
+      {
+        "type": "header",
+        "title": {
+          "en-US": "Mode",
+          "ru-RU": "Режим"
+        },
+        "position": 0
+      },
+      {
+        "type": "button",
+        "action": {
+          "program": [
+            1
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "program": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "program": [
+            2
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "program": [
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "program": [
+            3
+          ]
+        },
+        "position": 1,
+        "condition": [
+          {
+            "program": [
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "type": "fill",
+        "position": 1
+      },
+      {
+        "type": "header",
+        "title": {
+          "en-US": "Functions",
+          "ru-RU": "Функции"
+        },
+        "position": 2
+      },
+      {
+        "type": "button",
+        "feature": "turbo",
+        "position": 3,
+        "precondition": [
+          {
+            "not": {
+              "speed": 0
+            }
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "volume": 0
+        },
+        "feature": "volume",
+        "position": 3,
+        "condition": [
+          {
+            "source": "state",
+            "volume": 0
+          }
+        ],
+        "action_off": {
+          "volume": 1
+        }
+      }
+    ],
+    "top_info": [
+      {
+        "type": "info",
+        "feature": "current_temperature",
+        "position": 0
+      },
+      {
+        "icon": "M0.0,0.0h24.0v24.0V0.0M7 11v2h10v-2H7zm5-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z",
+        "type": "info",
+        "title": {
+          "en-US": "Water pump",
+          "ru-RU": "Водный насос"
+        },
+        "position": 0,
+        "visibility": [
+          {
+            "stream_warm": 0
+          }
+        ]
+      },
+      {
+        "icon": "M0.0,0.0h24.0v24.0V0.0M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z",
+        "type": "info",
+        "title": {
+          "en-US": "Water pump",
+          "ru-RU": "Водный насос"
+        },
+        "position": 0,
+        "visibility": [
+          {
+            "stream_warm": 1
+          }
+        ]
+      }
+    ],
+    "shortcuts": [
+      {
+        "type": "button",
+        "feature": "turbo",
+        "position": 0
+      },
+      {
+        "type": "button",
+        "action": {
+          "program": [
+            1
+          ]
+        },
+        "position": 0,
+        "condition": [
+          {
+            "program": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "program": [
+            2
+          ]
+        },
+        "position": 0,
+        "condition": [
+          {
+            "program": [
+              2
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "action": {
+          "program": [
+            3
+          ]
+        },
+        "position": 0,
+        "condition": [
+          {
+            "program": [
+              3
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "limits": {
+    "speed": {
+      "max": 3,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "turbo": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "volume": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "stream_warm": {
+      "max": 1,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    },
+    "temperature": {
+      "max": 4,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "icons": {
+      "turbo": "M0,0h53v19V0M0.148438 18V0.914062H5.32812C6.94531 0.914062 8.13281 1.3125 8.89062 2.10938C9.65625 2.89844 10.0391 4.13281 10.0391 5.8125V6.04688C10.0391 6.6875 9.92188 7.25391 9.6875 7.74609C9.45312 8.23047 9.24609 8.55469 9.06641 8.71875C8.89453 8.875 8.65625 9.05859 8.35156 9.26953C9.60156 9.89453 10.2266 11.0352 10.2266 12.6914V12.9609C10.2266 14.7344 9.78906 16.0195 8.91406 16.8164C8.04688 17.6055 6.89844 18 5.46875 18H0.148438ZM4.10938 14.4023H5.1875C5.58594 14.4023 5.85938 14.2656 6.00781 13.9922C6.16406 13.7188 6.24219 13.2969 6.24219 12.7266C6.24219 12.1484 6.16406 11.7305 6.00781 11.4727C5.85938 11.2148 5.58594 11.0859 5.1875 11.0859H4.10938V14.4023ZM4.10938 7.51172H5.07031C5.74219 7.51172 6.07812 7.01562 6.07812 6.02344C6.07812 5.01562 5.73438 4.51172 5.04688 4.51172H4.10938V7.51172ZM11.1523 12.7383V6.16406C11.1523 2.53125 12.7852 0.714844 16.0508 0.714844C19.3164 0.714844 20.9492 2.53125 20.9492 6.16406V12.7383C20.9492 16.3711 19.3164 18.1875 16.0508 18.1875C12.7852 18.1875 11.1523 16.3711 11.1523 12.7383ZM15.1367 12.6914C15.1367 13.3789 15.2109 13.8555 15.3594 14.1211C15.5156 14.3867 15.7461 14.5195 16.0508 14.5195C16.3555 14.5195 16.582 14.3867 16.7305 14.1211C16.8867 13.8555 16.9648 13.3789 16.9648 12.6914V6.16406C16.9648 5.47656 16.8867 5.01172 16.7305 4.76953C16.582 4.51953 16.3555 4.39453 16.0508 4.39453C15.7461 4.39453 15.5156 4.51953 15.3594 4.76953C15.2109 5.01172 15.1367 5.47656 15.1367 6.16406V12.6914ZM22.1445 12.7383V6.16406C22.1445 2.53125 23.7773 0.714844 27.043 0.714844C30.3086 0.714844 31.9414 2.53125 31.9414 6.16406V12.7383C31.9414 16.3711 30.3086 18.1875 27.043 18.1875C23.7773 18.1875 22.1445 16.3711 22.1445 12.7383ZM26.1289 12.6914C26.1289 13.3789 26.2031 13.8555 26.3516 14.1211C26.5078 14.3867 26.7383 14.5195 27.043 14.5195C27.3477 14.5195 27.5742 14.3867 27.7227 14.1211C27.8789 13.8555 27.957 13.3789 27.957 12.6914V6.16406C27.957 5.47656 27.8789 5.01172 27.7227 4.76953C27.5742 4.51953 27.3477 4.39453 27.043 4.39453C26.7383 4.39453 26.5078 4.51953 26.3516 4.76953C26.2031 5.01172 26.1289 5.47656 26.1289 6.16406V12.6914ZM32.8086 12.7969H36.6172C36.6484 13.3906 36.7422 13.8281 36.8984 14.1094C37.0625 14.3828 37.3359 14.5195 37.7188 14.5195C38.4375 14.5195 38.8008 14.0391 38.8086 13.0781C38.8086 12.4844 38.6797 12.0625 38.4219 11.8125C38.2109 11.6016 37.8242 11.4414 37.2617 11.332L36.8164 11.2266C35.4414 10.9375 34.4492 10.3711 33.8398 9.52734C33.2617 8.73047 32.9727 7.41016 32.9727 5.56641C32.9727 3.99609 33.3828 2.79688 34.2031 1.96875C35.0312 1.13281 36.2305 0.714844 37.8008 0.714844C39.4023 0.714844 40.582 1.13281 41.3398 1.96875C42.0977 2.79688 42.5156 4.11719 42.5938 5.92969H38.75C38.7188 5.30469 38.6406 4.88281 38.5156 4.66406C38.3906 4.4375 38.1602 4.32422 37.8242 4.32422C37.1992 4.32422 36.8867 4.73828 36.8867 5.56641C36.8867 6.11328 36.957 6.49609 37.0977 6.71484C37.2539 6.97266 37.6367 7.16797 38.2461 7.30078L38.7031 7.39453C40.0469 7.68359 41.0078 8.12109 41.5859 8.70703C42.3359 9.50391 42.7109 10.8984 42.7109 12.8906C42.7109 16.4297 41.082 18.1953 37.8242 18.1875C34.543 18.1953 32.8711 16.3984 32.8086 12.7969ZM42.8281 4.58203V0.914062H52.5312V4.58203H49.6719V18H45.7109V4.58203H42.8281Z"
+    },
+    "hidden": true,
+    "realtime": true,
+    "shortcuts": [
+      {
+        "values": {
+          "turbo": 1
+        }
+      },
+      {
+        "program": [
+          1
+        ]
+      },
+      {
+        "program": [
+          2
+        ]
+      },
+      {
+        "program": [
+          3
+        ]
+      }
+    ],
+    "invertSound": true,
+    "adminPresets": true,
+    "mqttFeatureNames": {
+      "speed": "intensity",
+      "volume": "sound"
+    }
+  },
+  "vendor": "polaris",
+  "presets": [
+    {
+      "icon": "M-81,-160.3h400v400V-160.3M36.3 65.8h39v48.6h-39zM95.2 16.6h39V114H95zM154-31.5h39v146h-39z",
+      "name": {
+        "de-DE": "First",
+        "en-US": "First",
+        "kk-KZ": "First",
+        "ru-RU": "Первый",
+        "uk-UA": "First"
+      },
+      "program": [
+        0
+      ],
+      "water_tank": 0,
+      "temperature": 100
+    }
+  ],
+  "features": [
+    "program",
+    "temperature",
+    "current_temperature",
+    "speed",
+    "turbo",
+    "stream_warm",
+    "volume"
+  ],
+  "messages": {
+    "diag": {
+      "de-DE": "Den Einschaltknopf und den Temperaturknopf für 5 Sekunden festklemmen. Das Symbol oben links beginnt langsam zu blinken",
+      "en-US": "Hold down the power button and the temperature button for 5 seconds. The symbol in the upper left corner will start blinking slowly",
+      "kk-KZ": "Қуат түймесін және температура түймесін 5 секунд басып тұрыңыз. Жоғарғы сол жақтағы таңба баяу жыпылықтай бастайды",
+      "ru-RU": "Зажать кнопку включения и кнопку температуры на 5 секунд. Символ в левом верхнем углу начнет медленно мигать",
+      "uk-UA": "Затиснути кнопку включення і кнопку температури на 5 секунд. Символ у верхньому лівому куті почне повільно блимати"
+    },
+    "pair": {
+      "ar-AE": "في وضع إيقاف التشغيل، يجب إلغاء قفل المفتاح الموجود على زر المضخة (يتم سحبه لأعلى). اضغط على زر المضخة مرتين، سيومض المؤشر مرتين.",
+      "de-DE": "Drücken Sie zweimal die Temperaturtaste auf dem Display, rechts leuchtet die Taste «Dampf»\nDen Ein Ausschalter und die Dampftaste 1 Sekunde lang gedrückt halten. Das Symbol oben links beginnt schnell zu blinken",
+      "en-US": "Press the temperature button twice on the display, the \"Steam\" button will light up on the right\nHold the power button and the \"Steam\" button for 1 second. The symbol in the upper left corner will start blinking quickly",
+      "kk-KZ": "Дисплейдегі температура түймесін екі рет басыңыз, оң жақта\"бу\" түймесі жанады\nҚуат түймесін және \"бу\" түймесін 1 секунд басып тұрыңыз. Жоғарғы сол жақтағы таңба тез жыпылықтай бастайды",
+      "ru-RU": "Два раза нажать на кнопку температуры на дисплее, загорится справа кнопка «Пар»\nЗажать кнопку включения и кнопку «Пар» на 1 секунду. Символ в левом верхнем углу начнёт быстро мигать",
+      "uk-UA": "Два рази натиснути на кнопку температури на дисплеї, загориться справа кнопка \"Пар\"\nЗатиснути кнопку включення і кнопку \" Пар \" на 1 секунду. Символ у верхньому лівому куті почне швидко блимати"
+    },
+    "reset": {
+      "de-DE": "Drücken Sie zweimal die Temperaturtaste auf dem Display, rechts leuchtet die Taste «Dampf»\nDen Einschaltknopf und die Dampftaste für 5 Sekunden festhalten. Das Symbol in der oberen linken Ecke erlischt",
+      "en-US": "Press the temperature button twice on the display the \"Steam\" button on the right will light up. Hold the power button and the \"Steam\" button for 5 seconds. The symbol in the upper left corner will go out",
+      "kk-KZ": "Дисплейдегі температура түймесін екі рет басыңыз, оң жақта \"бу\" түймесі жанады\nҚуат түймесін және \"бу\" түймесін 5 секунд басып тұрыңыз. Жоғарғы сол жақтағы таңба өшеді",
+      "ru-RU": "Два раза нажать на кнопку температуры на дисплее, загорится справа кнопка «Пар»\nЗажать кнопку включения и кнопку «Пар» на 5 секунд. Символ в левом верхнем углу погаснет",
+      "uk-UA": "Два рази натиснути на кнопку температури на дисплеї, загориться справа кнопка \"Пар\"\nЗатиснути кнопку включення і кнопку \" Пар \" на 5 секунд. Символ у верхньому лівому куті згасне"
+    },
+    "error.1": {
+      "en-US": "Low water"
+    },
+    "error.2": {
+      "en-US": "Self-Clean"
+    },
+    "error.3": {
+      "en-US": "NTC fault"
+    },
+    "attr.speed": {
+      "en-US": "Steam power",
+      "ru-RU": "Мощность пара"
+    },
+    "attr.turbo": {
+      "en-US": "Boost"
+    },
+    "attr.stream_warm": {
+      "en-US": "Water pump",
+      "ru-RU": "Водный насос"
+    },
+    "attr.temperature": {
+      "en-US": "Heating degree",
+      "ru-RU": "Степень нагрева"
+    }
+  },
+  "programs": [
+    {
+      "name": {
+        "ar-AE": "إيقاف التشغيل",
+        "de-DE": "Aus",
+        "en-US": "Off",
+        "kk-KZ": "Өшіру",
+        "ru-RU": "Выкл",
+        "uk-UA": "Вимкнено"
+      },
+      "hidden": true,
+      "limits": {
+        "speed": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "turbo": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "volume": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "stream_warm": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "temperature": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "icon": "M13.93 20.08C13.92 20 13.91 19.92 13.89 19.85C13.85 19.58 13.79 19.32 13.72 19.07C13.71 19.04 13.7 19 13.7 18.97C13.61 18.68 13.5 18.4 13.38 18.13C13.36 18.08 13.34 18.04 13.31 17.99C13.19 17.74 13.06 17.5 12.91 17.26C12.9 17.24 12.89 17.22 12.87 17.2C12.7 16.93 12.51 16.68 12.3 16.44C12.09 16.2 11.87 15.97 11.63 15.76L11.62 15.75C11.14 15.32 10.59 14.97 10 14.68V3C10 1.34 8.66 0 7 0C5.34 0 4 1.34 4 3V14.68C3.41 14.96 2.87 15.32 2.38 15.75L2.37 15.76C2.13 15.97 1.91 16.2 1.7 16.44C1.49 16.68 1.3 16.93 1.13 17.2C1.12 17.22 1.11 17.24 1.09 17.26C0.94 17.49 0.81 17.74 0.69 17.99C0.67 18.04 0.64 18.08 0.62 18.13C0.5 18.4 0.39 18.68 0.3 18.97C0.29 19 0.28 19.03 0.28 19.07C0.21 19.32 0.15 19.59 0.11 19.85C0.09 19.93 0.08 20 0.07 20.08C0.03 20.38 0 20.69 0 21C0 24.87 3.13 28 7 28C10.87 28 14 24.87 14 21C14 20.69 13.97 20.38 13.93 20.08ZM7 2C7.55 2 8 2.45 8 3V7H6V3C6 2.45 6.45 2 7 2ZM22.1 2.7C21.8 2 21.7 1.1 22 0C21.1 0 19.7 0.8 18.4 2C17.5 2.9 16.6 4 16 5.2C15.6 4.7 15.3 4 15.1 3.2C14.8 3.4 14.5 3.6 14.3 3.9C12.9 5.2 12 7 12 9C12 9.2 12 9.4 12 9.5C12.3 13.1 15.3 16 19 16C19.2 16 19.5 16 19.7 16C21.9 15.8 25 14 25 10C25 7 22.9 4.7 22.1 2.7ZM21.8 13C20.9 14.3 19.1 14.7 17.8 13.8C16.5 12.9 16.1 11.1 17 9.8C18.3 7.9 20.2 9.2 21 6.9C21.9 7.6 23.4 10.6 21.8 13Z",
+      "name": {
+        "ar-AE": "الإحماء",
+        "de-DE": "sich warm laufen",
+        "en-US": "Warm up",
+        "kk-KZ": "Ысыту",
+        "ru-RU": "Разогрев",
+        "uk-UA": "Розігрів"
+      },
+      "hidden": false,
+      "limits": {
+        "speed": {
+          "max": 3,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 1,
+          "round_alt": 1
+        },
+        "turbo": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "volume": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "stream_warm": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "temperature": {
+          "max": 4,
+          "min": 1,
+          "step": 1,
+          "round": 1,
+          "default": 1,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "icon": "M0,0h58v19V0M0.628906 12.7969H4.4375C4.46875 13.3906 4.5625 13.8281 4.71875 14.1094C4.88281 14.3828 5.15625 14.5195 5.53906 14.5195C6.25781 14.5195 6.62109 14.0391 6.62891 13.0781C6.62891 12.4844 6.5 12.0625 6.24219 11.8125C6.03125 11.6016 5.64453 11.4414 5.08203 11.332L4.63672 11.2266C3.26172 10.9375 2.26953 10.3711 1.66016 9.52734C1.08203 8.73047 0.792969 7.41016 0.792969 5.56641C0.792969 3.99609 1.20312 2.79688 2.02344 1.96875C2.85156 1.13281 4.05078 0.714844 5.62109 0.714844C7.22266 0.714844 8.40234 1.13281 9.16016 1.96875C9.91797 2.79688 10.3359 4.11719 10.4141 5.92969H6.57031C6.53906 5.30469 6.46094 4.88281 6.33594 4.66406C6.21094 4.4375 5.98047 4.32422 5.64453 4.32422C5.01953 4.32422 4.70703 4.73828 4.70703 5.56641C4.70703 6.11328 4.77734 6.49609 4.91797 6.71484C5.07422 6.97266 5.45703 7.16797 6.06641 7.30078L6.52344 7.39453C7.86719 7.68359 8.82812 8.12109 9.40625 8.70703C10.1562 9.50391 10.5312 10.8984 10.5312 12.8906C10.5312 16.4297 8.90234 18.1953 5.64453 18.1875C2.36328 18.1953 0.691406 16.3984 0.628906 12.7969ZM11.7969 18V0.914062H15.4648L17.9375 8.78906L20.4102 0.914062H24.0781V18H20.3633V11.1797L20.4102 9.59766L20.0938 11.0391L19.0625 14.3789H16.8125L15.7812 11.0391L15.4648 9.59766L15.5117 11.1797V18H11.7969ZM24.9453 18L28.9062 0.914062H32.4102L36.4414 18H32.5273L32.0938 15.7148H29.2461L28.8359 18H24.9453ZM29.8438 12.5039H31.4727L30.9688 9.91406L30.6289 7.94531L30.3242 9.91406L29.8438 12.5039ZM37.3438 18V0.914062H42.6641C45.6719 0.914062 47.1758 2.60938 47.1758 6V6.33984C47.1758 8.53516 46.5039 10.0156 45.1602 10.7812L47.375 18H43.2734L41.6094 11.6367H41.2578V18H37.3438ZM41.2578 8.22656H41.9961C42.7305 8.22656 43.0977 7.65234 43.0977 6.50391V6.31641C43.0977 5.72266 43.0156 5.28516 42.8516 5.00391C42.6953 4.72266 42.4102 4.58203 41.9961 4.58203H41.2578V8.22656ZM47.75 4.58203V0.914062H57.4531V4.58203H54.5938V18H50.6328V4.58203H47.75Z",
+      "name": {
+        "en-US": "Smart temp"
+      },
+      "hidden": false,
+      "limits": {
+        "speed": {
+          "max": 3,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 1,
+          "round_alt": 1
+        },
+        "turbo": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "volume": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "stream_warm": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "temperature": {
+          "max": 4,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 1,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "icon": "M5 6.1V6V1C5 0.4 4.6 0 4 0C3.4 0 3 0.4 3 1V6V6.1C1.3 6.5 0 8.1 0 10C0 11.9 1.3 13.4 3 13.9V27C3 27.6 3.4 28 4 28C4.6 28 5 27.6 5 27V13.9C6.7 13.5 8 11.9 8 10C8 8.1 6.7 6.6 5 6.1ZM4 12C2.9 12 2 11.1 2 10C2 8.9 2.9 8 4 8C5.1 8 6 8.9 6 10C6 11.1 5.1 12 4 12ZM28 10C28 8.1 26.7 6.6 25 6.1V6V1C25 0.4 24.6 0 24 0C23.4 0 23 0.4 23 1V6V6.1C21.3 6.5 20 8.1 20 10C20 11.9 21.3 13.4 23 13.9V27C23 27.6 23.4 28 24 28C24.6 28 25 27.6 25 27V13.9C26.7 13.4 28 11.9 28 10ZM24 12C22.9 12 22 11.1 22 10C22 8.9 22.9 8 24 8C25.1 8 26 8.9 26 10C26 11.1 25.1 12 24 12ZM15 14.1V1C15 0.4 14.6 0 14 0C13.4 0 13 0.4 13 1V14.1C11.3 14.5 10 16.1 10 18C10 19.9 11.3 21.4 13 21.9V22V27C13 27.6 13.4 28 14 28C14.6 28 15 27.6 15 27V22V21.9C16.7 21.5 18 19.9 18 18C18 16.1 16.7 14.6 15 14.1ZM14 20C12.9 20 12 19.1 12 18C12 16.9 12.9 16 14 16C15.1 16 16 16.9 16 18C16 19.1 15.1 20 14 20Z",
+      "name": {
+        "ar-AE": "مخصص",
+        "de-DE": "Handbuch",
+        "en-US": "Custom",
+        "kk-KZ": "Қолмен",
+        "ru-RU": "Ручной",
+        "uk-UA": "Звичай"
+      },
+      "hidden": false,
+      "limits": {
+        "speed": {
+          "max": 3,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 1,
+          "round_alt": 1
+        },
+        "turbo": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "volume": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "stream_warm": {
+          "max": 1,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        },
+        "temperature": {
+          "max": 4,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 1,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "diag": {
+      "60": "https://images.cdn.polaris-iot.com/1/e5/8e6c1-9a8a-4119-a5a4-92f57e587aa8/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/1/e5/8e6c1-9a8a-4119-a5a4-92f57e587aa8/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/1/e5/8e6c1-9a8a-4119-a5a4-92f57e587aa8/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/1/e5/8e6c1-9a8a-4119-a5a4-92f57e587aa8/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/1/e5/8e6c1-9a8a-4119-a5a4-92f57e587aa8/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/1/e5/8e6c1-9a8a-4119-a5a4-92f57e587aa8/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/1/e5/8e6c1-9a8a-4119-a5a4-92f57e587aa8/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/1/e5/8e6c1-9a8a-4119-a5a4-92f57e587aa8/1800.webp",
+      "id": "1e58e6c1-9a8a-4119-a5a4-92f57e587aa8",
+      "original": "https://images.cdn.polaris-iot.com/1/e5/8e6c1-9a8a-4119-a5a4-92f57e587aa8/original.webp"
+    },
+    "pair": {
+      "60": "https://images.cdn.polaris-iot.com/d/8b/e6dd2-b83f-4a87-8d04-23f783ee62dd/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/d/8b/e6dd2-b83f-4a87-8d04-23f783ee62dd/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/d/8b/e6dd2-b83f-4a87-8d04-23f783ee62dd/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/d/8b/e6dd2-b83f-4a87-8d04-23f783ee62dd/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/d/8b/e6dd2-b83f-4a87-8d04-23f783ee62dd/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/d/8b/e6dd2-b83f-4a87-8d04-23f783ee62dd/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/d/8b/e6dd2-b83f-4a87-8d04-23f783ee62dd/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/d/8b/e6dd2-b83f-4a87-8d04-23f783ee62dd/1800.webp",
+      "id": "d8be6dd2-b83f-4a87-8d04-23f783ee62dd",
+      "original": "https://images.cdn.polaris-iot.com/d/8b/e6dd2-b83f-4a87-8d04-23f783ee62dd/original.webp"
+    },
+    "reset": {
+      "60": "https://images.cdn.polaris-iot.com/6/ff/6be92-2f31-446c-96bc-4a5cf414c2c0/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/6/ff/6be92-2f31-446c-96bc-4a5cf414c2c0/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/6/ff/6be92-2f31-446c-96bc-4a5cf414c2c0/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/6/ff/6be92-2f31-446c-96bc-4a5cf414c2c0/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/6/ff/6be92-2f31-446c-96bc-4a5cf414c2c0/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/6/ff/6be92-2f31-446c-96bc-4a5cf414c2c0/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/6/ff/6be92-2f31-446c-96bc-4a5cf414c2c0/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/6/ff/6be92-2f31-446c-96bc-4a5cf414c2c0/1800.webp",
+      "id": "6ff6be92-2f31-446c-96bc-4a5cf414c2c0",
+      "original": "https://images.cdn.polaris-iot.com/6/ff/6be92-2f31-446c-96bc-4a5cf414c2c0/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1690463266,
+  "temperature_units": "celsius"
+}

@@ -1,0 +1,365 @@
+{
+  "id": "c65bd003-288e-4ec7-89d5-7f2e9ffbad7a",
+  "name": "PVCS-1150",
+  "type": 111,
+  "class": "cleaner",
+  "image": {
+    "60": "https://images.cdn.polaris-iot.com/1/27/36f11-5225-478f-bbc2-fed844a33639/60.webp",
+    "120": "https://images.cdn.polaris-iot.com/1/27/36f11-5225-478f-bbc2-fed844a33639/120.webp",
+    "240": "https://images.cdn.polaris-iot.com/1/27/36f11-5225-478f-bbc2-fed844a33639/240.webp",
+    "480": "https://images.cdn.polaris-iot.com/1/27/36f11-5225-478f-bbc2-fed844a33639/480.webp",
+    "600": "https://images.cdn.polaris-iot.com/1/27/36f11-5225-478f-bbc2-fed844a33639/600.webp",
+    "900": "https://images.cdn.polaris-iot.com/1/27/36f11-5225-478f-bbc2-fed844a33639/900.webp",
+    "1200": "https://images.cdn.polaris-iot.com/1/27/36f11-5225-478f-bbc2-fed844a33639/1200.webp",
+    "1800": "https://images.cdn.polaris-iot.com/1/27/36f11-5225-478f-bbc2-fed844a33639/1800.webp",
+    "id": "12736f11-5225-478f-bbc2-fed844a33639",
+    "original": "https://images.cdn.polaris-iot.com/1/27/36f11-5225-478f-bbc2-fed844a33639/original.webp"
+  },
+  "layout": {
+    "top": [
+      {
+        "type": "slider",
+        "limit": {
+          "max": 2,
+          "min": 0,
+          "step": 1,
+          "round": 1,
+          "default": 0,
+          "roundAlt": 1
+        },
+        "points": {
+          "0": {
+            "label": "Min"
+          },
+          "2": {
+            "label": "Max"
+          }
+        },
+        "feature": "speed",
+        "position": 0,
+        "precondition": [
+          {
+            "or": []
+          }
+        ],
+        "value_strings": {
+          "0": "Min",
+          "1": "Mid",
+          "2": "Max"
+        }
+      },
+      {
+        "type": "error",
+        "position": 0
+      }
+    ],
+    "middle": [
+      {
+        "icon": "M0.0,0.0h28.0v24.0V0.0M16 4C15.45 4 15 4.45 15 5V12.57L20.49 15.86C20.65 15.95 20.82 16 21 16C21.34 16 21.67 15.83 21.86 15.51C22.14 15.04 21.99 14.42 21.52 14.14L17 11.43V5C17 4.45 16.55 4 16 4ZM16 0C15.59 0 15.18 0.02 14.78 0.06C14.63 0.08 14.48 0.11 14.34 0.13C14.09 0.16 13.84 0.19 13.6 0.24C13.4 0.28 13.21 0.34 13.02 0.39C12.83 0.44 12.64 0.48 12.46 0.53C12.24 0.6 12.02 0.69 11.8 0.77C11.65 0.82 11.5 0.87 11.36 0.93C11.11 1.03 10.88 1.16 10.64 1.28C10.53 1.33 10.42 1.38 10.32 1.43C10.05 1.58 9.8 1.74 9.54 1.9C9.48 1.94 9.4 1.98 9.34 2.03C9.06 2.21 8.8 2.41 8.54 2.62C8.5 2.65 8.46 2.68 8.42 2.71C8.14 2.94 7.88 3.18 7.62 3.43C7.6 3.44 7.59 3.46 7.57 3.47C5.4 5.61 4.05 8.57 4.01 11.84L1.71 9.54C1.32 9.15 0.69 9.15 0.3 9.54C0.1 9.74 0 9.99 0 10.25C0 10.51 0.1 10.76 0.29 10.96L4.49 15.16C4.68 15.35 4.93 15.45 5.2 15.45C5.47 15.45 5.72 15.34 5.91 15.16L10.11 10.96C10.5 10.57 10.5 9.94 10.11 9.55C9.72 9.16 9.09 9.16 8.7 9.55L6 12.24V12C6 6.49 10.49 2 16 2C21.51 2 26 6.49 26 12C26 17.51 21.51 22 16 22C14.05 22 12.17 21.44 10.55 20.38C10.09 20.08 9.47 20.21 9.17 20.67C8.87 21.13 9 21.75 9.46 22.05C11.4 23.33 13.67 24 16 24C22.62 24 28 18.62 28 12C28 5.38 22.62 0 16 0Z",
+        "type": "button",
+        "title": {
+          "de-DE": "Geschichte",
+          "en-US": "History",
+          "kk-KZ": "Тарих",
+          "ru-RU": "История",
+          "uk-UA": "Історія"
+        },
+        "layout": "history",
+        "position": 0
+      },
+      {
+        "icon": "M0.0,0.0h28.0v24.0V0.0M6,9c0-1.1,0.9-2,2-2s2,0.9,2,2c0,1.1-0.9,2-2,2S6,10.1,6,9z M14,11c1.1,0,2-0.9,2-2c0-1.1-0.9-2-2-2 s-2,0.9-2,2C12,10.1,12.9,11,14,11z M20,11c1.1,0,2-0.9,2-2c0-1.1-0.9-2-2-2s-2,0.9-2,2C18,10.1,18.9,11,20,11z M28,2v14 c0,1.1-0.9,2-2,2h-3v4.3c0,0.9-1.2,1.4-1.8,0.7L17,18H2c-1.1,0-2-0.9-2-2V2c0-1.1,0.9-2,2-2h24C27.1,0,28,0.9,28,2z M26,2H2v14h15.9 l3.1,3.6V16h5V2z",
+        "type": "button",
+        "title": {
+          "en-US": "Advice",
+          "ru-RU": "Советы"
+        },
+        "feature": "recipe",
+        "position": 0
+      },
+      {
+        "axis": {
+          "y": {
+            "min": 0
+          },
+          "hoursSinceNow": 720,
+          "aggregationType": "sum",
+          "aggregationIntervalMinutes": 1440
+        },
+        "type": "graph",
+        "title": {
+          "de-DE": "Reinigungszeit / min",
+          "en-US": "Cleaning time / min",
+          "kk-KZ": "Тазалау уақыты/мин",
+          "ru-RU": "Время уборки / мин",
+          "uk-UA": "Час збирання/хв"
+        },
+        "measure": "history",
+        "position": 1
+      }
+    ],
+    "top_info": [
+      {
+        "type": "info",
+        "feature": "battery",
+        "position": 0
+      },
+      {
+        "type": "info",
+        "feature": "timer",
+        "position": 0
+      },
+      {
+        "type": "info",
+        "feature": "clean_time",
+        "position": 0
+      }
+    ]
+  },
+  "limits": {
+    "speed": {
+      "max": 2,
+      "min": 0,
+      "step": 1,
+      "round": 1,
+      "default": 1,
+      "round_alt": 1
+    },
+    "timer": {
+      "max": 7200,
+      "min": 0,
+      "step": 60,
+      "round": 1,
+      "default": 0,
+      "round_alt": 1
+    }
+  },
+  "params": {
+    "icons": {
+      "expendable.0": "M0,0h24v24V0M21.444,7.833H2.556C2.249,7.833 2,8.082 2,8.389v1.669v0.555v0.555v0.555v0.555v0.556v0.555v0.556V14.5v0.556v0.555c0,0.307 0.249,0.556 0.556,0.556h18.889C21.751,16.166 22,15.918 22,15.611V8.389C22,8.082 21.751,7.833 21.444,7.833zM21.444,8.944h-2.777V8.389h2.777V8.944zM10.333,13.39v-0.556h3.611v0.555L10.333,13.39L10.333,13.39zM13.944,13.945V14.5h-3.611v-0.555H13.944zM10.333,12.279v-0.556h3.611v0.555L10.333,12.279L10.333,12.279zM10.333,11.168v-0.555h3.611v0.555H10.333zM10.333,10.057V9.499h3.611v0.558H10.333zM10.333,8.944V8.389h3.611v0.555C13.944,8.944 10.333,8.944 10.333,8.944zM9.778,8.944H6.167V8.389h3.611V8.944zM9.778,9.499v0.558H6.167V9.499H9.778zM9.778,10.613v0.555H6.167v-0.555H9.778zM9.778,11.723v0.555H6.167v-0.555H9.778zM9.778,12.834v0.555H6.167v-0.555H9.778zM9.778,13.945V14.5H6.167v-0.555H9.778zM9.778,15.056v0.555H6.167v-0.555H9.778zM10.333,15.056h3.611v0.555h-3.611V15.056zM14.5,15.056h3.611v0.555H14.5V15.056zM14.5,14.5v-0.555h3.611V14.5H14.5zM14.5,13.39v-0.556h3.611v0.555L14.5,13.39L14.5,13.39zM14.5,12.279v-0.556h3.611v0.555L14.5,12.279L14.5,12.279zM14.5,11.168v-0.555h3.611v0.555H14.5zM14.5,10.057V9.499h3.611v0.558H14.5zM14.5,8.944V8.389h3.611v0.555C18.111,8.944 14.5,8.944 14.5,8.944zM5.611,8.389v0.555H2.556V8.389H5.611zM2.556,9.499h3.056v0.558H2.556V9.499zM2.556,10.613h3.056v0.555H2.556V10.613zM2.556,11.723h3.056v0.555H2.556V11.723zM2.556,12.834h3.056v0.555H2.556V12.834zM2.556,13.945h3.056V14.5H2.556V13.945zM2.556,15.056h3.056v0.555H2.556V15.056zM21.444,15.611h-2.777v-0.555h2.777V15.611zM21.444,14.5h-2.777v-0.555h2.777V14.5zM21.444,13.39h-2.777v-0.556h2.777V13.39zM21.444,12.279h-2.777v-0.556h2.777V12.279zM21.444,11.168h-2.777v-0.555h2.777V11.168zM18.667,10.057V9.499h2.777v0.558H18.667z"
+    },
+    "hidden": false,
+    "history": {
+      "graph": {
+        "value": "clean_time"
+      },
+      "values": [
+        {
+          "name": "clean_time",
+          "feature": "clean_time"
+        },
+        {
+          "name": "suction"
+        }
+      ]
+    },
+    "realtime": true,
+    "hotspot_ssid": "PVCS-1150",
+    "recipeAdvices": true,
+    "expendable_max": [
+      60
+    ],
+    "manualInfoFields": [
+      "program",
+      "battery",
+      "clean_time"
+    ],
+    "mqttFeatureNames": {
+      "speed": "suction"
+    }
+  },
+  "vendor": "polaris",
+  "features": [
+    "program",
+    "battery",
+    "timer",
+    "clean_time",
+    "speed",
+    "expendables",
+    "recipe",
+    "demo"
+  ],
+  "messages": {
+    "diag": {
+      "ar-AE": "اضغط مع الاستمرار على زر تحديد السرعة لمدة 5 ثوانٍ. للتأكيد، يومض مؤشر الواي فاي 3 مرات. اضغط مع الاستمرار عليه مرة أخرى لمدة 5 ثوان. للتأكيد، سيومض مؤشر الواي فاي 3 مرات مرة أخرى",
+      "de-DE": "Drücken und halten sie die geschwindigkeit auswahl taste für 5 sekunden. Zur Bestätigung blinkt die Wi-Fi-Anzeige 3 Mal. Drücken und halten Sie es erneut 5 Sekunden lang gedrückt. Zur Bestätigung blinkt die Wi-Fi-Anzeige erneut 3 Mal",
+      "en-US": "Press and hold down the speed selection button for 5 seconds. In confirmation, the Wi-Fi indicator flashes 3 times. Press and hold it down again for 5 seconds. In confirmation, the Wi-Fi indicator will flash 3 times again",
+      "kk-KZ": "жылдамдықты таңдау түймесін 5 секунд басып тұрыңыз. Растау үшін Wi-Fi индикаторы 3 рет жыпылықтайды. Оны тағы 5 секунд басып тұрыңыз. Растау үшін Wi-Fi индикаторы қайтадан 3 рет жыпылықтайды",
+      "ru-RU": "Зажмите и удерживайте кнопку выбора скорости в течение 5 секунд. В подтверждение индикатор Wi-Fi мигнет 3 раза. Зажмите и удерживайте ее повторно в течение 5 секунд. В подтверждение индикатор Wi-Fi опять мигнет 3 раза",
+      "uk-UA": "Натисніть і утримуйте кнопку вибору швидкості протягом 5 секунд. На підтвердження індикатор Wi-Fi блимає 3 рази. Натисніть і утримуйте її ще раз протягом 5 секунд. На підтвердження індикатор Wi-Fi знову блимне 3 рази"
+    },
+    "pair": {
+      "ar-AE": "اضغط مع الاستمرار على زر تحديد السرعة لمدة 5 ثوانٍ. للتأكيد، يومض مؤشر الواي فاي 3 مرات",
+      "de-DE": "Drücken und halten sie die geschwindigkeit auswahl taste für 5 sekunden. Zur Bestätigung blinkt die Wi-Fi-Anzeige 3 Mal",
+      "en-US": "Press and hold down the speed selection button for 5 seconds. In confirmation, the Wi-Fi indicator flashes 3 times",
+      "kk-KZ": "жылдамдықты таңдау түймесін 5 секунд басып тұрыңыз. Растау үшін Wi-Fi индикаторы 3 рет жыпылықтайды",
+      "ru-RU": "Зажмите и удерживайте кнопку выбора скорости в течение 5 секунд. В подтверждение индикатор Wi-Fi мигнет 3 раза",
+      "uk-UA": "Натисніть і утримуйте кнопку вибору швидкості протягом 5 секунд. На підтвердження індикатор Wi-Fi блимає 3 рази"
+    },
+    "reset": {
+      "ar-AE": "اضغط مع الاستمرار على زر تحديد السرعة لمدة 5 ثوانٍ. للتأكيد، يومض مؤشر الواي فاي 3 مرات. اضغط مع الاستمرار عليه مرة أخرى لمدة 5 ثوان. للتأكيد، سيومض مؤشر الواي فاي 3 مرات مرة أخرى. اضغط مع الاستمرار على زر تحديد السرعة للمرة الثالثة لمدة 5 ثوانٍ. للتأكيد، سيومض مؤشر الواي فاي 3 مرات مرة أخرى",
+      "de-DE": "Drücken und halten sie die geschwindigkeit auswahl taste für 5 sekunden. Zur Bestätigung blinkt die Wi-Fi-Anzeige 3 Mal. Drücken und halten Sie es erneut 5 Sekunden lang gedrückt. Zur Bestätigung blinkt die Wi-Fi-Anzeige erneut 3 Mal. Drücken und halten sie die geschwindigkeit auswahl taste für die dritte zeit für 5 sekunden. In bestätigung, die Wi-Fi anzeige blinkt 3 mal wieder",
+      "en-US": "Press and hold down the speed selection button for 5 seconds. In confirmation, the Wi-Fi indicator flashes 3 times. Press and hold it down again for 5 seconds. In confirmation, the Wi-Fi indicator will flash 3 times again. Press and hold down the speed selection button for the third time for 5 seconds. In confirmation, the Wi-Fi indicator will flash 3 times again",
+      "kk-KZ": "жылдамдықты таңдау түймесін 5 секунд басып тұрыңыз. Растау үшін Wi-Fi индикаторы 3 рет жыпылықтайды. Оны тағы 5 секунд басып тұрыңыз. Растау үшін Wi-Fi индикаторы қайтадан 3 рет жыпылықтайды. Жылдамдықты таңдау түймесін үшінші рет 5 секунд басып тұрыңыз. Растау үшін Wi-Fi индикаторы қайтадан 3 рет жыпылықтайды",
+      "ru-RU": "Зажмите и удерживайте кнопку выбора скорости в течение 5 секунд. В подтверждение индикатор Wi-Fi мигнет 3 раза. Зажмите и удерживайте ее повторно в течение 5 секунд. В подтверждение индикатор Wi-Fi опять мигнет 3 раза. Третий раз зажмите и удерживайте кнопку выбора скорости в течение 5 секунд. В подтверждение индикатор Wi-Fi опять мигнет 3 раза",
+      "uk-UA": "Натисніть і утримуйте кнопку вибору швидкості протягом 5 секунд. На підтвердження індикатор Wi-Fi блимає 3 рази. Натисніть і утримуйте її ще раз протягом 5 секунд. На підтвердження індикатор Wi-Fi знову блимне 3 рази. Натисніть і утримуйте кнопку вибору швидкості втретє протягом 5 секунд. На підтвердження індикатор Wi-Fi знову блимне 3 рази"
+    },
+    "enable": {
+      "ar-AE": "يُرجى تنبيه الجهاز من وضع السكون عن طريق تشغيله وإيقاف تشغيله لفترة وجيزة.",
+      "de-DE": "Bitte wecken Sie das Gerät aus dem Ruhemodus, indem Sie es kurz ein- und ausschalten.",
+      "en-US": "Please wake the device from sleep mode by briefly turning it on and off.",
+      "kk-KZ": "Құрылғыны қысқа уақыт ішінде қосу және өшіру арқылы ұйқы режимінен шығарыңыз.",
+      "ru-RU": "Пожалуйста, выведите устройство из режима сна – для этого кратковременно включите его и выключите.",
+      "uk-UA": "Будь ласка, виведіть пристрій зі сплячого режиму, короткочасно включивши і вимкнувши його."
+    },
+    "error.1": {
+      "ar-AE": "أفرغ صندوق الغبار",
+      "de-DE": "Leeren Sie den Abfallbehälter",
+      "en-US": "Empty the dust bin",
+      "kk-KZ": "Қоқыс жәшігін босатыңыз",
+      "ru-RU": "Опустошите контейнер для мусора",
+      "uk-UA": "Спорожніть контейнер для пилу"
+    },
+    "error.2": {
+      "ar-AE": "الفلتر مسدود",
+      "de-DE": "Filter blockiert",
+      "en-US": "Filter is blocked",
+      "kk-KZ": "Сүзгі бұғатталған",
+      "ru-RU": "Фильтр заблокирован",
+      "uk-UA": "Фільтр заблоковано"
+    },
+    "error.3": {
+      "ar-AE": "رأس الفرشاة مسدود",
+      "de-DE": "Bürstenkopf verstopft",
+      "en-US": "Brush head clogged",
+      "kk-KZ": "Қылқалам басы бітеліп қалды",
+      "ru-RU": "Головка щетки забита",
+      "uk-UA": "Головка щітки забита"
+    },
+    "error.4": {
+      "ar-AE": "تعطل المعدات",
+      "de-DE": "Geräteausfall",
+      "en-US": "Equipment failure",
+      "kk-KZ": "Жабдықтың істен шығуы",
+      "ru-RU": "Отказ оборудования",
+      "uk-UA": "Відмова обладнання"
+    },
+    "url.manual": {
+      "en-US": "https://images.cdn.polaris-iot.com/pdf/polaris/111/PVCS%201150.pdf"
+    },
+    "expendable.0": {
+      "ar-AE": "الفلتر",
+      "de-DE": "Filter",
+      "en-US": "Filter",
+      "kk-KZ": "Сүзгі",
+      "ru-RU": "Фильтр",
+      "uk-UA": "Фільтр"
+    },
+    "history.clean_time.suffix": {
+      "ar-AE": "دقيقة",
+      "de-DE": "Mindest",
+      "en-US": "min",
+      "kk-KZ": "мин",
+      "ru-RU": "мин",
+      "uk-UA": "хв"
+    }
+  },
+  "programs": [
+    {
+      "name": {
+        "ar-AE": "إيقاف التشغيل",
+        "de-DE": "Aus",
+        "en-US": "Off",
+        "kk-KZ": "Өшіру",
+        "ru-RU": "Выкл",
+        "uk-UA": "Вимкнено"
+      },
+      "hidden": true,
+      "limits": {
+        "pressure": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "منخفض",
+        "en-US": "Low"
+      },
+      "hidden": false,
+      "limits": {
+        "pressure": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "وسط",
+        "en-US": "Mid"
+      },
+      "hidden": false,
+      "limits": {
+        "pressure": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    },
+    {
+      "name": {
+        "ar-AE": "عالي",
+        "en-US": "High"
+      },
+      "hidden": false,
+      "limits": {
+        "pressure": {
+          "max": 0,
+          "min": 0,
+          "step": 0,
+          "round": 1,
+          "default": 0,
+          "round_alt": 1
+        }
+      },
+      "limits_constraints": []
+    }
+  ],
+  "alt_images": {
+    "manualbg": {
+      "60": "https://images.cdn.polaris-iot.com/f/f4/0f1cf-6676-4f5b-b725-8f1f190e15f9/60.webp",
+      "120": "https://images.cdn.polaris-iot.com/f/f4/0f1cf-6676-4f5b-b725-8f1f190e15f9/120.webp",
+      "240": "https://images.cdn.polaris-iot.com/f/f4/0f1cf-6676-4f5b-b725-8f1f190e15f9/240.webp",
+      "480": "https://images.cdn.polaris-iot.com/f/f4/0f1cf-6676-4f5b-b725-8f1f190e15f9/480.webp",
+      "600": "https://images.cdn.polaris-iot.com/f/f4/0f1cf-6676-4f5b-b725-8f1f190e15f9/600.webp",
+      "900": "https://images.cdn.polaris-iot.com/f/f4/0f1cf-6676-4f5b-b725-8f1f190e15f9/900.webp",
+      "1200": "https://images.cdn.polaris-iot.com/f/f4/0f1cf-6676-4f5b-b725-8f1f190e15f9/1200.webp",
+      "1800": "https://images.cdn.polaris-iot.com/f/f4/0f1cf-6676-4f5b-b725-8f1f190e15f9/1800.webp",
+      "id": "ff40f1cf-6676-4f5b-b725-8f1f190e15f9",
+      "original": "https://images.cdn.polaris-iot.com/f/f4/0f1cf-6676-4f5b-b725-8f1f190e15f9/original.webp"
+    }
+  },
+  "connectivity": [
+    "wifi",
+    "hotspot"
+  ],
+  "last_modified": 1697115304,
+  "temperature_units": "celsius"
+}
