@@ -6,13 +6,12 @@
 
 
 > [!NOTE]
-> ### Разработка интеграции прекращена!!!
-> :information_source: **Причина**: <br>
-Компания Polaris проводит обновление прошивок своих устройств.<br>
-Первый этап - подключение к mqtt брокеру, указанному пользователем (настраивается в приложении), уже тестируется.<br>
-Второй этап - MQTT Discovery для Home Assistant.<br>
-Поэтому в интеграции нет необходимости. Если по какой-то причине второй этап не будет реализован, то проект будет возобновлен.<br>
-Для себя получил богатый опыт в разработке интеграций для Home Assistant.
+> ### Разработка интеграции возобновлена!!!
+> :information_source: **Этапы**: <br>
+Первый этап - костяк интеграции создан. Доделываю мелочи (автообнаружение, иконки, кое какую логику и т.д.).<br>
+Второй этап - тест пользователями (чайники и увлажнители).<br>
+Третий этап - добавление мультиварок и нагревателей ковемашин (паралельно устранение недочетов).<br>
+Ожидаемая дата начала теста - до 23.02.2025 г.
 
 
 ## Устройства Polaris
@@ -164,14 +163,14 @@
 |98|PWK 1775CGLD|kettle|volume, weight, backlight, child_lock, temperature|Кипячение, Кипячение с подогревом, Разогрев, Разогрев с удержанием, IQ кипячение, Чайная церемония|![all](https://images.cdn.polaris-iot.com/8/08/f91f4-f117-4074-aa8a-d3d177d7c657/60.webp)|
 |105|PWK 1725CGLD|kettle|volume, backlight, child_lock, temperature|Кипячение, Кипячение с подогревом, Разогрев, Разогрев с удержанием, IQ кипячение, Чайная церемония|![all](https://images.cdn.polaris-iot.com/c/38/c5351-2643-4bcf-bd1b-c5d24a7a9b85/60.webp)|
 |106|PWK 1725CGLD|kettle|volume, backlight, child_lock, temperature|Кипячение, Кипячение с подогревом, Разогрев, Разогрев с удержанием, IQ кипячение, Чайная церемония|![all](https://images.cdn.polaris-iot.com/c/38/c5351-2643-4bcf-bd1b-c5d24a7a9b85/60.webp)|
-|116|Smart-Lid|kettle|speed, battery|Выкл|![all](https://images.cdn.polaris-iot.com/f/fc/274e8-7ddf-4429-b827-f63b141c6db9/60.webp)|
+|116|Smart-Lid|lid|speed, battery|Выкл|![all](https://images.cdn.polaris-iot.com/f/fc/274e8-7ddf-4429-b827-f63b141c6db9/60.webp)|
 |117|PWK-1712CGLD|kettle|volume, backlight, temperature|Кипячение, Кипячение с подогревом, Разогрев, Разогрев с удержанием, IQ кипячение, Чайная церемония, Ночник вкл, Ночник выкл|![all](https://images.cdn.polaris-iot.com/c/1c/4ff8e-7a0e-400c-9e50-43c6d45d300e/60.webp)|
-|120|HAIR-DRYER|kettle|speed, stream_warm, temperature|Ожидание, Ручной, Пользовательский, Умный|![all](https://images.cdn.polaris-iot.com/b/6c/73ab1-d25f-44d7-98a7-7f91e6d40628/60.webp)|
+|120|HAIR-DRYER|dryer|speed, stream_warm, temperature|Ожидание, Ручной, Пользовательский, Умный|![all](https://images.cdn.polaris-iot.com/b/6c/73ab1-d25f-44d7-98a7-7f91e6d40628/60.webp)|
 |139|PWK 1775CGLD VOICE|kettle|volume, backlight, child_lock, temperature|Кипячение, Кипячение с подогревом, Разогрев, Разогрев с удержанием, IQ кипячение, Чайная церемония|![all](https://images.cdn.polaris-iot.com/8/08/f91f4-f117-4074-aa8a-d3d177d7c657/60.webp)|
 |164|PWK 1728CGLDA|kettle|night, speed, amount, volume, backlight, child_lock, temperature|Кипячение, Кипячение с подогревом, Разогрев, Разогрев с удержанием, IQ кипячение, Чайная церемония, Ночник, Подсветка выкл|![all](https://images.cdn.polaris-iot.com/c/38/c5351-2643-4bcf-bd1b-c5d24a7a9b85/60.webp)|
 |165|PWK 1755CAD VOICE|kettle|volume, child_lock, temperature|Кипячение, Кипячение с подогревом, Разогрев, Разогрев с удержанием, IQ кипячение, Чайная церемония|![all](https://images.cdn.polaris-iot.com/8/96/c40d6-068b-4a17-9e9c-f912ee1e70c2/60.webp)|
-|168|Spice Mixer|kettle|||![all](https://images.cdn.polaris-iot.com/f/fc/274e8-7ddf-4429-b827-f63b141c6db9/60.webp)|
-|171|HOT BRUSH|kettle|speed, stream_warm, temperature|Standby, Manual, Custom, Smart, Wet hair, Color detect, Child, Sensitive|![all](https://images.cdn.polaris-iot.com/b/6c/73ab1-d25f-44d7-98a7-7f91e6d40628/60.webp)|
+|168|Spice Mixer|mixer|||![all](https://images.cdn.polaris-iot.com/f/fc/274e8-7ddf-4429-b827-f63b141c6db9/60.webp)|
+|171|HOT BRUSH|brush|speed, stream_warm, temperature|Standby, Manual, Custom, Smart, Wet hair, Color detect, Child, Sensitive|![all](https://images.cdn.polaris-iot.com/b/6c/73ab1-d25f-44d7-98a7-7f91e6d40628/60.webp)|
 |92|PGS-1450CWIFI|steamer|speed|Выкл, Нет нагрева, Нагрев|![all](https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/60.webp)|
 |94|PSS-7070KWIFI|steamer|water_tank, temperature|Выкл, Пар, Нагрев, Самоочистка|![all](https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/60.webp)|
 |159|PSS-9090K|steamer|speed, turbo, volume, stream_warm, temperature|Выкл, Разогрев, Smart, Ручной|![all](https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/60.webp)|
