@@ -1,1 +1,128 @@
-
+{
+  "config": {
+    "abort": {
+      "already_configured": "Это устройство уже было настроено."
+    },
+    "error": {
+      "cannot_connect": "Не удалось подключиться, пожалуйста, повторите попытку.",
+      "invalid_auth": "Неверная аутентификация.",
+      "too_many_requests": "Слишком много запросов, повторите попытку позже.",
+      "unknown": "Неожиданная ошибка.",
+      "Unknown error occurred": "Неожиданная ошибка."
+    },
+    "step": {
+      "user": {
+        "description": "Конфигурация Polaris Local MQTT.",
+        "data": {
+          "DEVICEID": "Выберите устройство (или все)",
+          "MQTT_ROOT_TOPIC": "Префикс темы (обычно 'polaris')"
+        },
+        "title": "Polaris Local MQTT"
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "sound_switch": {
+        "name": "Звук"
+      },
+      "power_switch": {
+        "name": "Включить"
+      },
+      "child_lock_switch": {
+        "name": "Блокировка"
+      },
+      "backlight_switch": {
+        "name": "Подсветка"
+      },
+      "ioniser_switch": {
+        "name": "Ионизация"
+      },
+      "warm_stream_switch": {
+        "name": "Теплый пар"
+      }
+    },
+    "water_heater": {
+      "water_heater": {
+        "name": "Нагрев",
+        "state": {
+          "off": "Выключен",
+          "performance": "Кипячение",
+          "electric": "Разогрев",
+          "heat_pump": "Разогрев с удержанием",
+          "eco": "IQ Кипячение"
+        }
+      }
+    },
+    "humidifier": {
+      "humidifier": {
+        "name": "Увлажнитель",
+        "state_attributes": {
+          "mode": {
+            "state": {
+              "auto": "Авто",
+              "comfort": "Здоровье",
+              "baby": "Детский",
+              "sleep": "Ночной",
+              "boost": "Интенсивность",
+              "home": "Ручной",
+              "eco": "Увлажнение"
+            }
+          }
+        }
+      }
+    },
+    "number": {
+      "intensity": {
+        "name": "Интенсивность"
+      }
+    },
+    "sensor": {
+      "temperature_sensor": {
+        "name": "Температура"
+      },
+      "firmware_sensor": {
+        "name": "Версия прошивки"
+      },
+      "type_sensor": {
+        "name": "Тип устройства"
+      },
+      "humidity_sensor": {
+        "name": "Влажность"
+      }
+    },
+    "select": {
+      "select_mode_kettle": {
+        "name": "Предустановки",
+        "state": {
+          "not_selected": "Не выбрано",
+          "black_tea": "Черный чай",
+          "baby_bottle": "Детская смесь",
+          "instant_coffee": "Растворимый кофе",
+          "green_tea": "Зеленый чай",
+          "flower_tea": "Цветочный чай",
+          "tea_bag": "Пакетированный чай",
+          "red_tea": "Красный чай",
+          "puerh_tea": "Пуэр",
+          "oolong_tea": "Улун",
+          "white_tea": "Белый чай",
+          "herbal_tea": "Травяной чай"
+        }
+      }
+    },
+    "light": {
+      "night_light": {
+        "name": "Ночник"
+      }
+    },
+    "binary_sensor": {
+      "base_binary_sensor": {
+        "name": "Положение",
+        "state": {
+          "on": "Снят с базы",
+          "off": "На базе"
+        }
+      }
+    }
+  }
+}

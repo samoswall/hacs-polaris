@@ -1,0 +1,128 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "This device has already been configured."
+    },
+    "error": {
+      "cannot_connect": "Failed to connect, please try again.",
+      "invalid_auth": "Invalid authentication.",
+      "too_many_requests": "Too many requests, retry later.",
+      "unknown": "Unexpected error.",
+      "Unknown error occurred": "Unexpected error."
+    },
+    "step": {
+      "user": {
+        "description": "Configuring Polaris Local MQTT.",
+        "data": {
+          "DEVICEID": "Select a device (or all devices)",
+          "MQTT_ROOT_TOPIC": "Topic Prefix (usually 'polaris')"
+        },
+        "title": "Polaris Local MQTT"
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "sound_switch": {
+        "name": "Sound"
+      },
+      "power_switch": {
+        "name": "Power"
+      },
+      "child_lock_switch": {
+        "name": "Child lock"
+      },
+      "backlight_switch": {
+        "name": "Backlight"
+      },
+      "ioniser_switch": {
+        "name": "Ioniser"
+      },
+      "warm_stream_switch": {
+        "name": "Warm stream"
+      }
+    },
+    "water_heater": {
+      "water_heater": {
+        "name": "Water heater",
+        "state": {
+          "off": "Off",
+          "performance": "Boiling",
+          "electric": "Warm up",
+          "heat_pump": "Warm up with keep",
+          "eco": "IQ boiling"
+        }
+      }
+    },
+    "humidifier": {
+      "humidifier": {
+        "name": "Humidifier",
+        "state_attributes": {
+          "my_available_modes": {
+            "state": {
+              "auto": "Auto",
+              "comfort": "Health",
+              "baby": "Baby mode",
+              "sleep": "Night",
+              "boost": "Intensity",
+              "home": "Custom",
+              "eco": "Humidity"
+            }
+          }
+        }
+      }
+    },
+    "number": {
+      "intensity": {
+        "name": "Intensity"
+      }
+    },
+    "sensor": {
+      "temperature_sensor": {
+        "name": "Temperature"
+      },
+      "firmware_sensor": {
+        "name": "Firmware Version"
+      },
+      "type_sensor": {
+        "name": "Device Type"
+      },
+      "humidity_sensor": {
+        "name": "Humidity"
+      }
+    },
+    "select": {
+      "select_mode_kettle": {
+        "name": "Preset",
+        "state": {
+          "not_selected": "Not selected",
+          "black_tea": "Black tea",
+          "baby_bottle": "Baby bottle",
+          "instant_coffee": "Instant coffee",
+          "green_tea": "Green tea",
+          "flower_tea": "Flower tea",
+          "tea_bag": "Tea bag",
+          "red_tea": "Red tea",
+          "puerh_tea": "Puerh tea",
+          "oolong_tea": "Oolong tea",
+          "white_tea": "White tea",
+          "herbal_tea": "Herbal tea"
+        }
+      }
+    },
+    "light": {
+      "night_light": {
+        "name": "Night light"
+      }
+    },
+    "binary_sensor": {
+      "base_binary_sensor": {
+        "name": "Position",
+        "state": {
+          "on": "Not on the base",
+          "off": "On the base"
+        }
+      }
+    }
+  }
+}
