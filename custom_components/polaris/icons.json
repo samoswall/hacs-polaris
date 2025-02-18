@@ -1,0 +1,72 @@
+{
+  "entity": {
+    "humidifier": {
+      "humidifier": {
+        "default": "mdi:air-humidifier",
+        "state": {
+          "off": "mdi:air-humidifier-off"
+        },
+        "state_attributes": {
+          "mode": {
+            "state": {
+              "auto": "mdi:refresh-auto",
+              "baby": "mdi:baby-carriage",
+              "boost": "mdi:rocket-launch",
+              "comfort": "mdi:heart-pulse",
+              "eco": "mdi:cloud-percent",
+              "home": "mdi:gesture-tap",
+              "sleep": "mdi:power-sleep"
+            }
+          }
+        }
+      }
+    },
+    "water_heater": {
+      "water_heater": {
+        "default": "mdi:kettle",
+        "state": {
+          "off": "mdi:kettle-off"
+        },
+        "state_attributes": {
+          "operation_list": {
+            "state": {
+              "off": "mdi:power",
+              "performance": "mdi:chart-bubble",
+              "electric": "mdi:heat-wave",
+              "heat_pump": "mdi:water-thermometer",
+              "eco": "mdi:water-plus"
+            }
+          }
+        }
+      }
+    },
+    "switch": {
+      "sound_switch": {
+        "default": "mdi:volume-high",
+        "state": {
+          "off": "mdi:volume-off"
+        }
+      },
+      "child_lock_switch": {
+        "default": "mdi:lock-open-variant",
+        "state": {
+          "on": "mdi:lock"
+        }
+      },
+      "backlight_switch": {
+        "default": "mdi:alarm-light",
+        "state": {
+          "off": "mdi:alarm-light-off"
+        }
+      }
+    },
+    "binary_sensor": {
+      "base_binary_sensor": {
+        "default": "mdi:home",
+        "state": {
+          "on": "mdi:home-off"
+        }
+      }
+    }
+  }
+}
