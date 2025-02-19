@@ -67,7 +67,7 @@ class PolarisNumber(PolarisBaseEntity, NumberEntity):
     def __init__(
         self,
         device_friendly_name: str,
-        description: PolarisWaterHeaterEntityDescription,
+        description: PolarisNumberEntityDescription,
         mqtt_root: str,
         device_id: str | None=None,
         device_type: str | None=None,
