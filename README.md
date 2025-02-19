@@ -29,6 +29,7 @@
 :black_large_square: Добавить сенсор ошибок (описание ошибки в атрибут) <br>
 :black_large_square: Добавить устройсто online/offline <br>
 
+Доступно обсуждение тут: [Telegram](https://t.me/polarishomeassistant)
 
 ## Устройства Polaris
 
