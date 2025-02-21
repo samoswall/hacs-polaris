@@ -39,17 +39,18 @@ async def async_setup_entry(
     mqtt_root = config.data[MQTT_ROOT_TOPIC]
     device_id = config.data["DEVICEID"]
     device_type = config.data[DEVICETYPE]
+    device_prefix_topic = config.data["DEVPREFIXTOPIC"]
     waterheaterList = []
 
     if (device_type in POLARIS_KETTLE_TYPE) or (device_type in POLARIS_KETTLE_WITH_WEIGHT_TYPE):
         # Create water heater for kettle devices
         WATER_HEATERS_LC = copy.deepcopy(WATER_HEATERS)
         for description in WATER_HEATERS_LC:
-            description.mqttTopicCommandTemperature = f"{mqtt_root}/{device_id}/{description.mqttTopicCommandTemperature}"
-            description.mqttTopicCurrentTemperature = f"{mqtt_root}/{device_id}/{description.mqttTopicCurrentTemperature}"
-            description.mqttTopicTargetTemperature = f"{mqtt_root}/{device_id}/{description.mqttTopicTargetTemperature}"
-            description.mqttTopicCommandMode = f"{mqtt_root}/{device_id}/{description.mqttTopicCommandMode}"
-            description.mqttTopicCurrentMode = f"{mqtt_root}/{device_id}/{description.mqttTopicCurrentMode}"
+            description.mqttTopicCommandTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandTemperature}"
+            description.mqttTopicCurrentTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentTemperature}"
+            description.mqttTopicTargetTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicTargetTemperature}"
+            description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+            description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
             waterheaterList.append(
                 PolarisWaterHeater(
                     description=description,

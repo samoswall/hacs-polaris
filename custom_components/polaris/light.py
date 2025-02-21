@@ -47,16 +47,17 @@ async def async_setup_entry(
     mqtt_root = config.data[MQTT_ROOT_TOPIC]
     device_id = config.data["DEVICEID"]
     device_type = config.data[DEVICETYPE]
+    device_prefix_topic = config.data["DEVPREFIXTOPIC"]
     lightList = []
 
     if (device_type in POLARIS_KETTLE_TYPE) or (device_type in POLARIS_KETTLE_WITH_WEIGHT_TYPE):
         # Create water heater for kettle devices
         LIGHTS_LC = copy.deepcopy(LIGHTS)
         for description in LIGHTS_LC:
-            description.mqttTopicCurrentColor = f"{mqtt_root}/{device_id}/{description.mqttTopicCurrentColor}"
-            description.mqttTopicCommandColor = f"{mqtt_root}/{device_id}/{description.mqttTopicCommandColor}"
-            description.mqttTopicCurrentState = f"{mqtt_root}/{device_id}/{description.mqttTopicCurrentState}"
-            description.mqttTopicCommandState = f"{mqtt_root}/{device_id}/{description.mqttTopicCommandState}"
+            description.mqttTopicCurrentColor = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentColor}"
+            description.mqttTopicCommandColor = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandColor}"
+            description.mqttTopicCurrentState = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentState}"
+            description.mqttTopicCommandState = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandState}"
             lightList.append(
                 PolarisLight(
                     description=description,

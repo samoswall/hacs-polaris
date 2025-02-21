@@ -1,7 +1,6 @@
 """The Polaris IQ Home component."""
 from __future__ import annotations
 
-
 import logging
 import time
 import voluptuous as vol
@@ -35,18 +34,30 @@ class PolarisConfigFlow(ConfigFlow, domain=DOMAIN):
         self._topic_prefix = "polaris"
 #        self._device_found = {"*":"0"}
         self._device_found = {}
+        self._device_prefix_topic = {}
 
     async def _get_devtypes_from_mqtt(self):
-        await mqtt.async_subscribe(self.hass, "polaris/+/state/devtype", self._mqtt_message)
+        await mqtt.async_subscribe(self.hass, "polaris/+/state/devtype", self._mqtt_message_newdev)
+        await mqtt.async_subscribe(self.hass, "polaris/+/+/state/mac", self._mqtt_message_olddev)
 
     @callback
-    async def _mqtt_message(self, message: ReceiveMessage):
+    async def _mqtt_message_newdev(self, message: ReceiveMessage):
         topic = message.topic
         device_type = message.payload
         device_id = topic.split("/")[1]
         if device_id not in self._device_found:
             self._device_found[device_id] = device_type
-        
+            self._device_prefix_topic[device_id] = device_id
+
+    @callback
+    async def _mqtt_message_olddev(self, message: ReceiveMessage):
+        topic = message.topic
+        device_id = message.payload
+        device_type = topic.split("/")[1]
+        device_oldid = topic.split("/")[2]
+        if device_id not in self._device_found:
+            self._device_found[device_id] = device_type
+            self._device_prefix_topic[device_id] = f"{device_type}/{device_oldid}"
 
     async def async_step_user(self, user_input=None):
         await self._get_devtypes_from_mqtt()
@@ -78,6 +89,7 @@ class PolarisConfigFlow(ConfigFlow, domain=DOMAIN):
             )
             
         user_input[DEVICETYPE] = self._device_found[user_input[DEVICEID]]
+        user_input["DEVPREFIXTOPIC"] = self._device_prefix_topic[user_input[DEVICEID]]
         
         if user_input[DEVICETYPE] == "0":
             for dev_mac, dev_type in self._device_found.items():

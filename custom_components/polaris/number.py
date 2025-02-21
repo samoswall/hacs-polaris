@@ -24,11 +24,13 @@ from .const import (
     DEVICEID,
     DEVICETYPE,
     POLARIS_DEVICE,
-    NUMBERS,
+    NUMBER_HUMIDIFIER,
+    NUMBER_COOKER,
     PolarisNumberEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
+    POLARIS_COOKER_TYPE,
 )
 
 #_LOGGER = logging.getLogger(__name__)
@@ -41,14 +43,30 @@ async def async_setup_entry(
     mqtt_root = config.data[MQTT_ROOT_TOPIC]
     device_id = config.data["DEVICEID"]
     device_type = config.data[DEVICETYPE]
+    device_prefix_topic = config.data["DEVPREFIXTOPIC"]
     numberList = []
     
     if (device_type in POLARIS_HUMIDDIFIER_TYPE):
     # Create humidifier  
-        NUMBERS_LC = copy.deepcopy(NUMBERS)
-        for description in NUMBERS_LC:
-            description.mqttTopicCurrentIntensity = f"{mqtt_root}/{device_id}/{description.mqttTopicCurrentIntensity}" 
-            description.mqttTopicCommandIntensity = f"{mqtt_root}/{device_id}/{description.mqttTopicCommandIntensity}"
+        NUMBER_HUMIDIFIER_LC = copy.deepcopy(NUMBER_HUMIDIFIER)
+        for description in NUMBER_HUMIDIFIER_LC:
+            description.mqttTopicCurrent = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrent}" 
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            numberList.append(
+                PolarisNumber(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+    elif (device_type in POLARIS_COOKER_TYPE):
+    # Create cooker  
+        NUMBER_COOKER_LC = copy.deepcopy(NUMBER_COOKER)
+        for description in NUMBER_COOKER_LC:
+            description.mqttTopicCurrent = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrent}" 
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             numberList.append(
                 PolarisNumber(
                     description=description,
@@ -86,7 +104,7 @@ class PolarisNumber(PolarisBaseEntity, NumberEntity):
 
     def set_native_value(self, value: float) -> None:
         self._attr_native_value = value
-        self.hass.components.mqtt.publish(self.hass, f"{self.entity_description.mqttTopicCommandIntensity}", int(value))
+        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value))
         
     async def async_added_to_hass(self):
         @callback
@@ -96,7 +114,7 @@ class PolarisNumber(PolarisBaseEntity, NumberEntity):
 
         await mqtt.async_subscribe(
             self.hass,
-            self.entity_description.mqttTopicCurrentIntensity,
+            self.entity_description.mqttTopicCurrent,
             message_received_numb,
             1,
         )

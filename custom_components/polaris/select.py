@@ -24,11 +24,13 @@ from .const import (
     DEVICEID,
     DEVICETYPE,
     POLARIS_DEVICE,
-    SELECTS,
+    SELECT_KETTLE,
+    SELECT_COOKER,
     PolarisSelectEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
+    POLARIS_COOKER_TYPE,
 )
 
 #_LOGGER = logging.getLogger(__name__)
@@ -40,14 +42,15 @@ async def async_setup_entry(
     mqtt_root = config.data[MQTT_ROOT_TOPIC]
     device_id = config.data["DEVICEID"]
     device_type = config.data[DEVICETYPE]
+    device_prefix_topic = config.data["DEVPREFIXTOPIC"]
     selectList = []
 
     if (device_type in POLARIS_KETTLE_TYPE) or (device_type in POLARIS_KETTLE_WITH_WEIGHT_TYPE):
-        SELECTS_LC = copy.deepcopy(SELECTS)
-        for description in SELECTS_LC:
-            description.mqttTopicCurrentMode = f"{mqtt_root}/{device_id}/{description.mqttTopicCurrentMode}"
-            description.mqttTopicCommandMode = f"{mqtt_root}/{device_id}/{description.mqttTopicCommandMode}"
-            description.mqttTopicCommandTemperature = f"{mqtt_root}/{device_id}/{description.mqttTopicCommandTemperature}"
+        SELECT_KETTLE_LC = copy.deepcopy(SELECT_KETTLE)
+        for description in SELECT_KETTLE_LC:
+            description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
+            description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+            description.mqttTopicCommandTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandTemperature}"
             selectList.append(
                 PolarisSelect(
                     description=description,
@@ -108,7 +111,7 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
         @callback
         def message_received_sel(message):
             payload = message.payload
-            if payload=="0":
+            if payload in ("0", "[]"):
                 self._attr_current_option = "not_selected"
 
         await mqtt.async_subscribe(self.hass, self.entity_description.mqttTopicCurrentMode, message_received_sel, 1)

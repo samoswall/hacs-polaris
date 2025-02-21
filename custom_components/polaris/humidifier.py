@@ -48,19 +48,20 @@ async def async_setup_entry(
     mqtt_root = config.data[MQTT_ROOT_TOPIC]
     device_id = config.data["DEVICEID"]
     device_type = config.data[DEVICETYPE]
+    device_prefix_topic = config.data["DEVPREFIXTOPIC"]
     humidifierList = []
     
     if (device_type in POLARIS_HUMIDDIFIER_TYPE):
         # Create humidifier  
             HUMIDIFIERS_LC = copy.deepcopy(HUMIDIFIERS)
             for description in HUMIDIFIERS_LC:
-                description.mqttTopicCurrentState = f"{mqtt_root}/{device_id}/{description.mqttTopicCurrentState}"
-                description.mqttTopicCommandState = f"{mqtt_root}/{device_id}/{description.mqttTopicCommandState}"
-                description.mqttTopicCurrentMode = f"{mqtt_root}/{device_id}/{description.mqttTopicCurrentMode}"
-                description.mqttTopicCommandMode = f"{mqtt_root}/{device_id}/{description.mqttTopicCommandMode}"
-                description.mqttTopicCurrentHumidity = f"{mqtt_root}/{device_id}/{description.mqttTopicCurrentHumidity}"
-                description.mqttTopicCurrentTargetHumidity = f"{mqtt_root}/{device_id}/{description.mqttTopicCurrentTargetHumidity}"
-                description.mqttTopicCommandTargetHumidity = f"{mqtt_root}/{device_id}/{description.mqttTopicCommandTargetHumidity}"
+                description.mqttTopicCurrentState = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentState}"
+                description.mqttTopicCommandState = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandState}"
+                description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
+                description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+                description.mqttTopicCurrentHumidity = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentHumidity}"
+                description.mqttTopicCurrentTargetHumidity = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentTargetHumidity}"
+                description.mqttTopicCommandTargetHumidity = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandTargetHumidity}"
                 humidifierList.append(
                     PolarisHumidifier(
                         description=description,
@@ -122,6 +123,7 @@ class PolarisHumidifier(PolarisBaseEntity, HumidifierEntity):
             if int(payload)==0:
                 self._attr_is_on = 0
             else:
+                self._attr_is_on = 1
                 self._attr_mode = list(self.my_operation_list.keys())[list(self.my_operation_list.values()).index(message.payload)]
             self.async_write_ha_state()
 

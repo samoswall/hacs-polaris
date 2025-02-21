@@ -30,10 +30,12 @@ from .const import (
     DEVICETYPE,
     POLARIS_DEVICE,
     BINARYSENSOR_KETTLE,
+    BINARYSENSOR_LID,
     PolarisBinarySensorEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
+    POLARIS_COOKER_TYPE,
 )
 
 #_LOGGER = logging.getLogger(__name__)
@@ -48,13 +50,14 @@ async def async_setup_entry(
     mqtt_root = config.data[MQTT_ROOT_TOPIC]
     device_id = config.data["DEVICEID"]
     device_type = config.data[DEVICETYPE]
+    device_prefix_topic = config.data["DEVPREFIXTOPIC"]
     binarysensorList = []
     
     if (device_type in POLARIS_KETTLE_WITH_WEIGHT_TYPE):
         # Create kettle with base
             BINARYSENSOR_KETTLE_LC = copy.deepcopy(BINARYSENSOR_KETTLE)
             for description in BINARYSENSOR_KETTLE_LC:
-                description.mqttTopicBaseStatus = f"{mqtt_root}/{device_id}/{description.mqttTopicBaseStatus}"
+                description.mqttTopicStatus = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicStatus}"
                 binarysensorList.append(
                     PolarisBinarySensor(
                         description=description,
@@ -64,7 +67,20 @@ async def async_setup_entry(
                         device_id=device_id
                     )
                 )
-
+    elif (device_type in POLARIS_COOKER_TYPE):
+        # Create kettle with base
+            BINARYSENSOR_LID_LC = copy.deepcopy(BINARYSENSOR_LID)
+            for description in BINARYSENSOR_LID_LC:
+                description.mqttTopicStatus = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicStatus}"
+                binarysensorList.append(
+                    PolarisBinarySensor(
+                        description=description,
+                        device_friendly_name=device_id,
+                        mqtt_root=mqtt_root,
+                        device_type=device_type,
+                        device_id=device_id
+                    )
+                )
     async_add_entities(binarysensorList, update_before_add=True)
 
 
@@ -106,7 +122,7 @@ class PolarisBinarySensor(PolarisBaseEntity, BinarySensorEntity):
 
         await mqtt.async_subscribe(
             self.hass,
-            self.entity_description.mqttTopicBaseStatus,
+            self.entity_description.mqttTopicStatus,
             message_received_base,
             1,
         )

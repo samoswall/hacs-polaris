@@ -22,14 +22,18 @@ from .const import (
     DEVICEID,
     DEVICETYPE,
     SENSORS_ALL_DEVICES,
+    SENSORS_WEIGHT,
     SENSORS_HUMIDIFIER,
+    SENSORS_COOKER,
     PolarisSensorEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
+    POLARIS_COOKER_TYPE,
 )
 
 #_LOGGER = logging.getLogger(__name__)
+#_LOGGER.setLevel(logging.DEBUG)
 
 async def async_setup_entry(
     hass: HomeAssistant, config: ConfigEntry, async_add_entities: AddEntitiesCallback
@@ -38,14 +42,16 @@ async def async_setup_entry(
     mqttRoot = config.data[MQTT_ROOT_TOPIC]
     deviceID = config.data["DEVICEID"]
     devicetype = config.data[DEVICETYPE]
+    device_prefix_topic = config.data["DEVPREFIXTOPIC"]
+    if len(device_prefix_topic)>15:
+        hass.components.mqtt.publish(hass, f"{mqttRoot}/{device_prefix_topic}/state/devtype", devicetype, 0, True)
     sensorList = []
-
     #Kettle
     if (devicetype in POLARIS_KETTLE_TYPE):
         # Create sensors for all devices 
         SENSORS_ALL_DEVICES_CP = copy.deepcopy(SENSORS_ALL_DEVICES)
         for description in SENSORS_ALL_DEVICES_CP:
-            description.mqttTopicCurrentValue = (f"{mqttRoot}/{deviceID}/state/{description.key}")
+            description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
                     uniqueID=f"{integrationUniqueID}",
@@ -61,7 +67,7 @@ async def async_setup_entry(
         # Create sensors for all devices 
         SENSORS_ALL_DEVICES_CP = copy.deepcopy(SENSORS_ALL_DEVICES)
         for description in SENSORS_ALL_DEVICES_CP:
-            description.mqttTopicCurrentValue = (f"{mqttRoot}/{deviceID}/state/{description.key}")
+            description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
                     uniqueID=f"{integrationUniqueID}",
@@ -74,7 +80,7 @@ async def async_setup_entry(
             )
         SENSORS_WEIGHT_CP = copy.deepcopy(SENSORS_WEIGHT)
         for description in SENSORS_WEIGHT_CP:
-            description.mqttTopicCurrentValue = (f"{mqttRoot}/{deviceID}/state/{description.key}")
+            description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
                     uniqueID=f"{integrationUniqueID}",
@@ -90,7 +96,7 @@ async def async_setup_entry(
         # Create sensors for all devices 
         SENSORS_ALL_DEVICES_CP = copy.deepcopy(SENSORS_ALL_DEVICES)
         for description in SENSORS_ALL_DEVICES_CP:
-            description.mqttTopicCurrentValue = (f"{mqttRoot}/{deviceID}/state/{description.key}")
+            description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
                     uniqueID=f"{integrationUniqueID}",
@@ -106,6 +112,35 @@ async def async_setup_entry(
             description.mqttTopicCurrentValue = (
                 f"{mqttRoot}/{deviceID}/state/{description.key}"
             )
+            sensorList.append(
+                PolarisSensor(
+                    uniqueID=f"{integrationUniqueID}",
+                    description=description,
+                    device_friendly_name=deviceID,
+                    mqtt_root=mqttRoot,
+                    device_type=devicetype,
+                    device_id=deviceID,
+                )
+            )
+    # Cooker
+    elif (devicetype in POLARIS_COOKER_TYPE):
+        # Create sensors for all devices 
+        SENSORS_ALL_DEVICES_CP = copy.deepcopy(SENSORS_ALL_DEVICES)
+        for description in SENSORS_ALL_DEVICES_CP:
+            description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
+            sensorList.append(
+                PolarisSensor(
+                    uniqueID=f"{integrationUniqueID}",
+                    description=description,
+                    device_friendly_name=deviceID,
+                    mqtt_root=mqttRoot,
+                    device_type=devicetype,
+                    device_id=deviceID,
+                )
+            )
+        SENSORS_COOKER_CP = copy.deepcopy(SENSORS_COOKER)
+        for description in SENSORS_COOKER_CP:
+            description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
                     uniqueID=f"{integrationUniqueID}",
