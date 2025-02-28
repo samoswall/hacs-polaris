@@ -40,6 +40,9 @@
       },
       "warm_stream_switch": {
         "name": "Warm stream"
+      },
+      "keepwarm_switch": {
+        "name": "Keep warm"
       }
     },
     "water_heater": {
@@ -75,6 +78,9 @@
     "number": {
       "intensity": {
         "name": "Intensity"
+      },
+      "set_temperature": {
+        "name": "Set temperature"
       }
     },
     "sensor": {
@@ -89,6 +95,32 @@
       },
       "humidity_sensor": {
         "name": "Humidity"
+      },
+      "time_to_end_sensor": {
+        "name": "Time to end"
+      },
+      "error": {
+        "name": "Error",
+        "state": {
+          "no_error": "No",
+          "low_water": "Low water",
+          "kettle_out_of_base": "Kettle is out of base station",
+          "temperature_sensor_failure": "Temperature sensor failure",
+          "child_lock": "Child lock operated",
+          "recommended_to_change_water": "It is recommended to change the water in the kettle",
+          "changed_water_for_long_time": "You probably haven't changed water for a long time. It is desirable to boil it",
+          "replace_filter": "It is recommended to replace the filter",
+          "maximum_schedules": "Maximum number of schedules 4",
+          "clean_tank": "Clean the tank",
+          "cup_not_present": "Cup is not present",
+          "gesture_sensor_error": "Gesture sensor error"
+        }
+      },
+      "filter_retain": {
+        "name": "Filter retain"
+      },
+      "clean_retain": {
+        "name": "Clean retain"
       }
     },
     "select": {
@@ -108,6 +140,24 @@
           "white_tea": "White tea",
           "herbal_tea": "Herbal tea"
         }
+      },
+      "select_mode_cooker": {
+        "name": "Recipes",
+        "state": {
+          "my_recipe_plus": "My recipe plus",
+          "reheat": "Reheat",
+          "cake": "Cake",
+          "soaked_rice": "Soaked rice",
+          "stew": "Stew",
+          "fry": "Fry",
+          "pilaf": "Pilaf",
+          "yogurt": "Yogurt",
+          "oatmeal": "Catmeal",
+          "milk_porridge": "Milk porridge",
+          "soup": "Soup",
+          "meat": "Meat",
+          "cottage_cheese": "Cottage cheese"
+        }
       }
     },
     "light": {
@@ -122,6 +172,36 @@
           "on": "Not on the base",
           "off": "On the base"
         }
+      },
+      "lid_binary_sensor": {
+        "name": "Lid",
+        "state": {
+          "on": "Open",
+          "off": "Close"
+        }
+      },
+      "water_tank_binary_sensor": {
+        "name": "Tank is removed",
+        "state": {
+          "on": "Yes",
+          "off": "No"
+        }
+      }
+    },
+    "time": {
+      "delay_start": {
+        "name": "Delay start"
+      },
+      "cooking_time": {
+        "name": "Cooking time"
+      }
+    },
+    "button": {
+      "button_stop": {
+        "name": "Stop"
+      },
+      "button_start": {
+        "name": "Start"
       }
     }
   }

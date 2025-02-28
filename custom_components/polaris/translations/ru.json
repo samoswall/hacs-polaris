@@ -40,6 +40,9 @@
       },
       "warm_stream_switch": {
         "name": "Теплый пар"
+      },
+      "keepwarm_switch": {
+        "name": "Поддержание температуры"
       }
     },
     "water_heater": {
@@ -75,6 +78,9 @@
     "number": {
       "intensity": {
         "name": "Интенсивность"
+      },
+      "set_temperature": {
+        "name": "Установка температуры"
       }
     },
     "sensor": {
@@ -89,6 +95,32 @@
       },
       "humidity_sensor": {
         "name": "Влажность"
+      },
+      "time_to_end_sensor": {
+        "name": "Оставшееся время"
+      },
+      "error": {
+        "name": "Ошибка",
+        "state": {
+          "no_error": "Нет",
+          "low_water": "Мало воды",
+          "kettle_out_of_base": "Чайник снят с базы",
+          "temperature_sensor_failure": "Ошибка термодатчика",
+          "child_lock": "Сработала защита от случайного нажатия",
+          "recommended_to_change_water": "Рекомендуется сменить воду в чайнике",
+          "changed_water_for_long_time": "Вероятно, вы давно не меняли воду. Ее желательно прокипятить",
+          "replace_filter": "Рекомендуется заменить фильтр",
+          "maximum_schedules": "Максимальное количество расписаний 4",
+          "clean_tank": "Почистите бак",
+          "cup_not_present": "Чаша не установлена",
+          "gesture_sensor_error": "Ошибка датчика жестов"
+        }
+      },
+      "filter_retain": {
+        "name": "Остаток фильтра"
+      },
+      "clean_retain": {
+        "name": "Остаток до очистки бака"
       }
     },
     "select": {
@@ -108,6 +140,24 @@
           "white_tea": "Белый чай",
           "herbal_tea": "Травяной чай"
         }
+      },
+      "select_mode_cooker": {
+        "name": "Рецепты",
+        "state": {
+          "my_recipe_plus": "Мой рецепт +",
+          "reheat": "Разогрев",
+          "cake": "Выпечка",
+          "soaked_rice": "Крупа",
+          "stew": "Тушение",
+          "fry": "Жарка",
+          "pilaf": "Плов",
+          "yogurt": "Йогурт",
+          "oatmeal": "Овсянка",
+          "milk_porridge": "Молочная каша",
+          "soup": "Суп",
+          "meat": "Холодец",
+          "cottage_cheese": "Творог"
+        }
       }
     },
     "light": {
@@ -122,6 +172,36 @@
           "on": "Снят с базы",
           "off": "На базе"
         }
+      },
+      "lid_binary_sensor": {
+        "name": "Крышка",
+        "state": {
+          "on": "Открыта",
+          "off": "Закрыта"
+        }
+      },
+      "water_tank_binary_sensor": {
+        "name": "Бак снят",
+        "state": {
+          "on": "Да",
+          "off": "Нет"
+        }
+      }
+    },
+    "time": {
+      "delay_start": {
+        "name": "Отложенный старт"
+      },
+      "cooking_time": {
+        "name": "Время приготовления"
+      }
+    },
+    "button": {
+      "button_stop": {
+        "name": "Остановить"
+      },
+      "button_start": {
+        "name": "Запустить"
       }
     }
   }
