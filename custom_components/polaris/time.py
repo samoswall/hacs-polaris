@@ -95,6 +95,5 @@ class PolarisTime(PolarisBaseEntity, TimeEntity):
             value_hour = int(self.entity_description.max_time / 60) - 1
         self._attr_native_value = time(value_hour,value_minute,value_second)
         value_in_seconds = value_hour * 3600 + value_minute * 60
-        _LOGGER.debug("Input Time: %s", self._attr_native_value)
         self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTime, str(value_in_seconds))
 

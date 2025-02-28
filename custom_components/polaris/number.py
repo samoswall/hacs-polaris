@@ -101,15 +101,20 @@ class PolarisNumber(PolarisBaseEntity, NumberEntity):
         self.entity_id = f"{DOMAIN}.{POLARIS_DEVICE[int(device_type)]['class']}_{POLARIS_DEVICE[int(device_type)]['model']}_{description.name}"
         self._attr_available = True
         self._attr_has_entity_name = True
+        self._attr_native_value = 115
 
-    def set_native_value(self, value: float) -> None:
-        self._attr_native_value = value
+    def set_native_value(self, value: int) -> None:
+        self._attr_native_value = int(value)
         self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value))
+        
+    @property
+    def get_state (self) -> int | None:
+        return self._attr_native_value
         
     async def async_added_to_hass(self):
         @callback
         def message_received_numb(message):
-            self._attr_native_value = int(message.payload)
+            self._attr_native_value = message.payload
             self.async_write_ha_state()
 
         await mqtt.async_subscribe(

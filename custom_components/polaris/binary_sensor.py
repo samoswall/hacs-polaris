@@ -31,6 +31,7 @@ from .const import (
     POLARIS_DEVICE,
     BINARYSENSOR_KETTLE,
     BINARYSENSOR_LID,
+    BINARYSENSOR_WATER_TANK,
     PolarisBinarySensorEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
@@ -71,6 +72,20 @@ async def async_setup_entry(
         # Create kettle with base
             BINARYSENSOR_LID_LC = copy.deepcopy(BINARYSENSOR_LID)
             for description in BINARYSENSOR_LID_LC:
+                description.mqttTopicStatus = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicStatus}"
+                binarysensorList.append(
+                    PolarisBinarySensor(
+                        description=description,
+                        device_friendly_name=device_id,
+                        mqtt_root=mqtt_root,
+                        device_type=device_type,
+                        device_id=device_id
+                    )
+                )
+    elif (device_type in POLARIS_HUMIDDIFIER_TYPE):
+        # Create humidifier water tank
+            BINARYSENSOR_WATER_TANK_LC = copy.deepcopy(BINARYSENSOR_WATER_TANK)
+            for description in BINARYSENSOR_WATER_TANK_LC:
                 description.mqttTopicStatus = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicStatus}"
                 binarysensorList.append(
                     PolarisBinarySensor(

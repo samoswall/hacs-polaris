@@ -303,8 +303,18 @@ POLARIS_DEVICE = {
 
 POLARIS_KETTLE_TYPE = ["2","6","8","29","36","37","38","51","52","53","54","56","57","58","59","60","61","62","63","67","82","83","84","85","86","97","105","117","121","139","165","175","176","189","194","196","205","209"]
 POLARIS_KETTLE_WITH_WEIGHT_TYPE = ["98","106","164","177","185","188","208","223","244","245"]
+POLARIS_KETTLE_WITH_NIGHT_TYPE = ["36","37","86","97","106","117","164","175","176","177","189","194","196","205","208","209","244"]
+POLARIS_KETTLE_WITH_BACKLIGHT_TYPE = ["36","37","51","52","53","54","60","61","62","63","67","82","83","84","85","86","97","98","105","106","117","139","164","175","176","177","188","189","194","196","208","209","223","244","245"]
 POLARIS_HUMIDDIFIER_TYPE = ["4","15","17","18","25","44","70","71","72","73","74","75","87","99","137","147","153","155","157","158"]
+POLARIS_HUMIDDIFIER_WITH_IONISER_TYPE = ["4","15","17","18","44","70","72","73","74","137","147","153","155","157","158"]
+POLARIS_HUMIDDIFIER_WITH_WARM_STREAM_TYPE = ["4","15","17","18","44","70","72","74","147","157","158"]
 POLARIS_COOKER_TYPE = ["1","9","10","39","40","41","47","48","55","77","78","79","80","89","95","114","138","162","169","183","192","206","210","215","240"]
+
+
+KETTLE_ERROR = {"00": "no_error", "01": "low_water", "02": "kettle_out_of_base", "03": "temperature_sensor_failure", "04": "temperature_sensor_failure", "05": "child_lock", "06": "recommended_to_change_water", "07": "changed_water_for_long_time"}
+HUMIDDIFIER_ERROR = {"00": "no_error", "01": "low_water", "02": "child_lock", "03": "replace_filter", "04": "maximum_schedules", "05": "clean_tank"}
+COOKER_ERROR = {"00": "no_error", "01": "temperature_sensor_failure", "02": "temperature_sensor_failure", "06": "cup_not_present", "07": "child_lock", "08": "gesture_sensor_error"}
+
 
 @dataclass
 class PolarisSensorEntityDescription(SensorEntityDescription):
@@ -346,13 +356,23 @@ SENSORS_ALL_DEVICES = [
     ),
     PolarisSensorEntityDescription(
         key="diag/rssi",
-        name="rssi",
+        name="RSSI",
         translation_key="rssi",
         device_class=SensorDeviceClass.SIGNAL_STRENGTH,
         native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS,
         state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         icon="mdi:wifi",
+    ),
+    PolarisSensorEntityDescription(
+        key="error/code",
+        name="error",
+        translation_key="error",
+        device_class=None,
+        native_unit_of_measurement=None,
+        state_class=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:alert",
     ),
 ]
 
@@ -366,6 +386,28 @@ SENSORS_HUMIDIFIER = [
         state_class=SensorStateClass.MEASUREMENT,
         entity_registry_enabled_default=True,
         icon="mdi:water-percent",
+    ),
+    PolarisSensorEntityDescription(
+        key="expendables",
+        name="filter_retain",
+        translation_key="filter_retain",
+        device_class=None,
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=True,
+        icon="mdi:filter",
+    ),
+    PolarisSensorEntityDescription(
+        key="expendables",
+        name="clean_retain",
+        translation_key="clean_retain",
+        device_class=None,
+        native_unit_of_measurement=UnitOfTime.HOURS,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=True,
+        icon="mdi:cup-water",
     ),
 ]
 
@@ -455,7 +497,7 @@ SWITCHES_ALL_DEVICES = [
     ),
 ]
 
-SWITCHES_HUMIDIFIER = [
+SWITCH_HUMIDIFIER_IONISER = [
     PolarisSwitchEntityDescription(
         key="ioniser",
         translation_key="ioniser_switch",
@@ -468,6 +510,9 @@ SWITCHES_HUMIDIFIER = [
         payload_off="false",
         icon="mdi:atom-variant",
     ),
+]
+
+SWITCH_HUMIDIFIER_WARM_STREAM = [
     PolarisSwitchEntityDescription(
         key="warm_stream",
         translation_key="warm_stream_switch",
@@ -616,12 +661,14 @@ NUMBER_COOKER = [
         mqttTopicCurrent = "control/set_temperature",
         mqttTopicCommand = "control/set_temperature",
         entity_category=EntityCategory.CONFIG,
-        device_class=None,
-        native_unit_of_measurement=None,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         entity_registry_enabled_default=True,
         native_max_value=160,
         native_min_value=20,
         native_step=1,
+        step=1,
+        mode="box",
     )
 ]
 
@@ -672,21 +719,19 @@ SELECT_COOKER = [
         mqttTopicCurrentMode="state/steps",
         mqttTopicCommandMode="control/steps",
         options={
-            "not_selected":  "[]",
-            "Мой рецепт +":  "[{\"mode\":1,   \"time\":1200,  \"temperature\":115}]",
-            "Разогрев":      "[{\"mode\":2,   \"time\":1200,  \"temperature\":115}]",
-            "Выпечка":       "[{\"mode\":3,   \"time\":3600,  \"temperature\":130}]",
-            "Крупа":         "[{\"mode\":4,   \"time\":2400,  \"temperature\":115}]",
-            "Тушение":       "[{\"mode\":6,   \"time\":7200,  \"temperature\":93}]",
-            "Жарка":         "[{\"mode\":7,   \"time\":300,   \"temperature\":160}]",
-            "Плов":          "[{\"mode\":9,   \"time\":3600,  \"temperature\":120}]",
-            "Йогурт":        "[{\"mode\":12,  \"time\":28800, \"temperature\":38}]",
-            "Овсянка":       "[{\"mode\":13,  \"time\":300,   \"temperature\":96}]",
-            "Варка":         "[{\"mode\":15,  \"time\":1800,  \"temperature\":115}]",
-            "Молочная каша": "[{\"mode\":17,  \"time\":3600,  \"temperature\":95}]",
-            "Суп":           "[{\"mode\":18,  \"time\":3600,  \"temperature\":97}]",
-            "Холодец":       "[{\"mode\":24,  \"time\":21600, \"temperature\":93}]",
-            "Творог":        "[{\"mode\":27,  \"time\":2400,  \"temperature\":80}]",
+            "my_recipe_plus": "[{\"mode\":1, \"time\":1200, \"temperature\":115}]",
+            "reheat": "[{\"mode\":2, \"time\":1200, \"temperature\":115}]",
+            "cake": "[{\"mode\":3, \"time\":3600, \"temperature\":130}]",
+            "soaked_rice": "[{\"mode\":4, \"time\":2400, \"temperature\":115}]",
+            "stew": "[{\"mode\":6, \"time\":7200, \"temperature\":93}]",
+            "fry": "[{\"mode\":7, \"time\":300, \"temperature\":160}]",
+            "pilaf": "[{\"mode\":9, \"time\":3600, \"temperature\":120}]",
+            "yogurt": "[{\"mode\":12, \"time\":28800, \"temperature\":38}]",
+            "oatmeal": "[{\"mode\":13, \"time\":300, \"temperature\":96}]",
+            "milk_porridge": "[{\"mode\":17, \"time\":3600, \"temperature\":95}]",
+            "soup": "[{\"mode\":18, \"time\":3600, \"temperature\":97}]",
+            "meat": "[{\"mode\":24, \"time\":21600, \"temperature\":93}]",
+            "cottage_cheese": "[{\"mode\":27, \"time\":2400, \"temperature\":80}]",
         },
         entity_category=EntityCategory.CONFIG,
         device_class=None,
@@ -740,7 +785,18 @@ BINARYSENSOR_LID = [
         name="lid",
         translation_key="lid_binary_sensor",
         mqttTopicStatus="state/lid_open",
-        device_class=None,     #BinarySensorDeviceClass.PLUG,
+        device_class=None,
+        entity_registry_enabled_default=True,
+    )
+]
+
+BINARYSENSOR_WATER_TANK = [
+    PolarisBinarySensorEntityDescription(
+        key="water_tank",
+        name="water_tank",
+        translation_key="water_tank_binary_sensor",
+        mqttTopicStatus="state/error/water",
+        device_class=None,
         entity_registry_enabled_default=True,
     )
 ]
@@ -756,6 +812,16 @@ BUTTON_COOKER = [
         key="button_stop",
         name="button_stop",
         translation_key="button_stop",
+        mqttTopicCommand="control/steps",
+        device_class=None,
+        entity_category=EntityCategory.CONFIG,
+        entity_registry_enabled_default=True,
+        payloads="[]",
+    ),
+        PolarisButtonEntityDescription(
+        key="button_start",
+        name="button_start",
+        translation_key="button_start",
         mqttTopicCommand="control/steps",
         device_class=None,
         entity_category=EntityCategory.CONFIG,

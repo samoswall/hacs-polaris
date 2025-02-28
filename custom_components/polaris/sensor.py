@@ -21,6 +21,7 @@ from .const import (
     MQTT_ROOT_TOPIC,
     DEVICEID,
     DEVICETYPE,
+    POLARIS_DEVICE,
     SENSORS_ALL_DEVICES,
     SENSORS_WEIGHT,
     SENSORS_HUMIDIFIER,
@@ -30,10 +31,13 @@ from .const import (
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
     POLARIS_COOKER_TYPE,
+    KETTLE_ERROR,
+    HUMIDDIFIER_ERROR,
+    COOKER_ERROR,
 )
 
-#_LOGGER = logging.getLogger(__name__)
-#_LOGGER.setLevel(logging.DEBUG)
+_LOGGER = logging.getLogger(__name__)
+_LOGGER.setLevel(logging.DEBUG)
 
 async def async_setup_entry(
     hass: HomeAssistant, config: ConfigEntry, async_add_entities: AddEntitiesCallback
@@ -181,26 +185,20 @@ class PolarisSensor(PolarisBaseEntity, SensorEntity):
     async def async_added_to_hass(self):
         @callback
         def message_received(message):
-            self._attr_native_value = message.payload
-
-            # Convert data if a conversion function is defined
-            if self.entity_description.value_fn is not None:
-                self._attr_native_value = self.entity_description.value_fn(
-                    self._attr_native_value
-                )
-
-            # Map values as defined in the value map dict.
-            # First try to map integer values, then string values.
-            # If no value can be mapped, use original value without conversion.
-            if self.entity_description.valueMap is not None:
-                try:
-                    self._attr_native_value = self.entity_description.valueMap.get(
-                        int(self._attr_native_value)
-                    )
-                except ValueError:
-                    self._attr_native_value = self.entity_description.valueMap.get(
-                        self._attr_native_value, self._attr_native_value
-                    )
+            payload_message = message.payload
+            if self.entity_description.name == "error":
+                if POLARIS_DEVICE[int(self.device_type)]['class'] == "cooker":
+                    dev_error = COOKER_ERROR[payload_message]
+                if POLARIS_DEVICE[int(self.device_type)]['class'] == "kettle":
+                    dev_error = KETTLE_ERROR[payload_message]
+                if POLARIS_DEVICE[int(self.device_type)]['class'] == "humidifier":
+                    dev_error = HUMIDDIFIER_ERROR[payload_message]
+                payload_message = dev_error
+            if self.entity_description.name == "filter_retain":
+                payload_message = payload_message.replace("[","",1).replace("]","",1).split(",")[0]
+            if self.entity_description.name == "clean_retain":
+                payload_message = payload_message.replace("[","",1).replace("]","",1).split(",")[1]
+            self._attr_native_value = payload_message
             self.async_write_ha_state()
 
         await mqtt.async_subscribe(

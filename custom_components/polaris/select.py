@@ -6,6 +6,7 @@ import re
 import logging
 from typing import Iterable
 import copy
+import datetime
 
 from homeassistant.components import mqtt
 from homeassistant.components.mqtt.models import ReceiveMessage
@@ -33,7 +34,8 @@ from .const import (
     POLARIS_COOKER_TYPE,
 )
 
-#_LOGGER = logging.getLogger(__name__)
+_LOGGER = logging.getLogger(__name__)
+_LOGGER.setLevel(logging.DEBUG)
 
 async def async_setup_entry(
     hass: HomeAssistant, config: ConfigEntry, async_add_entities: AddEntitiesCallback,
@@ -48,6 +50,21 @@ async def async_setup_entry(
     if (device_type in POLARIS_KETTLE_TYPE) or (device_type in POLARIS_KETTLE_WITH_WEIGHT_TYPE):
         SELECT_KETTLE_LC = copy.deepcopy(SELECT_KETTLE)
         for description in SELECT_KETTLE_LC:
+            description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
+            description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+            description.mqttTopicCommandTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandTemperature}"
+            selectList.append(
+                PolarisSelect(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+    elif (device_type in POLARIS_COOKER_TYPE):
+        SELECT_COOKER_LC = copy.deepcopy(SELECT_COOKER)
+        for description in SELECT_COOKER_LC:
             description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
             description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
             description.mqttTopicCommandTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandTemperature}"
@@ -84,7 +101,7 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
         self._attr_unique_id = slugify(f"{device_id}_{description.name}")
         self.entity_id = f"{DOMAIN}.{POLARIS_DEVICE[int(device_type)]['class']}_{POLARIS_DEVICE[int(device_type)]['model']}_{description.name}"
         self._attr_options = list(description.options.keys())
-        self._attr_current_option = "not_selected"
+        self._attr_current_option = self._attr_options[0]
         self._attr_has_entity_name = True
 
     @property
@@ -96,22 +113,36 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
             return next(
                 key
                 for key, value in self.entity_description.options.items()
-                if value == option
+                if json.loads(value)[0]["mode"] == option
             )
         except StopIteration:
             return None
 
-    def select_option(self, option: str) -> None:
+    async def async_select_option(self, option: str) -> None:
         self._attr_current_option = option
-        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, self.entity_description.options[option])
-        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandMode, 3)
-        self.async_write_ha_state()
+        if POLARIS_DEVICE[int(self.device_type)]['class'] == "cooker":
+            cook_time = json.loads(self.entity_description.options[option])
+            service_data = {}
+            service_data["entity_id"] = f"time.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_cooking_time"
+            service_data["time"] = str(datetime.timedelta(seconds=cook_time[0]["time"]))
+            await self.hass.services.async_call("time", "set_value", service_data)
+            service_data = {}
+            service_data["entity_id"] = f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_set_temperature"
+            service_data["value"] = cook_time[0]["temperature"]
+            await self.hass.services.async_call("number", "set_value", service_data)
+        if POLARIS_DEVICE[int(self.device_type)]['class'] == "kettle":
+            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, self.entity_description.options[option])
+            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandMode, 3)
         
     async def async_added_to_hass(self):
         @callback
         def message_received_sel(message):
             payload = message.payload
             if payload in ("0", "[]"):
-                self._attr_current_option = "not_selected"
-
+                self._attr_current_option = self._attr_options[0]
+            elif POLARIS_DEVICE[int(self.device_type)]['class'] == "cooker":
+                sel_mode = json.loads(payload)[0]["mode"]
+                sel_opt = self.key_from_option(sel_mode)
+                self._attr_current_option = sel_opt
+                self.async_write_ha_state()
         await mqtt.async_subscribe(self.hass, self.entity_description.mqttTopicCurrentMode, message_received_sel, 1)

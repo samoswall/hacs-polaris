@@ -35,6 +35,7 @@ from .const import (
     PolarisLightEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
+    POLARIS_KETTLE_WITH_NIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
 )
 
@@ -50,7 +51,7 @@ async def async_setup_entry(
     device_prefix_topic = config.data["DEVPREFIXTOPIC"]
     lightList = []
 
-    if (device_type in POLARIS_KETTLE_TYPE) or (device_type in POLARIS_KETTLE_WITH_WEIGHT_TYPE):
+    if (device_type in POLARIS_KETTLE_TYPE) or (device_type in POLARIS_KETTLE_WITH_NIGHT_TYPE):
         # Create water heater for kettle devices
         LIGHTS_LC = copy.deepcopy(LIGHTS)
         for description in LIGHTS_LC:

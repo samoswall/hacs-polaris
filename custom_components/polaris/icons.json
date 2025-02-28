@@ -66,6 +66,18 @@
         "state": {
           "on": "mdi:home-off"
         }
+      },
+      "water_tank_binary_sensor": {
+        "default": "mdi:cup",
+        "state": {
+          "on": "mdi:cup-off"
+        }
+      },
+      "lid_binary_sensor": {
+        "default": "mdi:pot",
+        "state": {
+          "on": "mdi:pot-steam"
+        }
       }
     }
   }
