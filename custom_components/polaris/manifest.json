@@ -7,9 +7,11 @@
   "dependencies": ["mqtt"],
   "mqtt": [
     "polaris/+/state/devtype",
-    "/polaris/+/state/devtype"
+    "/polaris/+/state/devtype",
+    "polaris/+/+/state/mac",
+    "/polaris/+/+/state/mac"
   ],
   "iot_class": "local_push",
   "config_flow": true,
-  "version": "1.0.1"
+  "version": "1.0.3"
   }
