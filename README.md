@@ -10,17 +10,14 @@
 
 [![Donate](https://img.shields.io/badge/donate-Yandex-red.svg)](https://yoomoney.ru/fundraise/b8GYBARCVRE.230309)
 
-> [!NOTE]
-> ### Интеграция для техники Polaris c поддержкой mqtt на этапе тестирования!
-
 > [!WARNING]
 > Устройство Polaris должно быть подключено к вашему mqtt брокеру! <br>
-> Подключить к mqtt брокеру можно в приложении в настройках. Если такой настройки нет, значит у вас старая версия прошивки.<br>
+> Подключить к mqtt брокеру можно в приложении в настройках. Если такой настройки нет, значит у вас старая версия прошивки в устройстве.<br>
 > Новую версию прошивки можно запросить в техподдержке Polaris через приложение.<br>
 > Если по какой-то причине нет возможности обновить прошивку, то можно воспользоваться решением, опиcанным на 4pda, перенаправив трафик в роутере на дополнительный брокер mqtt.<br>
 
 > [!WARNING]
-> Выяснилось, что у некотых устройств установлены пробные (с этапа тестирования, первые версии) прошивоки, некоторые из них не доработаны и не публикуют тип устройства (топик polaris/XXXXXXXXXXXX/state/devtype где ХХХХХХХХХХХХ mac адрес вашего устройства).<br>
+> Выяснилось, что у некотых устройств установлены пробные (с этапа тестирования) версии прошивок, некоторые из них не доработаны и не публикуют тип устройства (топик polaris/XXXXXXXXXXXX/state/devtype где ХХХХХХХХХХХХ mac адрес вашего устройства).<br>
 > Без типа невозможно понять, что это за устройство. Варианты решения проблемы:<br>
 > Запросить новую прошивку (с публикацией devtype) или самостоятельно опубликовать в топик polaris/XXXXXXXXXXXX/state/devtype тип устройства - число (ID) с установленным статусом retain из таблицы ниже.<br>
 > Обратите внимание - устройства одинаковые, а функции могут быть разные (наличие/отсутствие веса или ночника). После изменения (публикации) типа - надо удалить устройство в интеграции и создать заново.
@@ -28,6 +25,7 @@
 > :information_source: **Добавлены**: <br>
 :heavy_check_mark: Чайники <br>
 :heavy_check_mark: Увлажнители <br>
+:heavy_check_mark: Мультиварки <br>
 
 > :information_source: **Как добавить новое устройство**: <br>
 Создаем issues - Добавить ...  <br>
@@ -41,9 +39,9 @@
 
 > :information_source: **Планы для доработок**: <br>
 :heavy_check_mark: Добавить поддержку старых устройств (со старой структурой топика) <br>
-:black_large_square: Добавить сенсор ошибок (описание ошибки в атрибут) <br>
+:heavy_check_mark: Добавить сенсор ошибок <br>
 :black_large_square: Добавить устройсто online/offline <br>
-:black_large_square: Добавить мультиварки, кофемашины и т.д.<br>
+:black_large_square: Добавить кофемашины, пылесосы и т.д.<br>
 
 Доступно обсуждение тут: [Telegram](https://t.me/polarishomeassistant)
 
@@ -145,31 +143,31 @@
 |18|PUH-9105/PUH-2709|humidifier|:heavy_check_mark:|speed, timer, volume, ioniser, humidity, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/60.webp)
 |44|PUH-9105/PUH-2709|humidifier|:heavy_check_mark:|speed, timer, volume, ioniser, humidity, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/60.webp)
 |70|PUH-9105/PUH-2709|humidifier|:heavy_check_mark:|speed, timer, volume, ioniser, humidity, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/c/9d/27f85-2e01-4cd7-85d8-a034e81c5be4/60.webp)
-|1|EVO-0225|cooker|:x:|timer, keep_warm, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/b/8f/ae138-e3b2-448a-8a8e-ca60eb7c3cc5/60.webp)
-|95|PMC-00000|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
-|10|PMC-0521WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/1/31/fc82e-50af-430e-8d71-043bd7aeb5d2/60.webp)
-|41|PMC-0521WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/1/31/fc82e-50af-430e-8d71-043bd7aeb5d2/60.webp)
-|55|PMC-0524WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/e/5f/51204-817a-46fb-a477-c80cad89f019/60.webp)
-|206|PMC-0524WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/3/32/d6c82-2ebc-4519-8b71-05de8097756a/60.webp)
-|9|PMC-0526WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
-|40|PMC-0526WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
-|138|PMC-0526WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
-|39|PMC-0528WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/4/ce/e930f-5b1b-444f-96e2-04b4d9314231/60.webp)
-|48|PMC-0528WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/4/ce/e930f-5b1b-444f-96e2-04b4d9314231/60.webp)
-|47|PMC-0530WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/2/d9/64dfb-b93e-49b8-874c-766c212698c8/60.webp)
-|210|PMC-0590AD|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/4/cc/bd7d5-385a-4edb-bb43-7a686dcffa2f/60.webp)
-|215|PMC-5001WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/1/31/fc82e-50af-430e-8d71-043bd7aeb5d2/60.webp)
-|79|PMC-5017WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/7/41/24cf9-cb91-431c-a5cb-183d2594a5af/60.webp)
-|192|PMC-5017WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/7/41/24cf9-cb91-431c-a5cb-183d2594a5af/60.webp)
-|80|PMC-5020WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/d/da/5a3c8-b17a-4d94-83cd-24bd2e8562d6/60.webp)
-|77|PMC-5040WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/0/40/bbd11-87b7-47ae-9432-74b78d904d74/60.webp)
-|78|PMC-5050WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/1/87/4d6af-60c0-48d3-8939-60400805fca9/60.webp)
-|89|PMC-5055WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/a/67/edd4c-9a92-4cfe-b17e-53a76d282475/60.webp)
-|114|PMC-5060 Smart Motion|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
-|240|PMC-5060 Smart Motion*|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
-|162|PMC-5063WIFI|cooker|:x:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/e/5f/51204-817a-46fb-a477-c80cad89f019/60.webp)
-|169|PPC-1505 Wi-FI|cooker|:x:|timer, volume, pressure, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
-|183|PPC-1505 Wi-FI*|cooker|:x:|timer, volume, pressure, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
+|1|EVO-0225|cooker|:heavy_check_mark:|timer, keep_warm, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/b/8f/ae138-e3b2-448a-8a8e-ca60eb7c3cc5/60.webp)
+|95|PMC-00000|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
+|10|PMC-0521WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/1/31/fc82e-50af-430e-8d71-043bd7aeb5d2/60.webp)
+|41|PMC-0521WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/1/31/fc82e-50af-430e-8d71-043bd7aeb5d2/60.webp)
+|55|PMC-0524WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/e/5f/51204-817a-46fb-a477-c80cad89f019/60.webp)
+|206|PMC-0524WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/3/32/d6c82-2ebc-4519-8b71-05de8097756a/60.webp)
+|9|PMC-0526WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
+|40|PMC-0526WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
+|138|PMC-0526WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
+|39|PMC-0528WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/4/ce/e930f-5b1b-444f-96e2-04b4d9314231/60.webp)
+|48|PMC-0528WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/4/ce/e930f-5b1b-444f-96e2-04b4d9314231/60.webp)
+|47|PMC-0530WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/2/d9/64dfb-b93e-49b8-874c-766c212698c8/60.webp)
+|210|PMC-0590AD|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/4/cc/bd7d5-385a-4edb-bb43-7a686dcffa2f/60.webp)
+|215|PMC-5001WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/1/31/fc82e-50af-430e-8d71-043bd7aeb5d2/60.webp)
+|79|PMC-5017WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/7/41/24cf9-cb91-431c-a5cb-183d2594a5af/60.webp)
+|192|PMC-5017WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/7/41/24cf9-cb91-431c-a5cb-183d2594a5af/60.webp)
+|80|PMC-5020WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/d/da/5a3c8-b17a-4d94-83cd-24bd2e8562d6/60.webp)
+|77|PMC-5040WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/0/40/bbd11-87b7-47ae-9432-74b78d904d74/60.webp)
+|78|PMC-5050WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/1/87/4d6af-60c0-48d3-8939-60400805fca9/60.webp)
+|89|PMC-5055WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/a/67/edd4c-9a92-4cfe-b17e-53a76d282475/60.webp)
+|114|PMC-5060 Smart Motion|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
+|240|PMC-5060 Smart Motion*|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
+|162|PMC-5063WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/e/5f/51204-817a-46fb-a477-c80cad89f019/60.webp)
+|169|PPC-1505 Wi-FI|cooker|:heavy_check_mark:|timer, volume, pressure, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
+|183|PPC-1505 Wi-FI*|cooker|:heavy_check_mark:|timer, volume, pressure, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
 |235|AM7310-(test)|coffeemaker|:x:|turbo, amount, volume, child_lock, water_tank, stream_warm, temperature, |![all](https://images.cdn.polaris-iot.com/d/05/16bab-b852-4e03-afa6-41a892d93205/60.webp)
 |103|PACM-2080AC|coffeemaker|:x:|speed, amount, volume, weight, pressure, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/b/2b/8c952-9291-4c02-bce2-4d73f853452d/60.webp)
 |200|PACM-2081AC|coffeemaker|:x:|speed, timer, amount, volume, weight, pressure, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/c/11/747d1-b6ce-417f-980d-665512b3a6ad/60.webp)
