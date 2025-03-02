@@ -1,7 +1,6 @@
 {
     "name": "Polaris IQ Home MQTT",
     "render_readme": true,
-    "domains": ["sensor"],
-    "country": ["RU"],
+    "country": ["NO", "EN", "RU"],
     "homeassistant": "2024.1.6"
 }
