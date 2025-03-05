@@ -14,7 +14,7 @@
       "user": {
         "description": "Конфигурация Polaris Local MQTT.",
         "data": {
-          "DEVICEID": "Выберите устройство (или все)",
+          "DEVICEID": "Выберите устройство",
           "MQTT_ROOT_TOPIC": "Префикс темы (обычно 'polaris')"
         },
         "title": "Polaris Local MQTT"
