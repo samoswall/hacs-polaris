@@ -14,7 +14,7 @@
       "user": {
         "description": "Configuring Polaris Local MQTT.",
         "data": {
-          "DEVICEID": "Select a device (or all devices)",
+          "DEVICEID": "Select a device",
           "MQTT_ROOT_TOPIC": "Topic Prefix (usually 'polaris')"
         },
         "title": "Polaris Local MQTT"
