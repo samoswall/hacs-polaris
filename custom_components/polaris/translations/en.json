@@ -14,7 +14,7 @@
       "user": {
         "description": "Configuring Polaris Local MQTT.",
         "data": {
-          "DEVICEID": "Select a device",
+          "DEVICEID": "Select a device (or all devices)",
           "MQTT_ROOT_TOPIC": "Topic Prefix (usually 'polaris')"
         },
         "title": "Polaris Local MQTT"
@@ -81,6 +81,24 @@
       },
       "set_temperature": {
         "name": "Set temperature"
+      },
+      "amount": {
+        "name": "Amount"
+      },
+      "weight": {
+        "name": "Weight"
+      },
+      "tank": {
+        "name": "Water tank"
+      },
+      "pressure": {
+        "name": "Pressure"
+      },
+      "speed": {
+        "name": "Speed"
+      },
+      "temperature": {
+        "name": "Temperature"
       }
     },
     "sensor": {
@@ -113,7 +131,27 @@
           "maximum_schedules": "Maximum number of schedules 4",
           "clean_tank": "Clean the tank",
           "cup_not_present": "Cup is not present",
-          "gesture_sensor_error": "Gesture sensor error"
+          "gesture_sensor_error": "Gesture sensor error",
+          "side_door_open": "Side door open",
+          "waste_container_not_installed": "Waste container not installed",
+          "drip_tray_not_installed": "Drip tray not installed",
+          "the_brewing_unit_not_installed": "The brewing unit isn't installed",
+          "missing_water_tank": "Missing water tank",
+          "waste_container_full": "Waste container is full",
+          "not_enough_coffee_beans": "Not enough coffee beans",
+          "water_supply_blocked": "Water supply is blocked",
+          "code_E001": "The coffee machine is faulty (code E001) Contact service center",
+          "code_E002": "The coffee machine is faulty (code E002) Contact service center",
+          "code_E003": "The coffee machine is faulty (code E003) Contact service center",
+          "code_E004": "The coffee machine is faulty (code E004) Contact service center",
+          "code_E005": "The coffee machine is faulty (code E005) Contact service center",
+          "decalcification_required": "Decalcification required",
+          "water_changed_for_long_time": "Water in the tank hasn't been changed for a long time. It's recommended to change the water",
+          "cleaning_milk_system": "Cleaning the milk system",
+          "cleaning_brewing_system": "Cleaning the brewing system",
+          "decalcification_progress": "Decalcification in progress",
+          "cleaning_hydraulic_system": "Cleaning the hydraulic system",
+          "check_water_tank": "Сheck the water tank"
         }
       },
       "filter_retain": {
@@ -121,6 +159,41 @@
       },
       "clean_retain": {
         "name": "Clean retain"
+      },
+      "mode_sensor": {
+        "name": "Mode",
+        "state": {
+          "off": "Off",
+          "espresso": "Espresso",
+          "ristretto": "Ristretto",
+          "long_espresso": "Long espresso",
+          "americano": "Americano",
+          "heating": "Heating",
+          "cappuccino": "Cappuccino",
+          "latte": "Latte",
+          "flat_white": "Flat white",
+          "cortado": "Cortado",
+          "double_espresso": "Double espresso",
+          "double_cappuccino": "Double cappuccino",
+          "double_latte": "Double latte",
+          "double_long_espresso": "Double long espresso",
+          "double_macchiato": "Double macchiato",
+          "milk_coffee": "Milk coffee",
+          "macchiato": "Macchiato",
+          "latte_macchiato": "Latte macchiato",
+          "hot_water": "Hot water",
+          "hot_milk_foam": "Hot milk foam",
+          "hot_milk": "Hot milk"
+        }
+      },
+      "power_state": {
+        "name": "Power",
+        "state": {
+          "power_on": "On",
+          "power_off": "Off",
+          "turns_on": "Turns on",
+          "turns_off": "Turns off"
+        }
       }
     },
     "select": {
@@ -157,6 +230,31 @@
           "soup": "Soup",
           "meat": "Meat",
           "cottage_cheese": "Cottage cheese"
+        }
+      },
+      "select_mode_cofeemaker": {
+        "name": "Напиток",
+        "state": {
+          "not_selected": "Not selected",
+          "espresso": "Espresso",
+          "ristretto": "Ristretto",
+          "long_espresso": "Long espresso",
+          "americano": "Americano",
+          "cappuccino": "Cappuccino",
+          "latte": "Latte",
+          "flat_white": "Flat white",
+          "cortado": "Cortado",
+          "double_espresso": "Double espresso",
+          "double_cappuccino": "Double cappuccino",
+          "double_latte": "Double latte",
+          "double_long_espresso": "Double long espresso",
+          "double_macchiato": "Double macchiato",
+          "milk_coffee": "Milk coffee",
+          "macchiato": "Macchiato",
+          "latte_macchiato": "Latte macchiato",
+          "hot_water": "Hot water",
+          "hot_milk_foam": "Hot milk foam",
+          "hot_milk": "Hot milk"
         }
       }
     },
@@ -202,6 +300,18 @@
       },
       "button_start": {
         "name": "Start"
+      },
+      "button_stop_coffee": {
+        "name": "Stop"
+      },
+      "button_start_coffee": {
+        "name": "Start"
+      },
+      "button_reset_filter": {
+        "name": "Reset time filter"
+      },
+      "button_reset_tank": {
+        "name": "Reset time water tank"
       }
     }
   }

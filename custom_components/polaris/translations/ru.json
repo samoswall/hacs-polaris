@@ -81,6 +81,24 @@
       },
       "set_temperature": {
         "name": "Установка температуры"
+      },
+      "amount": {
+        "name": "Объём кофе"
+      },
+      "weight": {
+        "name": "Крепкость напитка"
+      },
+      "tank": {
+        "name": "Объём напитка"
+      },
+      "pressure": {
+        "name": "Объём пенки"
+      },
+      "speed": {
+        "name": "Объём молока"
+      },
+      "temperature": {
+        "name": "Температура напитка"
       }
     },
     "sensor": {
@@ -113,7 +131,27 @@
           "maximum_schedules": "Максимальное количество расписаний 4",
           "clean_tank": "Почистите бак",
           "cup_not_present": "Чаша не установлена",
-          "gesture_sensor_error": "Ошибка датчика жестов"
+          "gesture_sensor_error": "Ошибка датчика жестов",
+          "side_door_open": "Открыта боковая дверца",
+          "waste_container_not_installed": "Контейнер для отходов не установлен",
+          "drip_tray_not_installed": "Каплесборник не установлен",
+          "the_brewing_unit_not_installed": "Заварочный узел не установлен",
+          "missing_water_tank": "Отсутствует резервуар для воды",
+          "waste_container_full": "Контейнер для отходов полон",
+          "not_enough_coffee_beans": "Недостаточно кофейных зерен",
+          "water_supply_blocked": "Подача воды заблокирована",
+          "code_E001": "Кофемашина неисправна (код Е001) Обратитесь в сервисный центр",
+          "code_E002": "Кофемашина неисправна (код Е002) Обратитесь в сервисный центр",
+          "code_E003": "Кофемашина неисправна (код Е003) Обратитесь в сервисный центр",
+          "code_E004": "Кофемашина неисправна (код Е004) Обратитесь в сервисный центр",
+          "code_E005": "Кофемашина неисправна (код Е005) Обратитесь в сервисный центр",
+          "decalcification_required": "Необходима декальцинация",
+          "water_changed_for_long_time": "Вода в резервуаре давно не менялась, рекомендуем сменить воду",
+          "cleaning_milk_system": "Очистка молочной системы",
+          "cleaning_brewing_system": "Очистка заварочной системы",
+          "decalcification_progress": "Идет декальцинация",
+          "cleaning_hydraulic_system": "Очистка гидросистемы",
+          "check_water_tank": "Проверьте бак с водой"
         }
       },
       "filter_retain": {
@@ -121,6 +159,41 @@
       },
       "clean_retain": {
         "name": "Остаток до очистки бака"
+      },
+      "mode_sensor": {
+        "name": "Режим работы",
+        "state": {
+          "off": "Выключен",
+          "espresso": "Эспрессо",
+          "ristretto": "Ристретто",
+          "long_espresso": "Лунго",
+          "americano": "Американо",
+          "heating": "Нагрев",
+          "cappuccino": "Капучино",
+          "latte": "Латте",
+          "flat_white": "Флэт уайт",
+          "cortado": "Кортадо",
+          "double_espresso": "Двойной эспрессо",
+          "double_cappuccino": "Двойной капучино",
+          "double_latte": "Двойной латте",
+          "double_long_espresso": "Двойной лунго",
+          "double_macchiato": "Двойной макиато",
+          "milk_coffee": "Кофе с молоком",
+          "macchiato": "Макиато",
+          "latte_macchiato": "Латте макиато",
+          "hot_water": "Горячая вода",
+          "hot_milk foam": "Молочная пена",
+          "hot_milk": "Горячее молоко"
+        }
+      },
+      "power_state": {
+        "name": "Питание",
+        "state": {
+          "power_on": "Включено",
+          "power_off": "Выключено",
+          "turns_on": "Включается",
+          "turns_off": "Выключается"
+        }
       }
     },
     "select": {
@@ -157,6 +230,31 @@
           "soup": "Суп",
           "meat": "Холодец",
           "cottage_cheese": "Творог"
+        }
+      },
+      "select_mode_cofeemaker": {
+        "name": "Напиток",
+        "state": {
+          "not_selected": "Не выбрано",
+          "espresso": "Эспрессо",
+          "ristretto": "Ристретто",
+          "long_espresso": "Лунго",
+          "americano": "Американо",
+          "cappuccino": "Капучино",
+          "latte": "Латте",
+          "flat_white": "Флэт уайт",
+          "cortado": "Кортадо",
+          "double_espresso": "Двойной эспрессо",
+          "double_cappuccino": "Двойной капучино",
+          "double_latte": "Двойной латте",
+          "double_long_espresso": "Двойной лунго",
+          "double_macchiato": "Двойной макиато",
+          "milk_coffee": "Кофе с молоком",
+          "macchiato": "Макиато",
+          "latte_macchiato": "Латте макиато",
+          "hot_water": "Горячая вода",
+          "hot_milk_foam": "Молочная пена",
+          "hot_milk": "Горячее молоко"
         }
       }
     },
@@ -202,6 +300,18 @@
       },
       "button_start": {
         "name": "Запустить"
+      },
+      "button_stop_coffee": {
+        "name": "Остановить"
+      },
+      "button_start_coffee": {
+        "name": "Приготовить"
+      },
+      "button_reset_filter": {
+        "name": "Сброс таймера фильтра"
+      },
+      "button_reset_tank": {
+        "name": "Сброс таймера очистки бака"
       }
     }
   }
