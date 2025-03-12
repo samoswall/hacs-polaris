@@ -26,6 +26,7 @@
 :heavy_check_mark: Чайники <br>
 :heavy_check_mark: Увлажнители <br>
 :heavy_check_mark: Мультиварки <br>
+:heavy_check_mark: Кофемашины <br>
 
 > :information_source: **Как добавить новое устройство**: <br>
 Создаем issues - Добавить ...  <br>
@@ -41,7 +42,7 @@
 :heavy_check_mark: Добавить поддержку старых устройств (со старой структурой топика) <br>
 :heavy_check_mark: Добавить сенсор ошибок <br>
 :black_large_square: Добавить устройсто online/offline <br>
-:black_large_square: Добавить кофемашины, пылесосы и т.д.<br>
+:black_large_square: Добавить пылесосы и т.д.<br>
 
 Доступно обсуждение тут: [Telegram](https://t.me/polarishomeassistant)
 
@@ -168,15 +169,15 @@
 |162|PMC-5063WIFI|cooker|:heavy_check_mark:|timer, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/e/5f/51204-817a-46fb-a477-c80cad89f019/60.webp)
 |169|PPC-1505 Wi-FI|cooker|:heavy_check_mark:|timer, volume, pressure, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
 |183|PPC-1505 Wi-FI*|cooker|:heavy_check_mark:|timer, volume, pressure, keep_warm, child_lock, multi_step, delay_start, temperature, |![all](https://images.cdn.polaris-iot.com/6/fd/f7349-f7c0-46e0-b001-787923872799/60.webp)
-|235|AM7310-(test)|coffeemaker|:x:|turbo, amount, volume, child_lock, water_tank, stream_warm, temperature, |![all](https://images.cdn.polaris-iot.com/d/05/16bab-b852-4e03-afa6-41a892d93205/60.webp)
-|103|PACM-2080AC|coffeemaker|:x:|speed, amount, volume, weight, pressure, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/b/2b/8c952-9291-4c02-bce2-4d73f853452d/60.webp)
-|200|PACM-2081AC|coffeemaker|:x:|speed, timer, amount, volume, weight, pressure, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/c/11/747d1-b6ce-417f-980d-665512b3a6ad/60.webp)
-|166|PACM-2085GC|coffeemaker|:x:|speed, amount, volume, weight, pressure, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/b/2b/8c952-9291-4c02-bce2-4d73f853452d/60.webp)
-|247|PCM-1255|coffeemaker|:x:|timer, amount, volume, weight, ioniser, child_lock, |![all](https://images.cdn.polaris-iot.com/6/7e/b8e87-9593-4023-b339-3fb6da5df931/60.webp)
-|45|PCM-1540WIFI|coffeemaker|:x:|amount, volume, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/a/44/ec0b3-ea7f-4d75-bd2a-ba174bf1817d/60.webp)
-|222|PCM-1540WIFI|coffeemaker|:x:|amount, volume, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/a/44/ec0b3-ea7f-4d75-bd2a-ba174bf1817d/60.webp)
-|190|PCM-1560|coffeemaker|:x:|amount, volume, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/6/7e/b8e87-9593-4023-b339-3fb6da5df931/60.webp)
-|207|PCM-2070CG|coffeemaker|:x:|turbo, amount, volume, child_lock, water_tank, stream_warm, temperature, |![all](https://images.cdn.polaris-iot.com/2/72/b2f22-3608-40b7-b435-7485fe68dfc2/60.webp)
+|235|AM7310-(test)|coffeemaker|:heavy_check_mark:|turbo, amount, volume, child_lock, water_tank, stream_warm, temperature, |![all](https://images.cdn.polaris-iot.com/d/05/16bab-b852-4e03-afa6-41a892d93205/60.webp)
+|103|PACM-2080AC|coffeemaker|:heavy_check_mark:|speed, amount, volume, weight, pressure, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/b/2b/8c952-9291-4c02-bce2-4d73f853452d/60.webp)
+|200|PACM-2081AC|coffeemaker|:heavy_check_mark:|speed, timer, amount, volume, weight, pressure, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/c/11/747d1-b6ce-417f-980d-665512b3a6ad/60.webp)
+|166|PACM-2085GC|coffeemaker|:heavy_check_mark:|speed, amount, volume, weight, pressure, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/b/2b/8c952-9291-4c02-bce2-4d73f853452d/60.webp)
+|247|PCM-1255|coffeemaker|:heavy_check_mark:|timer, amount, volume, weight, ioniser, child_lock, |![all](https://images.cdn.polaris-iot.com/6/7e/b8e87-9593-4023-b339-3fb6da5df931/60.webp)
+|45|PCM-1540WIFI|coffeemaker|:heavy_check_mark:|amount, volume, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/a/44/ec0b3-ea7f-4d75-bd2a-ba174bf1817d/60.webp)
+|222|PCM-1540WIFI|coffeemaker|:heavy_check_mark:|amount, volume, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/a/44/ec0b3-ea7f-4d75-bd2a-ba174bf1817d/60.webp)
+|190|PCM-1560|coffeemaker|:heavy_check_mark:|amount, volume, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/6/7e/b8e87-9593-4023-b339-3fb6da5df931/60.webp)
+|207|PCM-2070CG|coffeemaker|:heavy_check_mark:|turbo, amount, volume, child_lock, water_tank, stream_warm, temperature, |![all](https://images.cdn.polaris-iot.com/2/72/b2f22-3608-40b7-b435-7485fe68dfc2/60.webp)
 |172|PAW-0804|air-cleaner|:x:|speed, timer, volume, backlight, |![all](https://images.cdn.polaris-iot.com/6/8d/81a02-893f-467d-a375-1c004bb31548/60.webp)
 |140|PAW-0804(c3-test)|air-cleaner|:x:|speed, timer, turbo, volume, ioniser, backlight, |![all](https://images.cdn.polaris-iot.com/0/f0/440b3-27bd-49f8-81e4-0af6f8e13dee/60.webp)
 |151|PPA-2025|air-cleaner|:x:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/5/de/94ac7-2530-446f-a4bd-566ddc4edd16/60.webp)
