@@ -16,6 +16,7 @@ from homeassistant.core import HomeAssistant, callback
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from .common import PolarisBaseEntity
+from homeassistant.const import STATE_UNAVAILABLE
 
 # Import global values.
 from .const import (
@@ -26,15 +27,18 @@ from .const import (
     POLARIS_DEVICE,
     NUMBER_HUMIDIFIER,
     NUMBER_COOKER,
+    NUMBERS_COFFEEMAKER,
     PolarisNumberEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
+    POLARIS_HUMIDDIFIER_LOW_FAN_TYPE,
     POLARIS_COOKER_TYPE,
+    POLARIS_COFFEEMAKER_TYPE,
 )
 
-#_LOGGER = logging.getLogger(__name__)
-#_LOGGER.setLevel(logging.DEBUG)
+_LOGGER = logging.getLogger(__name__)
+_LOGGER.setLevel(logging.DEBUG)
 
 async def async_setup_entry(
     hass: HomeAssistant, config: ConfigEntry, async_add_entities: AddEntitiesCallback,
@@ -61,11 +65,26 @@ async def async_setup_entry(
                     device_id=device_id
                 )
             )
-    elif (device_type in POLARIS_COOKER_TYPE):
+    if (device_type in POLARIS_COOKER_TYPE):
     # Create cooker  
         NUMBER_COOKER_LC = copy.deepcopy(NUMBER_COOKER)
         for description in NUMBER_COOKER_LC:
             description.mqttTopicCurrent = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrent}" 
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            numberList.append(
+                PolarisNumber(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+    if (device_type in POLARIS_COFFEEMAKER_TYPE):
+    # Create cooker  
+        NUMBERS_COFFEEMAKER_LC = copy.deepcopy(NUMBERS_COFFEEMAKER)
+        for description in NUMBERS_COFFEEMAKER_LC:
+#            description.mqttTopicCurrent = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrent}" 
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             numberList.append(
                 PolarisNumber(
@@ -101,12 +120,21 @@ class PolarisNumber(PolarisBaseEntity, NumberEntity):
         self.entity_id = f"{DOMAIN}.{POLARIS_DEVICE[int(device_type)]['class']}_{POLARIS_DEVICE[int(device_type)]['model']}_{description.name}"
         self._attr_available = True
         self._attr_has_entity_name = True
-        self._attr_native_value = 115
+        self._attr_native_value = self.entity_description.native_value
+        if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
+            self._attr_native_value = STATE_UNAVAILABLE
+        if self.device_type in POLARIS_HUMIDDIFIER_LOW_FAN_TYPE:
+            self._attr_native_max_value = 3
 
-    def set_native_value(self, value: int) -> None:
-        self._attr_native_value = int(value)
-        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value))
-        
+
+    def set_native_value(self, value: float) -> None:
+        if value % 1 > 0:
+            self._attr_native_value = STATE_UNAVAILABLE
+#             self._attr_available = False
+        else:
+            self._attr_native_value = int(value)
+            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value))
+            
     @property
     def get_state (self) -> int | None:
         return self._attr_native_value

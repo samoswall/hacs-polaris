@@ -9,6 +9,11 @@ from zoneinfo import ZoneInfo
 
 import voluptuous as vol
 
+from homeassistant.components.climate import (
+    ClimateEntity,
+    ClimateEntityFeature,
+    ClimateEntityDescription,
+)
 from homeassistant.components.time import TimeEntity, TimeEntityDescription
 from homeassistant.components.button import (
     ButtonDeviceClass,
@@ -40,6 +45,7 @@ from homeassistant.const import (
     UnitOfMass,
     SIGNAL_STRENGTH_DECIBELS,
     UnitOfTime,
+    UnitOfVolume,
     Platform,
 )
 import homeassistant.helpers.config_validation as cv
@@ -61,7 +67,8 @@ PLATFORMS = [
     Platform.LIGHT,
     Platform.BINARY_SENSOR,
     Platform.BUTTON,
-    Platform.TIME
+    Platform.TIME,
+    Platform.CLIMATE
 ]
 
 # Global values
@@ -299,6 +306,7 @@ POLARIS_DEVICE = {
     92:  {"model": "PGS-1450CWIFI", "class": "steamer"},
     94:  {"model": "PSS-7070KWIFI", "class": "steamer"},
     50:  {"model": "PETB-0202TC", "class": "toothbrush"},
+    69:  {"model": "Ballu ASP-100", "class": "oneair"},
 }
 
 POLARIS_KETTLE_TYPE = ["2","6","8","29","36","37","38","51","52","53","54","56","57","58","59","60","61","62","63","67","82","83","84","85","86","97","105","117","121","139","165","175","176","189","194","196","205","209"]
@@ -308,13 +316,75 @@ POLARIS_KETTLE_WITH_BACKLIGHT_TYPE = ["36","37","51","52","53","54","60","61","6
 POLARIS_HUMIDDIFIER_TYPE = ["4","15","17","18","25","44","70","71","72","73","74","75","87","99","137","147","153","155","157","158"]
 POLARIS_HUMIDDIFIER_WITH_IONISER_TYPE = ["4","15","17","18","44","70","72","73","74","137","147","153","155","157","158"]
 POLARIS_HUMIDDIFIER_WITH_WARM_STREAM_TYPE = ["4","15","17","18","44","70","72","74","147","157","158"]
+POLARIS_HUMIDDIFIER_LOW_FAN_TYPE = ["25","71","72","73","74","75","87","99","137","153","155","157","158"]
+POLARIS_HUMIDDIFIER_7_MODE_TYPE = ["17","18","44","70"]
+POLARIS_HUMIDDIFIER_5A_MODE_TYPE = ["4"]
+POLARIS_HUMIDDIFIER_5B_MODE_TYPE = ["72","74","87","147","155"]
+POLARIS_HUMIDDIFIER_4_MODE_TYPE = ["15","71","73","75","99"]
+POLARIS_HUMIDDIFIER_3A_MODE_TYPE = ["25"]
+POLARIS_HUMIDDIFIER_3B_MODE_TYPE = ["153","157","158"]
+POLARIS_HUMIDDIFIER_1_MODE_TYPE = ["137"]
 POLARIS_COOKER_TYPE = ["1","9","10","39","40","41","47","48","55","77","78","79","80","89","95","114","138","162","169","183","192","206","210","215","240"]
+POLARIS_COOKER_WITH_LID_TYPE = ["9","39","40","41","47","48","55","77","78","79","80","89","95","114","138","162","169","183","192","206","210","215","240"]
+POLARIS_COFFEEMAKER_TYPE = ["45", "103", "166", "190", "200", "207", "222", "235", "247"]
+POLARIS_CLIMATE_TYPE = ["69"]
 
+HUMIDDIFIER_5A_AVAILABLE_MODES = {"auto": "1", "comfort": "2", "baby": "3", "sleep": "4", "boost": "5"}
+HUMIDDIFIER_5B_AVAILABLE_MODES = {"auto": "1", "sleep": "4", "boost": "5", "home": "6", "eco": "7"}
+HUMIDDIFIER_4_AVAILABLE_MODES = {"auto": "1", "boost": "5", "home": "6", "eco": "7"}
+HUMIDDIFIER_3A_AVAILABLE_MODES = {"boost": "5", "home": "6", "eco": "7"}
+HUMIDDIFIER_3B_AVAILABLE_MODES = {"auto": "1", "boost": "5", "eco": "7"}
+HUMIDDIFIER_1_AVAILABLE_MODES = {"boost": "5"}
 
-KETTLE_ERROR = {"00": "no_error", "01": "low_water", "02": "kettle_out_of_base", "03": "temperature_sensor_failure", "04": "temperature_sensor_failure", "05": "child_lock", "06": "recommended_to_change_water", "07": "changed_water_for_long_time"}
-HUMIDDIFIER_ERROR = {"00": "no_error", "01": "low_water", "02": "child_lock", "03": "replace_filter", "04": "maximum_schedules", "05": "clean_tank"}
-COOKER_ERROR = {"00": "no_error", "01": "temperature_sensor_failure", "02": "temperature_sensor_failure", "06": "cup_not_present", "07": "child_lock", "08": "gesture_sensor_error"}
-
+KETTLE_ERROR = {
+"00": "no_error",
+"01": "low_water",
+"02": "kettle_out_of_base",
+"03": "temperature_sensor_failure",
+"04": "temperature_sensor_failure",
+"05": "child_lock",
+"06": "recommended_to_change_water",
+"07": "changed_water_for_long_time"
+}
+HUMIDDIFIER_ERROR = {
+"00": "no_error",
+"01": "low_water",
+"02": "child_lock",
+"03": "replace_filter",
+"04": "maximum_schedules",
+"05": "clean_tank"
+}
+COOKER_ERROR = {
+"00": "no_error",
+"01": "temperature_sensor_failure",
+"02": "temperature_sensor_failure",
+"06": "cup_not_present",
+"07": "child_lock",
+"08": "gesture_sensor_error"
+}
+COFFEEMAKER_ERROR = {
+"00": "no_error",
+"01": "side_door_open",
+"02": "waste_container_not_installed",
+"03": "drip_tray_not_installed",
+"04": "the_brewing_unit_not_installed",
+"05": "missing_water_tank",
+"06": "waste_container_full",
+"07": "not_enough_coffee_beans",
+"08": "water_supply_blocked",
+"09": "code_E001",
+"10": "code_E002",
+"11": "code_E003",
+"12": "code_E004",
+"13": "code_E005",
+"14": "decalcification_required",
+"15": "water_changed_for_long_time",
+"16": "cleaning_milk_system",
+"17": "cleaning_brewing_system",
+"18": "decalcification_progress",
+"19": "cleaning_hydraulic_system",
+"20": "check_water_tank"
+}
 
 @dataclass
 class PolarisSensorEntityDescription(SensorEntityDescription):
@@ -437,6 +507,59 @@ SENSORS_COOKER = [
     ),
 ]
 
+SENSORS_COFFEEMAKER = [
+    PolarisSensorEntityDescription(
+        key="mode",
+        name="mode",
+        translation_key="mode_sensor",
+        valueMap={
+            "0": "off",
+            "1": "espresso",
+            "2": "ristretto",
+            "3": "long_espresso",
+            "4": "americano",
+            "5": "heating",
+            "8": "cappuccino",
+            "9": "latte",
+            "10": "flat_white",
+            "11": "cortado",
+            "12": "double_espresso",
+            "13": "double_cappuccino",
+            "14": "double_latte",
+            "15": "double_long_espresso",
+            "16": "double_macchiato",
+            "17": "milk_coffee",
+            "18": "macchiato",
+            "19": "latte_macchiato",
+            "20": "hot_water",
+            "21": "hot_milk foam",
+            "22": "hot_milk"
+        },
+        device_class=None,
+        native_unit_of_measurement=None,
+        state_class=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=True,
+        icon="mdi:coffee-maker",
+    ),
+    PolarisSensorEntityDescription(
+        key="program_data/5",
+        name="power_state",
+        translation_key="power_state",
+        valueMap={
+            "01": "power_on",
+            "02": "power_off",
+            "03": "turns_on",
+            "04": "turns_off"
+        },
+        device_class=None,
+        native_unit_of_measurement=None,
+        state_class=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=True,
+        icon="mdi:power",
+    ),
+]
 
 @dataclass
 class PolarisSwitchEntityDescription(SwitchEntityDescription):
@@ -483,6 +606,9 @@ SWITCHES_ALL_DEVICES = [
         payload_off="false",
 #        icon="mdi:lock",
     ),
+]
+
+SWITCH_KETTLE_BACKLIGHT = [
     PolarisSwitchEntityDescription(
         key="backlight",
         translation_key="backlight_switch",
@@ -554,6 +680,43 @@ SWITCHES_COOKER = [
     ),
 ]
 
+SWITCHES_COFFEEMAKER = [
+    PolarisSwitchEntityDescription(
+        key="power",
+        translation_key="power_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Power",
+        mqttTopicCommand="control/program_data/5",
+        mqttTopicCurrentValue="state/program_data/5",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="03",
+        payload_off="04",
+        icon="mdi:power-standby",
+    ),
+    PolarisSwitchEntityDescription(
+        key="sound",
+        translation_key="sound_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Sound",
+        mqttTopicCommand="control/sound",
+        mqttTopicCurrentValue="state/sound",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="true",
+        payload_off="false",
+    ),
+    PolarisSwitchEntityDescription(
+        key="child_lock",
+        translation_key="child_lock_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Child lock",
+        mqttTopicCommand="control/child_lock",
+        mqttTopicCurrentValue="state/child_lock",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="true",
+        payload_off="false",
+    ),
+]
+
 @dataclass
 class PolarisWaterHeaterEntityDescription(WaterHeaterEntityEntityDescription): # breaks_in_ha_version="2026.1"
 
@@ -612,7 +775,7 @@ HUMIDIFIERS = [
         name="Humidifier",
         key="humidifier",
         translation_key="humidifier",
-        mode="auto",
+        mode="boost",
         available_modes={"auto": "1", "comfort": "2", "baby": "3", "sleep": "4", "boost": "5", "home": "6", "eco": "7"},
         mqttTopicCurrentState = "state/mode",
         mqttTopicCommandState = "control/mode",
@@ -635,6 +798,7 @@ class PolarisNumberEntityDescription(NumberEntityDescription):
 
     mqttTopicCurrent: str | None = None
     mqttTopicCommand: str | None = None
+    native_value: int | None = None
     
 NUMBER_HUMIDIFIER = [
     PolarisNumberEntityDescription(
@@ -650,6 +814,7 @@ NUMBER_HUMIDIFIER = [
         native_max_value=7,
         native_min_value=0,
         native_step=1,
+        native_value=1,
     )
 ]
 
@@ -667,9 +832,108 @@ NUMBER_COOKER = [
         native_max_value=160,
         native_min_value=20,
         native_step=1,
-        step=1,
+        native_value=115,
         mode="box",
     )
+]
+
+NUMBERS_COFFEEMAKER = [
+    PolarisNumberEntityDescription(
+        key="amount",
+        name="amount",
+        translation_key="amount",
+        mqttTopicCurrent = "state/amount",
+        mqttTopicCommand = "control/amount",
+        entity_category=EntityCategory.CONFIG,
+        device_class=NumberDeviceClass.WATER,
+        native_unit_of_measurement=UnitOfVolume.MILLILITERS,
+        entity_registry_enabled_default=True,
+        native_max_value=250,
+        native_min_value=20,
+        native_step=5,
+        native_value=40,
+        mode="slider",
+    ),
+    PolarisNumberEntityDescription(
+        key="weight",
+        name="weight",
+        translation_key="weight",
+        mqttTopicCurrent = "state/weight",
+        mqttTopicCommand = "control/weight",
+        entity_category=EntityCategory.CONFIG,
+        device_class=NumberDeviceClass.WEIGHT,
+        native_unit_of_measurement=UnitOfMass.GRAMS,
+        entity_registry_enabled_default=True,
+        native_max_value=12,
+        native_min_value=7,
+        native_step=1,
+        native_value=9,
+        mode="slider",
+    ),
+    PolarisNumberEntityDescription(
+        key="tank",
+        name="tank",
+        translation_key="tank",
+        mqttTopicCurrent = "state/tank",
+        mqttTopicCommand = "control/tank",
+        entity_category=EntityCategory.CONFIG,
+        device_class=NumberDeviceClass.WATER,
+        native_unit_of_measurement=UnitOfVolume.MILLILITERS,
+        entity_registry_enabled_default=True,
+        native_max_value=250,
+        native_min_value=50,
+        native_step=5,
+        native_value=100,
+        mode="slider",
+    ),
+    PolarisNumberEntityDescription(
+        key="pressure",
+        name="pressure",
+        translation_key="pressure",
+        mqttTopicCurrent = "state/pressure",
+        mqttTopicCommand = "control/pressure",
+        entity_category=EntityCategory.CONFIG,
+        device_class=NumberDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.SECONDS,
+        entity_registry_enabled_default=True,
+        native_max_value=100,
+        native_min_value=0,
+        native_step=5,
+        native_value=40,
+        mode="slider",
+    ),
+    PolarisNumberEntityDescription(
+        key="speed",
+        name="speed",
+        translation_key="speed",
+        mqttTopicCurrent = "state/speed",
+        mqttTopicCommand = "control/speed",
+        entity_category=EntityCategory.CONFIG,
+        device_class=NumberDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.SECONDS,
+        entity_registry_enabled_default=True,
+        native_max_value=100,
+        native_min_value=0,
+        native_step=5,
+        native_value=30,
+        mode="slider",
+    ),
+    PolarisNumberEntityDescription(
+        key="temperature",
+        name="temperature",
+        translation_key="temperature",
+        mqttTopicCurrent = "state/temperature",
+        mqttTopicCommand = "control/temperature",
+        entity_category=EntityCategory.CONFIG,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        entity_registry_enabled_default=True,
+        native_max_value=95,
+        native_min_value=0,
+        native_step=1,
+        native_value=92,
+        mode="slider",
+    ),
 ]
 
 @dataclass
@@ -732,6 +996,42 @@ SELECT_COOKER = [
             "soup": "[{\"mode\":18, \"time\":3600, \"temperature\":97}]",
             "meat": "[{\"mode\":24, \"time\":21600, \"temperature\":93}]",
             "cottage_cheese": "[{\"mode\":27, \"time\":2400, \"temperature\":80}]",
+        },
+        entity_category=EntityCategory.CONFIG,
+        device_class=None,
+        icon="mdi:receipt-text",
+        entity_registry_enabled_default=True,
+    )
+]
+
+SELECT_COFFEEMAKER = [
+    PolarisSelectEntityDescription(
+        key="select_mode_cofeemaker",
+        name="select_mode_cofeemaker",
+        translation_key="select_mode_cofeemaker",
+        mqttTopicCurrentMode="control/mode",                            # ??????
+        mqttTopicCommandMode="control/mode",
+        options={
+        "not_selected": "[{\"mode\": 0, \"amount\": 0, \"weight\": 0, \"tank\": 0, \"pressure\": 0, \"speed\": 0, \"temperature\": 0}]",
+        "espresso": "[{\"mode\": 1, \"amount\": 40, \"weight\": 9, \"tank\": 0, \"pressure\": 0, \"speed\": 0, \"temperature\": 92}]",
+        "ristretto": "[{\"mode\": 2, \"amount\": 30, \"weight\": 11, \"tank\": 0, \"pressure\": 0, \"speed\": 0, \"temperature\": 92}]",
+        "long_espresso": "[{\"mode\": 3, \"amount\": 100, \"weight\": 9, \"tank\": 0, \"pressure\": 0, \"speed\": 0, \"temperature\": 92}]",
+        "americano": "[{\"mode\": 4, \"amount\": 80, \"weight\": 9, \"tank\": 100, \"pressure\": 0, \"speed\": 0, \"temperature\": 92}]",
+        "cappuccino": "[{\"mode\": 8, \"amount\": 50, \"weight\": 9, \"tank\": 0, \"pressure\": 35, \"speed\": 0, \"temperature\": 92}]",
+        "latte": "[{\"mode\": 9, \"amount\": 40, \"weight\": 9, \"tank\": 0, \"pressure\": 15, \"speed\": 30, \"temperature\": 92}]",
+        "flat_white": "[{\"mode\": 10, \"amount\": 80, \"weight\": 9, \"tank\": 0, \"pressure\": 5, \"speed\": 30, \"temperature\": 92}]",
+        "cortado": "[{\"mode\": 11, \"amount\": 50, \"weight\": 9, \"tank\": 0, \"pressure\": 0, \"speed\": 10, \"temperature\": 92}]",
+        "double_espresso": "[{\"mode\": 12, \"amount\": 40, \"weight\": 9, \"tank\": 0, \"pressure\": 0, \"speed\": 0, \"temperature\": 92}]",
+        "double_cappuccino": "[{\"mode\": 13, \"amount\": 80, \"weight\": 12, \"tank\": 0, \"pressure\": 50, \"speed\": 0, \"temperature\": 92}]",
+        "double_latte": "[{\"mode\": 14, \"amount\": 60, \"weight\": 10, \"tank\": 0, \"pressure\": 20, \"speed\": 45, \"temperature\": 92}]",
+        "double_long_espresso": "[{\"mode\": 15, \"amount\": 100, \"weight\": 9, \"tank\": 0, \"pressure\": 0, \"speed\": 0, \"temperature\": 92}]",
+        "double_macchiato": "[{\"mode\": 16, \"amount\": 60, \"weight\": 10, \"tank\": 0, \"pressure\": 60, \"speed\": 0, \"temperature\": 92}]",
+        "milk_coffee": "[{\"mode\": 17, \"amount\": 50, \"weight\": 9, \"tank\": 0, \"pressure\": 0, \"speed\": 30, \"temperature\": 92}]",
+        "macchiato": "[{\"mode\": 18, \"amount\": 40, \"weight\": 9, \"tank\": 0, \"pressure\": 40, \"speed\": 0, \"temperature\": 92}]",
+        "latte_macchiato": "[{\"mode\": 19, \"amount\": 40, \"weight\": 9, \"tank\": 0, \"pressure\": 20, \"speed\": 25, \"temperature\": 92}]",
+        "hot_water": "[{\"mode\": 20, \"amount\": 0, \"weight\": 0, \"tank\": 100, \"pressure\": 0, \"speed\": 0, \"temperature\": 0}]",
+        "hot_milk_foam": "[{\"mode\": 21, \"amount\": 0, \"weight\": 0, \"tank\": 0, \"pressure\": 35, \"speed\": 0, \"temperature\": 0}]",
+        "hot_milk": "[{\"mode\": 22, \"amount\": 0, \"weight\": 0, \"tank\": 0, \"pressure\": 0, \"speed\": 45, \"temperature\": 0}]"
         },
         entity_category=EntityCategory.CONFIG,
         device_class=None,
@@ -807,6 +1107,31 @@ class PolarisButtonEntityDescription(ButtonEntityDescription):
     payloads: str | None = None
     mqttTopicCommand: str | None = None
 
+BUTTON_HUMIDIFIER = [
+    PolarisButtonEntityDescription(
+        key="button_reset_filter",
+        name="button_reset_filter",
+        translation_key="button_reset_filter",
+        mqttTopicCommand="control/expendables",
+        device_class=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=True,
+        payloads="[0,0]",
+        icon="mdi:filter",
+    ),
+        PolarisButtonEntityDescription(
+        key="button_reset_tank",
+        name="button_reset_tank",
+        translation_key="button_reset_tank",
+        mqttTopicCommand="control/expendables",
+        device_class=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=True,
+        payloads="[1,0]",
+        icon="mdi:cup-water",
+    )
+]
+
 BUTTON_COOKER = [
     PolarisButtonEntityDescription(
         key="button_stop",
@@ -823,6 +1148,29 @@ BUTTON_COOKER = [
         name="button_start",
         translation_key="button_start",
         mqttTopicCommand="control/steps",
+        device_class=None,
+        entity_category=EntityCategory.CONFIG,
+        entity_registry_enabled_default=True,
+        payloads="[]",
+    )
+]
+
+BUTTON_COFFEEMAKER = [
+    PolarisButtonEntityDescription(
+        key="button_stop",
+        name="button_stop",
+        translation_key="button_stop_coffee",
+        mqttTopicCommand="control/",
+        device_class=None,
+        entity_category=EntityCategory.CONFIG,
+        entity_registry_enabled_default=True,
+        payloads="[]",
+    ),
+    PolarisButtonEntityDescription(
+        key="button_start",
+        name="button_start",
+        translation_key="button_start_coffee",
+        mqttTopicCommand="control/",
         device_class=None,
         entity_category=EntityCategory.CONFIG,
         entity_registry_enabled_default=True,
@@ -866,3 +1214,49 @@ TIME_COOKER = [
     )
 ]
 
+@dataclass
+class PolarisClimateEntityDescription(ClimateEntityDescription):
+
+    fan_mode: str | None = None
+    fan_modes: str | None = None
+    preset_modes: str | None = None
+    mqttTopicStateTemperature: str | None = None
+    mqttTopicCommandTemperature: str | None = None
+    mqttTopicCurrentTemperature: str | None = None
+    mqttTopicStateFanMode: str | None = None
+    mqttTopicCommandFanMode: str | None = None
+    mqttTopicCommandPower: str | None = None
+    mqttTopicCurrentPresetMode: str | None = None
+    mqttTopicCommandPresetMode: str | None = None
+    payload_on: str | None = None
+    payload_off: str | None = None
+    min_temp: int | None = None
+    max_temp: int | None = None
+    temp_step: int | None = None
+
+
+CLIMATES = [
+    PolarisClimateEntityDescription(
+        name = "Climate",
+        key = "climate",
+        translation_key = "climate",
+        fan_mode = "off",
+        fan_modes = {"off": "0", "1_speed": "1", "2_speed": "2", "3_speed": "3", "4_speed": "4", "5_speed": "5", "6_speed": "6", "7_speed": "7"},
+        preset_modes = {"off": "0", "hands": "1", "auto": "2", "night": "3", "turbo": "4", "passive": "5"},
+        mqttTopicStateTemperature = "state/temperature",
+        mqttTopicCommandTemperature = "control/temperature",
+        mqttTopicCurrentTemperature = "state/sensor/temperature",
+        mqttTopicStateFanMode = "state/speed",
+        mqttTopicCommandFanMode = "control/speed",
+        mqttTopicCommandPower = "control/mode",
+        mqttTopicCurrentPresetMode = "state/mode",
+        mqttTopicCommandPresetMode = "control/mode",
+        payload_on = "5",
+        payload_off = "0",
+        min_temp = 5,
+        max_temp = 25,
+        temp_step = 1,
+        device_class = None,
+        icon = "mdi:air-filter",
+    )
+]

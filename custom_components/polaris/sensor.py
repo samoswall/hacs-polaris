@@ -6,7 +6,7 @@ import json
 import logging
 
 from homeassistant.components import mqtt
-from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import DOMAIN, SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.device_registry import async_get as async_get_dev_reg
@@ -26,14 +26,17 @@ from .const import (
     SENSORS_WEIGHT,
     SENSORS_HUMIDIFIER,
     SENSORS_COOKER,
+    SENSORS_COFFEEMAKER,
     PolarisSensorEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
     POLARIS_COOKER_TYPE,
+    POLARIS_COFFEEMAKER_TYPE,
     KETTLE_ERROR,
     HUMIDDIFIER_ERROR,
     COOKER_ERROR,
+    COFFEEMAKER_ERROR
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -58,7 +61,6 @@ async def async_setup_entry(
             description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
-                    uniqueID=f"{integrationUniqueID}",
                     description=description,
                     device_friendly_name=deviceID,
                     mqtt_root=mqttRoot,
@@ -67,14 +69,13 @@ async def async_setup_entry(
                 )
             )
     #Kettle with weight
-    elif (devicetype in POLARIS_KETTLE_WITH_WEIGHT_TYPE):
+    if (devicetype in POLARIS_KETTLE_WITH_WEIGHT_TYPE):
         # Create sensors for all devices 
         SENSORS_ALL_DEVICES_CP = copy.deepcopy(SENSORS_ALL_DEVICES)
         for description in SENSORS_ALL_DEVICES_CP:
             description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
-                    uniqueID=f"{integrationUniqueID}",
                     description=description,
                     device_friendly_name=deviceID,
                     mqtt_root=mqttRoot,
@@ -87,7 +88,6 @@ async def async_setup_entry(
             description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
-                    uniqueID=f"{integrationUniqueID}",
                     description=description,
                     device_friendly_name=deviceID,
                     mqtt_root=mqttRoot,
@@ -96,14 +96,13 @@ async def async_setup_entry(
                 )
             )
     # Humidifier
-    elif (devicetype in POLARIS_HUMIDDIFIER_TYPE):
+    if (devicetype in POLARIS_HUMIDDIFIER_TYPE):
         # Create sensors for all devices 
         SENSORS_ALL_DEVICES_CP = copy.deepcopy(SENSORS_ALL_DEVICES)
         for description in SENSORS_ALL_DEVICES_CP:
             description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
-                    uniqueID=f"{integrationUniqueID}",
                     description=description,
                     device_friendly_name=deviceID,
                     mqtt_root=mqttRoot,
@@ -118,7 +117,6 @@ async def async_setup_entry(
             )
             sensorList.append(
                 PolarisSensor(
-                    uniqueID=f"{integrationUniqueID}",
                     description=description,
                     device_friendly_name=deviceID,
                     mqtt_root=mqttRoot,
@@ -127,14 +125,13 @@ async def async_setup_entry(
                 )
             )
     # Cooker
-    elif (devicetype in POLARIS_COOKER_TYPE):
+    if (devicetype in POLARIS_COOKER_TYPE):
         # Create sensors for all devices 
         SENSORS_ALL_DEVICES_CP = copy.deepcopy(SENSORS_ALL_DEVICES)
         for description in SENSORS_ALL_DEVICES_CP:
             description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
-                    uniqueID=f"{integrationUniqueID}",
                     description=description,
                     device_friendly_name=deviceID,
                     mqtt_root=mqttRoot,
@@ -147,7 +144,35 @@ async def async_setup_entry(
             description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
             sensorList.append(
                 PolarisSensor(
-                    uniqueID=f"{integrationUniqueID}",
+                    description=description,
+                    device_friendly_name=deviceID,
+                    mqtt_root=mqttRoot,
+                    device_type=devicetype,
+                    device_id=deviceID,
+                )
+            )
+    # Coffeemaker
+    if (devicetype in POLARIS_COFFEEMAKER_TYPE):
+        # Create sensors for all devices 
+        SENSORS_ALL_DEVICES_CP = copy.deepcopy(SENSORS_ALL_DEVICES)
+        for description in SENSORS_ALL_DEVICES_CP:
+            description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
+            sensorList.append(
+                PolarisSensor(
+                    description=description,
+                    device_friendly_name=deviceID,
+                    mqtt_root=mqttRoot,
+                    device_type=devicetype,
+                    device_id=deviceID,
+                )
+            )
+    if (devicetype in POLARIS_COFFEEMAKER_TYPE):
+        # Create sensors for coffeemaker 
+        SENSORS_COFFEEMAKER_CP = copy.deepcopy(SENSORS_COFFEEMAKER)
+        for description in SENSORS_COFFEEMAKER:
+            description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
+            sensorList.append(
+                PolarisSensor(
                     description=description,
                     device_friendly_name=deviceID,
                     mqtt_root=mqttRoot,
@@ -164,7 +189,7 @@ class PolarisSensor(PolarisBaseEntity, SensorEntity):
 
     def __init__(
         self,
-        uniqueID: str | None,
+#        uniqueID: str | None,
         device_friendly_name: str,
         mqtt_root: str,
         description: PolarisSensorEntityDescription,
@@ -178,8 +203,8 @@ class PolarisSensor(PolarisBaseEntity, SensorEntity):
             device_id=device_id,
         )
         self.entity_description = description
-        self._attr_unique_id = slugify(f"{uniqueID}-{description.name}")
-        self.entity_id = f"sensor.{uniqueID}-{description.name}"
+        self._attr_unique_id = slugify(f"{device_id}_{description.name}")
+        self.entity_id = f"{DOMAIN}.{POLARIS_DEVICE[int(device_type)]['class']}_{POLARIS_DEVICE[int(device_type)]['model']}_{description.name}"
         self._attr_has_entity_name = True
 
     async def async_added_to_hass(self):
@@ -193,11 +218,17 @@ class PolarisSensor(PolarisBaseEntity, SensorEntity):
                     dev_error = KETTLE_ERROR[payload_message]
                 if POLARIS_DEVICE[int(self.device_type)]['class'] == "humidifier":
                     dev_error = HUMIDDIFIER_ERROR[payload_message]
+                if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
+                    dev_error = COFFEEMAKER_ERROR[payload_message]
                 payload_message = dev_error
             if self.entity_description.name == "filter_retain":
                 payload_message = payload_message.replace("[","",1).replace("]","",1).split(",")[0]
             if self.entity_description.name == "clean_retain":
                 payload_message = payload_message.replace("[","",1).replace("]","",1).split(",")[1]
+            if self.entity_description.name == "mode":
+                payload_message = self.entity_description.valueMap[payload_message]
+            if self.entity_description.name == "power_state":
+                payload_message = self.entity_description.valueMap[payload_message]
             self._attr_native_value = payload_message
             self.async_write_ha_state()
 

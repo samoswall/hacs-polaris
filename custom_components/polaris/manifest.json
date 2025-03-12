@@ -1,17 +1,15 @@
 {
   "domain": "polaris",
   "name": "Polaris IQ Home MQTT",
-  "codeowners": ["@samoswall"],
-  "config_flow": true,
-  "dependencies": ["mqtt"],
   "documentation": "https://github.com/samoswall/hass-polaris",
-  "iot_class": "local_push",
   "issue_tracker": "https://github.com/samoswall/hass-polaris/issues",
+  "codeowners": ["@samoswall"],
+  "dependencies": ["mqtt"],
   "mqtt": [
     "polaris/+/state/devtype",
-    "/polaris/+/state/devtype",
-    "polaris/+/+/state/mac",
-    "/polaris/+/+/state/mac"
+    "/polaris/+/state/devtype"
   ],
-  "version": "1.0.3"
-}
+  "iot_class": "local_push",
+  "config_flow": true,
+  "version": "1.0.4"
+  }

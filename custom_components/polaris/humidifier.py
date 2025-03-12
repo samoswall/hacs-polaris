@@ -33,6 +33,19 @@ from .const import (
     HUMIDIFIERS,
     PolarisHumidifierEntityDescription,
     POLARIS_HUMIDDIFIER_TYPE,
+    POLARIS_HUMIDDIFIER_7_MODE_TYPE,
+    POLARIS_HUMIDDIFIER_5A_MODE_TYPE,
+    POLARIS_HUMIDDIFIER_5B_MODE_TYPE,
+    POLARIS_HUMIDDIFIER_4_MODE_TYPE,
+    POLARIS_HUMIDDIFIER_3A_MODE_TYPE,
+    POLARIS_HUMIDDIFIER_3B_MODE_TYPE,
+    POLARIS_HUMIDDIFIER_1_MODE_TYPE,
+    HUMIDDIFIER_5A_AVAILABLE_MODES,
+    HUMIDDIFIER_5B_AVAILABLE_MODES,
+    HUMIDDIFIER_4_AVAILABLE_MODES,
+    HUMIDDIFIER_3A_AVAILABLE_MODES,
+    HUMIDDIFIER_3B_AVAILABLE_MODES,
+    HUMIDDIFIER_1_AVAILABLE_MODES,
 )
 
 SUPPORT_FLAGS = HumidifierEntityFeature(1)
@@ -100,7 +113,20 @@ class PolarisHumidifier(PolarisBaseEntity, HumidifierEntity):
         self._attr_is_on = True
         self._attr_max_humidity = description.max_humidity
         self._attr_min_humidity = description.min_humidity
-        self.my_operation_list = description.available_modes
+        if device_type in POLARIS_HUMIDDIFIER_7_MODE_TYPE:
+            self.my_operation_list = description.available_modes
+        elif device_type in POLARIS_HUMIDDIFIER_5A_MODE_TYPE:
+            self.my_operation_list = HUMIDDIFIER_5A_AVAILABLE_MODES
+        elif device_type in POLARIS_HUMIDDIFIER_5B_MODE_TYPE:
+            self.my_operation_list = HUMIDDIFIER_5B_AVAILABLE_MODES
+        elif device_type in POLARIS_HUMIDDIFIER_4_MODE_TYPE:
+            self.my_operation_list = HUMIDDIFIER_4_AVAILABLE_MODES
+        elif device_type in POLARIS_HUMIDDIFIER_3A_MODE_TYPE:
+            self.my_operation_list = HUMIDDIFIER_3A_AVAILABLE_MODES
+        elif device_type in POLARIS_HUMIDDIFIER_3B_MODE_TYPE:
+            self.my_operation_list = HUMIDDIFIER_3B_AVAILABLE_MODES
+        elif device_type in POLARIS_HUMIDDIFIER_1_MODE_TYPE:
+            self.my_operation_list = HUMIDDIFIER_1_AVAILABLE_MODES
         self._attr_mode = description.mode
         self._attr_available_modes = list(self.my_operation_list.keys())
         self.payload_on=description.payload_on
@@ -163,10 +189,10 @@ class PolarisHumidifier(PolarisBaseEntity, HumidifierEntity):
         self._attr_target_humidity = humidity
         topic = f"{self.entity_description.mqttTopicCommandTargetHumidity}"
         self.hass.components.mqtt.publish(self.hass, topic, str(humidity))
-        self.async_write_ha_state()
+
 
     def set_mode(self, mode: str):
         self._attr_mode = mode
         topic = f"{self.entity_description.mqttTopicCommandMode}"
         self.hass.components.mqtt.publish(self.hass, topic, self.my_operation_list[mode])
-        self.async_write_ha_state()
+

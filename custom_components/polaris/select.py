@@ -27,12 +27,15 @@ from .const import (
     POLARIS_DEVICE,
     SELECT_KETTLE,
     SELECT_COOKER,
+    SELECT_COFFEEMAKER,
     PolarisSelectEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
     POLARIS_COOKER_TYPE,
+    POLARIS_COFFEEMAKER_TYPE,
 )
+
 
 _LOGGER = logging.getLogger(__name__)
 _LOGGER.setLevel(logging.DEBUG)
@@ -77,6 +80,20 @@ async def async_setup_entry(
                     device_id=device_id
                 )
             )
+    elif (device_type in POLARIS_COFFEEMAKER_TYPE):
+        SELECT_COFFEEMAKER_LC = copy.deepcopy(SELECT_COFFEEMAKER)
+        for description in SELECT_COFFEEMAKER_LC:
+            description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
+            description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+            selectList.append(
+                PolarisSelect(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
     async_add_entities(selectList, update_before_add=True)
 
 
@@ -103,6 +120,7 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
         self._attr_options = list(description.options.keys())
         self._attr_current_option = self._attr_options[0]
         self._attr_has_entity_name = True
+
 
     @property
     def available(self):
@@ -133,7 +151,26 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
         if POLARIS_DEVICE[int(self.device_type)]['class'] == "kettle":
             self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, self.entity_description.options[option])
             self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandMode, 3)
-        
+        if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
+            coffee_mode = json.loads(self.entity_description.options[option])
+            for key, val in coffee_mode[0].items():
+                if key == "mode":
+                    mode = val
+                elif val != 0:
+                    service_data = {}
+                    service_data["entity_id"] = f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_{key}"
+                    service_data["value"] = str(val)
+                    await self.hass.services.async_call("number", "set_value", service_data)
+                else:
+                    if key == "weight": 
+                        val = "7.777"
+                    else:
+                        val = "55.777"
+                    service_data = {}
+                    service_data["entity_id"] = f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_{key}"
+                    service_data["value"] = val
+                    await self.hass.services.async_call("number", "set_value", service_data)
+
     async def async_added_to_hass(self):
         @callback
         def message_received_sel(message):
@@ -142,6 +179,10 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
                 self._attr_current_option = self._attr_options[0]
             elif POLARIS_DEVICE[int(self.device_type)]['class'] == "cooker":
                 sel_mode = json.loads(payload)[0]["mode"]
+          #      if int(sel_mode)>0:
+          #          self.switch.set_available(True)
+          #      else:
+          #          self.switch.set_available(False)
                 sel_opt = self.key_from_option(sel_mode)
                 self._attr_current_option = sel_opt
                 self.async_write_ha_state()

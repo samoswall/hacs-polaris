@@ -37,6 +37,7 @@ from .const import (
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
     POLARIS_COOKER_TYPE,
+    POLARIS_COOKER_WITH_LID_TYPE,
 )
 
 #_LOGGER = logging.getLogger(__name__)
@@ -68,7 +69,7 @@ async def async_setup_entry(
                         device_id=device_id
                     )
                 )
-    elif (device_type in POLARIS_COOKER_TYPE):
+    elif (device_type in POLARIS_COOKER_WITH_LID_TYPE):
         # Create kettle with base
             BINARYSENSOR_LID_LC = copy.deepcopy(BINARYSENSOR_LID)
             for description in BINARYSENSOR_LID_LC:
