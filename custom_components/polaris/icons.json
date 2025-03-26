@@ -78,6 +78,44 @@
         "state": {
           "on": "mdi:pot-steam"
         }
+      },
+      "cappuccinator_binary_sensor": {
+        "default": "mdi:cup-off",
+        "state": {
+          "on": "mdi:cup"
+        }
+      }
+    },
+    "climate": {
+      "climate": {
+        "default": "mdi:hvac",
+        "state": {
+          "off": "mdi:hvac-off"
+        },
+        "state_attributes": {
+          "fan_mode": {
+            "state": {
+              "1_speed": "mdi:fan",
+              "2_speed": "mdi:fan",
+              "3_speed": "mdi:fan",
+              "4_speed": "mdi:fan",
+              "5_speed": "mdi:fan",
+              "6_speed": "mdi:fan",
+              "7_speed": "mdi:fan",
+              "off": "mdi:fan-off"
+            }
+          },
+          "preset_mode": {
+            "default": "mdi:hvac",
+            "state": {
+              "hands": "mdi:gesture-tap",
+              "auto": "mdi:molecule-co2",
+              "night": "mdi:weather-night",
+              "turbo": "mdi:rocket-launch",
+              "passive": "mdi:hvac"
+            }
+          }
+        }
       }
     }
   }

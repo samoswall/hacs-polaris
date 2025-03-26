@@ -34,12 +34,14 @@ from .const import (
     SELECT_COOKER,
     BUTTON_COFFEEMAKER,
     SELECT_COFFEEMAKER,
+    SELECT_COFFEEMAKER_ROG,
     PolarisButtonEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
     POLARIS_COOKER_TYPE,
     POLARIS_COFFEEMAKER_TYPE,
+    POLARIS_COFFEEMAKER_ROG_TYPE,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -98,6 +100,20 @@ async def async_setup_entry(
                     device_prefix_topic=device_prefix_topic,
                 )
             )
+    if (device_type in POLARIS_COFFEEMAKER_ROG_TYPE):
+        BUTTON_COFFEEMAKER_LC = copy.deepcopy(BUTTON_COFFEEMAKER)
+        for description in BUTTON_COFFEEMAKER_LC:
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            buttonList.append(
+                PolarisButton(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id,
+                    device_prefix_topic=device_prefix_topic,
+                )
+            )
     async_add_entities(buttonList, update_before_add=True)
 
 
@@ -128,7 +144,7 @@ class PolarisButton(PolarisBaseEntity, ButtonEntity):
         self.device_prefix_topic = device_prefix_topic
 
     async def async_press(self) -> None:
-        if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
+        if (self.device_type in POLARIS_COFFEEMAKER_TYPE):
             if self.entity_description.key == "button_stop":
                 self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand+"mode", "0")
             else:
@@ -157,6 +173,38 @@ class PolarisButton(PolarisBaseEntity, ButtonEntity):
                         command_mode = SELECT_COFFEEMAKER[0].options[state_mode]
                         coffee_mode = json.loads(command_mode)
                         self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand+"mode", coffee_mode[0]["mode"])
+
+        if (self.device_type in POLARIS_COFFEEMAKER_ROG_TYPE):
+            if self.entity_description.key == "button_stop":
+                self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand+"mode", "0")
+            else:
+                state_amount = self.hass.states.get(f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_amount").state
+                state_tank = self.hass.states.get(f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_tank").state
+                state_temp = self.hass.states.get(f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_temperature").state
+                state_mode = self.hass.states.get(f"select.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_select_mode_cofeemaker").state
+                state_cappuccinator = self.hass.states.get(f"binary_sensor.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_cappuccinator").state
+                state_power = self.hass.states.get(f"switch.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_power").state
+                if state_power == "off":
+                    self.hass.components.mqtt.publish(self.hass, f"{self.mqtt_root}/{self.device_prefix_topic}/control/mode", 5)
+                if state_cappuccinator == "off" and state_mode in ("cappuccino", "double_cappuccino", "latte", "double_latte", "flat_white", "hot_milk"):
+                    self.hass.components.mqtt.publish(self.hass, f"{self.mqtt_root}/{self.device_prefix_topic}/state/error/code", "99")
+                    return
+                elif state_mode == "not_selected":
+                    self.hass.components.mqtt.publish(self.hass, f"{self.mqtt_root}/{self.device_prefix_topic}/state/error/code", "98")
+                    return
+                else:
+                    if state_amount == "unavailable":
+                        state_amount = "0"
+                    if state_tank == "unavailable":
+                        state_tank = "0"
+                    self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand+"amount", state_amount)
+                    self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand+"temperature", state_temp)
+                    self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand+"tank", state_tank)
+                    command_mode = SELECT_COFFEEMAKER_ROG[0].options[state_mode]
+                    coffee_mode = json.loads(command_mode)
+                    self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand+"mode", coffee_mode[0]["mode"])
+                    self.hass.components.mqtt.publish(self.hass, f"{self.mqtt_root}/{self.device_prefix_topic}/state/error/code", "00")
+
 
         if POLARIS_DEVICE[int(self.device_type)]['class'] == "cooker":
             if self.entity_description.key == "button_stop":

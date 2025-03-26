@@ -141,7 +141,10 @@ class PolarisHumidifier(PolarisBaseEntity, HumidifierEntity):
             self.async_write_ha_state()
         @callback
         def message_received_targ_humid(message):
-            self._attr_target_humidity = float(message.payload)
+            if float(message.payload) < self._attr_min_humidity:
+                self._attr_target_humidity = self._attr_min_humidity
+            else:
+                self._attr_target_humidity = float(message.payload)
             self.async_write_ha_state()
         @callback
         def message_received_mode(message):

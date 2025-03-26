@@ -113,7 +113,10 @@ class PolarisWaterHeater(PolarisBaseEntity, WaterHeaterEntity):
             self.async_write_ha_state()
         @callback
         def message_received_targtemp(message):
-            self.target_temperature = float(message.payload)
+            if float(message.payload) < self._attr_min_temp:
+                self.target_temperature = self._attr_min_temp
+            else:
+                self.target_temperature = float(message.payload)
             self.async_write_ha_state()
 
         await mqtt.async_subscribe(

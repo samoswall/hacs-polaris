@@ -28,12 +28,16 @@ from .const import (
     SELECT_KETTLE,
     SELECT_COOKER,
     SELECT_COFFEEMAKER,
+    SELECT_COFFEEMAKER_ROG,
+    SELECT_CLIMATE,
     PolarisSelectEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
     POLARIS_HUMIDDIFIER_TYPE,
     POLARIS_COOKER_TYPE,
     POLARIS_COFFEEMAKER_TYPE,
+    POLARIS_COFFEEMAKER_ROG_TYPE,
+    POLARIS_CLIMATE_TYPE,
 )
 
 
@@ -65,7 +69,7 @@ async def async_setup_entry(
                     device_id=device_id
                 )
             )
-    elif (device_type in POLARIS_COOKER_TYPE):
+    if (device_type in POLARIS_COOKER_TYPE):
         SELECT_COOKER_LC = copy.deepcopy(SELECT_COOKER)
         for description in SELECT_COOKER_LC:
             description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
@@ -80,9 +84,37 @@ async def async_setup_entry(
                     device_id=device_id
                 )
             )
-    elif (device_type in POLARIS_COFFEEMAKER_TYPE):
+    if (device_type in POLARIS_COFFEEMAKER_TYPE):
         SELECT_COFFEEMAKER_LC = copy.deepcopy(SELECT_COFFEEMAKER)
         for description in SELECT_COFFEEMAKER_LC:
+            description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
+            description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+            selectList.append(
+                PolarisSelect(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+    if (device_type in POLARIS_COFFEEMAKER_ROG_TYPE):
+        SELECT_COFFEEMAKER_ROG_LC = copy.deepcopy(SELECT_COFFEEMAKER_ROG)
+        for description in SELECT_COFFEEMAKER_ROG_LC:
+            description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
+            description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+            selectList.append(
+                PolarisSelect(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+    if (device_type in POLARIS_CLIMATE_TYPE):
+        SELECT_CLIMATE_LC = copy.deepcopy(SELECT_CLIMATE)
+        for description in SELECT_CLIMATE_LC:
             description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
             description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
             selectList.append(
@@ -152,24 +184,54 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
             self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, self.entity_description.options[option])
             self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandMode, 3)
         if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
-            coffee_mode = json.loads(self.entity_description.options[option])
-            for key, val in coffee_mode[0].items():
-                if key == "mode":
-                    mode = val
-                elif val != 0:
-                    service_data = {}
-                    service_data["entity_id"] = f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_{key}"
-                    service_data["value"] = str(val)
-                    await self.hass.services.async_call("number", "set_value", service_data)
+            if int(self.device_type) == 45:
+                coffee_mode = json.loads(self.entity_description.options[option])
+                
+                service_data = {}
+                service_data["entity_id"] = f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_tank"
+                if coffee_mode[0]["tank"] != 0:
+                   service_data["value"] = str(coffee_mode[0]["tank"])
                 else:
-                    if key == "weight": 
-                        val = "7.777"
+                   service_data["value"] = 7.777
+                await self.hass.services.async_call("number", "set_value", service_data)
+                
+                service_data = {}
+                service_data["entity_id"] = f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_amount"
+                if coffee_mode[0]["amount"] != 0:
+                    service_data["value"] = str(coffee_mode[0]["amount"])
+                else:
+                    service_data["value"] = 100.777
+                await self.hass.services.async_call("number", "set_value", service_data)
+                
+                service_data = {}
+                service_data["entity_id"] = f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_temperature"
+                if coffee_mode[0]["temperature"] != 0:
+                    service_data["value"] = str(coffee_mode[0]["temperature"])
+                else:
+                    service_data["value"] = 100.777
+                await self.hass.services.async_call("number", "set_value", service_data)
+                
+            else:
+                coffee_mode = json.loads(self.entity_description.options[option])
+                for key, val in coffee_mode[0].items():
+                    if key == "mode":
+                        mode = val
+                    elif val != 0:
+                        service_data = {}
+                        service_data["entity_id"] = f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_{key}"
+                        service_data["value"] = str(val)
+                        await self.hass.services.async_call("number", "set_value", service_data)
                     else:
-                        val = "55.777"
-                    service_data = {}
-                    service_data["entity_id"] = f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_{key}"
-                    service_data["value"] = val
-                    await self.hass.services.async_call("number", "set_value", service_data)
+                        if key == "weight": 
+                            val = "7.777"
+                        else:
+                            val = "55.777"
+                        service_data = {}
+                        service_data["entity_id"] = f"number.{POLARIS_DEVICE[int(self.device_type)]['class']}_{POLARIS_DEVICE[int(self.device_type)]['model'].replace('-', '_')}_{key}"
+                        service_data["value"] = val
+                        await self.hass.services.async_call("number", "set_value", service_data)
+        if int(self.device_type) == 69:
+            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandMode, self.entity_description.options[option])
 
     async def async_added_to_hass(self):
         @callback
@@ -177,6 +239,7 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
             payload = message.payload
             if payload in ("0", "[]"):
                 self._attr_current_option = self._attr_options[0]
+                self.async_write_ha_state()
             elif POLARIS_DEVICE[int(self.device_type)]['class'] == "cooker":
                 sel_mode = json.loads(payload)[0]["mode"]
           #      if int(sel_mode)>0:
@@ -185,5 +248,12 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
           #          self.switch.set_available(False)
                 sel_opt = self.key_from_option(sel_mode)
                 self._attr_current_option = sel_opt
+                self.async_write_ha_state()
+            elif int(self.device_type) == 45:
+                sel_opt = self.key_from_option(int(payload))
+                self._attr_current_option = sel_opt
+                self.async_write_ha_state()
+            elif int(self.device_type) == 69:
+                self._attr_current_option = self._attr_options[int(payload)]
                 self.async_write_ha_state()
         await mqtt.async_subscribe(self.hass, self.entity_description.mqttTopicCurrentMode, message_received_sel, 1)

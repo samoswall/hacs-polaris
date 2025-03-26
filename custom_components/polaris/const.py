@@ -44,6 +44,7 @@ from homeassistant.const import (
     UnitOfTemperature,
     UnitOfMass,
     SIGNAL_STRENGTH_DECIBELS,
+    CONCENTRATION_PARTS_PER_MILLION,
     UnitOfTime,
     UnitOfVolume,
     Platform,
@@ -306,7 +307,7 @@ POLARIS_DEVICE = {
     92:  {"model": "PGS-1450CWIFI", "class": "steamer"},
     94:  {"model": "PSS-7070KWIFI", "class": "steamer"},
     50:  {"model": "PETB-0202TC", "class": "toothbrush"},
-    69:  {"model": "Ballu ASP-100", "class": "oneair"},
+    69:  {"model": "Ballu-OneAir-ASP-100", "class": "air-cleaner"},
 }
 
 POLARIS_KETTLE_TYPE = ["2","6","8","29","36","37","38","51","52","53","54","56","57","58","59","60","61","62","63","67","82","83","84","85","86","97","105","117","121","139","165","175","176","189","194","196","205","209"]
@@ -326,7 +327,8 @@ POLARIS_HUMIDDIFIER_3B_MODE_TYPE = ["153","157","158"]
 POLARIS_HUMIDDIFIER_1_MODE_TYPE = ["137"]
 POLARIS_COOKER_TYPE = ["1","9","10","39","40","41","47","48","55","77","78","79","80","89","95","114","138","162","169","183","192","206","210","215","240"]
 POLARIS_COOKER_WITH_LID_TYPE = ["9","39","40","41","47","48","55","77","78","79","80","89","95","114","138","162","169","183","192","206","210","215","240"]
-POLARIS_COFFEEMAKER_TYPE = ["45", "103", "166", "190", "200", "207", "222", "235", "247"]
+POLARIS_COFFEEMAKER_TYPE = ["103", "166", "190", "200", "207", "222", "235", "247"]
+POLARIS_COFFEEMAKER_ROG_TYPE = ["45"]
 POLARIS_CLIMATE_TYPE = ["69"]
 
 HUMIDDIFIER_5A_AVAILABLE_MODES = {"auto": "1", "comfort": "2", "baby": "3", "sleep": "4", "boost": "5"}
@@ -383,7 +385,9 @@ COFFEEMAKER_ERROR = {
 "17": "cleaning_brewing_system",
 "18": "decalcification_progress",
 "19": "cleaning_hydraulic_system",
-"20": "check_water_tank"
+"20": "check_water_tank",
+"98": "nothing_is_selected",
+"99": "cappuccinator_false"
 }
 
 @dataclass
@@ -561,6 +565,74 @@ SENSORS_COFFEEMAKER = [
     ),
 ]
 
+SENSORS_COFFEEMAKER_ROG = [
+    PolarisSensorEntityDescription(
+        key="firmware",
+        name="Firmware Version",
+        translation_key="firmware_sensor",
+        device_class=None,
+        native_unit_of_measurement=None,
+        state_class=None,
+        entity_registry_enabled_default=True,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:information-outline",
+    ),
+    PolarisSensorEntityDescription(
+        key="devtype",
+        name="Device Type",
+        translation_key="type_sensor",
+        device_class=None,
+        native_unit_of_measurement=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:information-outline",
+    ),
+    PolarisSensorEntityDescription(
+        key="diag/rssi",
+        name="RSSI",
+        translation_key="rssi",
+        device_class=SensorDeviceClass.SIGNAL_STRENGTH,
+        native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:wifi",
+    ),
+    PolarisSensorEntityDescription(
+        key="error/code",
+        name="error",
+        translation_key="error",
+        device_class=None,
+        native_unit_of_measurement=None,
+        state_class=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:alert",
+    ),
+]
+
+SENSORS_CLIMATE = [
+    PolarisSensorEntityDescription(
+        key="sensor/co2",
+        name="CO2",
+        translation_key="co2_sensor",
+        device_class=None,
+        native_unit_of_measurement=CONCENTRATION_PARTS_PER_MILLION,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_registry_enabled_default=True,
+#        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:molecule-co2",
+    ),
+    PolarisSensorEntityDescription(
+        key="expendables",
+        name="filter_retain",
+        translation_key="filter_retain",
+        device_class=None,
+        native_unit_of_measurement=PERCENTAGE,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        entity_registry_enabled_default=True,
+        icon="mdi:filter",
+    ),
+]
+
 @dataclass
 class PolarisSwitchEntityDescription(SwitchEntityDescription):
 
@@ -609,6 +681,21 @@ SWITCHES_ALL_DEVICES = [
 ]
 
 SWITCH_KETTLE_BACKLIGHT = [
+    PolarisSwitchEntityDescription(
+        key="backlight",
+        translation_key="backlight_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Backlight",
+        mqttTopicCommand="control/backlight",
+        mqttTopicCurrentValue="state/backlight",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="true",
+        payload_off="false",
+#        icon="mdi:alarm-light",
+    ),
+]
+
+SWITCH_HUMIDIFIER_BACKLIGHT = [
     PolarisSwitchEntityDescription(
         key="backlight",
         translation_key="backlight_switch",
@@ -714,6 +801,80 @@ SWITCHES_COFFEEMAKER = [
         device_class=SwitchDeviceClass.SWITCH,
         payload_on="true",
         payload_off="false",
+    ),
+]
+
+SWITCHES_COFFEEMAKER_ROG = [
+    PolarisSwitchEntityDescription(
+        key="power",
+        translation_key="power_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Power",
+        mqttTopicCommand="control/mode",
+        mqttTopicCurrentValue="state/mode",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="5",
+        payload_off="0",
+        icon="mdi:power-standby",
+    ),
+    PolarisSwitchEntityDescription(
+        key="sound",
+        translation_key="sound_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Sound",
+        mqttTopicCommand="control/sound",
+        mqttTopicCurrentValue="state/sound",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="true",
+        payload_off="false",
+    ),
+    PolarisSwitchEntityDescription(
+        key="child_lock",
+        translation_key="child_lock_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Child lock",
+        mqttTopicCommand="control/child_lock",
+        mqttTopicCurrentValue="state/child_lock",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="true",
+        payload_off="false",
+    ),
+]
+
+SWITCHES_CLIMATE = [
+    PolarisSwitchEntityDescription(
+        key="power",
+        translation_key="power_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Power",
+        mqttTopicCommand="control/mode",
+        mqttTopicCurrentValue="state/mode",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="5",
+        payload_off="0",
+        icon="mdi:power-standby",
+    ),
+    PolarisSwitchEntityDescription(
+        key="volume",
+        translation_key="sound_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Volume",
+        mqttTopicCommand="control/volume",
+        mqttTopicCurrentValue="state/volume",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="1",
+        payload_off="0",
+    ),
+    PolarisSwitchEntityDescription(
+        key="backlight",
+        translation_key="backlight_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Backlight",
+        mqttTopicCommand="control/backlight",
+        mqttTopicCurrentValue="state/backlight",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="1",
+        payload_off="0",
     ),
 ]
 
@@ -936,6 +1097,73 @@ NUMBERS_COFFEEMAKER = [
     ),
 ]
 
+NUMBERS_COFFEEMAKER_ROG = [
+    PolarisNumberEntityDescription(
+        key="display_time",
+        name="display_time",
+        translation_key="display_time",
+        mqttTopicCurrent = "state/program_data/0",
+        mqttTopicCommand = "control/program_data/0",
+        entity_category=EntityCategory.CONFIG,
+        device_class=NumberDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.MINUTES,
+        entity_registry_enabled_default=True,
+        native_max_value=30,
+        native_min_value=10,
+        native_step=5,
+        native_value=10,
+        mode="slider",
+    ),
+    PolarisNumberEntityDescription(
+        key="amount",
+        name="amount",
+        translation_key="amount",
+        mqttTopicCurrent = "state/amount",
+        mqttTopicCommand = "control/amount",
+        entity_category=EntityCategory.CONFIG,
+        device_class=NumberDeviceClass.WEIGHT,
+        native_unit_of_measurement=UnitOfMass.GRAMS,
+        entity_registry_enabled_default=True,
+        native_max_value=200,
+        native_min_value=30,
+        native_step=5,
+        native_value=40,
+        mode="slider",
+    ),
+    PolarisNumberEntityDescription(
+        key="tank",
+        name="tank",
+        translation_key="speed",
+        mqttTopicCurrent = "state/tank",
+        mqttTopicCommand = "control/tank",
+        entity_category=EntityCategory.CONFIG,
+        device_class=NumberDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.SECONDS,
+        entity_registry_enabled_default=True,
+        native_max_value=40,
+        native_min_value=1,
+        native_step=1,
+        native_value=15,
+        mode="slider",
+    ),
+    PolarisNumberEntityDescription(
+        key="temperature",
+        name="temperature",
+        translation_key="temperature",
+        mqttTopicCurrent = "state/temperature",
+        mqttTopicCommand = "control/temperature",
+        entity_category=EntityCategory.CONFIG,
+        device_class=NumberDeviceClass.TEMPERATURE,
+        native_unit_of_measurement=UnitOfTemperature.CELSIUS,
+        entity_registry_enabled_default=True,
+        native_max_value=105,
+        native_min_value=95,
+        native_step=5,
+        native_value=95,
+        mode="slider",
+    ),
+]
+
 @dataclass
 class PolarisSelectEntityDescription(SelectEntityDescription):
 
@@ -1040,6 +1268,56 @@ SELECT_COFFEEMAKER = [
     )
 ]
 
+SELECT_COFFEEMAKER_ROG = [
+    PolarisSelectEntityDescription(
+        key="select_mode_cofeemaker_rog",
+        name="select_mode_cofeemaker",
+        translation_key="select_mode_cofeemaker",
+        mqttTopicCurrentMode="state/mode",
+        mqttTopicCommandMode="control/mode",
+        options={
+            "not_selected": "[{\"mode\": 0, \"amount\": 30, \"tank\": 0, \"temperature\": 95}]",
+            "espresso": "[{\"mode\": 1, \"amount\": 65, \"tank\": 0, \"temperature\": 95}]",
+            "doppio": "[{\"mode\": 1, \"amount\": 115, \"tank\": 0, \"temperature\": 95}]",
+            "cappuccino": "[{\"mode\": 2, \"amount\": 50, \"tank\": 15, \"temperature\": 95}]",
+            "double_cappuccino": "[{\"mode\": 2, \"amount\": 100, \"tank\": 25, \"temperature\": 95}]",
+            "latte": "[{\"mode\": 3, \"amount\": 65, \"tank\": 32, \"temperature\": 95}]",
+            "double_latte": "[{\"mode\": 3, \"amount\": 115, \"tank\": 42, \"temperature\": 95}]",
+            "lungo": "[{\"mode\": 1, \"amount\": 120, \"tank\": 0, \"temperature\": 95}]",
+            "flat_white": "[{\"mode\": 2, \"amount\": 70, \"tank\": 20, \"temperature\": 95}]",
+            "clearing": "[{\"mode\": 4, \"amount\": 0, \"tank\": 0, \"temperature\": 95}]",
+            "heating": "[{\"mode\": 5, \"amount\": 0, \"tank\": 0, \"temperature\": 95}]",
+            "hot_milk": "[{\"mode\": 6, \"amount\": 0, \"tank\": 15, \"temperature\": 95}]",
+        },
+        entity_category=EntityCategory.CONFIG,
+        device_class=None,
+        icon="mdi:receipt-text",
+        entity_registry_enabled_default=True,
+    )
+]
+
+SELECT_CLIMATE = [
+    PolarisSelectEntityDescription(
+        key="select_melody",
+        name="Melody",
+        translation_key="select_melody",
+        mqttTopicCurrentMode="state/amount",
+        mqttTopicCommandMode="control/amount",
+        options={
+          "mute": 0,
+          "rainstorm": 1,
+          "surf": 2,
+          "forest": 3,
+          "birdsong": 4,
+          "bonfire": 5,
+        },
+        entity_category=EntityCategory.CONFIG,
+        device_class=None,
+        icon="mdi:music-note",
+        entity_registry_enabled_default=True,
+    )
+]
+
 @dataclass
 class PolarisLightEntityDescription(SelectEntityDescription):
 
@@ -1096,6 +1374,17 @@ BINARYSENSOR_WATER_TANK = [
         name="water_tank",
         translation_key="water_tank_binary_sensor",
         mqttTopicStatus="state/error/water",
+        device_class=None,
+        entity_registry_enabled_default=True,
+    )
+]
+
+BINARYSENSOR_CAPPUCCINATOR = [
+    PolarisBinarySensorEntityDescription(
+        key="cappuccinator",
+        name="cappuccinator",
+        translation_key="cappuccinator_binary_sensor",
+        mqttTopicStatus="state/tank",
         device_class=None,
         entity_registry_enabled_default=True,
     )
@@ -1242,7 +1531,7 @@ CLIMATES = [
         translation_key = "climate",
         fan_mode = "off",
         fan_modes = {"off": "0", "1_speed": "1", "2_speed": "2", "3_speed": "3", "4_speed": "4", "5_speed": "5", "6_speed": "6", "7_speed": "7"},
-        preset_modes = {"off": "0", "hands": "1", "auto": "2", "night": "3", "turbo": "4", "passive": "5"},
+        preset_modes = {"hands": "1", "auto": "2", "night": "3", "turbo": "4", "passive": "5"},
         mqttTopicStateTemperature = "state/temperature",
         mqttTopicCommandTemperature = "control/temperature",
         mqttTopicCurrentTemperature = "state/sensor/temperature",
@@ -1257,6 +1546,5 @@ CLIMATES = [
         max_temp = 25,
         temp_step = 1,
         device_class = None,
-        icon = "mdi:air-filter",
     )
 ]

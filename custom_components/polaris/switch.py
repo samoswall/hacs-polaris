@@ -26,10 +26,13 @@ from .const import (
     POLARIS_DEVICE,
     SWITCHES_ALL_DEVICES,
     SWITCH_KETTLE_BACKLIGHT,
+    SWITCH_HUMIDIFIER_BACKLIGHT,
     SWITCH_HUMIDIFIER_IONISER,
     SWITCH_HUMIDIFIER_WARM_STREAM,
     SWITCHES_COOKER,
     SWITCHES_COFFEEMAKER,
+    SWITCHES_COFFEEMAKER_ROG,
+    SWITCHES_CLIMATE,
     PolarisSwitchEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
@@ -39,6 +42,8 @@ from .const import (
     POLARIS_HUMIDDIFIER_WITH_WARM_STREAM_TYPE,
     POLARIS_COOKER_TYPE,
     POLARIS_COFFEEMAKER_TYPE,
+    POLARIS_COFFEEMAKER_ROG_TYPE,
+    POLARIS_CLIMATE_TYPE,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -88,6 +93,19 @@ async def async_setup_entry(
         # Create switches for all devices
         SWITCHES_ALL_DEVICES_LC = copy.deepcopy(SWITCHES_ALL_DEVICES)
         for description in SWITCHES_ALL_DEVICES_LC:
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            switchList.append(
+                PolarisSwitch(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+        SWITCH_HUMIDIFIER_BACKLIGHT_LC = copy.deepcopy(SWITCH_HUMIDIFIER_BACKLIGHT)
+        for description in SWITCH_HUMIDIFIER_BACKLIGHT_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
             switchList.append(
@@ -159,6 +177,36 @@ async def async_setup_entry(
                     device_id=device_id
                 )
             )
+    if (device_type in POLARIS_COFFEEMAKER_ROG_TYPE):
+        # Create switches for coffeemaker
+        SWITCHES_COFFEEMAKER_ROG_LC = copy.deepcopy(SWITCHES_COFFEEMAKER_ROG)
+        for description in SWITCHES_COFFEEMAKER_ROG_LC:
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            switchList.append(
+                PolarisSwitch(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+    if (device_type in POLARIS_CLIMATE_TYPE):
+        # Create switches for climate
+        SWITCHES_CLIMATE_LC = copy.deepcopy(SWITCHES_CLIMATE)
+        for description in SWITCHES_CLIMATE_LC:
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            switchList.append(
+                PolarisSwitch(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
     async_add_entities(switchList, update_before_add=True)
 
 class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
@@ -191,12 +239,17 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
         @callback
         def message_received(message):
             if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
-                if str(message.payload) in ("01", "1", "03", "3"):
+                if int(self.device_type) == 45:
+                    if str(message.payload) in ("1", "2", "3", "4", "5", "6"):
+                        self._attr_is_on = True
+                    else:
+                        self._attr_is_on = False
+                elif str(message.payload) in ("01", "1", "03", "3"):
                     self._attr_is_on = True
                 else:
                     self._attr_is_on = False
             else:
-                if str(message.payload).lower() in ("1", "2", "3", "4", "5","true"):
+                if str(message.payload).lower() in ("1", "2", "3", "4", "5", "true"):
                     self._attr_is_on = True
                 elif str(message.payload).lower() in ("0", "false"):
                    self._attr_is_on = False
