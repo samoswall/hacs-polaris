@@ -72,8 +72,8 @@
 Устройство так же может находиться во внешней сети, и если до сети с брокером есть маршрут, оно будет найдено.
 </details>
 
-
-## Устройства Polaris
+<details>
+  <summary>Устройства Polaris</summary>
 
 | ID    | Модель           | Тип устройства | Поддержка | Функции | Изображение |
 | :---: |------------------|----------------|-----------|---------|    :---:    |
@@ -309,3 +309,13 @@
 |92|PGS-1450CWIFI|steamer|:x:|speed, child_lock, |![all](https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/60.webp)
 |94|PSS-7070KWIFI|steamer|:x:|water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/1/00/43d2d-5a4b-4de7-a60a-767a007b7f5c/60.webp)
 |50|PETB-0202TC|toothbrush|:x:|timer, smart_mode, |![all](https://images.cdn.polaris-iot.com/d/d5/14363-6a8e-4d0d-bee1-658994b95305/60.webp)
+</details>
+
+<details>
+  <summary>Устройства Rusklimat</summary>
+
+| ID    | Модель           | Тип устройства | Поддержка | Функции | Изображение |
+| :---: |------------------|----------------|-----------|---------|    :---:    |
+|69|Ballu ASP-100|air-cleaner|:heavy_check_mark:|fan speed, volume, sound, backlight |![all](https://m-files.cdn1.cc/lpfile/1/2/b/12b3c2e3a488530bce9bcf8d2723188b/-/crop/0x0x1920x1920/-/resize/100/-/quality/95/f.jpg)
+
+</details>
