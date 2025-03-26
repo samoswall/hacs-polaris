@@ -4,9 +4,9 @@
   "codeowners": ["@samoswall"],
   "config_flow": true,
   "dependencies": ["mqtt"],
-  "documentation": "https://github.com/samoswall/hacs-polaris",
+  "documentation": "https://github.com/samoswall/polaris-mqtt",
   "iot_class": "local_push",
-  "issue_tracker": "https://github.com/samoswall/hacs-polaris/issues",
+  "issue_tracker": "https://github.com/samoswall/polaris-mqtt/issues",
   "mqtt": [
     "polaris/+/state/devtype",
     "/polaris/+/state/devtype"
