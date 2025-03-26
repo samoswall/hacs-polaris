@@ -99,6 +99,9 @@
       },
       "temperature": {
         "name": "Температура напитка"
+      },
+      "display_time": {
+        "name": "Отключение дисплея"
       }
     },
     "sensor": {
@@ -151,7 +154,9 @@
           "cleaning_brewing_system": "Очистка заварочной системы",
           "decalcification_progress": "Идет декальцинация",
           "cleaning_hydraulic_system": "Очистка гидросистемы",
-          "check_water_tank": "Проверьте бак с водой"
+          "check_water_tank": "Проверьте бак с водой",
+          "cappuccinator_false": "Капучинатор не установлен",
+          "nothing_is_selected": "Не выбран напиток"
         }
       },
       "filter_retain": {
@@ -254,7 +259,22 @@
           "latte_macchiato": "Латте макиато",
           "hot_water": "Горячая вода",
           "hot_milk_foam": "Молочная пена",
-          "hot_milk": "Горячее молоко"
+          "hot_milk": "Горячее молоко",
+          "doppio": "Доппио",
+          "lungo": "Лунго",
+          "clearing": "Очистка",
+          "heating": "Подогрев"
+        }
+      },
+      "select_melody": {
+        "name": "Мелодия",
+        "state": {
+          "mute": "Без звука",
+          "rainstorm": "Ливень",
+          "surf": "Прибой",
+          "forest": "В лесу",
+          "birdsong": "Пение птиц",
+          "bonfire": "Костер"
         }
       }
     },
@@ -284,6 +304,13 @@
           "on": "Да",
           "off": "Нет"
         }
+      },
+      "cappuccinator_binary_sensor": {
+        "name": "Капучинатор",
+        "state": {
+          "on": "Установлен",
+          "off": "Не установлен"
+        }
       }
     },
     "time": {
@@ -312,6 +339,33 @@
       },
       "button_reset_tank": {
         "name": "Сброс таймера очистки бака"
+      }
+    },
+    "climate": {
+      "climate": {
+        "name": "Климат",
+        "state_attributes": {
+          "fan_mode": {
+            "state": {
+              "1_speed": "1 скорость",
+              "2_speed": "2 скорость",
+              "3_speed": "3 скорость",
+              "4_speed": "4 скорость",
+              "5_speed": "5 скорость",
+              "6_speed": "6 скорость",
+              "7_speed": "7 скорость"
+            }
+          },
+          "preset_mode": {
+            "state": {
+              "hands": "Ручной",
+              "auto": "Автоматический",
+              "night": "Ночной",
+              "turbo": "Турбо",
+              "passive": "Пассивный"
+            }
+          }
+        }
       }
     }
   }

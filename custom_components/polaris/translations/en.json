@@ -99,6 +99,9 @@
       },
       "temperature": {
         "name": "Temperature"
+      },
+      "display_time": {
+        "name": "Display time"
       }
     },
     "sensor": {
@@ -151,7 +154,9 @@
           "cleaning_brewing_system": "Cleaning the brewing system",
           "decalcification_progress": "Decalcification in progress",
           "cleaning_hydraulic_system": "Cleaning the hydraulic system",
-          "check_water_tank": "Сheck the water tank"
+          "check_water_tank": "Сheck the water tank",
+          "cappuccinator_false": "Cappuccinator false",
+          "nothing_is_selected": "Nothing is selected"
         }
       },
       "filter_retain": {
@@ -254,7 +259,22 @@
           "latte_macchiato": "Latte macchiato",
           "hot_water": "Hot water",
           "hot_milk_foam": "Hot milk foam",
-          "hot_milk": "Hot milk"
+          "hot_milk": "Hot milk",
+          "doppio": "Doppio",
+          "lungo": "Lungo",
+          "clearing": "Clearing",
+          "heating": "Heating"
+        }
+      },
+      "select_melody": {
+        "name": "Melody",
+        "state": {
+          "mute": "Without sound",
+          "rainstorm": "Rainstorm",
+          "surf": "Surf",
+          "forest": "In the forest",
+          "birdsong": "Birdsong",
+          "bonfire": "Bonfire"
         }
       }
     },
@@ -284,6 +304,13 @@
           "on": "Yes",
           "off": "No"
         }
+      },
+      "cappuccinator_binary_sensor": {
+        "name": "Cappuccinator",
+        "state": {
+          "on": "Installed",
+          "off": "Not installed"
+        }
       }
     },
     "time": {
@@ -312,6 +339,33 @@
       },
       "button_reset_tank": {
         "name": "Reset time water tank"
+      }
+    },
+    "climate": {
+      "climate": {
+        "name": "Climate",
+        "state_attributes": {
+          "fan_mode": {
+            "state": {
+              "1_speed": "1 speed",
+              "2_speed": "2 speed",
+              "3_speed": "3 speed",
+              "4_speed": "4 speed",
+              "5_speed": "5 speed",
+              "6_speed": "6 speed",
+              "7_speed": "7 speed"
+            }
+          },
+          "preset_mode": {
+            "state": {
+              "hands": "Hands",
+              "auto": "Auto",
+              "night": "Night",
+              "turbo": "Turbo",
+              "passive": "Passive"
+            }
+          }
+        }
       }
     }
   }
