@@ -112,7 +112,7 @@
               "auto": "mdi:molecule-co2",
               "night": "mdi:weather-night",
               "turbo": "mdi:rocket-launch",
-              "passive": "mdi:hvac"
+              "passive": "mdi:air-filter"
             }
           }
         }
