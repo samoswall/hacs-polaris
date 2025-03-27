@@ -319,3 +319,25 @@
 |69|Ballu ASP-100|air-cleaner|:heavy_check_mark:|fan speed, volume, sound, backlight |![all](https://m-files.cdn1.cc/lpfile/1/2/b/12b3c2e3a488530bce9bcf8d2723188b/-/crop/0x0x1920x1920/-/resize/100/-/quality/95/f.jpg)
 
 </details>
+
+<details>
+  <summary>Инструкция по добавлению устройства Rusklimat в интеграцию Polaris</summary>
+
+  
+1. В MQTT Explorer выбираем топик с mac адресом своего устройства (справа в разделе Publish появится полный путь топика)
+
+![all](https://github.com/samoswall/polaris-mqtt/blob/main/rusclimate/rusclimate_1.png)
+
+2. Заменяем в полном пути топика rusclimate на polaris, вводим в окно сообщения свой mac адрес, ставим галочку Retain и нажимаем кнопку PUBLISH
+
+![all](https://github.com/samoswall/polaris-mqtt/blob/main/rusclimate/rusclimate_2.png)
+
+Должно получиться: в топике polaris - топик 69 (тип вашего устройства) - топик aaabbbcccdddeeefff (токен вашего устройства) - топик state - топик mac (с mac адресом вашего устройства)
+
+![all](https://github.com/samoswall/polaris-mqtt/blob/main/rusclimate/rusclimate_3.png)
+
+3. В интеграции Polaris добавляем устройство, оно уже нашлось (но в топике polaris по mac адресу). Заменяем название топика polaris на rusclimate
+
+![all](https://github.com/samoswall/polaris-mqtt/blob/main/rusclimate/rusclimate_4.png)
+
+</details>
