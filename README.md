@@ -73,6 +73,59 @@
 </details>
 
 <details>
+  <summary>Инструкция по добавлению своих рецептов (напитков) в мультиварку (кофемашину/чайник).</summary>
+
+1. Открываем файл `const.py` в папке интеграции `custom_components\polaris` любым удобным способом для редактирования (например с помощью дополнения File editor)
+2. Находим раздел `class PolarisSelectEntityDescription(SelectEntityDescription)`
+3. Далее ищем нужное описание:<br>
+`SELECT_KETTLE` - чайник<br>
+`SELECT_COOKER` - мультиварка<br>
+`SELECT_COFFEEMAKER` - кофемашина<br>
+`SELECT_COFFEEMAKER_ROG` - кофеварка рожкового типа (PCM-1540)<br>
+а в нем раздел `options` <br>
+на примере мультиварки:<br>
+```yaml
+options={
+            "my_recipe_plus": "[{\"mode\":1, \"time\":1200, \"temperature\":115}]",
+            "reheat": "[{\"mode\":2, \"time\":1200, \"temperature\":115}]",
+            "cake": "[{\"mode\":3, \"time\":3600, \"temperature\":130}]",
+            "soaked_rice": "[{\"mode\":4, \"time\":2400, \"temperature\":115}]",
+            "stew": "[{\"mode\":6, \"time\":7200, \"temperature\":93}]",
+            "fry": "[{\"mode\":7, \"time\":300, \"temperature\":160}]",
+            "pilaf": "[{\"mode\":9, \"time\":3600, \"temperature\":120}]",
+            "yogurt": "[{\"mode\":12, \"time\":28800, \"temperature\":38}]",
+            "oatmeal": "[{\"mode\":13, \"time\":300, \"temperature\":96}]",
+            "milk_porridge": "[{\"mode\":17, \"time\":3600, \"temperature\":95}]",
+            "soup": "[{\"mode\":18, \"time\":3600, \"temperature\":97}]",
+            "meat": "[{\"mode\":24, \"time\":21600, \"temperature\":93}]",
+            "cottage_cheese": "[{\"mode\":27, \"time\":2400, \"temperature\":80}]",
+        },
+```
+копируем строчку с наиболее подходящим рецептом и вставляем ниже, например омлет (oatmeal)<br>
+меняем имя рецепта, значения времени и/или температуры<br>
+Получается так (добавили Мой омлет с временем 420 (7 минут) и температурой 100):
+```yaml
+options={
+            "my_recipe_plus": "[{\"mode\":1, \"time\":1200, \"temperature\":115}]",
+            "reheat": "[{\"mode\":2, \"time\":1200, \"temperature\":115}]",
+            "cake": "[{\"mode\":3, \"time\":3600, \"temperature\":130}]",
+            "soaked_rice": "[{\"mode\":4, \"time\":2400, \"temperature\":115}]",
+            "stew": "[{\"mode\":6, \"time\":7200, \"temperature\":93}]",
+            "fry": "[{\"mode\":7, \"time\":300, \"temperature\":160}]",
+            "pilaf": "[{\"mode\":9, \"time\":3600, \"temperature\":120}]",
+            "yogurt": "[{\"mode\":12, \"time\":28800, \"temperature\":38}]",
+            "oatmeal": "[{\"mode\":13, \"time\":300, \"temperature\":96}]",
+            "Мой омлет": "[{\"mode\":13, \"time\":420, \"temperature\":100}]",
+            "milk_porridge": "[{\"mode\":17, \"time\":3600, \"temperature\":95}]",
+            "soup": "[{\"mode\":18, \"time\":3600, \"temperature\":97}]",
+            "meat": "[{\"mode\":24, \"time\":21600, \"temperature\":93}]",
+            "cottage_cheese": "[{\"mode\":27, \"time\":2400, \"temperature\":80}]",
+        },
+```
+Сохраняем изменения в файле. После перезагрузки Home Assistant в меню будет новый рецепт.
+</details>
+
+<details>
   <summary>Устройства Polaris</summary>
 
 | ID    | Модель           | Тип устройства | Поддержка | Функции | Изображение |
