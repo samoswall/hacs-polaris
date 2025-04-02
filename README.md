@@ -28,6 +28,7 @@
 :heavy_check_mark: Увлажнители <br>
 :heavy_check_mark: Мультиварки <br>
 :heavy_check_mark: Кофемашины <br>
+:heavy_check_mark: Очистители воздуха <br>
 
 :information_source: **Как добавить новое устройство**: <br>
 Создаем issues - Добавить ...  <br>
@@ -42,7 +43,7 @@
 :information_source: **Планы для доработок**: <br>
 :heavy_check_mark: Добавить поддержку старых устройств (со старой структурой топика) <br>
 :heavy_check_mark: Добавить сенсор ошибок <br>
-:black_large_square: Добавить устройсто online/offline <br>
+:heavy_check_mark: Добавить устройсто online/offline <br>
 :black_large_square: Добавить пылесосы и т.д.<br>
 
 Доступно обсуждение тут: [Telegram](https://t.me/polarishomeassistant)
@@ -75,55 +76,57 @@
 <details>
   <summary>Инструкция по добавлению своих рецептов (напитков) в мультиварку (кофемашину/чайник).</summary>
 
-1. Открываем файл `const.py` в папке интеграции `custom_components\polaris` любым удобным способом для редактирования (например с помощью дополнения File editor)
-2. Находим раздел `class PolarisSelectEntityDescription(SelectEntityDescription)`
-3. Далее ищем нужное описание:<br>
-`SELECT_KETTLE` - чайник<br>
-`SELECT_COOKER` - мультиварка<br>
-`SELECT_COFFEEMAKER` - кофемашина<br>
-`SELECT_COFFEEMAKER_ROG` - кофеварка рожкового типа (PCM-1540)<br>
-а в нем раздел `options` <br>
-на примере мультиварки:<br>
+  1. Необходимо создать файл `polaris_custom_select.js` в папке `www/polaris` (в корне конфигурации, папка www, в ней polaris) любым удобным способом и открыть его для редактирования (например с помощью дополнения File editor)
+  2. Скопировать пример и вставить в файл `polaris_custom_select.js`
+  3. Пример: <br>
 ```yaml
-options={
-            "my_recipe_plus": "[{\"mode\":1, \"time\":1200, \"temperature\":115}]",
-            "reheat": "[{\"mode\":2, \"time\":1200, \"temperature\":115}]",
-            "cake": "[{\"mode\":3, \"time\":3600, \"temperature\":130}]",
-            "soaked_rice": "[{\"mode\":4, \"time\":2400, \"temperature\":115}]",
-            "stew": "[{\"mode\":6, \"time\":7200, \"temperature\":93}]",
-            "fry": "[{\"mode\":7, \"time\":300, \"temperature\":160}]",
-            "pilaf": "[{\"mode\":9, \"time\":3600, \"temperature\":120}]",
-            "yogurt": "[{\"mode\":12, \"time\":28800, \"temperature\":38}]",
-            "oatmeal": "[{\"mode\":13, \"time\":300, \"temperature\":96}]",
-            "milk_porridge": "[{\"mode\":17, \"time\":3600, \"temperature\":95}]",
-            "soup": "[{\"mode\":18, \"time\":3600, \"temperature\":97}]",
-            "meat": "[{\"mode\":24, \"time\":21600, \"temperature\":93}]",
-            "cottage_cheese": "[{\"mode\":27, \"time\":2400, \"temperature\":80}]",
-        },
+{
+  "SELECT_KETTLE_options": {
+    "Мой чай": 94
+  },
+  "SELECT_COOKER_options": {
+    "Мой рецепт 1": {"mode": 1, "time": 1200, "temperature": 115},
+    "Мой рецепт 2": {"mode": 2, "time": 1300, "temperature": 105}
+  },
+  "SELECT_COFFEEMAKER_options": {
+    "Мой кофе": {"mode": 2, "amount": 30, "weight": 11, "tank": 0, "pressure": 0, "speed": 0, "temperature": 92}
+  },
+  "SELECT_COFFEEMAKER_ROG_options": {
+    "Мой кофе": {"mode": 3, "amount": 65, "tank": 32, "temperature": 95}
+  }
+}
 ```
-копируем строчку с наиболее подходящим рецептом и вставляем ниже, например омлет (oatmeal)<br>
-меняем имя рецепта, значения времени и/или температуры<br>
-Получается так (добавили Мой омлет с временем 420 (7 минут) и температурой 100):
+(значение 0 у кофемашин и кофеварок обозначает, что параметр не используется и этот регулятор блокируется<br>
+"mode" - Режим, "time" - Время приготовления, "amount" - Объём кофе, "weight" - Крепкость напитка, "tank" - Объём напитка (молока для кофеварок рожкового типа), "pressure" - Объём пенки, "speed" - Объём молока, "temperature" - Температура напитка)
+4. Отредактировать файл под свои нужды.
+Пояснения:
 ```yaml
-options={
-            "my_recipe_plus": "[{\"mode\":1, \"time\":1200, \"temperature\":115}]",
-            "reheat": "[{\"mode\":2, \"time\":1200, \"temperature\":115}]",
-            "cake": "[{\"mode\":3, \"time\":3600, \"temperature\":130}]",
-            "soaked_rice": "[{\"mode\":4, \"time\":2400, \"temperature\":115}]",
-            "stew": "[{\"mode\":6, \"time\":7200, \"temperature\":93}]",
-            "fry": "[{\"mode\":7, \"time\":300, \"temperature\":160}]",
-            "pilaf": "[{\"mode\":9, \"time\":3600, \"temperature\":120}]",
-            "yogurt": "[{\"mode\":12, \"time\":28800, \"temperature\":38}]",
-            "oatmeal": "[{\"mode\":13, \"time\":300, \"temperature\":96}]",
-            "Мой омлет": "[{\"mode\":13, \"time\":420, \"temperature\":100}]",
-            "milk_porridge": "[{\"mode\":17, \"time\":3600, \"temperature\":95}]",
-            "soup": "[{\"mode\":18, \"time\":3600, \"temperature\":97}]",
-            "meat": "[{\"mode\":24, \"time\":21600, \"temperature\":93}]",
-            "cottage_cheese": "[{\"mode\":27, \"time\":2400, \"temperature\":80}]",
-        },
+{
+  "SELECT_KETTLE_options": {
+    Напитки для чайников
+  },
+  "SELECT_COOKER_options": {
+    Рецепты для мультиварок
+  },
+  "SELECT_COFFEEMAKER_options": {
+    Напитки для кофемашин
+  },
+  "SELECT_COFFEEMAKER_ROG_options": {
+    Напитки для кофеварок рожкового типа
+  }
+}
 ```
+Количество напитков/рецептов может быть минимум 1.
+Если для устройства не добавляются напитки/рецепты, то раздел удалить. Например добавление только для мультиварки:
+```yaml
+{
+  "SELECT_COOKER_options": {
+    "Мой рецепт 1": {"mode": 1, "time": 1200, "temperature": 115}
+  }
+}
+```
+ВАЖНО! Валидация ваших напитков/рецептов не осуществляется! Поэтому внимательно отнеситесь к значению параметров и синтаксису json (запятые и фигурные скобки).
 Сохраняем изменения в файле. После перезагрузки Home Assistant в меню будет новый рецепт.<br>
-Важно! При обновлении интеграции ваши изменения сотрутся, рекомендую строчки с вашими рецептами сохранить в отдельный файл для быстрого копирования в дальнейшем. 
 </details>
 
 <details>
@@ -233,17 +236,17 @@ options={
 |222|PCM-1540WIFI|coffeemaker|:heavy_check_mark:|amount, volume, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/a/44/ec0b3-ea7f-4d75-bd2a-ba174bf1817d/60.webp)
 |190|PCM-1560|coffeemaker|:heavy_check_mark:|amount, volume, child_lock, water_tank, temperature, |![all](https://images.cdn.polaris-iot.com/6/7e/b8e87-9593-4023-b339-3fb6da5df931/60.webp)
 |207|PCM-2070CG|coffeemaker|:heavy_check_mark:|turbo, amount, volume, child_lock, water_tank, stream_warm, temperature, |![all](https://images.cdn.polaris-iot.com/2/72/b2f22-3608-40b7-b435-7485fe68dfc2/60.webp)
-|172|PAW-0804|air-cleaner|:x:|speed, timer, volume, backlight, |![all](https://images.cdn.polaris-iot.com/6/8d/81a02-893f-467d-a375-1c004bb31548/60.webp)
-|140|PAW-0804(c3-test)|air-cleaner|:x:|speed, timer, turbo, volume, ioniser, backlight, |![all](https://images.cdn.polaris-iot.com/0/f0/440b3-27bd-49f8-81e4-0af6f8e13dee/60.webp)
-|151|PPA-2025|air-cleaner|:x:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/5/de/94ac7-2530-446f-a4bd-566ddc4edd16/60.webp)
-|203|PPA-2025|air-cleaner|:x:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/d/fb/9d0c9-ddaf-405a-8ae7-19b1ccf27fa3/60.webp)
-|250|PPA-2025|air-cleaner|:x:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/d/fb/9d0c9-ddaf-405a-8ae7-19b1ccf27fa3/60.webp)
-|152|PPA-4050|air-cleaner|:x:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/9/3d/a90f0-137c-414c-aa15-df9f395e1cb1/60.webp)
-|204|PPA-4050|air-cleaner|:x:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/8/93/ca1e0-f8de-4b42-938f-6f803eb7d982/60.webp)
-|251|PPA-4050|air-cleaner|:x:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/8/93/ca1e0-f8de-4b42-938f-6f803eb7d982/60.webp)
-|236|PPAT-02A|air-cleaner|:x:|speed, timer, turbo, volume, ioniser, humidity, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/a/87/e91a5-a8eb-4b7f-9d9d-88b7db5f744e/60.webp)
-|238|PPAT-80P|air-cleaner|:x:|speed, timer, volume, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/f/66/2b72c-ed43-456e-9524-245e229bb667/60.webp)
-|239|PPAT-90GDi|air-cleaner|:x:|speed, timer, turbo, volume, humidity, child_lock, water_tank, stream_warm, |![all](https://images.cdn.polaris-iot.com/f/66/2b72c-ed43-456e-9524-245e229bb667/60.webp)
+|172|PAW-0804|air-cleaner|:heavy_check_mark:|speed, timer, volume, backlight, |![all](https://images.cdn.polaris-iot.com/6/8d/81a02-893f-467d-a375-1c004bb31548/60.webp)
+|140|PAW-0804(c3-test)|air-cleaner|:heavy_check_mark:|speed, timer, turbo, volume, ioniser, backlight, |![all](https://images.cdn.polaris-iot.com/0/f0/440b3-27bd-49f8-81e4-0af6f8e13dee/60.webp)
+|151|PPA-2025|air-cleaner|:heavy_check_mark:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/5/de/94ac7-2530-446f-a4bd-566ddc4edd16/60.webp)
+|203|PPA-2025|air-cleaner|:heavy_check_mark:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/d/fb/9d0c9-ddaf-405a-8ae7-19b1ccf27fa3/60.webp)
+|250|PPA-2025|air-cleaner|:heavy_check_mark:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/d/fb/9d0c9-ddaf-405a-8ae7-19b1ccf27fa3/60.webp)
+|152|PPA-4050|air-cleaner|:heavy_check_mark:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/9/3d/a90f0-137c-414c-aa15-df9f395e1cb1/60.webp)
+|204|PPA-4050|air-cleaner|:heavy_check_mark:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/8/93/ca1e0-f8de-4b42-938f-6f803eb7d982/60.webp)
+|251|PPA-4050|air-cleaner|:heavy_check_mark:|speed, timer, volume, ioniser, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/8/93/ca1e0-f8de-4b42-938f-6f803eb7d982/60.webp)
+|236|PPAT-02A|air-cleaner|:heavy_check_mark:|speed, timer, turbo, volume, ioniser, humidity, backlight, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/a/87/e91a5-a8eb-4b7f-9d9d-88b7db5f744e/60.webp)
+|238|PPAT-80P|air-cleaner|:heavy_check_mark:|speed, timer, volume, child_lock, stream_warm, |![all](https://images.cdn.polaris-iot.com/f/66/2b72c-ed43-456e-9524-245e229bb667/60.webp)
+|239|PPAT-90GDi|air-cleaner|:heavy_check_mark:|speed, timer, turbo, volume, humidity, child_lock, water_tank, stream_warm, |![all](https://images.cdn.polaris-iot.com/f/66/2b72c-ed43-456e-9524-245e229bb667/60.webp)
 |93|PHB-1350-WIFI|blender|:x:|speed, timer, multi_step, |![all](https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/60.webp)
 |35|PHB-1503-WIFI-(old)|blender|:x:|speed, timer, child_lock, multi_step, |![all](https://images.cdn.polaris-iot.com/3/a6/45180-5e03-4e43-9de9-a0948262c226/60.webp)
 |34|PHB-1551-WIFI|blender|:x:|speed, timer, child_lock, multi_step, |![all](https://images.cdn.polaris-iot.com/e/f8/22f01-dd2f-40e3-8f85-d7dc8f9fddce/60.webp)
