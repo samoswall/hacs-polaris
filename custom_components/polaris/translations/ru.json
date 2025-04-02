@@ -43,6 +43,9 @@
       },
       "keepwarm_switch": {
         "name": "Поддержание температуры"
+      },
+      "ultraviolet_switch": {
+        "name": "Ультрафиолет"
       }
     },
     "water_heater": {
@@ -102,6 +105,9 @@
       },
       "display_time": {
         "name": "Отключение дисплея"
+      },
+      "time_timer": {
+        "name": "Таймер отключения"
       }
     },
     "sensor": {
@@ -311,6 +317,13 @@
           "on": "Установлен",
           "off": "Не установлен"
         }
+      },
+      "available_binary_sensor": {
+        "name": "Локальная сеть",
+        "state": {
+          "on": "В сети",
+          "off": "Не в сети"
+        }
       }
     },
     "time": {
@@ -363,6 +376,21 @@
               "night": "Ночной",
               "turbo": "Турбо",
               "passive": "Пассивный"
+            }
+          }
+        }
+      },
+      "aircleaner": {
+        "name": "Очиститель воздуха",
+        "state": {
+          "dry": "Очистка"
+        },
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "hands": "Ручной",
+              "auto": "Автоматический",
+              "night": "Ночной"
             }
           }
         }

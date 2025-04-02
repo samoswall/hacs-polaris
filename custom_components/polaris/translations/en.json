@@ -43,6 +43,9 @@
       },
       "keepwarm_switch": {
         "name": "Keep warm"
+      },
+      "ultraviolet_switch": {
+        "name": "Ultraviolet"
       }
     },
     "water_heater": {
@@ -102,6 +105,9 @@
       },
       "display_time": {
         "name": "Display time"
+      },
+      "time_timer": {
+        "name": "Timer"
       }
     },
     "sensor": {
@@ -311,6 +317,13 @@
           "on": "Installed",
           "off": "Not installed"
         }
+      },
+      "available_binary_sensor": {
+        "name": "LAN",
+        "state": {
+          "on": "Online",
+          "off": "Offline"
+        }
       }
     },
     "time": {
@@ -363,6 +376,21 @@
               "night": "Night",
               "turbo": "Turbo",
               "passive": "Passive"
+            }
+          }
+        }
+      },
+      "aircleaner": {
+        "name": "Air cleaner",
+        "state": {
+          "dry": "Сlearing"
+        },
+        "state_attributes": {
+          "preset_mode": {
+            "state": {
+              "hands": "Hands",
+              "auto": "Auto",
+              "night": "Night"
             }
           }
         }
