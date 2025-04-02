@@ -29,6 +29,7 @@ from .const import (
     SENSORS_COFFEEMAKER,
     SENSORS_COFFEEMAKER_ROG,
     SENSORS_CLIMATE,
+    SENSORS_AIRCLEANER,
     PolarisSensorEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
@@ -37,10 +38,12 @@ from .const import (
     POLARIS_COFFEEMAKER_TYPE,
     POLARIS_COFFEEMAKER_ROG_TYPE,
     POLARIS_CLIMATE_TYPE,
+    POLARIS_AIRCLEANER_TYPE,
     KETTLE_ERROR,
     HUMIDDIFIER_ERROR,
     COOKER_ERROR,
-    COFFEEMAKER_ERROR
+    COFFEEMAKER_ERROR,
+    AIRCLEANER_ERROR,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -222,6 +225,19 @@ async def async_setup_entry(
                     device_id=deviceID,
                 )
             )
+    if (devicetype in POLARIS_AIRCLEANER_TYPE):
+        SENSORS_AIRCLEANER_CP = copy.deepcopy(SENSORS_AIRCLEANER)
+        for description in SENSORS_AIRCLEANER_CP:
+            description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
+            sensorList.append(
+                PolarisSensor(
+                    description=description,
+                    device_friendly_name=deviceID,
+                    mqtt_root=mqttRoot,
+                    device_type=devicetype,
+                    device_id=deviceID,
+                )
+            )
     async_add_entities(sensorList)
 
 
@@ -262,6 +278,8 @@ class PolarisSensor(PolarisBaseEntity, SensorEntity):
                     dev_error = HUMIDDIFIER_ERROR[payload_message]
                 if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
                     dev_error = COFFEEMAKER_ERROR[payload_message]
+                if POLARIS_DEVICE[int(self.device_type)]['class'] == "air-cleaner":
+                    dev_error = AIRCLEANER_ERROR[payload_message]
                 payload_message = dev_error
             if self.entity_description.name == "filter_retain":
                 payload_message = payload_message.replace("[","",1).replace("]","",1).split(",")[0]

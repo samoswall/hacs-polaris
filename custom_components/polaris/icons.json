@@ -116,6 +116,22 @@
             }
           }
         }
+      },
+      "aircleaner": {
+        "default": "mdi:air-purifier",
+        "state": {
+          "off": "mdi:air-purifier-off"
+        },
+        "state_attributes": {
+          "preset_mode": {
+            "default": "mdi:hvac",
+            "state": {
+              "hands": "mdi:gesture-tap",
+              "auto": "mdi:refresh-auto",
+              "night": "mdi:weather-night"
+            }
+          }
+        }
       }
     }
   }

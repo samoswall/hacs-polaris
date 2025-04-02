@@ -24,6 +24,7 @@ class PolarisBaseEntity:
         self.device_type=device_type
         self.device_id=device_id
 
+
     @property
     def device_info(self) -> DeviceInfo:
         return DeviceInfo(

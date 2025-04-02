@@ -34,8 +34,10 @@ from .const import (
     DEVICETYPE,
     POLARIS_DEVICE,
     CLIMATES,
+    AIRCLEANER,
     PolarisClimateEntityDescription,
     POLARIS_CLIMATE_TYPE,
+    POLARIS_AIRCLEANER_TYPE,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -59,6 +61,24 @@ async def async_setup_entry(
                 description.mqttTopicStateTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicStateTemperature}"
                 description.mqttTopicCommandTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandTemperature}"
                 description.mqttTopicCurrentTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentTemperature}"
+                description.mqttTopicStateFanMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicStateFanMode}"
+                description.mqttTopicCommandFanMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandFanMode}"
+                description.mqttTopicCommandPower = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandPower}"
+                description.mqttTopicCurrentPresetMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentPresetMode}"
+                description.mqttTopicCommandPresetMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandPresetMode}"
+                climateList.append(
+                    PolarisClimate(
+                        description=description,
+                        device_friendly_name=device_id,
+                        mqtt_root=mqtt_root,
+                        device_type=device_type,
+                        device_id=device_id
+                    )
+                )
+    if (device_type in POLARIS_AIRCLEANER_TYPE):
+        # Create humidifier  
+            AIRCLEANER_LC = copy.deepcopy(AIRCLEANER)
+            for description in AIRCLEANER_LC:
                 description.mqttTopicStateFanMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicStateFanMode}"
                 description.mqttTopicCommandFanMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandFanMode}"
                 description.mqttTopicCommandPower = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandPower}"
@@ -102,17 +122,12 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
         self.payload_off=description.payload_off
         self._attr_has_entity_name = True
 
-        
-        self._attr_hvac_modes = [HVACMode.OFF, HVACMode.FAN_ONLY]
+        self._attr_precision = 1.0
+        self._attr_target_temperature_step = 1.0
+        self._attr_hvac_modes = self.entity_description.hvac_modes
         self._attr_preset_modes = list(self.entity_description.preset_modes.keys())
         self._attr_fan_modes = list(self.entity_description.fan_modes.keys())
-        self._attr_supported_features = (
-            ClimateEntityFeature.TARGET_TEMPERATURE
-            | ClimateEntityFeature.PRESET_MODE
-            | ClimateEntityFeature.FAN_MODE
-            | ClimateEntityFeature.TURN_OFF
-            | ClimateEntityFeature.TURN_ON
-        )
+        self._attr_supported_features = self.entity_description.supported_features
         self._enable_turn_on_off_backwards_compatibility = False
         self._attr_temperature_unit = UnitOfTemperature.CELSIUS
         
@@ -121,8 +136,8 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
         self._attr_max_temp = self.entity_description.max_temp
         self._attr_min_temp = self.entity_description.min_temp
         
-        self._attr_fan_mode = "off"
-        self._attr_preset_mode = "off"
+        self._attr_fan_mode = self.entity_description.fan_mode
+        self._attr_preset_mode = self.entity_description.preset_mode
         self._attr_hvac_mode = HVACMode.OFF
         
 
@@ -143,6 +158,8 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
             payload = message.payload
             if int(payload)==0:
                 self._attr_hvac_mode = HVACMode.OFF
+            elif (self.device_type in POLARIS_AIRCLEANER_TYPE):
+                self._attr_hvac_mode = HVACMode.DRY
             else:
                 self._attr_hvac_mode = HVACMode.FAN_ONLY
             self.async_write_ha_state()
@@ -156,19 +173,20 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
         def message_received_fan_mode(message):
             self._attr_fan_mode = list(self.entity_description.fan_modes.keys())[list(self.entity_description.fan_modes.values()).index(message.payload)]
             self.async_write_ha_state()
-
-        await mqtt.async_subscribe(
-            self.hass,
-            self.entity_description.mqttTopicCurrentTemperature,
-            message_received_curr_temp,
-            1,
-        )
-        await mqtt.async_subscribe(
-            self.hass,
-            self.entity_description.mqttTopicStateTemperature,
-            message_received_targ_temp,
-            1,
-        )
+        if self.entity_description.mqttTopicCurrentTemperature is not None:
+            await mqtt.async_subscribe(
+                self.hass,
+                self.entity_description.mqttTopicCurrentTemperature,
+                message_received_curr_temp,
+                1,
+            )
+        if self.entity_description.mqttTopicStateTemperature is not None:
+            await mqtt.async_subscribe(
+                self.hass,
+                self.entity_description.mqttTopicStateTemperature,
+                message_received_targ_temp,
+                1,
+            )
         await mqtt.async_subscribe(
             self.hass,
             self.entity_description.mqttTopicCurrentPresetMode,
@@ -189,8 +207,12 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
         )
 
     async def async_turn_on(self) -> None:
-        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 5)
-        await self.async_set_hvac_mode(HVACMode.FAN_ONLY)
+        if (self.device_type in POLARIS_AIRCLEANER_TYPE):
+            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 1)
+            await self.async_set_hvac_mode(HVACMode.DRY)
+        else:
+            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 5)
+            await self.async_set_hvac_mode(HVACMode.FAN_ONLY)
 
     async def async_turn_off(self) -> None:
         self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 0)
@@ -205,7 +227,7 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
             self._attr_target_temperature_low = kwargs.get(ATTR_TARGET_TEMP_LOW)
         if (hvac_mode := kwargs.get(ATTR_HVAC_MODE)) is not None:
             self._attr_hvac_mode = hvac_mode
-        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, self._attr_target_temperature)
+        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, int(self._attr_target_temperature))
         self.async_write_ha_state()
 
     async def async_set_fan_mode(self, fan_mode: str) -> None:
@@ -219,6 +241,8 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
         self._attr_hvac_mode = hvac_mode
         if hvac_mode == "off":
             self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPresetMode, 0)
+        elif (self.device_type in POLARIS_AIRCLEANER_TYPE):
+            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 1)
         else:
             self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPresetMode, 5)
         self.async_write_ha_state()

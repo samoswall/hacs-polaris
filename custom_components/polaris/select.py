@@ -7,6 +7,7 @@ import logging
 from typing import Iterable
 import copy
 import datetime
+import os
 
 from homeassistant.components import mqtt
 from homeassistant.components.mqtt.models import ReceiveMessage
@@ -25,6 +26,7 @@ from .const import (
     DEVICEID,
     DEVICETYPE,
     POLARIS_DEVICE,
+    CUSTOM_SELECT_FILE_PATH,
     SELECT_KETTLE,
     SELECT_COOKER,
     SELECT_COFFEEMAKER,
@@ -149,10 +151,44 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
         self.entity_description = description
         self._attr_unique_id = slugify(f"{device_id}_{description.name}")
         self.entity_id = f"{DOMAIN}.{POLARIS_DEVICE[int(device_type)]['class']}_{POLARIS_DEVICE[int(device_type)]['model']}_{description.name}"
-        self._attr_options = list(description.options.keys())
-        self._attr_current_option = self._attr_options[0]
         self._attr_has_entity_name = True
+        
+# if load polaris_custom_select.js
+        self._custom_data_select = self._read_file()
+        if self._custom_data_select is not None:
+            if POLARIS_DEVICE[int(self.device_type)]['class'] == "kettle" and "SELECT_KETTLE_options" in self._custom_data_select:
+                self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
+                for key, value in self._custom_data_select["SELECT_KETTLE_options"].items():
+                    self.entity_description.options[key] = value
+#                _LOGGER.debug("kettle %s", self.entity_description.options)
+            if POLARIS_DEVICE[int(self.device_type)]['class'] == "cooker" and "SELECT_COOKER_options" in self._custom_data_select:
+                self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
+                for key, value in self._custom_data_select["SELECT_COOKER_options"].items():
+                    self.entity_description.options[key] = json.dumps([value])
+#                _LOGGER.debug("cooker %s", self.entity_description.options)
+            if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
+                if int(self.device_type) == 45 and "SELECT_COFFEEMAKER_ROG_options" in self._custom_data_select:
+                    self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
+                    for key, value in self._custom_data_select["SELECT_COFFEEMAKER_ROG_options"].items():
+                        self.entity_description.options[key] = json.dumps([value])
+#                    _LOGGER.debug("coffee_rog %s", self.entity_description.options)
+                elif "SELECT_COFFEEMAKER_options" in self._custom_data_select:
+                    self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
+                    for key, value in self._custom_data_select["SELECT_COFFEEMAKER_options"].items():
+                        self.entity_description.options[key] = json.dumps([value])
+#                    _LOGGER.debug("coffee %s", self.entity_description.options)
 
+        self._attr_options = list(self.entity_description.options.keys())
+        self._attr_current_option = self._attr_options[0]
+
+    def _read_file(self):
+        file_path = CUSTOM_SELECT_FILE_PATH
+        if os.path.exists(file_path):
+            with open(file_path, 'r', encoding='utf-8') as file:
+                content = json.loads(file.read())
+        else:
+            content = None
+        return content
 
     @property
     def available(self):

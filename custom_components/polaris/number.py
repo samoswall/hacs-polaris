@@ -29,6 +29,7 @@ from .const import (
     NUMBER_COOKER,
     NUMBERS_COFFEEMAKER,
     NUMBERS_COFFEEMAKER_ROG,
+    NUMBERS_AIRCLEANER,
     PolarisNumberEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
@@ -37,6 +38,7 @@ from .const import (
     POLARIS_COOKER_TYPE,
     POLARIS_COFFEEMAKER_TYPE,
     POLARIS_COFFEEMAKER_ROG_TYPE,
+    POLARIS_AIRCLEANER_TYPE,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -112,6 +114,21 @@ async def async_setup_entry(
                     device_id=device_id
                 )
             )
+    if (device_type in POLARIS_AIRCLEANER_TYPE): 
+    # Create humidifier  
+        NUMBERS_AIRCLEANER_LC = copy.deepcopy(NUMBERS_AIRCLEANER)
+        for description in NUMBERS_AIRCLEANER_LC:
+            description.mqttTopicCurrent = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrent}" 
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            numberList.append(
+                PolarisNumber(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
     async_add_entities(numberList, update_before_add=True)
 
 
@@ -149,12 +166,15 @@ class PolarisNumber(PolarisBaseEntity, NumberEntity):
         if value % 1 > 0:
             self._attr_native_value = STATE_UNAVAILABLE
 #             self._attr_available = False
-        elif self.entity_description.name != "display_time":
+        elif self.entity_description.name == "display_time":
             self._attr_native_value = int(value)
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value))
+            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, f"{int(value):02x}", 0, True)
+        elif self.entity_description.name == "time_timer":
+            self._attr_native_value = int(value)
+            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value)*3600)
         else:
             self._attr_native_value = int(value)
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, f"{int(value):02x}")
+            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value))
             
     @property
     def get_state (self) -> int | None:
@@ -163,11 +183,13 @@ class PolarisNumber(PolarisBaseEntity, NumberEntity):
     async def async_added_to_hass(self):
         @callback
         def message_received_numb(message):
-            if self.entity_description.name != "display_time":
+            if self.entity_description.name == "display_time":
+                self._attr_native_value = int(message.payload, 16)
+            elif self.entity_description.name == "time_timer":
+                self._attr_native_value = int(int(message.payload) / 3600)
+            else:
                 if self.entity_description.native_min_value <= int(message.payload):
                     self._attr_native_value = message.payload
-            else:
-                self._attr_native_value = int(message.payload, 16)
             self.async_write_ha_state()
 
         await mqtt.async_subscribe(

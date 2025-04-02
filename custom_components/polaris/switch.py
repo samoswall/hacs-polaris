@@ -33,6 +33,7 @@ from .const import (
     SWITCHES_COFFEEMAKER,
     SWITCHES_COFFEEMAKER_ROG,
     SWITCHES_CLIMATE,
+    SWITCHES_AIRCLEANER,
     PolarisSwitchEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
@@ -44,6 +45,7 @@ from .const import (
     POLARIS_COFFEEMAKER_TYPE,
     POLARIS_COFFEEMAKER_ROG_TYPE,
     POLARIS_CLIMATE_TYPE,
+    POLARIS_AIRCLEANER_TYPE,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -196,6 +198,34 @@ async def async_setup_entry(
         # Create switches for climate
         SWITCHES_CLIMATE_LC = copy.deepcopy(SWITCHES_CLIMATE)
         for description in SWITCHES_CLIMATE_LC:
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            switchList.append(
+                PolarisSwitch(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+    if (device_type in POLARIS_AIRCLEANER_TYPE):
+        # Create switches for all devices
+        SWITCHES_ALL_DEVICES_LC = copy.deepcopy(SWITCHES_ALL_DEVICES)
+        for description in SWITCHES_ALL_DEVICES_LC:
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            switchList.append(
+                PolarisSwitch(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+        SWITCHES_AIRCLEANER_LC = copy.deepcopy(SWITCHES_AIRCLEANER)
+        for description in SWITCHES_AIRCLEANER_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
             switchList.append(
