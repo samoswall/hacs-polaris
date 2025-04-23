@@ -177,6 +177,7 @@
 |98|PWK-1775CGLD|kettle|:heavy_check_mark:|volume, backlight, child_lock, temperature, weight|![all](https://images.cdn.polaris-iot.com/8/08/f91f4-f117-4074-aa8a-d3d177d7c657/60.webp)
 |188|PWK-1775CGLD|kettle|:heavy_check_mark:|volume, backlight, child_lock, temperature, |![all](https://images.cdn.polaris-iot.com/8/08/f91f4-f117-4074-aa8a-d3d177d7c657/60.webp)
 |223|PWK-1775CGLD|kettle|:heavy_check_mark:|volume, backlight, child_lock, temperature, weight|![all](https://images.cdn.polaris-iot.com/8/08/f91f4-f117-4074-aa8a-d3d177d7c657/60.webp)
+|263|PWK-1775CGLD|kettle|:heavy_check_mark:|volume, backlight, child_lock, temperature, weight|![all](https://images.cdn.polaris-iot.com/8/08/f91f4-f117-4074-aa8a-d3d177d7c657/60.webp)
 |85|PWK-1775CGLD-SMART|kettle|:heavy_check_mark:|volume, backlight, child_lock, temperature, |![all](https://images.cdn.polaris-iot.com/8/08/f91f4-f117-4074-aa8a-d3d177d7c657/60.webp)
 |139|PWK-1775CGLD-VOICE|kettle|:heavy_check_mark:|volume, backlight, child_lock, temperature, |![all](https://images.cdn.polaris-iot.com/8/08/f91f4-f117-4074-aa8a-d3d177d7c657/60.webp)
 |175|PWK-1823CGLD|kettle|:heavy_check_mark:|night, volume, backlight, child_lock, temperature, |![all](https://images.cdn.polaris-iot.com/5/f2/5158d-edd3-4018-a391-2a97626f3bb9/60.webp)
