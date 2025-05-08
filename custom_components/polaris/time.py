@@ -48,6 +48,7 @@ async def async_setup_entry(
         for description in TIME_COOKER_LC:
             description.mqttTopicCurrentTime = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentTime}"
             description.mqttTopicCommandTime = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandTime}"
+            description.device_prefix_topic = device_prefix_topic
             timeList.append(
                 PolarisTime(
                     description=description,
@@ -81,9 +82,23 @@ class PolarisTime(PolarisBaseEntity, TimeEntity):
         self.entity_description = description
         self._attr_unique_id = slugify(f"{device_id}_{description.name}")
         self.entity_id = f"{DOMAIN}.{POLARIS_DEVICE[int(device_type)]['class']}_{POLARIS_DEVICE[int(device_type)]['model']}_{description.name}"
-        self._attr_available = True
+        self._attr_available = False
         self._attr_has_entity_name = True
         self._attr_native_value = time(0, self.entity_description.default_time, 0)
+
+    async def async_added_to_hass(self):
+        @callback
+        async def entity_availability(message):
+            if self.entity_description.name != "available":
+                if str(message.payload).lower() in ("1", "true"):
+                    self._attr_available = False
+                else:
+                    self._attr_available = True
+                self.async_write_ha_state()
+            
+        await mqtt.async_subscribe(self.hass, f"{self.mqtt_root}/{self.entity_description.device_prefix_topic}/state/error/connection", entity_availability, 1)
+
+
 
     async def async_set_value(self, value: time) -> None:
         """Update the time."""
@@ -95,5 +110,5 @@ class PolarisTime(PolarisBaseEntity, TimeEntity):
             value_hour = int(self.entity_description.max_time / 60) - 1
         self._attr_native_value = time(value_hour,value_minute,value_second)
         value_in_seconds = value_hour * 3600 + value_minute * 60
-        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTime, str(value_in_seconds))
+        mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTime, str(value_in_seconds))
 

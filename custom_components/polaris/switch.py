@@ -34,6 +34,7 @@ from .const import (
     SWITCHES_COFFEEMAKER_ROG,
     SWITCHES_CLIMATE,
     SWITCHES_AIRCLEANER,
+    SWITCHES_VACUUM,
     PolarisSwitchEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
@@ -46,6 +47,7 @@ from .const import (
     POLARIS_COFFEEMAKER_ROG_TYPE,
     POLARIS_CLIMATE_TYPE,
     POLARIS_AIRCLEANER_TYPE,
+    POLARIS_VACUUM_TYPE,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -67,6 +69,7 @@ async def async_setup_entry(
         for description in SWITCHES_ALL_DEVICES_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -82,6 +85,7 @@ async def async_setup_entry(
         for description in SWITCH_KETTLE_BACKLIGHT_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -97,6 +101,7 @@ async def async_setup_entry(
         for description in SWITCHES_ALL_DEVICES_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -110,6 +115,7 @@ async def async_setup_entry(
         for description in SWITCH_HUMIDIFIER_BACKLIGHT_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -125,6 +131,7 @@ async def async_setup_entry(
         for description in SWITCH_HUMIDIFIER_IONISER_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -140,6 +147,7 @@ async def async_setup_entry(
         for description in SWITCH_HUMIDIFIER_WARM_STREAM_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -155,6 +163,7 @@ async def async_setup_entry(
         for description in SWITCHES_COOKER_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -170,6 +179,7 @@ async def async_setup_entry(
         for description in SWITCHES_COFFEEMAKER_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -185,6 +195,7 @@ async def async_setup_entry(
         for description in SWITCHES_COFFEEMAKER_ROG_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -200,6 +211,7 @@ async def async_setup_entry(
         for description in SWITCHES_CLIMATE_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -215,6 +227,7 @@ async def async_setup_entry(
         for description in SWITCHES_ALL_DEVICES_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -228,6 +241,23 @@ async def async_setup_entry(
         for description in SWITCHES_AIRCLEANER_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
+            switchList.append(
+                PolarisSwitch(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+    if (device_type in POLARIS_VACUUM_TYPE):
+        # Create switches for vacuum
+        SWITCHES_VACUUM_LC = copy.deepcopy(SWITCHES_VACUUM)
+        for description in SWITCHES_VACUUM_LC:
+            description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+            description.device_prefix_topic = device_prefix_topic
             switchList.append(
                 PolarisSwitch(
                     description=description,
@@ -262,8 +292,7 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
         self.payload_off=description.payload_off
         self._attr_has_entity_name = True
 #        self._old_mode = "0"
-        if self.entity_description.translation_key == "keepwarm_switch":
-            self._attr_available = False
+        self._attr_available = False
 
     async def async_added_to_hass(self):
         @callback
@@ -297,6 +326,7 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
             if self.entity_description.translation_key == "keepwarm_switch":
                 if str(message.payload) in ("[]", '[{"mode":1,"time":0,"temperature":0}]'):
                     self._attr_available = False
+#                    self._attr_is_on = False
                 else:
                     self._attr_available = True
                     self._attr_is_on = True
@@ -308,6 +338,19 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
             mode_message_received,
             1,
         )
+        
+        @callback
+        async def entity_availability(message):
+            if self.entity_description.name != "available":
+                if str(message.payload).lower() in ("1", "true"):
+                    self._attr_available = False
+                else:
+                    if self.entity_description.key != "keepwarm":
+                        self._attr_available = True
+                self.async_write_ha_state()
+            
+        await mqtt.async_subscribe(self.hass, f"{self.mqtt_root}/{self.entity_description.device_prefix_topic}/state/error/connection", entity_availability, 1)
+
 
     def turn_on(self, **kwargs):
         self._attr_is_on = True
@@ -319,5 +362,5 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
 
     def publishToMQTT(self, send_message: str):
         topic = f"{self.entity_description.mqttTopicCommand}"
-        self.hass.components.mqtt.publish(self.hass, topic, send_message)
+        mqtt.publish(self.hass, topic, send_message)
 

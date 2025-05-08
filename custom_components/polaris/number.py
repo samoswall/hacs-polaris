@@ -60,6 +60,7 @@ async def async_setup_entry(
         for description in NUMBER_HUMIDIFIER_LC:
             description.mqttTopicCurrent = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrent}" 
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.device_prefix_topic = device_prefix_topic
             numberList.append(
                 PolarisNumber(
                     description=description,
@@ -75,6 +76,7 @@ async def async_setup_entry(
         for description in NUMBER_COOKER_LC:
             description.mqttTopicCurrent = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrent}" 
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.device_prefix_topic = device_prefix_topic
             numberList.append(
                 PolarisNumber(
                     description=description,
@@ -90,6 +92,7 @@ async def async_setup_entry(
         for description in NUMBERS_COFFEEMAKER_LC:
 #            description.mqttTopicCurrent = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrent}" 
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.device_prefix_topic = device_prefix_topic
             numberList.append(
                 PolarisNumber(
                     description=description,
@@ -105,6 +108,7 @@ async def async_setup_entry(
         for description in NUMBERS_COFFEEMAKER_ROG_LC:
             description.mqttTopicCurrent = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrent}" 
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.device_prefix_topic = device_prefix_topic
             numberList.append(
                 PolarisNumber(
                     description=description,
@@ -120,6 +124,7 @@ async def async_setup_entry(
         for description in NUMBERS_AIRCLEANER_LC:
             description.mqttTopicCurrent = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrent}" 
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+            description.device_prefix_topic = device_prefix_topic
             numberList.append(
                 PolarisNumber(
                     description=description,
@@ -152,7 +157,7 @@ class PolarisNumber(PolarisBaseEntity, NumberEntity):
         self.entity_description = description
         self._attr_unique_id = slugify(f"{device_id}_{description.name}")
         self.entity_id = f"{DOMAIN}.{POLARIS_DEVICE[int(device_type)]['class']}_{POLARIS_DEVICE[int(device_type)]['model']}_{description.name}"
-        self._attr_available = True
+        self._attr_available = False
         self._attr_has_entity_name = True
         self._attr_native_value = self.entity_description.native_value
         if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
@@ -168,13 +173,13 @@ class PolarisNumber(PolarisBaseEntity, NumberEntity):
 #             self._attr_available = False
         elif self.entity_description.name == "display_time":
             self._attr_native_value = int(value)
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, f"{int(value):02x}", 0, True)
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, f"{int(value):02x}", 0, True)
         elif self.entity_description.name == "time_timer":
             self._attr_native_value = int(value)
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value)*3600)
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value)*3600)
         else:
             self._attr_native_value = int(value)
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value))
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, int(value))
             
     @property
     def get_state (self) -> int | None:
@@ -198,3 +203,14 @@ class PolarisNumber(PolarisBaseEntity, NumberEntity):
             message_received_numb,
             1,
         )
+        @callback
+        async def entity_availability(message):
+            if self.entity_description.name != "available":
+                if str(message.payload).lower() in ("1", "true"):
+                    self._attr_available = False
+                else:
+                    self._attr_available = True
+                self.async_write_ha_state()
+            
+        await mqtt.async_subscribe(self.hass, f"{self.mqtt_root}/{self.entity_description.device_prefix_topic}/state/error/connection", entity_availability, 1)
+

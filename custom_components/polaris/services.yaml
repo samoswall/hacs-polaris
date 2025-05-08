@@ -1,0 +1,15 @@
+select_rooms:
+  target:
+    entity:
+      integration: "polaris"
+      domain: "vacuum"
+  name: Select rooms
+  description: Select rooms to clean
+  fields:
+    select_rooms:
+      name: Rooms
+      description: Input of available rooms to clean
+      required: true
+      example: Kitchen
+      selector:
+        text:

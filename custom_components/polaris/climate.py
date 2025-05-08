@@ -66,6 +66,7 @@ async def async_setup_entry(
                 description.mqttTopicCommandPower = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandPower}"
                 description.mqttTopicCurrentPresetMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentPresetMode}"
                 description.mqttTopicCommandPresetMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandPresetMode}"
+                description.device_prefix_topic = device_prefix_topic
                 climateList.append(
                     PolarisClimate(
                         description=description,
@@ -84,6 +85,7 @@ async def async_setup_entry(
                 description.mqttTopicCommandPower = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandPower}"
                 description.mqttTopicCurrentPresetMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentPresetMode}"
                 description.mqttTopicCommandPresetMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandPresetMode}"
+                description.device_prefix_topic = device_prefix_topic
                 climateList.append(
                     PolarisClimate(
                         description=description,
@@ -139,6 +141,7 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
         self._attr_fan_mode = self.entity_description.fan_mode
         self._attr_preset_mode = self.entity_description.preset_mode
         self._attr_hvac_mode = HVACMode.OFF
+        self._attr_available = False
         
 
     async def async_added_to_hass(self):
@@ -205,17 +208,29 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
             message_received_fan_mode,
             1,
         )
+        
+        @callback
+        async def entity_availability(message):
+            if self.entity_description.name != "available":
+                if str(message.payload).lower() in ("1", "true"):
+                    self._attr_available = False
+                else:
+                    self._attr_available = True
+                self.async_write_ha_state()
+            
+        await mqtt.async_subscribe(self.hass, f"{self.mqtt_root}/{self.entity_description.device_prefix_topic}/state/error/connection", entity_availability, 1)
+
 
     async def async_turn_on(self) -> None:
         if (self.device_type in POLARIS_AIRCLEANER_TYPE):
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 1)
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 1)
             await self.async_set_hvac_mode(HVACMode.DRY)
         else:
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 5)
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 5)
             await self.async_set_hvac_mode(HVACMode.FAN_ONLY)
 
     async def async_turn_off(self) -> None:
-        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 0)
+        mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 0)
         await self.async_set_hvac_mode(HVACMode.OFF)
 
     async def async_set_temperature(self, **kwargs: Any) -> None:
@@ -227,28 +242,28 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
             self._attr_target_temperature_low = kwargs.get(ATTR_TARGET_TEMP_LOW)
         if (hvac_mode := kwargs.get(ATTR_HVAC_MODE)) is not None:
             self._attr_hvac_mode = hvac_mode
-        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, int(self._attr_target_temperature))
+        mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, int(self._attr_target_temperature))
         self.async_write_ha_state()
 
     async def async_set_fan_mode(self, fan_mode: str) -> None:
         """Set new fan mode."""
         self._attr_fan_mode = fan_mode
-        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandFanMode, self.entity_description.fan_modes[fan_mode])
+        mqtt.publish(self.hass, self.entity_description.mqttTopicCommandFanMode, self.entity_description.fan_modes[fan_mode])
         self.async_write_ha_state()
 
     async def async_set_hvac_mode(self, hvac_mode: HVACMode) -> None:
         """Set new operation mode."""
         self._attr_hvac_mode = hvac_mode
         if hvac_mode == "off":
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPresetMode, 0)
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPresetMode, 0)
         elif (self.device_type in POLARIS_AIRCLEANER_TYPE):
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 1)
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPower, 1)
         else:
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPresetMode, 5)
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPresetMode, 5)
         self.async_write_ha_state()
 
     async def async_set_preset_mode(self, preset_mode: str) -> None:
         """Update preset_mode on."""
         self._attr_preset_mode = preset_mode
-        self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPresetMode, self.entity_description.preset_modes[preset_mode])
+        mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPresetMode, self.entity_description.preset_modes[preset_mode])
         self.async_write_ha_state()

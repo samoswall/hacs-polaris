@@ -9,6 +9,7 @@ from zoneinfo import ZoneInfo
 
 import voluptuous as vol
 
+from homeassistant.components.image import Image, ImageEntityDescription                                                                        
 from homeassistant.components.vacuum import (
     DOMAIN,
     ATTR_CLEANED_AREA,
@@ -80,6 +81,7 @@ PLATFORMS = [
     Platform.TIME,
     Platform.CLIMATE,
     Platform.VACUUM
+#    Platform.IMAGE
 ]
 
 # Global values
@@ -309,9 +311,9 @@ POLARIS_DEVICE = {
     208: {"model": "PWK-1712CGLD", "class": "kettle"},
     209: {"model": "PWK-1729CAD", "class": "kettle"},
     223: {"model": "PWK-1775CGLD", "class": "kettle"},
-    263: {"model": "PWK-1775CGLD", "class": "kettle"},
     244: {"model": "PWK-1716CGLD", "class": "kettle"},
     245: {"model": "PWK-0105", "class": "kettle"},
+    263: {"model": "PWK-1775CGLD", "class": "kettle"},
     32:  {"model": "PMG-2580", "class": "meat_grinder"},
     216: {"model": "PMG-3060", "class": "meat_grinder"},
     237: {"model": "SM-8095", "class": "multicooker"},
@@ -323,9 +325,9 @@ POLARIS_DEVICE = {
 }
 
 POLARIS_KETTLE_TYPE = ["2","6","8","29","36","37","38","51","52","53","54","56","57","58","59","60","61","62","63","67","82","83","84","85","86","97","105","117","121","139","165","175","176","189","194","196","205","209"]
-POLARIS_KETTLE_WITH_WEIGHT_TYPE = ["98","106","164","177","185","188","208","223","263","244","245"]
+POLARIS_KETTLE_WITH_WEIGHT_TYPE = ["98","106","164","177","185","188","208","223","244","245","263"]
 POLARIS_KETTLE_WITH_NIGHT_TYPE = ["36","37","86","97","106","117","164","175","176","177","189","194","196","205","208","209","244"]
-POLARIS_KETTLE_WITH_BACKLIGHT_TYPE = ["36","37","51","52","53","54","60","61","62","63","67","82","83","84","85","86","97","98","105","106","117","139","164","175","176","177","188","189","194","196","208","209","223","263","244","245"]
+POLARIS_KETTLE_WITH_BACKLIGHT_TYPE = ["36","37","51","52","53","54","60","61","62","63","67","82","83","84","85","86","97","98","105","106","117","139","164","175","176","177","188","189","194","196","208","209","223","244","245","263"]
 POLARIS_HUMIDDIFIER_TYPE = ["4","15","17","18","25","44","70","71","72","73","74","75","87","99","137","147","153","155","157","158"]
 POLARIS_HUMIDDIFIER_WITH_IONISER_TYPE = ["4","15","17","18","44","70","72","73","74","137","147","153","155","157","158"]
 POLARIS_HUMIDDIFIER_WITH_WARM_STREAM_TYPE = ["4","15","17","18","44","70","72","74","147","157","158"]
@@ -343,7 +345,7 @@ POLARIS_COFFEEMAKER_TYPE = ["103", "166", "200"]
 POLARIS_COFFEEMAKER_ROG_TYPE = ["45", "190", "207", "222", "235", "247"]
 POLARIS_CLIMATE_TYPE = ["69"]
 POLARIS_AIRCLEANER_TYPE = ["140", "151", "152", "172", "203", "204", "236", "238", "239", "250", "251"]
-POLARIS_VACUUM_TYPE = ["7"]
+POLARIS_VACUUM_TYPE = ["7","12","19","21","22","23","24","43","66","68","76","81","88","100","101","102","104","107","108","109","110","112","113","115","119","122","123","124","125","126","127","128","129","130","131","133","134","135","142","146","148","149","150","154","156","160","163","178","181","186","187","193","195","197","198","199","201","202","211","212","213","217","218","219","220","221","241","242","246"]
 
 HUMIDDIFIER_5A_AVAILABLE_MODES = {"auto": "1", "comfort": "2", "baby": "3", "sleep": "4", "boost": "5"}
 HUMIDDIFIER_5B_AVAILABLE_MODES = {"auto": "1", "sleep": "4", "boost": "5", "home": "6", "eco": "7"}
@@ -408,6 +410,22 @@ AIRCLEANER_ERROR = {
 "00": "no_error",
 "01": "replace_filter",
 "02": "child_lock"
+}
+
+VACUUM_ERROR = {
+"00": "no_error",
+"01": "Cliff error",
+"02": "Check front collision plate",
+"04": "Check wheels",
+"08": "Check edge brushes",
+"10": "Change side brushes",
+"11": "Change the main brush",
+"12": "Change filter",
+"13": "Empty the dust bin",
+"16": "Check fan motor",
+"22": "The robot is not on the floor",
+"32": "Check roll brush",
+"64": "Low batttery"
 }
 
 @dataclass
@@ -727,6 +745,68 @@ SENSORS_AIRCLEANER = [
     ),
 ]
 
+SENSORS_VACUUM = [
+    PolarisSensorEntityDescription(
+        key="firmware",
+        name="Firmware Version",
+        translation_key="firmware_sensor",
+        device_class=None,
+        native_unit_of_measurement=None,
+        state_class=None,
+        entity_registry_enabled_default=True,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:information-outline",
+    ),
+    PolarisSensorEntityDescription(
+        key="devtype",
+        name="Device Type",
+        translation_key="type_sensor",
+        device_class=None,
+        native_unit_of_measurement=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:information-outline",
+    ),
+    PolarisSensorEntityDescription(
+        key="diag/rssi",
+        name="RSSI",
+        translation_key="rssi",
+        device_class=SensorDeviceClass.SIGNAL_STRENGTH,
+        native_unit_of_measurement=SIGNAL_STRENGTH_DECIBELS,
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:wifi",
+    ),
+    PolarisSensorEntityDescription(
+        key="error/code",
+        name="error",
+        translation_key="error",
+        device_class=None,
+        native_unit_of_measurement=None,
+        state_class=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:alert",
+    ),
+    PolarisSensorEntityDescription(
+        key="go_area",
+        name="go_area",
+        translation_key="go_area",
+        device_class=None,
+        native_unit_of_measurement=None,
+        state_class=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:map-marker-radius",
+    ),
+    PolarisSensorEntityDescription(
+        key="location_current",
+        name="current_id_room",
+        translation_key="current_id_room",
+        device_class=None,
+        native_unit_of_measurement=None,
+        state_class=None,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        icon="mdi:map-marker-radius",
+    ),
+]
 @dataclass
 class PolarisSwitchEntityDescription(SwitchEntityDescription):
 
@@ -1008,6 +1088,44 @@ SWITCHES_AIRCLEANER = [
         payload_on="true",
         payload_off="false",
         icon="mdi:white-balance-sunny",
+    ),
+]
+
+SWITCHES_VACUUM = [
+    PolarisSwitchEntityDescription(
+        key="turbo",
+        translation_key="turbo_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="mode clean carpet",
+        mqttTopicCommand="control/turbo",
+        mqttTopicCurrentValue="state/turbo",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="true",
+        payload_off="false",
+#        icon="mdi:alarm-light",
+    ),
+    PolarisSwitchEntityDescription(
+        key="ioniser",
+        translation_key="emptying_dust_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="sbros_musora",
+        mqttTopicCommand="control/ioniser",
+        mqttTopicCurrentValue="state/ioniser",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="true",
+        payload_off="false",
+        icon="mdi:atom-variant",
+    ),
+    PolarisSwitchEntityDescription(
+        key="volume",
+        translation_key="sound_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Volume",
+        mqttTopicCommand="control/volume",
+        mqttTopicCurrentValue="state/volume",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="true",
+        payload_off="false",
     ),
 ]
 
@@ -1470,6 +1588,41 @@ SELECT_CLIMATE = [
     )
 ]
 
+SELECT_VACUUM = [
+    PolarisSelectEntityDescription(
+        key="select_mode_vacuum",
+        name="select_mode_vacuum",
+        translation_key="select_mode",
+        mqttTopicCurrentMode="state/mode",
+        mqttTopicCommandMode="control/mode",
+        options={
+          "mode0": 0,
+          "mode1": 1,
+          "mode2": 2,
+          "mode3": 3,
+          "mode4": 4,
+          "mode5": 5,
+        },
+        entity_category=EntityCategory.CONFIG,
+        device_class=None,
+        icon="mdi:vacuum",
+        entity_registry_enabled_default=True,
+    ),
+    PolarisSelectEntityDescription(
+        key="select_room",
+        name="select_room",
+        translation_key="select_room",
+        mqttTopicCurrentMode="control/room",
+        mqttTopicCommandMode="control/room",
+        options={
+          "All_rooms": {"id": "00", "coordinate": []}
+        },
+        entity_category=EntityCategory.CONFIG,
+        device_class=None,
+        icon="mdi:vacuum",
+        entity_registry_enabled_default=True,
+    )
+]
 @dataclass
 class PolarisLightEntityDescription(SelectEntityDescription):
 
@@ -1784,56 +1937,44 @@ class PolarisVacuumEntityDescription(ClimateEntityDescription):
 
     fan_mode: str | None = None
     fan_modes: str | None = None
-    preset_mode: str | None = None
-    preset_modes: str | None = None
-    hvac_modes: list | None = None
-    supported_features: int | None = None
-    mqttTopicStateTemperature: str | None = None
-    mqttTopicCommandTemperature: str | None = None
-    mqttTopicCurrentTemperature: str | None = None
-    mqttTopicStateFanMode: str | None = None
-    mqttTopicCommandFanMode: str | None = None
-    mqttTopicCommandPower: str | None = None
-    mqttTopicCurrentPresetMode: str | None = None
-    mqttTopicCommandPresetMode: str | None = None
     mqttTopicCommandMode: str | None = None
     mqttTopicCurrentMode: str | None = None
-    payload_on: str | None = None
-    payload_off: str | None = None
-    min_temp: int | None = None
-    max_temp: int | None = None
-    temp_step: int | None = None
-
+    mqttTopicBatteryState: str | None = None
+    mqttTopicBatteryLevel: str | None = None
+    mqttTopicStateFanMode: str | None = None
+    mqttTopicCommandFanMode: str | None = None
+    mqttTopicCommandFindMe: str | None = None
+    mqttTopicCommandGoArea: str | None = None
 
 VACUUM = [
     PolarisVacuumEntityDescription(
         name = "Vacuum",
         key = "vacuum",
         translation_key = "vacuum",
-        fan_mode = "off",
-        fan_modes = {"off": "0", "1_speed": "1", "2_speed": "2", "3_speed": "3", "4_speed": "4", "5_speed": "5", "6_speed": "6", "7_speed": "7"},
-        preset_mode = "passive",
-        preset_modes = {"hands": "1", "auto": "2", "night": "3", "turbo": "4", "passive": "5"},
-        hvac_modes = [HVACMode.OFF, HVACMode.FAN_ONLY],
-        supported_features = (
-            ClimateEntityFeature.TARGET_TEMPERATURE
-            | ClimateEntityFeature.PRESET_MODE
-            | ClimateEntityFeature.FAN_MODE
-            | ClimateEntityFeature.TURN_OFF
-            | ClimateEntityFeature.TURN_ON
-        ),
-        mqttTopicCommandMode = "control/temperature",
-        mqttTopicCurrentMode = "state/sensor/temperature",
-        mqttTopicStateFanMode = "state/speed",
-        mqttTopicCommandFanMode = "control/speed",
-        mqttTopicCommandPower = "control/mode",
-        mqttTopicCurrentPresetMode = "state/mode",
-        mqttTopicCommandPresetMode = "control/mode",
-        payload_on = "5",
-        payload_off = "0",
-        min_temp = 5,
-        max_temp = 25,
-        temp_step = 1,
+        mqttTopicCommandMode = "control/mode",
+        mqttTopicCurrentMode = "state/mode",
+        mqttTopicStateFanMode = "state/suction",
+        mqttTopicCommandFanMode = "control/suction",
+        mqttTopicBatteryLevel = "state/battery",
+        mqttTopicBatteryState = "state/battery_state",
+        mqttTopicCommandFindMe = "control/find_me",
+        mqttTopicCommandGoArea = "control/go_area",
+        device_class = None,
+    )
+]
+
+
+@dataclass
+class PolarisImageEntityDescription(ImageEntityDescription):
+
+    mqttTopicCommandGoArea: str | None = None
+
+IMAGE = [
+    PolarisImageEntityDescription(
+        name = "Image",
+        key = "image",
+        translation_key = "image",
+        mqttTopicCommandGoArea = "control/go_area",
         device_class = None,
     )
 ]

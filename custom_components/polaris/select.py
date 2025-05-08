@@ -32,6 +32,7 @@ from .const import (
     SELECT_COFFEEMAKER,
     SELECT_COFFEEMAKER_ROG,
     SELECT_CLIMATE,
+    SELECT_VACUUM,
     PolarisSelectEntityDescription,
     POLARIS_KETTLE_TYPE,
     POLARIS_KETTLE_WITH_WEIGHT_TYPE,
@@ -40,6 +41,7 @@ from .const import (
     POLARIS_COFFEEMAKER_TYPE,
     POLARIS_COFFEEMAKER_ROG_TYPE,
     POLARIS_CLIMATE_TYPE,
+    POLARIS_VACUUM_TYPE,
 )
 
 
@@ -62,6 +64,7 @@ async def async_setup_entry(
             description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
             description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
             description.mqttTopicCommandTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandTemperature}"
+            description.device_prefix_topic = device_prefix_topic
             selectList.append(
                 PolarisSelect(
                     description=description,
@@ -77,6 +80,7 @@ async def async_setup_entry(
             description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
             description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
             description.mqttTopicCommandTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandTemperature}"
+            description.device_prefix_topic = device_prefix_topic
             selectList.append(
                 PolarisSelect(
                     description=description,
@@ -91,6 +95,7 @@ async def async_setup_entry(
         for description in SELECT_COFFEEMAKER_LC:
             description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
             description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+            description.device_prefix_topic = device_prefix_topic
             selectList.append(
                 PolarisSelect(
                     description=description,
@@ -105,6 +110,7 @@ async def async_setup_entry(
         for description in SELECT_COFFEEMAKER_ROG_LC:
             description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
             description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+            description.device_prefix_topic = device_prefix_topic
             selectList.append(
                 PolarisSelect(
                     description=description,
@@ -119,6 +125,22 @@ async def async_setup_entry(
         for description in SELECT_CLIMATE_LC:
             description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
             description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+            description.device_prefix_topic = device_prefix_topic
+            selectList.append(
+                PolarisSelect(
+                    description=description,
+                    device_friendly_name=device_id,
+                    mqtt_root=mqtt_root,
+                    device_type=device_type,
+                    device_id=device_id
+                )
+            )
+    if (device_type in POLARIS_VACUUM_TYPE):
+        SELECT_VACUUM_LC = copy.deepcopy(SELECT_VACUUM)
+        for description in SELECT_VACUUM_LC:
+            description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
+            description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
+            description.device_prefix_topic = device_prefix_topic
             selectList.append(
                 PolarisSelect(
                     description=description,
@@ -153,33 +175,42 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
         self.entity_id = f"{DOMAIN}.{POLARIS_DEVICE[int(device_type)]['class']}_{POLARIS_DEVICE[int(device_type)]['model']}_{description.name}"
         self._attr_has_entity_name = True
         
-# if load polaris_custom_select.js
+        
+        if POLARIS_DEVICE[int(self.device_type)]['class'] == "kettle" or POLARIS_DEVICE[int(self.device_type)]['class'] == "cooker" or POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker" or POLARIS_DEVICE[int(self.device_type)]['class'] == "cleaner":
+            self._select_options = json.loads(json.dumps(SELECT_COFFEEMAKER[0].options))
+
+
         self._custom_data_select = self._read_file()
         if self._custom_data_select is not None:
             if POLARIS_DEVICE[int(self.device_type)]['class'] == "kettle" and "SELECT_KETTLE_options" in self._custom_data_select:
-                self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
+#                self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
                 for key, value in self._custom_data_select["SELECT_KETTLE_options"].items():
                     self.entity_description.options[key] = value
 #                _LOGGER.debug("kettle %s", self.entity_description.options)
             if POLARIS_DEVICE[int(self.device_type)]['class'] == "cooker" and "SELECT_COOKER_options" in self._custom_data_select:
-                self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
+#                self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
                 for key, value in self._custom_data_select["SELECT_COOKER_options"].items():
                     self.entity_description.options[key] = json.dumps([value])
 #                _LOGGER.debug("cooker %s", self.entity_description.options)
             if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
                 if int(self.device_type) == 45 and "SELECT_COFFEEMAKER_ROG_options" in self._custom_data_select:
-                    self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
+#                    self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
                     for key, value in self._custom_data_select["SELECT_COFFEEMAKER_ROG_options"].items():
                         self.entity_description.options[key] = json.dumps([value])
 #                    _LOGGER.debug("coffee_rog %s", self.entity_description.options)
                 elif "SELECT_COFFEEMAKER_options" in self._custom_data_select:
-                    self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
+#                    self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
                     for key, value in self._custom_data_select["SELECT_COFFEEMAKER_options"].items():
                         self.entity_description.options[key] = json.dumps([value])
 #                    _LOGGER.debug("coffee %s", self.entity_description.options)
+            if POLARIS_DEVICE[int(self.device_type)]['class'] == "cleaner" and "SELECT_VACUUM_rooms" in self._custom_data_select and self.entity_description.key == "select_room":
+#                self.entity_description.options = json.loads(json.dumps(self.entity_description.options))
+                for key, value in self._custom_data_select["SELECT_VACUUM_rooms"].items():
+                    self.entity_description.options[key] = json.dumps([value])
 
         self._attr_options = list(self.entity_description.options.keys())
         self._attr_current_option = self._attr_options[0]
+        self._attr_available = False
 
     def _read_file(self):
         file_path = CUSTOM_SELECT_FILE_PATH
@@ -190,9 +221,9 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
             content = None
         return content
 
-    @property
-    def available(self):
-        return self._attr_current_option is not None
+#    @property
+#    def available(self):
+#        return self._attr_current_option is not None
 
     def key_from_option(self, option: str):
         try:
@@ -217,8 +248,8 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
             service_data["value"] = cook_time[0]["temperature"]
             await self.hass.services.async_call("number", "set_value", service_data)
         if POLARIS_DEVICE[int(self.device_type)]['class'] == "kettle":
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, self.entity_description.options[option])
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandMode, 3)
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, self.entity_description.options[option])
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommandMode, 3)
         if POLARIS_DEVICE[int(self.device_type)]['class'] == "coffeemaker":
             if int(self.device_type) == 45:
                 coffee_mode = json.loads(self.entity_description.options[option])
@@ -267,7 +298,7 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
                         service_data["value"] = val
                         await self.hass.services.async_call("number", "set_value", service_data)
         if int(self.device_type) == 69:
-            self.hass.components.mqtt.publish(self.hass, self.entity_description.mqttTopicCommandMode, self.entity_description.options[option])
+            mqtt.publish(self.hass, self.entity_description.mqttTopicCommandMode, self.entity_description.options[option])
 
     async def async_added_to_hass(self):
         @callback
@@ -293,3 +324,15 @@ class PolarisSelect(PolarisBaseEntity, SelectEntity):
                 self._attr_current_option = self._attr_options[int(payload)]
                 self.async_write_ha_state()
         await mqtt.async_subscribe(self.hass, self.entity_description.mqttTopicCurrentMode, message_received_sel, 1)
+        
+        @callback
+        async def entity_availability(message):
+            if self.entity_description.name != "available":
+                if str(message.payload).lower() in ("1", "true"):
+                    self._attr_available = False
+                else:
+                    self._attr_available = True
+                self.async_write_ha_state()
+            
+        await mqtt.async_subscribe(self.hass, f"{self.mqtt_root}/{self.entity_description.device_prefix_topic}/state/error/connection", entity_availability, 1)
+

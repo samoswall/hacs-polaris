@@ -59,6 +59,7 @@ async def async_setup_entry(
             description.mqttTopicCommandColor = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandColor}"
             description.mqttTopicCurrentState = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentState}"
             description.mqttTopicCommandState = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandState}"
+            description.device_prefix_topic = device_prefix_topic
             lightList.append(
                 PolarisLight(
                     description=description,
@@ -97,6 +98,7 @@ class PolarisLight(PolarisBaseEntity, LightEntity):
         self._attr_rgb_color = [255, 255, 255]
         self._attr_brightness = 100
         self._attr_is_on = False
+        self._attr_available = False
 
     async def async_added_to_hass(self):
         @callback
@@ -128,6 +130,17 @@ class PolarisLight(PolarisBaseEntity, LightEntity):
             message_received_state,
             1,
         )
+        @callback
+        async def entity_availability(message):
+            if self.entity_description.name != "available":
+                if str(message.payload).lower() in ("1", "true"):
+                    self._attr_available = False
+                else:
+                    self._attr_available = True
+                self.async_write_ha_state()
+            
+        await mqtt.async_subscribe(self.hass, f"{self.mqtt_root}/{self.entity_description.device_prefix_topic}/state/error/connection", entity_availability, 1)
+
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         if ATTR_RGB_COLOR in kwargs:
@@ -140,14 +153,14 @@ class PolarisLight(PolarisBaseEntity, LightEntity):
             bright_factor_new = level/ 100 / bright_factor_old
             self._attr_rgb_color = [int(value * bright_factor_new) for value in self._attr_rgb_color]
         topic = self.entity_description.mqttTopicCommandColor
-        self.hass.components.mqtt.publish(self.hass, topic,  color_util.color_rgb_to_hex(self._attr_rgb_color[0], self._attr_rgb_color[1],self._attr_rgb_color[2]))
+        mqtt.publish(self.hass, topic,  color_util.color_rgb_to_hex(self._attr_rgb_color[0], self._attr_rgb_color[1],self._attr_rgb_color[2]))
         topic = self.entity_description.mqttTopicCommandState
-        self.hass.components.mqtt.publish(self.hass, topic, "true")
+        mqtt.publish(self.hass, topic, "true")
         self._attr_is_on = True
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         topic = self.entity_description.mqttTopicCommandState
-        self.hass.components.mqtt.publish(self.hass, topic, "false")
+        mqtt.publish(self.hass, topic, "false")
         self._attr_is_on = False
 
     @property

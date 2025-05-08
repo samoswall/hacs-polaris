@@ -75,6 +75,7 @@ async def async_setup_entry(
                 description.mqttTopicCurrentHumidity = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentHumidity}"
                 description.mqttTopicCurrentTargetHumidity = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentTargetHumidity}"
                 description.mqttTopicCommandTargetHumidity = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandTargetHumidity}"
+                description.device_prefix_topic = device_prefix_topic
                 humidifierList.append(
                     PolarisHumidifier(
                         description=description,
@@ -132,6 +133,9 @@ class PolarisHumidifier(PolarisBaseEntity, HumidifierEntity):
         self.payload_on=description.payload_on
         self.payload_off=description.payload_off
         self._attr_has_entity_name = True
+        self._attr_available = False
+        self._attr_current_humidity = self._attr_min_humidity
+        self._attr_target_humidity = self._attr_min_humidity
 
 
     async def async_added_to_hass(self):
@@ -174,6 +178,17 @@ class PolarisHumidifier(PolarisBaseEntity, HumidifierEntity):
             message_received_mode,
             1,
         )
+        @callback
+        async def entity_availability(message):
+            if self.entity_description.name != "available":
+                if str(message.payload).lower() in ("1", "true"):
+                    self._attr_available = False
+                else:
+                    self._attr_available = True
+                self.async_write_ha_state()
+            
+        await mqtt.async_subscribe(self.hass, f"{self.mqtt_root}/{self.entity_description.device_prefix_topic}/state/error/connection", entity_availability, 1)
+
 
     def turn_on(self, **kwargs):
         self._attr_is_on = self.payload_on
@@ -186,16 +201,16 @@ class PolarisHumidifier(PolarisBaseEntity, HumidifierEntity):
         self.publishToMQTT(topic)
 
     def publishToMQTT(self, topic: str):
-        self.hass.components.mqtt.publish(self.hass, topic, str(self._attr_is_on))
+        mqtt.publish(self.hass, topic, str(self._attr_is_on))
 
     def set_humidity(self, humidity: int):
         self._attr_target_humidity = humidity
         topic = f"{self.entity_description.mqttTopicCommandTargetHumidity}"
-        self.hass.components.mqtt.publish(self.hass, topic, str(humidity))
+        mqtt.publish(self.hass, topic, str(humidity))
 
 
     def set_mode(self, mode: str):
         self._attr_mode = mode
         topic = f"{self.entity_description.mqttTopicCommandMode}"
-        self.hass.components.mqtt.publish(self.hass, topic, self.my_operation_list[mode])
+        mqtt.publish(self.hass, topic, self.my_operation_list[mode])
 

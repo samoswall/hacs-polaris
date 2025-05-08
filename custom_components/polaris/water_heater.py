@@ -51,6 +51,7 @@ async def async_setup_entry(
             description.mqttTopicTargetTemperature = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicTargetTemperature}"
             description.mqttTopicCommandMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommandMode}"
             description.mqttTopicCurrentMode = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentMode}"
+            description.device_prefix_topic = device_prefix_topic
             waterheaterList.append(
                 PolarisWaterHeater(
                     description=description,
@@ -101,6 +102,7 @@ class PolarisWaterHeater(PolarisBaseEntity, WaterHeaterEntity):
         self._operation_list = list(description.operation_list.keys())
         #self.entity_picture = "https://images.cdn.polaris-iot.com/a/8c/aad08-4d13-489c-9b0f-028486297ac1/60.webp"
         self._attr_has_entity_name = True
+        self._attr_available = False
 
     async def async_added_to_hass(self):
         @callback
@@ -137,6 +139,17 @@ class PolarisWaterHeater(PolarisBaseEntity, WaterHeaterEntity):
             message_received_targtemp,
             1,
         )
+        @callback
+        async def entity_availability(message):
+            if self.entity_description.name != "available":
+                if str(message.payload).lower() in ("1", "true"):
+                    self._attr_available = False
+                else:
+                    self._attr_available = True
+                self.async_write_ha_state()
+            
+        await mqtt.async_subscribe(self.hass, f"{self.mqtt_root}/{self.entity_description.device_prefix_topic}/state/error/connection", entity_availability, 1)
+
 
     def async_turn_on(self, **kwargs):
         self._attr_is_on = self.payload_on
@@ -148,14 +161,14 @@ class PolarisWaterHeater(PolarisBaseEntity, WaterHeaterEntity):
 
     def publishToMQTT(self):
         topic = f"{self.entity_description.mqttTopicCommandMode}"
-        self.hass.components.mqtt.publish(self.hass, topic, str(self._attr_is_on))
+        mqtt.publish(self.hass, topic, str(self._attr_is_on))
 
     def set_operation_mode(self, operation_mode):
         topic = f"{self.entity_description.mqttTopicCommandTemperature}"
-        self.hass.components.mqtt.publish(self.hass, topic, int(self.target_temperature))
+        mqtt.publish(self.hass, topic, int(self.target_temperature))
         topic = f"{self.entity_description.mqttTopicCommandMode}"
         self.current_operation = operation_mode
-        self.hass.components.mqtt.publish(self.hass, topic, int(self.my_operation_list[operation_mode]))
+        mqtt.publish(self.hass, topic, int(self.my_operation_list[operation_mode]))
         self.schedule_update_ha_state()
 
     def set_temperature(self, **kwargs):
