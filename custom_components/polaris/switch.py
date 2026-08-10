@@ -49,6 +49,7 @@ from .const import (
     SWITCHES_AIRCONDITIONER,
     SWITCHES_AIRCONDITIONER_820,
     SWITCHES_AIRCONDITIONER_882,
+    SWITCHES_AIRCONDITIONER_856,
     SWITCHES_THERMOSTAT,
     SWITCHES_FAN,
     SWITCH_ROTATION_FAN,
@@ -604,7 +605,7 @@ async def async_setup_entry(
                         device_id=device_id
                     )
                 )
-    if (device_type == "815"):
+    if device_type in ("815", "856"):
         SWITCH_HUMIDIFIER_IONISER_LC = copy.deepcopy(SWITCH_HUMIDIFIER_IONISER)
         for description in SWITCH_HUMIDIFIER_IONISER_LC:
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
@@ -619,11 +620,12 @@ async def async_setup_entry(
                     device_id=device_id
                 )
             )
-    if device_type in ("808","882","821","868","860"):
+    if device_type in ("808","882","821","868","860","856"):
         SWITCHES_AIRCONDITIONER_882_LC = copy.deepcopy(SWITCHES_AIRCONDITIONER_882)
         for description in SWITCHES_AIRCONDITIONER_882_LC:
-            if (device_type not in ("808","860") or description.translation_key not in ("backlight_switch", "smart_mode", "sound_switch")):
+            if (device_type not in ("808","860","856") or description.translation_key not in ("backlight_switch", "smart_mode", "sound_switch")):
                 if (device_type not in ("821","868") or description.translation_key not in ("turbo_switch", "night_switch", "sound_switch")):
+                  if (device_type != "856" or description.translation_key != "night_switch"):
                     description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
                     description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
                     description.device_prefix_topic = device_prefix_topic
@@ -636,10 +638,25 @@ async def async_setup_entry(
                             device_id=device_id
                         )
                     )
-    if device_type =="860":
+    if device_type in ("856","860"):
         SWITCHES_AIRCONDITIONER_LC = copy.deepcopy(SWITCHES_AIRCONDITIONER)
         for description in SWITCHES_AIRCONDITIONER_LC:
             if description.translation_key in ("auto_heater_switch", "eco_mode_switch"):
+                description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
+                description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
+                description.device_prefix_topic = device_prefix_topic
+                switchList.append(
+                    PolarisSwitch(
+                        description=description,
+                        device_friendly_name=device_id,
+                        mqtt_root=mqtt_root,
+                        device_type=device_type,
+                        device_id=device_id
+                    )
+                )
+        if device_type == "856":
+            SWITCHES_AIRCONDITIONER_856_LC = copy.deepcopy(SWITCHES_AIRCONDITIONER_856)
+            for description in SWITCHES_AIRCONDITIONER_856_LC:
                 description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
                 description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
                 description.device_prefix_topic = device_prefix_topic
@@ -776,6 +793,14 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
             else:
                 self._swing_message = "00000000"
                 self._aircond_data0 = "0000"
+            if device_type == "882":
+                self._aircond_data1 = "00000000"
+            if self.entity_description.key == "fireplace":
+                self._attr_available = False
+            if self.entity_description.key == "silent_1":
+                self._attr_available = False
+            if self.entity_description.key == "silent_2":
+                self._attr_available = False
             if self.entity_description.key == "turbo":
                 self._attr_available = False
             if self.entity_description.key == "self_cleaning":
@@ -945,6 +970,35 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
             )
         
         @callback
+        def switch_data1_message_received(message):
+            self._aircond_data1 = message.payload
+            if self.entity_description.key == "fireplace":
+                if message.payload[2:4] == "01":
+                    self._attr_is_on = True
+                else:
+                   self._attr_is_on = False
+                self.async_write_ha_state()
+            if self.entity_description.key == "silent_1":
+                if message.payload[4:6] == "01":
+                    self._attr_is_on = True
+                else:
+                   self._attr_is_on = False
+                self.async_write_ha_state()
+            if self.entity_description.key == "silent_2":
+                if message.payload[4:6] == "02":
+                    self._attr_is_on = True
+                else:
+                   self._attr_is_on = False
+                self.async_write_ha_state()
+        if self.device_type == "856":
+            await mqtt.async_subscribe(
+                self.hass,
+                self.entity_description.mqttTopicCurrentValue,
+                switch_data1_message_received,
+                1,
+            )
+        
+        @callback
         async def entity_availability(message):
             if self.entity_description.name != "available":
                 if str(message.payload).lower() in ("1", "true"):
@@ -981,6 +1035,12 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
             self._EAP_data0 = self._EAP_data0[:2] + "01"
             mqtt.publish(self.hass, self.entity_description.mqttTopicCommand.replace("backlight", "program_data/0"), self._EAP_data0)
             send_message = self.payload_on
+        elif self.device_type == "856":
+            if self.entity_description.key == "fireplace":
+                self._aircond_data1 = self._aircond_data1[:2] + self.payload_on + self._aircond_data1[-4:]
+            if self.entity_description.key in ("silent_1", "silent_2"):
+                self._aircond_data1 = self._aircond_data1[:4] + self.payload_on + self._aircond_data1[-2:]
+            send_message = self._aircond_data1
         else:
             send_message = self.payload_on
         mqtt.publish(self.hass, topic, send_message)
@@ -1010,6 +1070,12 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
             self._EAP_data0 = self._EAP_data0[:2] + "00"
             mqtt.publish(self.hass, self.entity_description.mqttTopicCommand.replace("backlight", "program_data/0"), self._EAP_data0)
             send_message = self.payload_off
+        elif self.device_type == "856":
+            if self.entity_description.key == "fireplace":
+                self._aircond_data1 = self._aircond_data1[:2] + self.payload_off + self._aircond_data1[-4:]
+            if self.entity_description.key in ("silent_1", "silent_2"):
+                self._aircond_data1 = self._aircond_data1[:4] + self.payload_off + self._aircond_data1[-2:]
+            send_message = self._aircond_data1
         else:
             send_message = self.payload_off
         mqtt.publish(self.hass, topic, send_message)

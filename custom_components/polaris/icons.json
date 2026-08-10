@@ -133,6 +133,12 @@
         "state": {
           "off": "mdi:leaf-off"
         }
+      },
+      "fireplace": {
+        "default": "mdi:fireplace",
+        "state": {
+          "off": "mdi:fireplace-off"
+        }
       }
     },
     "binary_sensor": {

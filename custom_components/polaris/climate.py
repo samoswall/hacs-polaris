@@ -242,6 +242,8 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
         if device_type == "860":
             self.entity_description.fan_modes = {"auto": "0", "quite": "1", "min": "2", "low": "3", "middle": "4", "high": "5", "max": "6"}
             self._attr_hvac_modes = [HVACMode.OFF, HVACMode.HEAT, HVACMode.COOL, HVACMode.FAN_ONLY, HVACMode.DRY]
+        if device_type == "856":
+            self.entity_description.fan_modes = {"auto": "0", "quite": "1", "min": "2", "low": "3", "middle": "4", "high": "5", "max": "6"}
         if self.entity_description.fan_modes is not None:
            self._attr_fan_modes = list(self.entity_description.fan_modes.keys())
            self._attr_fan_mode = self.entity_description.fan_mode
@@ -257,6 +259,8 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
             self._attr_max_temp = self.entity_description.max_temp
         if device_type == "851":
             self._attr_min_temp = 18
+        elif device_type == "856":
+            self._attr_min_temp = 17
         else:
             self._attr_min_temp = self.entity_description.min_temp
         self._attr_preset_mode = self.entity_description.preset_mode
@@ -347,9 +351,9 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
                         swmode = "off"
                     case "0001": 
                         swmode = "horizontal"
-                    case "0100": 
+                    case "0100" | "0200" | "0300" | "0400" | "0500" | "0600": 
                         swmode = "vertical"
-                    case "0101": 
+                    case "0101" | "0201" | "0301" | "0401" | "0501" | "0601": 
                         swmode = "both"
 #            _LOGGER.debug("swing mode %s", swmode)
             self._attr_swing_mode = swmode

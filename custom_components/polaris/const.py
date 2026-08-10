@@ -410,6 +410,7 @@ POLARIS_DEVICE = {
     821: {"model": "Zanussi-Moderno-DC_Electrolux-Loft-DC", "class": "air_conditioner"},
     857: {"model": "Shuft-Berg_MBO-M1", "class": "air_conditioner"},
     860: {"model": "Ballu-Discovery-DC", "class": "air_conditioner"},
+    856: {"model": "Toshiba", "class": "air_conditioner"},
     881: {"model": "UHB-960-ET", "class": "humidifier"},
     835: {"model": "Electrolux-YOGAhealthline-2", "class": "humidifier"},
     878: {"model": "Electrolux_Royal-Thermo", "class": "thermostat"},
@@ -447,7 +448,7 @@ POLARIS_VACUUM_TYPE = ["7","12","19","21","22","23","24","43","66","68","76","81
 POLARIS_BOILER_TYPE = ["802","807","833","844","876","877"]
 POLARIS_IRRIGATOR_TYPE = ["132", "252"]
 POLARIS_HEATER_TYPE = ["806","846","847","849","814"]
-POLARIS_AIRCONDITIONER_TYPE = ["813","820","882","808","815","868","851","821","857","860"]
+POLARIS_AIRCONDITIONER_TYPE = ["813","820","882","808","815","868","851","821","857","860","856"]
 POLARIS_THERMOSTAT_TYPE = ["878","867","829"]
 POLARIS_FAN_TYPE = ["180","248"]
 POLARIS_WINDOWCLEANER_TYPE = ["246"]
@@ -3046,6 +3047,44 @@ SWITCHES_AIRCONDITIONER_882 = [
     ),
 ]
 
+SWITCHES_AIRCONDITIONER_856 = [
+    PolarisSwitchEntityDescription(
+        key="fireplace",
+        translation_key="fireplace",
+        entity_category=EntityCategory.CONFIG,
+        name="Fireplace",
+        mqttTopicCommand="control/program_data/1",
+        mqttTopicCurrentValue="state/program_data/1",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="01",
+        payload_off="00",
+    ),
+    PolarisSwitchEntityDescription(
+        key="silent_1",
+        translation_key="silent_1_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Silent 1 mode",
+        mqttTopicCommand="control/program_data/1",
+        mqttTopicCurrentValue="state/program_data/1",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="01",
+        payload_off="00",
+        icon="mdi:volume-medium",
+    ),
+     PolarisSwitchEntityDescription(
+        key="silent_2",
+        translation_key="silent_2_switch",
+        entity_category=EntityCategory.CONFIG,
+        name="Silent 2 mode",
+        mqttTopicCommand="control/program_data/1",
+        mqttTopicCurrentValue="state/program_data/1",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="02",
+        payload_off="00",
+        icon="mdi:volume-low",
+    ),
+]
+
 SWITCHES_THERMOSTAT = [
     PolarisSwitchEntityDescription(
         key="power",
@@ -3889,6 +3928,24 @@ SELECT_AIRCONDITIONER_SWING_VERTICAL  = [
     )
 ]
 
+SELECT_AIRCONDITIONER_COMPRESSOR_POWER = [
+    PolarisSelectEntityDescription(
+        key="select_compressor_power",
+        name="Compressor power",
+        translation_key="select_compressor_power",
+        mqttTopicCurrentMode="state/program_data/1",
+        mqttTopicCommandMode="control/program_data/1",
+        options={
+          "low": "00",
+          "middle": "01",
+          "high": "02"
+        },
+        entity_category=EntityCategory.CONFIG,
+        device_class=None,
+        entity_registry_enabled_default=True,
+        icon="mdi:lightning-bolt",
+    )
+]
 
 SELECT_VACUUM = [
     PolarisSelectEntityDescription(
