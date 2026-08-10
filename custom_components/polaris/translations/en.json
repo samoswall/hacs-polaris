@@ -144,6 +144,15 @@
       },
       "auto_rotation": {
         "name": "Auto rotation"
+      },
+      "fireplace": {
+        "name": "Fireplace"
+      },
+      "silent_1_switch": {
+        "name": "Silent 1"
+      },
+      "silent_2_switch": {
+        "name": "Silent 2"
       }
     },
     "water_heater": {
@@ -963,6 +972,18 @@
           "bottom": "Bottom"
         }
       },
+      "select_swing_horizontal_856": {
+        "name": "Swing vertical",
+        "state": {
+          "off": "Off",
+          "auto": "Swing",
+          "top": "Top",
+          "high": "High",
+          "middle": "Middle",
+          "low": "Low",
+          "bottom": "Bottom"
+        }
+      },
       "select_swing_vertical": {
         "name": "Swing vertical",
         "state": {
@@ -972,6 +993,14 @@
           "center": "Center",
           "center-right": "Center-right",
           "right": "Right"
+        }
+      },
+      "select_compressor_power": {
+        "name": "Compressor power",
+        "state": {
+          "low": "50 %",
+          "middle": "75 %",
+          "high": "100 %"
         }
       },
       "select_mode_vacuum": {

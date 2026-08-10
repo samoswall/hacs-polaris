@@ -144,6 +144,15 @@
       },
       "auto_rotation": {
         "name": "Автоповорот"
+      },
+      "fireplace": {
+        "name": "Камин"
+      },
+      "silent_1_switch": {
+        "name": "Бесшумный 1"
+      },
+      "silent_2_switch": {
+        "name": "Бесшумный 2"
       }
     },
     "water_heater": {
@@ -963,6 +972,18 @@
           "bottom": "Вниз"
         }
       },
+      "select_swing_horizontal_856": {
+        "name": "Вертикальный обдув",
+        "state": {
+          "off": "Выключен",
+          "auto": "Качание",
+          "top": "Вверх",
+          "high": "Выше среднего",
+          "middle": "Среднее",
+          "low": "Ниже среднего",
+          "bottom": "Вниз"
+        }
+      },
       "select_swing_vertical": {
         "name": "Горизонтальный обдув",
         "state": {
@@ -972,6 +993,14 @@
           "center": "Центр",
           "center-right": "Правее центра",
           "right": "Вправо"
+        }
+      },
+      "select_compressor_power": {
+        "name": "Мощность компрессора",
+        "state": {
+          "low": "50 %",
+          "middle": "75 %",
+          "high": "100 %"
         }
       },
       "select_mode_vacuum": {
