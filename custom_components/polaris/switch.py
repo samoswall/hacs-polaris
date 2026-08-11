@@ -624,7 +624,8 @@ async def async_setup_entry(
         SWITCHES_AIRCONDITIONER_882_LC = copy.deepcopy(SWITCHES_AIRCONDITIONER_882)
         for description in SWITCHES_AIRCONDITIONER_882_LC:
             if (device_type not in ("808","860","856") or description.translation_key not in ("backlight_switch", "smart_mode", "sound_switch")):
-                if (device_type not in ("821","868") or description.translation_key not in ("turbo_switch", "night_switch", "sound_switch")):
+              if (device_type !="821" or description.translation_key not in ("turbo_switch", "night_switch", "sound_switch")):
+                if (device_type !="868" or description.translation_key not in ("night_switch", "sound_switch")):
                   if (device_type != "856" or description.translation_key != "night_switch"):
                     description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
                     description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"

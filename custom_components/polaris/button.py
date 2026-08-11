@@ -400,9 +400,9 @@ class PolarisButton(PolarisBaseEntity, ButtonEntity):
                 cook_mode = json.loads(command_mode)[0]
                 if isinstance(cook_mode, dict):
                     cook_mode = [cook_mode]
-                    payload = "[{" + f'"mode":{cook_mode[0]["mode"]}, "time":{state_time_seconds}, "temperature":{state_temp}' + "}]"
+                    payload = "[{" + f'"mode":{cook_mode[0]["mode"]},"time":{state_time_seconds},"temperature":{state_temp}' + "}]"
                 else:
-                    payload = "[{"+f'"mode":{cook_mode[0]["mode"]}, "time":{state_time_seconds}, "temperature":{state_temp}' + "}," + ','.join(json.dumps(dat) for dat in cook_mode[1:]) + "]"
+                    payload = "[{"+f'"mode":{cook_mode[0]["mode"]},"time":{state_time_seconds},"temperature":{state_temp}' + "}," + ','.join(json.dumps(dat) for dat in cook_mode[1:]) + "]"
                 mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, payload)
         if POLARIS_DEVICE[int(self.device_type)]['class'] == "humidifier":
             mqtt.publish(self.hass, self.entity_description.mqttTopicCommand, self.entity_description.payloads)

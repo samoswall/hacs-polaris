@@ -135,6 +135,8 @@ class PolarisWaterHeater(PolarisBaseEntity, WaterHeaterEntity):
             self._modes = {"off": "0", "performance": "1", "electric": "2", "heat_pump": "3"}
         elif (self.device_type == "807"):
             self._modes = {"off": "0", "performance": "1", "electric": "2", "heat_pump": "3", "gas": "5"}
+        elif (self.device_type == "833"):
+            self._modes = {"off": "0", "performance": "1", "electric": "2", "heat_pump": "3", "eco": "7"}
         else:
             self._modes = description.operation_list
         self._attr_operation_list = list(self._modes.keys())
