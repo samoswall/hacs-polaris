@@ -1038,9 +1038,14 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
         elif self.device_type == "856":
             if self.entity_description.key == "fireplace":
                 self._aircond_data1 = self._aircond_data1[:2] + self.payload_on + self._aircond_data1[-4:]
+                send_message = self._aircond_data1
             if self.entity_description.key in ("silent_1", "silent_2"):
                 self._aircond_data1 = self._aircond_data1[:4] + self.payload_on + self._aircond_data1[-2:]
-            send_message = self._aircond_data1
+                send_message = self._aircond_data1
+            if self.entity_description.key == "ioniser":
+                send_message = self.payload_on
+            if self.entity_description.key == "turbo":
+                send_message = self.payload_on
         else:
             send_message = self.payload_on
         mqtt.publish(self.hass, topic, send_message)
@@ -1073,9 +1078,14 @@ class PolarisSwitch(PolarisBaseEntity, SwitchEntity):
         elif self.device_type == "856":
             if self.entity_description.key == "fireplace":
                 self._aircond_data1 = self._aircond_data1[:2] + self.payload_off + self._aircond_data1[-4:]
+                send_message = self._aircond_data1
             if self.entity_description.key in ("silent_1", "silent_2"):
                 self._aircond_data1 = self._aircond_data1[:4] + self.payload_off + self._aircond_data1[-2:]
-            send_message = self._aircond_data1
+                send_message = self._aircond_data1
+            if self.entity_description.key == "ioniser":
+                send_message = self.payload_off
+            if self.entity_description.key == "turbo":
+                send_message = self.payload_off
         else:
             send_message = self.payload_off
         mqtt.publish(self.hass, topic, send_message)
