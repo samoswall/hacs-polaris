@@ -126,11 +126,11 @@ class PolarisWaterHeater(PolarisBaseEntity, WaterHeaterEntity):
         self._attr_current_operation = description.mode
         self._modes = {}
         if (self.device_type in POLARIS_KETTLE_WITH_KEEP_WITH_WARM_MODE_TYPE):
-            self._modes = KETTLE_WITH_KEEP_WITH_WARM_MODES
-#            self._attr_operation_list = list(KETTLE_WITH_KEEP_WITH_WARM_MODES.keys())
+            self._modes = description.operation_list
+            description.operation_list["high_demand"] = "2" # KETTLE_WITH_KEEP_WITH_WARM_MODES
         elif (self.device_type in POLARIS_KETTLE_WITH_TEA_TIME_MODE_TYPE):
-            self._modes = KETTLE_WITH_TEA_TIME_MODES
-#            self._attr_operation_list = list(KETTLE_WITH_TEA_TIME_MODES.keys())
+            self._modes = description.operation_list
+            description.operation_list["gas"] = "6" # KETTLE_WITH_TEA_TIME_MODES
         elif (self.device_type in {"802","844","877"}):
             self._modes = {"off": "0", "performance": "1", "electric": "2", "heat_pump": "3"}
         elif (self.device_type == "807"):
