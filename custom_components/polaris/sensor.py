@@ -128,6 +128,20 @@ async def async_setup_entry(
                     device_id=deviceID,
                 )
             )
+        if devicetype == "177":
+            SENSORS_WEIGHT_CP = copy.deepcopy(SENSORS_WEIGHT)
+            for description in SENSORS_WEIGHT_CP:
+                description.mqttTopicCurrentValue = (f"{mqttRoot}/{device_prefix_topic}/state/{description.key}")
+                description.device_prefix_topic = device_prefix_topic
+                sensorList.append(
+                    PolarisSensor(
+                        description=description,
+                        device_friendly_name=deviceID,
+                        mqtt_root=mqttRoot,
+                        device_type=devicetype,
+                        device_id=deviceID,
+                    )
+                )
     #Kettle with weight
     if (devicetype in POLARIS_KETTLE_WITH_WEIGHT_TYPE):
         # Create sensors for all devices 

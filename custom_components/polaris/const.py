@@ -2433,6 +2433,17 @@ SWITCHES_CLIMATE_200 = [
         payload_off="false",
         icon="mdi:white-balance-sunny",
     ),
+    PolarisSwitchEntityDescription(
+        key="backlight",
+        translation_key="display_off_heater",
+        entity_category=EntityCategory.CONFIG,
+        name="Backlight",
+        mqttTopicCommand="control/backlight",
+        mqttTopicCurrentValue="state/backlight",
+        device_class=SwitchDeviceClass.SWITCH,
+        payload_on="1",
+        payload_off="0",
+    ),
 ]
 
 SWITCHES_AIRCLEANER = [

@@ -493,6 +493,8 @@ class PolarisClimate(PolarisBaseEntity, ClimateEntity):
                 case "cool": 
                     command = 2
             mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPresetMode, command)
+            if self.device_type == "868" and hvac_mode in ("heat", "cool"):
+                mqtt.publish(self.hass, self.entity_description.mqttTopicCommandTemperature, int(self._attr_target_temperature))
         else:
             mqtt.publish(self.hass, self.entity_description.mqttTopicCommandPresetMode, 5)  # 5 = FAN_ONLY for AIRCLEANER and HEATER_TYPE
         self.async_write_ha_state()

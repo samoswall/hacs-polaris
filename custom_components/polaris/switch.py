@@ -312,6 +312,7 @@ async def async_setup_entry(
         # Create switches for climate
         SWITCHES_CLIMATE_LC = copy.deepcopy(SWITCHES_CLIMATE)
         for description in SWITCHES_CLIMATE_LC:
+          if (device_type !="859" or description.translation_key != "backlight_switch"):
             description.mqttTopicCommand = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCommand}"
             description.mqttTopicCurrentValue = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicCurrentValue}"
             description.device_prefix_topic = device_prefix_topic
