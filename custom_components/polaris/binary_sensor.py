@@ -78,7 +78,7 @@ async def async_setup_entry(
     device_prefix_topic = config.data["DEVPREFIXTOPIC"]
     binarysensorList = []
     
-    if (device_type in POLARIS_KETTLE_WITH_WEIGHT_TYPE):
+    if device_type in POLARIS_KETTLE_WITH_WEIGHT_TYPE or device_type in ("2","8","51","53","56","58","60","62","85","121","139","165","205"):
             BINARYSENSOR_KETTLE_LC = copy.deepcopy(BINARYSENSOR_KETTLE)
             for description in BINARYSENSOR_KETTLE_LC:
                 description.mqttTopicStatus = f"{mqtt_root}/{device_prefix_topic}/{description.mqttTopicStatus}"
